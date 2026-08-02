@@ -136,6 +136,32 @@ countEls.forEach(el=> countObserver.observe(el));
   update();
 })();
 
+/* ---------- Account protection chart (falls, then caught by floor) ---------- */
+(function safetyChart(){
+  const chart = document.getElementById('safetyChart');
+  const line = document.getElementById('safetyPriceFill');
+  const impact = document.getElementById('safetyImpact');
+  if(!chart || !line || !impact) return;
+
+  const len = line.getTotalLength();
+  line.style.strokeDasharray = len;
+  line.style.strokeDashoffset = len;
+
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        line.style.strokeDashoffset = '0';
+        setTimeout(()=>{
+          impact.classList.add('hit');
+          line.classList.add('protected');
+        }, 1500);
+        obs.unobserve(chart);
+      }
+    });
+  }, { threshold:0.5 });
+  obs.observe(chart);
+})();
+
 /* ---------- FAQ accordion ---------- */
 document.querySelectorAll('.faq-item').forEach(item=>{
   const q = item.querySelector('.faq-q');
