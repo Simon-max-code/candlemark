@@ -290,33 +290,40 @@
   </div>
 </section>
 
-<!-- ============ HOW IT WORKS ============ -->
+<!-- ============ HOW IT WORKS — ZIGZAG CHART ============ -->
 <section class="section how" id="how">
   <div class="section-head center">
     <span class="eyebrow">03 — Process</span>
     <h2>How copytrading works</h2>
-    <p>Four steps between you and your first mirrored trade.</p>
+    <p>Four steps between you and your first mirrored trade — plotted like a trade going right.</p>
   </div>
 
-  <div class="road">
-    <div class="road-line" aria-hidden="true"><div class="road-line-fill" id="roadFill"></div></div>
+  <div class="chart-road" id="chartRoad">
+    <svg class="chart-svg" id="chartSvg" viewBox="0 0 200 900" preserveAspectRatio="none" aria-hidden="true">
+      <polyline class="chart-path-bg" points="10,0 10,60 190,220 190,260 10,420 10,460 190,620 190,660 190,900"/>
+      <polyline class="chart-path-fill" id="chartPathFill" points="10,0 10,60 190,220 190,260 10,420 10,460 190,620 190,660 190,900"/>
+      <circle class="chart-node" data-node="0" cx="10" cy="60" r="6"/>
+      <circle class="chart-node" data-node="1" cx="190" cy="260" r="6"/>
+      <circle class="chart-node" data-node="2" cx="10" cy="460" r="6"/>
+      <circle class="chart-node" data-node="3" cx="190" cy="660" r="6"/>
+    </svg>
 
-    <div class="road-step reveal" data-reveal>
+    <div class="chart-step step-left" data-frac="0.0667">
       <div class="road-num">01</div>
       <h3>Find a mentor on the Mentorboard</h3>
       <p>Filter by asset class, win rate, drawdown and risk score until you find a style that matches yours.</p>
     </div>
-    <div class="road-step reveal" data-reveal>
+    <div class="chart-step step-right" data-frac="0.2889">
       <div class="road-num">02</div>
       <h3>Review their performance history</h3>
       <p>Open any mentor's full trading statistics — no cherry-picked screenshots, just the ledger.</p>
     </div>
-    <div class="road-step reveal" data-reveal>
+    <div class="chart-step step-left" data-frac="0.5111">
       <div class="road-num">03</div>
       <h3>Set your allocation</h3>
       <p>Copy with a fixed amount or a percentage of your balance — you decide the exposure.</p>
     </div>
-    <div class="road-step reveal" data-reveal>
+    <div class="chart-step step-right" data-frac="0.7333">
       <div class="road-num">04</div>
       <h3>Add your own stop loss &amp; take profit</h3>
       <p>Inherit the mentor's trade, then tighten or loosen the exit points to fit your own risk appetite.</p>

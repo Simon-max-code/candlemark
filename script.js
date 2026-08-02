@@ -94,19 +94,47 @@ const countObserver = new IntersectionObserver((entries)=>{
 }, { threshold:0.5 });
 countEls.forEach(el=> countObserver.observe(el));
 
-/* ---------- Road line fill progress ---------- */
-const roadSection = document.querySelector('.road');
-const roadFill = document.getElementById('roadFill');
-if(roadSection){
-  const roadObs = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        roadFill.style.width = '100%';
-      }
+/* ---------- Zigzag trading-chart "How it works" scroll animation ---------- */
+(function chartRoad(){
+  const wrap = document.getElementById('chartRoad');
+  const pathFill = document.getElementById('chartPathFill');
+  if(!wrap || !pathFill) return;
+
+  const steps = Array.from(wrap.querySelectorAll('.chart-step'));
+  const nodes = Array.from(wrap.querySelectorAll('.chart-node'));
+  let len = 0;
+
+  function setup(){
+    len = pathFill.getTotalLength();
+    pathFill.style.strokeDasharray = len;
+  }
+  setup();
+
+  let ticking = false;
+  function update(){
+    ticking = false;
+    const rect = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height + vh * 0.55;
+    let progress = (vh * 0.82 - rect.top) / total;
+    progress = Math.max(0, Math.min(1, progress));
+
+    pathFill.style.strokeDashoffset = String(len * (1 - progress));
+
+    steps.forEach((step, i)=>{
+      const frac = parseFloat(step.dataset.frac);
+      const active = progress > frac - 0.015;
+      step.classList.toggle('in-view', active);
+      if(nodes[i]) nodes[i].classList.toggle('lit', active);
     });
-  }, { threshold:0.3 });
-  roadObs.observe(roadSection);
-}
+  }
+  function onScroll(){
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', ()=>{ setup(); update(); });
+  update();
+})();
 
 /* ---------- FAQ accordion ---------- */
 document.querySelectorAll('.faq-item').forEach(item=>{
