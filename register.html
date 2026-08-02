@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Account — CandleMark</title>
+<meta name="description" content="Open a free CandleMark demo account or register a live account in minutes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="auth-shell">
+
+  <!-- ============ LEFT VISUAL PANEL ============ -->
+  <aside class="auth-visual">
+    <canvas id="authCanvas" class="auth-visual-canvas"></canvas>
+    <div class="auth-visual-grid" aria-hidden="true"></div>
+
+    <div class="auth-visual-content">
+      <a href="index.html" class="auth-logo">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+          <rect x="4" y="10" width="4" height="12" rx="1" fill="#00E6A0"/>
+          <rect x="4" y="6" width="4" height="2.5" fill="#00E6A0"/>
+          <rect x="11" y="4" width="4" height="18" rx="1" fill="#E8B961"/>
+          <rect x="11" y="2" width="4" height="1.6" fill="#E8B961"/>
+          <rect x="18" y="13" width="4" height="9" rx="1" fill="#FF5C6C"/>
+          <rect x="18" y="17.5" width="4" height="2" fill="#FF5C6C"/>
+        </svg>
+        <span class="brand-word">Candle<em>Mark</em></span>
+      </a>
+
+      <div class="auth-headline">
+        <h1>Your first trade is a few minutes away.<br><span class="grad-text">No pressure. No paperwork.</span></h1>
+
+        <div class="auth-quote-wrap">
+          <div class="auth-quote active">
+            <p>I opened a demo account to see the interface before committing anything. Two weeks later I funded a live account.</p>
+            <span>— D. Marchetti, verified user</span>
+          </div>
+          <div class="auth-quote">
+            <p>The mentor performance stats were more detailed than I expected — win rate, drawdown, everything.</p>
+            <span>— A. Reyes, verified user</span>
+          </div>
+          <div class="auth-quote">
+            <p>Setting a personal stop loss on a copied trade took one click. That's what sold me.</p>
+            <span>— K. Fujimoto, verified user</span>
+          </div>
+          <div class="auth-quote-dots">
+            <button class="active" aria-label="Testimonial 1"></button>
+            <button aria-label="Testimonial 2"></button>
+            <button aria-label="Testimonial 3"></button>
+          </div>
+        </div>
+
+        <div class="auth-stats-row">
+          <div><strong>2.1M+</strong><span>Traders onboarded</span></div>
+          <div><strong>4,000</strong><span>Instruments</span></div>
+          <div><strong>0.8 pip</strong><span>Spreads from</span></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ RIGHT FORM PANEL ============ -->
+  <section class="auth-form-panel">
+    <a href="index.html" class="auth-form-panel-mobile-logo">
+      <svg width="24" height="24" viewBox="0 0 26 26" fill="none">
+        <rect x="4" y="10" width="4" height="12" rx="1" fill="#00E6A0"/>
+        <rect x="11" y="4" width="4" height="18" rx="1" fill="#E8B961"/>
+        <rect x="18" y="13" width="4" height="9" rx="1" fill="#FF5C6C"/>
+      </svg>
+      <span class="brand-word">Candle<em>Mark</em></span>
+    </a>
+
+    <div class="auth-card">
+      <div class="auth-card-head">
+        <span class="auth-eyebrow">Get started</span>
+        <h2>Create your account</h2>
+        <p>Already trading with us? <a href="login.html">Log in</a></p>
+      </div>
+
+      <!-- Account type segmented control -->
+      <div class="seg-control" role="radiogroup" aria-label="Account type">
+        <input type="radio" name="accType" id="accType1" checked>
+        <label for="accType1">Demo account</label>
+        <input type="radio" name="accType" id="accType2">
+        <label for="accType2">Live account</label>
+        <div class="seg-thumb"></div>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <div class="form-grid">
+          <div class="form-row-2">
+            <div class="field">
+              <input type="text" id="regName" placeholder=" " autocomplete="name" required>
+              <label for="regName">Full name</label>
+              <div class="field-error"><span>Enter your full name</span></div>
+            </div>
+            <div class="field">
+              <select id="regCountry">
+                <option value=""></option>
+                <option>Nigeria</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+                <option>South Africa</option>
+                <option>United Arab Emirates</option>
+                <option>Other</option>
+              </select>
+              <label for="regCountry">Country</label>
+              <svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+            </div>
+          </div>
+
+          <div class="field">
+            <input type="email" id="regEmail" placeholder=" " autocomplete="email" required>
+            <label for="regEmail">Email address</label>
+            <div class="field-error"><span>Enter a valid email address</span></div>
+          </div>
+
+          <div class="field">
+            <input type="password" id="regPassword" placeholder=" " autocomplete="new-password" required>
+            <label for="regPassword">Password</label>
+            <button type="button" class="field-icon-btn" data-toggle-pw="regPassword" tabindex="-1" aria-label="Show password"></button>
+            <div class="field-error"><span>Use at least 8 characters</span></div>
+            <div class="pw-strength"><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="pw-strength-label">Use 8+ characters with a mix of letters, numbers &amp; symbols</span>
+          </div>
+
+          <div class="field">
+            <input type="password" id="regConfirm" placeholder=" " autocomplete="new-password" required>
+            <label for="regConfirm">Confirm password</label>
+            <button type="button" class="field-icon-btn" data-toggle-pw="regConfirm" tabindex="-1" aria-label="Show password"></button>
+            <div class="field-error"><span>Passwords do not match</span></div>
+          </div>
+
+          <div>
+            <label class="check-row">
+              <span class="checkbox"><input type="checkbox" id="regTerms"><svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5l3 3 6-6" stroke="#02110C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span>I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>, and confirm I understand the risks of leveraged trading.</span>
+            </label>
+            <div class="field-error" id="termsError" style="display:none; margin-left:28px;"><span>You need to accept the terms to continue</span></div>
+          </div>
+
+          <button type="submit" class="btn-solid btn-submit magnetic">
+            <span>Create Free Account</span>
+            <div class="spinner"></div>
+          </button>
+
+          <div class="form-success" id="registerSuccess">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#00E6A0" stroke-width="1.4"/><path d="M6 10l2.5 2.5L14 7" stroke="#00E6A0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Account created — this is a design demo, so no real account was opened. Check your inbox in a live build.</span>
+          </div>
+        </div>
+      </form>
+
+      <div class="auth-divider">or sign up with</div>
+      <div class="social-row">
+        <button type="button" class="social-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm3.9 5.5-4.6 5.1c-.15.17-.4.17-.55 0L4.1 8.2a.4.4 0 0 1 0-.55l.5-.5a.4.4 0 0 1 .56 0l1.4 1.4 4-4.4a.4.4 0 0 1 .56-.02l.5.46a.4.4 0 0 1 .02.56Z"/></svg>
+          Google
+        </button>
+        <button type="button" class="social-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M13.5 0h-11A2.5 2.5 0 0 0 0 2.5v11A2.5 2.5 0 0 0 2.5 16h11a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 13.5 0Z"/></svg>
+          Apple
+        </button>
+      </div>
+
+      <p class="auth-foot-note">
+        This is a frontend design demo. Forms do not create real accounts or transmit data to a broker. Leveraged trading carries a high risk of loss.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="auth.js"></script>
+<script>
+  const cursorGlow = document.getElementById('cursorGlow');
+  window.addEventListener('pointermove', (e)=>{
+    cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+  });
+</script>
+</body>
+</html>
