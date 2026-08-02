@@ -17,14 +17,38 @@ const onScrollNav = ()=>{
 window.addEventListener('scroll', onScrollNav, { passive:true });
 onScrollNav();
 
-/* ---------- Mobile menu ---------- */
+/* ---------- Mobile menu (burger + backdrop + scroll lock) ---------- */
 const burger = document.getElementById('navBurger');
 const mobileMenu = document.getElementById('mobileMenu');
+const menuBackdrop = document.getElementById('menuBackdrop');
+
+function openMenu(){
+  mobileMenu.classList.add('open');
+  menuBackdrop.classList.add('show');
+  burger.classList.add('active');
+  burger.setAttribute('aria-expanded', 'true');
+  document.body.classList.add('no-scroll');
+}
+function closeMenu(){
+  mobileMenu.classList.remove('open');
+  menuBackdrop.classList.remove('show');
+  burger.classList.remove('active');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('no-scroll');
+}
 burger.addEventListener('click', ()=>{
-  mobileMenu.classList.toggle('open');
+  mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
 });
+menuBackdrop.addEventListener('click', closeMenu);
 mobileMenu.querySelectorAll('a').forEach(a=>{
-  a.addEventListener('click', ()=> mobileMenu.classList.remove('open'));
+  a.addEventListener('click', closeMenu);
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+});
+// close on resize back to desktop
+window.addEventListener('resize', ()=>{
+  if(window.innerWidth > 920 && mobileMenu.classList.contains('open')) closeMenu();
 });
 
 /* ---------- Scroll reveal ---------- */
@@ -94,35 +118,37 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 
-/* ---------- Tilt cards ---------- */
-document.querySelectorAll('[data-tilt]').forEach(card=>{
-  let raf = null;
-  card.addEventListener('mousemove', (e)=>{
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    if(raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(()=>{
-      card.style.transform = `perspective(700px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-4px)`;
+/* ---------- Tilt cards (skip on touch devices) ---------- */
+if(window.matchMedia('(hover: hover)').matches){
+  document.querySelectorAll('[data-tilt]').forEach(card=>{
+    let raf = null;
+    card.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      if(raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(()=>{
+        card.style.transform = `perspective(700px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-4px)`;
+      });
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.transform = 'perspective(700px) rotateX(0) rotateY(0) translateY(0)';
     });
   });
-  card.addEventListener('mouseleave', ()=>{
-    card.style.transform = 'perspective(700px) rotateX(0) rotateY(0) translateY(0)';
-  });
-});
 
-/* ---------- Magnetic buttons ---------- */
-document.querySelectorAll('.magnetic').forEach(btn=>{
-  btn.addEventListener('mousemove', (e)=>{
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
-    btn.style.transform = `translate(${x*0.18}px, ${y*0.35}px)`;
+  /* ---------- Magnetic buttons ---------- */
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove', (e)=>{
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width/2;
+      const y = e.clientY - rect.top - rect.height/2;
+      btn.style.transform = `translate(${x*0.18}px, ${y*0.35}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=>{
+      btn.style.transform = 'translate(0,0)';
+    });
   });
-  btn.addEventListener('mouseleave', ()=>{
-    btn.style.transform = 'translate(0,0)';
-  });
-});
+}
 
 /* ---------- Ticker tape generation ---------- */
 const tickerData = [
@@ -154,9 +180,11 @@ buildTicker();
 (function heroScene(){
   const canvas = document.getElementById('heroCanvas');
   if(!canvas || typeof THREE === 'undefined') return;
+  if(window.innerWidth < 640) { /* still render, but lighter particle count handled below */ }
 
   const wrap = canvas.parentElement;
   let W = wrap.clientWidth, H = wrap.clientHeight;
+  const isSmall = window.innerWidth < 640;
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x0A0D12, 0.028);
@@ -166,7 +194,7 @@ buildTicker();
   camera.lookAt(0,2,0);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
   renderer.setSize(W, H);
 
   // Lighting
@@ -182,7 +210,7 @@ buildTicker();
   const group = new THREE.Group();
   scene.add(group);
 
-  const COUNT = 26;
+  const COUNT = isSmall ? 16 : 26;
   const SPACING = 1.35;
   const bars = [];
 
@@ -219,7 +247,7 @@ buildTicker();
   scene.add(gridHelper);
 
   // Floating particles (ambient depth)
-  const particleCount = 140;
+  const particleCount = isSmall ? 60 : 140;
   const particlesGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount*3);
   for(let i=0;i<particleCount;i++){

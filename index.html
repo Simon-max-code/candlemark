@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>CandleMark — Trade Markets With Verified Mentors</title>
 <meta name="description" content="CandleMark is a copy-trading platform for forex, stocks, crypto, indices and commodities. Follow verified mentors, trade with tight spreads, and learn as you go.">
 
@@ -76,12 +76,15 @@
       <a href="register.html" class="btn-solid">
         <span>Get Started</span>
       </a>
-      <button class="nav-burger" id="navBurger" aria-label="Open menu">
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
+
+<!-- ============ MOBILE MENU BACKDROP ============ -->
+<div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
 
 <!-- ============ MOBILE MENU ============ -->
 <div class="mobile-menu" id="mobileMenu">
