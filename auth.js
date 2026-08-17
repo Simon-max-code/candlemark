@@ -196,6 +196,7 @@ if(loginForm){
 
     submitWithLoading(loginForm, ()=>{
       document.getElementById('loginSuccess').classList.add('show');
+      redirectToDashboard();
     });
   });
 }
@@ -224,8 +225,15 @@ if(registerForm){
 
     submitWithLoading(registerForm, ()=>{
       document.getElementById('registerSuccess').classList.add('show');
+      redirectToDashboard();
     });
   });
+}
+
+function redirectToDashboard(delay = 1500){
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, delay);
 }
 
 function submitWithLoading(form, onDone){
