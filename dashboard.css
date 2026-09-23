@@ -40,7 +40,9 @@ body.no-scroll{ overflow:hidden; }
   z-index:120;
   overflow-y:auto;
   overflow-x:hidden;
+  scrollbar-width:none;
 }
+.dash-sidebar::-webkit-scrollbar{ display:none; }
 .dash-sidebar-head{
   display:flex; align-items:center; justify-content:space-between;
   margin-bottom:30px; padding:0 6px;
