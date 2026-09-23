@@ -62,7 +62,7 @@ const topbarCrumb = document.getElementById('topbarCrumb');
 const titleMap = {
   overview:'Overview', copytrading:'Copytrading', markets:'Markets',
   wallet:'Wallet', transactions:'Transactions', settings:'Settings',
-  account:'Account Details', wallets:'Wallets'
+  account:'Account Details', wallets:'Wallets', deposits:'Deposits'
 };
 
 function activateTab(tab){
@@ -84,6 +84,21 @@ document.querySelectorAll('[data-tab-link]').forEach(el=>{
   el.addEventListener('click', (e)=>{
     e.preventDefault();
     activateTab(el.dataset.tabLink);
+  });
+});
+
+document.getElementById('depositMethodGrid')?.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.method-card');
+  if(!btn) return;
+  document.querySelectorAll('#depositMethodGrid .method-card').forEach(c=>c.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.querySelectorAll('.deposit-details').forEach(p=> p.style.display = p.dataset.panel === btn.dataset.method ? '' : 'none');
+});
+
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    navigator.clipboard?.writeText(btn.dataset.copy || '');
+    showToast('Copied to clipboard', '');
   });
 });
 

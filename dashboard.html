@@ -70,22 +70,32 @@
         <span class="label">Transactions</span>
       </a>
 
-      <span class="dash-nav-label">Account</span>
-      <a class="dash-nav-item" data-tab="settings">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M9 2.4v1.8M9 13.8v1.8M15.6 9h-1.8M4.2 9H2.4M13.6 4.4l-1.3 1.3M5.7 12.3l-1.3 1.3M13.6 13.6l-1.3-1.3M5.7 5.7 4.4 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="label">Settings</span>
+    <span class="dash-nav-label">Wallet &amp; Activity</span>
+      <a class="dash-nav-item" data-tab="deposits">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v9m0 0-3.5-3.5M9 12l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 13v1.5A1.5 1.5 0 0 0 4 16h10a1.5 1.5 0 0 0 1.5-1.5V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="label">Deposits</span>
+      </a>
+
+      <a class="dash-nav-item" data-tab="wallets">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h14" stroke="currentColor" stroke-width="1.5"/><circle cx="12.5" cy="11" r="1" fill="currentColor"/></svg>
+        <span class="label">Withdrawal Wallets</span>
       </a>
     </nav>
 
     <div class="dash-sidebar-foot">
+
+        <span class="dash-nav-label"
+        >Account</span>
+      <a class="dash-nav-item" data-tab="settings">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M9 2.4v1.8M9 13.8v1.8M15.6 9h-1.8M4.2 9H2.4M13.6 4.4l-1.3 1.3M5.7 12.3l-1.3 1.3M13.6 13.6l-1.3-1.3M5.7 5.7 4.4 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="label">Settings</span>
+      </a>
+      
       <a class="dash-nav-item" data-tab="account">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 15c0-3 2.7-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span class="label">Account Details</span>
       </a>
-      <a class="dash-nav-item" data-tab="wallets">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h14" stroke="currentColor" stroke-width="1.5"/><circle cx="12.5" cy="11" r="1" fill="currentColor"/></svg>
-        <span class="label">Wallets</span>
-      </a>
+      
       <a class="dash-nav-item" href="#">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 9h9m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 2.5H4A1.5 1.5 0 0 0 2.5 4v10A1.5 1.5 0 0 0 4 15.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span class="label">Support</span>
@@ -152,7 +162,7 @@
               <button class="btn-solid btn-sm magnetic" data-toast="Deposit initiated" data-toast-sub="This is a design demo — no funds were moved.">
                 <span>Deposit</span>
               </button>
-              <button class="btn-outline btn-sm magnetic" data-toast="Withdrawal requested" data-toast-sub="Demo withdrawals settle instantly in this preview.">
+              <button class="btn-outline btn-sm magnetic" data-tab-link="wallets" data-toast="Withdrawal requested" data-toast-sub="Demo withdrawals settle instantly in this preview.">
                 <span>Withdraw</span>
               </button>
             </div>
@@ -600,6 +610,63 @@
           </p>
           <button class="btn-solid btn-sm magnetic" data-toast="Withdrawal requested" data-toast-sub="Demo only — added to your queue, no funds moved.">
             <span>Request Payout</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- DEPOSITS -->
+      <section class="dash-panel" id="panel-deposits">
+        <div class="dash-greeting">
+          <h1>Deposit Funds</h1>
+          <p>Select your preferred payment method, send the funds, then upload proof of deposit. Minimum $100. Funds are credited after verification.</p>
+        </div>
+
+        <div class="card-head" style="margin-bottom:14px;"><h3>Choose deposit method</h3></div>
+        <div class="method-grid" id="depositMethodGrid">
+          <button class="method-card selected" data-method="wire">
+            <div class="method-icon">🏦</div><strong>Bank Wire Transfer</strong><small>Domestic USD wire</small>
+          </button>
+          <button class="method-card" data-method="sepa">
+            <div class="method-icon">🇪🇺</div><strong>SEPA Transfer</strong><small>Europe · EUR</small>
+          </button>
+          <button class="method-card" data-method="crypto">
+            <div class="method-icon">◈</div><strong>Cryptocurrency</strong><small>BTC, ETH, USDT</small>
+          </button>
+        </div>
+
+        <div class="card deposit-details" data-panel="wire" style="margin-bottom:20px;">
+          <div class="card-head"><h3>Bank Wire Transfer Details</h3></div>
+          <div class="bank-field"><label>Account Holder / Beneficiary Name</label><div class="bank-val"><span>YOUR LEGAL BUSINESS NAME</span><button class="copy-btn" data-copy="YOUR LEGAL BUSINESS NAME">Copy</button></div></div>
+          <div class="bank-field"><label>Bank Name</label><div class="bank-val"><span>YOUR BANK NAME</span><button class="copy-btn" data-copy="YOUR BANK NAME">Copy</button></div></div>
+          <div class="bank-field"><label>Account Number</label><div class="bank-val"><span>XXXXXXXXXXXX</span><button class="copy-btn" data-copy="XXXXXXXXXXXX">Copy</button></div></div>
+          <div class="bank-field"><label>Routing Number (ABA)</label><div class="bank-val"><span>XXXXXXXXX</span><button class="copy-btn" data-copy="XXXXXXXXX">Copy</button></div></div>
+          <div class="bank-field"><label>Bank Address</label><div class="bank-val"><span>Your bank's registered address</span><button class="copy-btn" data-copy="">Copy</button></div></div>
+          <p class="deposit-note">📌 Include your Account ID in the wire memo for faster reconciliation.</p>
+        </div>
+
+        <div class="card deposit-details" data-panel="sepa" style="margin-bottom:20px; display:none;">
+          <div class="card-head"><h3>SEPA Bank Transfer Details</h3></div>
+          <div class="bank-field"><label>Bank Name</label><div class="bank-val"><span>YOUR EU BANK NAME</span><button class="copy-btn" data-copy="">Copy</button></div></div>
+          <div class="bank-field"><label>IBAN</label><div class="bank-val"><span>XXXXXXXXXXXXXXXXXX</span><button class="copy-btn" data-copy="">Copy</button></div></div>
+          <div class="bank-field"><label>BIC / SWIFT</label><div class="bank-val"><span>XXXXXXXX</span><button class="copy-btn" data-copy="">Copy</button></div></div>
+          <div class="bank-field"><label>Bank Address</label><div class="bank-val"><span>Bank's registered EU address</span><button class="copy-btn" data-copy="">Copy</button></div></div>
+        </div>
+
+        <div class="card deposit-details" data-panel="crypto" style="margin-bottom:20px; display:none;">
+          <div class="card-head"><h3>Cryptocurrency Wallets</h3></div>
+          <div class="crypto-row"><div><strong>Bitcoin (BTC)</strong><small class="mono">your-btc-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <div class="crypto-row"><div><strong>Ethereum (ETH)</strong><small class="mono">your-eth-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <div class="crypto-row"><div><strong>USDT (TRC20)</strong><small class="mono">your-usdt-trc20-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <p class="deposit-note">⚠ Send only the matching asset on the matching network. Wrong-network transfers cannot be recovered.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Upload proof of deposit</h3></div>
+          <p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:16px;">Send funds via your selected method, then upload your receipt or transaction screenshot. Minimum $100.</p>
+          <div class="settings-field"><label>Amount deposited ($)</label><input type="number" id="depositProofAmount" min="100" placeholder="e.g. 500"></div>
+          <div class="settings-field"><label>Proof (receipt or screenshot)</label><input type="file" id="depositProofFile" accept="image/*,.pdf"></div>
+          <button class="btn-solid btn-sm magnetic" data-toast="Proof submitted" data-toast-sub="Demo only — pending verification, no file uploaded.">
+            <span>Submit proof of deposit</span>
           </button>
         </div>
       </section>

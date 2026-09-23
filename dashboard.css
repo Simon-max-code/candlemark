@@ -451,6 +451,17 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 .method-card strong{ display:block; font-size:13.5px; margin-bottom:4px; }
 .method-card small{ font-size:11px; color:var(--text-tertiary); }
 
+.bank-field{ display:flex; flex-direction:column; gap:6px; padding:12px 0; border-top:1px solid var(--line); }
+.bank-field:first-of-type{ border-top:none; }
+.bank-field label{ font-size:11.5px; color:var(--text-tertiary); }
+.bank-val{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:var(--font-mono); font-size:13.5px; }
+.copy-btn{ font-size:11px; font-weight:600; color:var(--bull); border:1px solid rgba(0,230,160,.35); padding:5px 10px; border-radius:7px; flex-shrink:0; transition:background .2s; }
+.copy-btn:hover{ background:var(--bull-dim); }
+.deposit-note{ font-size:11.5px; color:var(--gold); margin-top:12px; }
+.crypto-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-top:1px solid var(--line); }
+.crypto-row:first-of-type{ border-top:none; }
+.crypto-row .mono{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-tertiary); word-break:break-all; }
+
 .status-badge{ font-family:var(--font-mono); font-size:10.5px; padding:4px 10px; border-radius:100px; font-weight:600; }
 .status-badge.completed{ color:var(--up); background:var(--bull-dim); }
 .status-badge.pending{ color:var(--gold); background:var(--gold-dim); }
