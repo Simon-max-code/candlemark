@@ -1,5 +1,5 @@
 /* ============================================================
-   CANDLEMARK — AUTH PAGE INTERACTIONS
+  MENTORSEDGEPRO — AUTH PAGE INTERACTIONS
 ============================================================ */
 
 /* ---------- Ambient Three.js scene (left panel) ---------- */

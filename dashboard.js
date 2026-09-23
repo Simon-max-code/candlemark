@@ -1,5 +1,5 @@
 /* ============================================================
-   CANDLEMARK — DASHBOARD LOGIC
+  MENTORSEDGEPRO — DASHBOARD LOGIC
 ============================================================ */
 
 /* ---------- tiny seeded RNG so charts look the same every load ---------- */

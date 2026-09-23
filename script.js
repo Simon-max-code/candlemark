@@ -1,5 +1,5 @@
 /* ============================================================
-   CANDLEMARK — INTERACTIONS & THREE.JS SCENES
+  MENTORSEDGEPRO — INTERACTIONS & THREE.JS SCENES
 ============================================================ */
 
 /* ---------- Cursor glow ---------- */
