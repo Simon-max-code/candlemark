@@ -33,7 +33,7 @@
           <rect x="18" y="13" width="4" height="9" rx="1" fill="#FF5C6C"/>
           <rect x="18" y="17.5" width="4" height="2" fill="#FF5C6C"/>
         </svg>
-        <span class="brand-word">Candle<em>Mark</em></span>
+        <span class="brand-word">Mentorsedge<em>Pro</em></span>
       </a>
       <button class="sidebar-collapse-btn" id="collapseBtn" aria-label="Collapse sidebar">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -78,6 +78,14 @@
     </nav>
 
     <div class="dash-sidebar-foot">
+      <a class="dash-nav-item" data-tab="account">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 15c0-3 2.7-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="label">Account Details</span>
+      </a>
+      <a class="dash-nav-item" data-tab="wallets">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h14" stroke="currentColor" stroke-width="1.5"/><circle cx="12.5" cy="11" r="1" fill="currentColor"/></svg>
+        <span class="label">Wallets</span>
+      </a>
       <a class="dash-nav-item" href="#">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 9h9m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 2.5H4A1.5 1.5 0 0 0 2.5 4v10A1.5 1.5 0 0 0 4 15.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span class="label">Support</span>
@@ -516,6 +524,83 @@
               <label class="switch"><input type="checkbox"><span class="track"></span></label>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ACCOUNT DETAILS -->
+      <section class="dash-panel" id="panel-account">
+        <div class="dash-greeting"><h1>Account Details</h1><p>Your core account information.</p></div>
+        <div class="card" style="max-width:560px">
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Full name</span><strong>Adaeze Reyes</strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Email</span><strong>adaeze.reyes@example.com</strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Account ID</span><strong style="font-family:var(--font-mono)">CM-208491</strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Member since</span><strong>Jan 14, 2026</strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">KYC status</span><span class="status-badge pending">In review</span></div>
+        </div>
+      </section>
+
+      <!-- WALLETS -->
+      <section class="dash-panel" id="panel-wallets">
+        <div class="dash-greeting">
+          <h1>Withdrawal Wallets &amp; Linked Accounts</h1>
+          <p>Link an exchange account or configure direct crypto payout addresses.</p>
+        </div>
+
+        <div class="card-head" style="margin-bottom:14px;"><h3>Link an account</h3></div>
+        <div class="method-grid">
+          <button class="method-card" data-toast="Link Coinbase" data-toast-sub="Opens OAuth connection in the live build.">
+            <div class="method-icon">🔵</div><strong>Coinbase Account</strong><small>Mirror exchange via email</small>
+          </button>
+          <button class="method-card" data-toast="Link Trust Wallet" data-toast-sub="Opens wallet connect in the live build.">
+            <div class="method-icon">🛡️</div><strong>Trust Wallet</strong><small>Multi-chain &amp; TRC20</small>
+          </button>
+          <button class="method-card" data-toast="Link MetaMask" data-toast-sub="Opens Web3 connect in the live build.">
+            <div class="method-icon">🦊</div><strong>MetaMask</strong><small>Self-custody Web3</small>
+          </button>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-head"><h3>Manual payout addresses</h3></div>
+          <div class="settings-field">
+            <label>USDT wallet (TRC20)</label>
+            <input type="text" placeholder="T...">
+            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ TRC20 network only — sending on another network may result in lost funds.</p>
+          </div>
+          <div class="settings-field">
+            <label>Bitcoin wallet</label>
+            <input type="text" placeholder="bc1...">
+            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ Bitcoin network only.</p>
+          </div>
+          <div class="settings-field">
+            <label>Ethereum wallet (ERC20)</label>
+            <input type="text" placeholder="0x...">
+            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ ERC20 network only.</p>
+          </div>
+          <button class="btn-solid btn-sm magnetic" data-toast="Wallet addresses saved" data-toast-sub="Demo only — nothing was transmitted.">
+            <span>Save wallet addresses</span>
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Request withdrawal</h3></div>
+          <div class="ot-field">
+            <label>Amount (USD)</label>
+            <div class="ot-input-row"><span>$</span><input type="number" id="wdAmount" value="100" min="10"></div>
+          </div>
+          <div class="settings-field">
+            <label>Destination</label>
+            <select style="width:100%;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:9px;padding:12px 14px;color:var(--text-primary);font-size:13.5px;">
+              <option>Saved BTC address — bc1q...9f2</option>
+              <option>Saved USDT (TRC20) address</option>
+              <option>Custom address (enter manually)</option>
+            </select>
+          </div>
+          <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:16px;line-height:1.6;">
+            Network and transfer fees are deducted from the amount you receive — there's no separate fee payment required to release a withdrawal. Processed in FIFO order, typically within 24–48 hours. Minimum $10. KYC verification required.
+          </p>
+          <button class="btn-solid btn-sm magnetic" data-toast="Withdrawal requested" data-toast-sub="Demo only — added to your queue, no funds moved.">
+            <span>Request Payout</span>
+          </button>
         </div>
       </section>
 

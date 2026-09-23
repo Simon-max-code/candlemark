@@ -61,7 +61,8 @@ const topbarCrumb = document.getElementById('topbarCrumb');
 
 const titleMap = {
   overview:'Overview', copytrading:'Copytrading', markets:'Markets',
-  wallet:'Wallet', transactions:'Transactions', settings:'Settings'
+  wallet:'Wallet', transactions:'Transactions', settings:'Settings',
+  account:'Account Details', wallets:'Wallets'
 };
 
 function activateTab(tab){
