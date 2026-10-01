@@ -672,31 +672,61 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 }
 
 @media (max-width:640px){
-  #marketsTable,#marketsTable tbody{ display:block; }
-  #marketsTable thead{ display:none; }
-  #marketsTable tr.instrument-row{
-    display:grid; grid-template-columns:1fr auto; gap:10px 12px;
-    grid-template-areas:"n p" "s c" "b b";
-    background:var(--bg-panel-2); border:1px solid var(--line);
-    border-radius:14px; padding:14px; margin-bottom:10px;
-  }
-  #marketsTable tr.instrument-row.selected{ border-color:var(--bull); background:rgba(0,230,160,.06); }
-  #marketsTable tr.instrument-row td{ padding:0; display:block; border:0; }
-  #marketsTable td:nth-child(1){ grid-area:n; display:flex; }
-  #marketsTable td:nth-child(2){ grid-area:p; text-align:right; font-size:1.05rem; align-self:center; }
-  #marketsTable td:nth-child(3){ grid-area:c; text-align:right; align-self:center; }
-  #marketsTable td:nth-child(4){ grid-area:s; }
-  #marketsTable td:nth-child(5){ grid-area:b; display:flex; gap:10px; }
-  #marketsTable .cell-instrument .instr-icon{ display:flex; }
-  #marketsTable .mini-spark{ width:100%; max-width:140px; height:30px; }
-  #marketsTable .buy-btn,#marketsTable .sell-btn{ flex:1; margin:0; min-height:44px; font-size:13px; }
-}
-
-@media (max-width:640px){
-  #panel-markets .markets-layout{ display:block; min-width:0; }
+  /* unwrap the outer card so rows become standalone cards */
+  #panel-markets .markets-layout{ display:block; }
   #panel-markets .markets-layout > div{ min-width:0; }
-  #panel-markets .asset-tabs{ margin-inline:-4px; padding-inline:4px; }
+  #panel-markets .markets-layout > div > .card{ background:none; border:0; padding:0; }
   #panel-markets .table-wrap{ overflow:visible; }
-  #panel-markets .card{ width:100%; min-width:0; }
-  #marketsTable{ width:100%; }
+
+  /* sticky, swipeable asset tabs */
+  #panel-markets .asset-tabs{
+    position:sticky; top:var(--topbar-h); z-index:5;
+    background:var(--bg-void); margin:0 -14px 10px; padding:10px 14px;
+    scrollbar-width:none;
+  }
+  #panel-markets .asset-tabs::-webkit-scrollbar{ display:none; }
+
+  #marketsTable, #marketsTable tbody{ display:block; width:100%; min-width:0; }
+  #marketsTable thead{ display:none; }
+
+  #marketsTable tr.instrument-row{
+    position:relative; overflow:hidden;
+    display:grid; grid-template-columns:1fr auto;
+    grid-template-areas:"n p" "n c" "s s" "b b";
+    gap:6px 12px; align-items:center;
+    padding:16px 16px 14px 20px; margin-bottom:12px;
+    background:linear-gradient(160deg,var(--bg-panel-2),var(--bg-panel));
+    border:1px solid var(--line); border-radius:16px;
+    transition:transform .2s var(--ease), border-color .25s, box-shadow .25s;
+  }
+  #marketsTable tr.instrument-row::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--up); box-shadow:0 0 12px rgba(0,230,160,.6);
+  }
+  #marketsTable tr.instrument-row.down::before{ background:var(--down); box-shadow:0 0 12px rgba(255,92,108,.6); }
+  #marketsTable tr.instrument-row:active{ transform:scale(.985); }
+  #marketsTable tr.instrument-row.selected{
+    border-color:var(--bull); box-shadow:0 10px 30px -12px rgba(0,230,160,.35);
+  }
+
+  #marketsTable tr.instrument-row td{ display:block; padding:0; border:0; }
+  #marketsTable td:nth-child(1){ grid-area:n; display:flex; align-items:center; }
+  #marketsTable td:nth-child(2){ grid-area:p; text-align:right; font-size:1.2rem; font-weight:600; }
+  #marketsTable td:nth-child(3){
+    grid-area:c; justify-self:end; font-size:11.5px;
+    padding:3px 10px; border-radius:100px;
+  }
+  #marketsTable tr.up td:nth-child(3){ background:var(--bull-dim); }
+  #marketsTable tr.down td:nth-child(3){ background:var(--bear-dim); }
+
+  #marketsTable td:nth-child(4){ grid-area:s; margin-top:4px; }
+  #marketsTable .mini-spark{ width:100%; max-width:none; height:38px; }
+  #marketsTable .mini-spark path{ stroke-width:2; vector-effect:non-scaling-stroke; }
+
+  #marketsTable td:nth-child(5){
+    grid-area:b; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px;
+  }
+  #marketsTable .buy-btn, #marketsTable .sell-btn{
+    margin:0; min-height:44px; font-size:13px; border-radius:10px;
+  }
 }

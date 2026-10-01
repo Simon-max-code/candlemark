@@ -404,7 +404,7 @@ function renderMarkets(asset){
     const up = inst.chg >= 0;
     const color = up ? '#00E6A0' : '#FF5C6C';
     const tr = document.createElement('tr');
-    tr.className = 'instrument-row';
+    tr.className = `instrument-row ${up ? 'up' : 'down'}`;
     tr.dataset.sym = inst.sym;
     tr.innerHTML = `
       <td class="cell-instrument">
