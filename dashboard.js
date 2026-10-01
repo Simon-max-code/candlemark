@@ -63,7 +63,8 @@ const titleMap = {
   overview:'Overview', copytrading:'Copytrading', markets:'Markets',
   wallet:'Wallet', transactions:'Transactions', settings:'Settings',
   account:'Account Details', wallets:'Wallets', deposits:'Deposits',
-  'mentors-pro':'Pro Mentors'
+  'mentors-pro':'Pro Mentors', 'research-terminal':'Research Terminal',
+  'market-calendar':'Market Calendar', 'market-news':'Market News'
 };
 
 function activateTab(tab){
@@ -724,3 +725,51 @@ if(window.matchMedia('(hover: hover)').matches){
   }
   animate();
 })();
+
+document.getElementById('marketsDropdown')?.querySelector('.dd-trigger')
+  .addEventListener('click', function(){ this.parentElement.classList.toggle('open'); });
+
+const RT_INSTRUMENTS = [
+  ['EURUSD','3h 52m',62],['GBPUSD','5h 22m',48],['USDJPY','4h 22m',55],['UK100','5h 22m',71],
+  ['Gold','8h 52m',80],['Crude Oil','11h 52m',33],['US100','8h 52m',68],['Silver','8h 52m',59]
+];
+document.getElementById('rtList') && RT_INSTRUMENTS.forEach(([sym,cd,conf])=>{
+  document.getElementById('rtList').insertAdjacentHTML('beforeend', `
+    <div class="rt-row"><span class="rt-sym">${sym}</span><span class="rt-cd">${cd}</span>
+    <div class="rt-conf-bar"><i style="width:${conf}%"></i></div><span class="rt-conf-val">${conf}%</span></div>`);
+});
+document.getElementById('rtSentGrid') && [['Apple Inc',64,'#00E6A0'],['Meta Platforms, Inc',41,'#FF5C6C'],['EURUSD',55,'#E8B961']]
+  .forEach(([name,val,color])=>{
+    document.getElementById('rtSentGrid').insertAdjacentHTML('beforeend', `
+      <div class="rt-sent-card"><strong>${name}</strong><div class="rt-conf-bar"><i style="width:${val}%;background:${color}"></i></div><span>${val}% bullish</span></div>`);
+  });
+
+const CAL_EVENTS = [
+  ['08:30','USD','Retail Sales (YoY)','high','—','—','2.8%'],
+  ['09:00','EUR','ZEW Economic Sentiment','med','—','18.4','15.2'],
+  ['10:00','GBP','CPI (YoY)','high','—','2.6%','2.5%'],
+  ['12:30','USD','Initial Jobless Claims','med','—','221K','225K'],
+  ['14:00','USD','Fed Chair Speech','high','—','—','—'],
+  ['23:50','JPY','Trade Balance','low','—','¥180B','¥142B'],
+];
+document.getElementById('calBody') && CAL_EVENTS.forEach(([t,c,e,imp,a,f,p])=>{
+  document.getElementById('calBody').insertAdjacentHTML('beforeend', `
+    <tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${t}</td><td><strong>${c}</strong></td><td>${e}</td>
+    <td><span class="status-badge impact-${imp}">${imp}</span></td>
+    <td style="font-family:var(--font-mono)">${a}</td><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${f}</td>
+    <td style="font-family:var(--font-mono);color:var(--text-tertiary)">${p}</td></tr>`);
+});
+
+const NEWS = [
+  ['Acuity','ING Economics: Softer-than-expected US inflation signals potential rate strategy shift','3h ago','Macro'],
+  ['Reuters','Gold holds near record high as traders weigh Fed rate path','5h ago','Commodities'],
+  ['Bloomberg','Tech earnings beat estimates, Nasdaq futures climb','6h ago','Equities'],
+  ['Acuity','ECB officials signal cautious approach to further cuts','9h ago','Macro'],
+  ['Reuters','Oil slips on demand concerns after inventory build','11h ago','Commodities'],
+  ['Bloomberg','Bitcoin consolidates below recent highs as volume thins','14h ago','Crypto'],
+];
+document.getElementById('newsGrid') && NEWS.forEach(([src,headline,time,tag])=>{
+  document.getElementById('newsGrid').insertAdjacentHTML('beforeend', `
+    <div class="news-card"><div class="news-top"><span class="news-src">${src}</span><span class="news-tag">${tag}</span></div>
+    <p>${headline}</p><span class="news-time">${time}</span></div>`);
+});
