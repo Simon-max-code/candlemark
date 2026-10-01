@@ -73,6 +73,7 @@ $$('.kyc-slide input, .kyc-slide select, .kyc-slide textarea').forEach(el =>
 
 /* ---------- Wizard ---------- */
 let cur = 1, busy = false;
+let first = true;
 const slides = $$('.kyc-slide');
 const back = $('#kycBack'), next = $('#kycNext'), nextLbl = $('#kycNextLabel');
 
@@ -91,8 +92,12 @@ function render(dir='fwd'){
   back.disabled = cur === 1;
   nextLbl.textContent = cur === TOTAL ? 'SUBMIT' : 'Continue →';
   if (cur === TOTAL) buildSummary();
-  $('.kyc-card').scrollIntoView({ behavior:'smooth', block:'start' });
-  setTimeout(() => $('input:not([type=radio]):not([type=checkbox]), textarea', slides[cur-1])?.focus({ preventScroll:true }), 350);
+  if(!first) matchMedia('(max-width:980px)').matches
+    ? scrollTo({ top:0, behavior:'smooth' })
+    : $('.kyc-card').scrollIntoView({ behavior:'smooth', block:'start' });
+  if(matchMedia('(hover:hover)').matches)
+    setTimeout(() => $('input:not([type=radio]):not([type=checkbox]), textarea', slides[cur-1])?.focus({ preventScroll:true }), 350);
+  first = false;
 }
 
 function buildSummary(){

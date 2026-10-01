@@ -68,6 +68,7 @@ const titleMap = {
 };
 
 function activateTab(tab){
+  sheet.close();
   navItems.forEach(i=> i.classList.toggle('active', i.dataset.tab === tab));
   panels.forEach(p=> p.classList.toggle('active', p.id === `panel-${tab}`));
   topbarTitle.textContent = titleMap[tab] || tab;
@@ -773,3 +774,24 @@ document.getElementById('newsGrid') && NEWS.forEach(([src,headline,time,tag])=>{
     <div class="news-card"><div class="news-top"><span class="news-src">${src}</span><span class="news-tag">${tag}</span></div>
     <p>${headline}</p><span class="news-time">${time}</span></div>`);
 });
+
+/* drawer: reset state across breakpoints + lock body scroll while open */
+const mq = matchMedia('(max-width:980px)');
+const syncShell = () => dashShell.classList.remove(mq.matches ? 'collapsed' : 'mobile-open');
+mq.addEventListener('change', syncShell); syncShell();
+new MutationObserver(() => document.body.classList.toggle('no-scroll', dashShell.classList.contains('mobile-open')))
+  .observe(dashShell, { attributes:true, attributeFilter:['class'] });
+
+/* order ticket bottom sheet (mobile) */
+const ticket = document.querySelector('.order-ticket');
+const otBackdrop = Object.assign(document.createElement('div'), { className:'ot-backdrop' });
+document.body.appendChild(otBackdrop);
+ticket.insertAdjacentHTML('afterbegin', '<div class="ot-grab"></div>');
+const sheet = {
+  open(){ if(innerWidth <= 1100){ ticket.classList.add('open'); otBackdrop.classList.add('show'); } },
+  close(){ ticket.classList.remove('open'); otBackdrop.classList.remove('show'); }
+};
+marketsBody.addEventListener('click', e => { if(e.target.closest('.instrument-row')) sheet.open(); });
+otBackdrop.addEventListener('click', sheet.close);
+ticket.querySelector('.ot-grab').addEventListener('click', sheet.close);
+otSubmit.addEventListener('click', sheet.close);

@@ -611,3 +611,65 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 .news-tag{ font-size:10.5px; color:var(--text-tertiary); border:1px solid var(--line); padding:2px 8px; border-radius:100px; }
 .news-card p{ font-size:13.5px; line-height:1.5; margin-bottom:12px; }
 .news-time{ font-size:11px; color:var(--text-tertiary); }
+
+.ot-grab{ display:none; }
+
+@media (max-width:980px){
+  .dash-sidebar{ height:100dvh; }
+  .topbar-left{ flex-direction:row; align-items:center; gap:12px; }
+  .topbar-crumb,.market-pill{ display:none; }
+  .dash-topbar{ padding:0 14px; gap:10px; }
+  .topbar-right{ gap:8px; }
+  .topbar-title{ font-size:1.05rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .card{ padding:18px; }
+  .filter-bar{ flex-wrap:nowrap; overflow-x:auto; margin-inline:-18px; padding-inline:18px; scrollbar-width:none; }
+  .filter-bar::-webkit-scrollbar{ display:none; }
+  .filter-chip{ white-space:nowrap; flex-shrink:0; }
+}
+
+@media (max-width:1100px){
+  .order-ticket{
+    position:fixed; top:auto; left:0; right:0; bottom:0; z-index:300;
+    max-height:88dvh; overflow-y:auto; border-radius:22px 22px 0 0;
+    padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));
+    transform:translateY(105%); transition:transform .4s var(--ease);
+    box-shadow:0 -30px 80px rgba(0,0,0,.6);
+  }
+  .order-ticket.open{ transform:none; }
+  .ot-grab{ display:block; width:44px; height:5px; border-radius:5px; background:var(--line-strong); margin:0 auto 16px; }
+  .ot-backdrop{ position:fixed; inset:0; z-index:290; background:rgba(6,8,11,.6); opacity:0; visibility:hidden; transition:opacity .3s; }
+  .ot-backdrop.show{ opacity:1; visibility:visible; }
+}
+
+@media (max-width:640px){
+  .dtable{ min-width:0; }
+  .dtable td,.dtable thead th{ padding:10px 8px; font-size:12.5px; }
+  .cell-instrument .instr-icon{ display:none; }
+  #positionsTable :is(th,td):nth-child(3),
+  #positionsTable :is(th,td):nth-child(6),
+  #marketsTable :is(th,td):nth-child(4),
+  #marketsTable :is(th,td):nth-child(5),
+  #txTable :is(th,td):nth-child(1){ display:none; }
+  #txTable{ min-width:520px; }
+}
+
+@media (max-width:560px){
+  .dash-content{ padding:14px; }
+  .stat-row{ grid-template-columns:1fr 1fr; gap:10px; }
+  .stat-card{ padding:14px; }
+  .stat-card .val{ font-size:1.1rem; }
+  .stat-card .val small{ display:block; margin:2px 0 0; }
+  .balance-hero{ padding:20px 18px; }
+  .balance-num{ flex-wrap:wrap; }
+  .balance-actions .btn-sm{ flex:1; justify-content:center; }
+  .big-chart-svg{ height:190px; }
+  .rt-row{ grid-template-columns:64px 54px 1fr 34px; gap:8px; }
+  .kyc-card{ flex-wrap:wrap; }
+  .kyc-card .btn-sm{ margin-left:0; width:100%; justify-content:center; }
+  .bank-val span{ word-break:break-all; }
+  .pm-modal-backdrop{ align-items:flex-end; padding:0; }
+  .pm-modal{ border-radius:24px 24px 0 0; padding:24px 18px; max-height:90dvh; overflow-y:auto; }
+  .pm-stats{ gap:8px; }
+  .toast-stack{ left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom,0px)); }
+  .toast{ min-width:0; }
+}

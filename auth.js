@@ -5,7 +5,7 @@
 /* ---------- Ambient Three.js scene (left panel) ---------- */
 (function authScene(){
   const canvas = document.getElementById('authCanvas');
-  if(!canvas || typeof THREE === 'undefined') return;
+  if(!canvas || typeof THREE === 'undefined' || innerWidth <= 980) return;
   const wrap = canvas.parentElement;
   let W = wrap.clientWidth, H = wrap.clientHeight;
 

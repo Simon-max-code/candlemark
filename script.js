@@ -248,6 +248,8 @@ buildTicker();
   camera.lookAt(0,2,0);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  let visible = true;
+  new IntersectionObserver(([e])=> visible = e.isIntersecting).observe(canvas);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
   renderer.setSize(W, H);
 
@@ -336,6 +338,8 @@ buildTicker();
 
   const clock = new THREE.Clock();
   function animate(){
+    requestAnimationFrame(animate);
+    if(!visible) return;
     const t = clock.getElapsedTime();
 
     group.rotation.y = Math.sin(t*0.08) * 0.12 + mouseX * 0.35;
@@ -351,7 +355,6 @@ buildTicker();
     particles.rotation.y = t * 0.01;
 
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
   }
   animate();
 })();
@@ -370,6 +373,8 @@ buildTicker();
   camera.position.set(0,0,14);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  let visible = true;
+  new IntersectionObserver(([e])=> visible = e.isIntersecting).observe(canvas);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
 
@@ -393,11 +398,12 @@ buildTicker();
 
   const clock = new THREE.Clock();
   function animate(){
+    requestAnimationFrame(animate);
+    if(!visible) return;
     const t = clock.getElapsedTime();
     mesh.rotation.y = t*0.15;
     mesh.rotation.x = t*0.08;
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
   }
   animate();
 })();

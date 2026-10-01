@@ -869,3 +869,33 @@ body::before{
 @media (max-width:380px){
   .brand-word{ font-size:17px; }
 }
+
+/* ===== MOBILE POLISH ===== */
+html{ -webkit-text-size-adjust:100%; }
+button,a{ -webkit-tap-highlight-color:transparent; }
+@media (max-width:760px){
+  input,select,textarea{ font-size:16px !important; }
+  .btn-solid,.btn-outline,.btn-ghost{ min-height:44px; }
+}
+@media (max-width:720px){ .hstat-num{ font-size:1.4rem; } }
+@media (max-width:380px){
+  .nav-inner{ gap:8px; }
+  .nav-actions .btn-solid{ padding:9px 12px; font-size:13px; }
+}
+.mobile-menu{ padding-bottom:calc(40px + env(safe-area-inset-bottom,0px)); }
+
+@media (max-width:900px){
+  .copy-visual{ height:auto; display:grid; gap:16px; }
+  .copy-card{ position:static; width:100%; animation:none; }
+  .copy-glow{ inset:0; }
+
+  .chart-road{ height:auto; display:flex; flex-direction:column; gap:18px; padding-left:30px; }
+  .chart-road::before{ content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--line-strong); }
+  .chart-svg{ opacity:0; pointer-events:none; }
+  .chart-step,.chart-step.step-left,.chart-step.step-right{
+    position:static; width:100%; left:auto; right:auto; text-align:left;
+  }
+  .chart-step.step-right .road-num{ margin-left:0; }
+
+  .faq-item.open .faq-a{ max-height:360px; }
+}
