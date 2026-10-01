@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Your Profile — mentorsedgepro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+<link rel="stylesheet" href="kyc.css">
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="auth-shell">
+
+  <!-- LEFT: visual + vertical stepper -->
+  <aside class="auth-visual">
+    <canvas id="authCanvas" class="auth-visual-canvas"></canvas>
+    <div class="auth-visual-grid" aria-hidden="true"></div>
+    <div class="auth-visual-content">
+      <a href="index.html" class="auth-logo">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="4" y="10" width="4" height="12" rx="1" fill="#00E6A0"/><rect x="11" y="4" width="4" height="18" rx="1" fill="#E8B961"/><rect x="18" y="13" width="4" height="9" rx="1" fill="#FF5C6C"/></svg>
+        <span class="brand-word">Mentorsedge<em>Pro</em></span>
+      </a>
+
+      <div class="auth-headline">
+        <h1>One last step before <span class="grad-text">you trade.</span></h1>
+        <p class="kyc-lead">Complete your profile so we can open your trading account. Takes about 3 minutes.</p>
+        <ol class="kyc-steps" id="kycSteps"></ol>
+        <div class="kyc-secure">
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="8" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="1.5"/></svg>
+          256-bit encrypted · Your data is never shared
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT: form -->
+  <section class="auth-form-panel">
+    <a href="index.html" class="auth-form-panel-mobile-logo">
+      <svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="4" y="10" width="4" height="12" rx="1" fill="#00E6A0"/><rect x="11" y="4" width="4" height="18" rx="1" fill="#E8B961"/><rect x="18" y="13" width="4" height="9" rx="1" fill="#FF5C6C"/></svg>
+      <span class="brand-word">Mentorsedge<em>Pro</em></span>
+    </a>
+
+    <div class="auth-card kyc-card">
+      <!-- Progress -->
+      <div class="kyc-progress">
+        <div class="kp-top"><span id="kpLabel">Step 1 of 7</span><strong id="kpPct">0%</strong></div>
+        <div class="kp-track"><i id="kpFill"></i></div>
+        <div class="kp-dots" id="kpDots"></div>
+      </div>
+
+      <form id="kycForm" novalidate>
+
+        <!-- 1 PERSONAL -->
+        <section class="kyc-slide active" data-step="1">
+          <header class="ks-head"><span class="ks-ico">👤</span><div><h2>Personal information</h2><p>In order to start trading, you must first complete your profile.</p></div></header>
+          <div class="form-grid">
+            <div><span class="group-label">Title *</span>
+              <div class="chip-group" data-name="title" data-opts="Mr|Mrs|Ms|Dr" data-req></div><div class="field-error"><span>Choose a title</span></div></div>
+            <div class="form-row-2">
+              <div class="field"><input type="text" name="firstName" id="firstName" placeholder=" " data-req autocomplete="given-name"><label for="firstName">First name *</label><div class="field-error"><span></span></div></div>
+              <div class="field"><input type="text" name="lastName" id="lastName" placeholder=" " data-req autocomplete="family-name"><label for="lastName">Surname / Last name *</label><div class="field-error"><span></span></div></div>
+            </div>
+            <div class="field"><input type="text" name="dob" id="dob" placeholder=" " data-req data-type="date" inputmode="numeric" maxlength="10" autocomplete="bday"><label for="dob">Date of birth (dd/mm/yyyy) *</label><div class="field-error"><span></span></div></div>
+          </div>
+        </section>
+
+        <!-- 2 CONTACT -->
+        <section class="kyc-slide" data-step="2">
+          <header class="ks-head"><span class="ks-ico">📍</span><div><h2>Contact information</h2><p>Where can we reach you? Use your current residential address.</p></div></header>
+          <div class="form-grid">
+            <div class="form-row-2">
+              <div class="field"><input type="text" name="houseNo" id="houseNo" placeholder=" " data-req><label for="houseNo">House No. *</label><div class="field-error"><span></span></div></div>
+              <div class="field"><input type="text" name="street" id="street" placeholder=" " data-req autocomplete="address-line1"><label for="street">Street address *</label><div class="field-error"><span></span></div></div>
+            </div>
+            <div class="form-row-2">
+              <div class="field"><input type="text" name="city" id="city" placeholder=" " data-req autocomplete="address-level2"><label for="city">City / Town / Village *</label><div class="field-error"><span></span></div></div>
+              <div class="field"><input type="text" name="province" id="province" placeholder=" " data-req autocomplete="address-level1"><label for="province">Province *</label><div class="field-error"><span></span></div></div>
+            </div>
+            <div class="form-row-2">
+              <div class="field"><input type="text" name="zip" id="zip" placeholder=" " data-req autocomplete="postal-code"><label for="zip">Zip / Postal code *</label><div class="field-error"><span></span></div></div>
+              <div class="field"><input type="tel" name="phone" id="phone" placeholder=" " data-req data-type="phone" autocomplete="tel"><label for="phone">Phone no. *</label><div class="field-error"><span></span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 INVESTOR -->
+        <section class="kyc-slide" data-step="3">
+          <header class="ks-head"><span class="ks-ico">💼</span><div><h2>Investor information</h2><p>Helps us understand your financial profile.</p></div></header>
+          <div class="form-grid">
+            <div><span class="group-label">Status of employment *</span>
+              <div class="chip-group" data-name="employment" data-opts="Employed|Self Employed|Retired|Unemployed|Student|Others" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div><span class="group-label">Source of income *</span>
+              <div class="chip-group" data-name="incomeSource" data-opts="Employment|Savings/Investments|Partner/Parent/Family|Benefits|Private Pension|State Pension|Others" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div class="field"><select name="industry" id="industry" data-req data-opts="Architecture and Engineering, Construction|Business and Financial Services|Extractive Industries, Dealers in Precious Metals|Entrepreneur|Governmental, Public Procurement|IT Services|Legal Occupations|Logistics, Shipping|Manufacturing|Military, Defense, Trade|Money Service Businesses, Gambling, Casinos|Office administrative|Pharmaceuticals and Healthcare|Production, Media|Retail, Wholesale Trade|Real Estate|Student|Others"><option value=""></option></select><label for="industry">Industry *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select your industry</span></div></div>
+            <div><span class="group-label">Level of education *</span>
+              <div class="chip-group" data-name="education" data-opts="Primary education|Secondary education|Bachelor|Master|Doctoral" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div><span class="group-label">Annual amount (USD) *</span>
+              <div class="chip-group" data-name="annual" data-opts="Up to 15K|15K – 50K|50K – 200K|200K – 500K|500K – 1M|1M – 3M|Above 3M" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div class="field"><select name="netWorth" id="netWorth" data-req data-opts="Up to 15K|15K – 50K|50K – 200K|200K – 500K|500K – 1M|1M – 3M|Above 3M"><option value=""></option></select><label for="netWorth">Estimated net worth (USD) *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select a range</span></div></div>
+          </div>
+        </section>
+
+        <!-- 4 EXPECTATION -->
+        <section class="kyc-slide" data-step="4">
+          <header class="ks-head"><span class="ks-ico">📊</span><div><h2>Trading expectation</h2><p>Tell us how you plan to use your account.</p></div></header>
+          <div class="form-grid">
+            <div><span class="group-label">Monthly exp. trade volume (lot) *</span>
+              <div class="chip-group big" data-name="volume" data-opts="Below 50 Lots|Above 50 Lots" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div><span class="group-label">Monthly exp. trade frequency *</span>
+              <div class="chip-group big" data-name="frequency" data-opts="Below 50 Transactions|Above 50 Transactions" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div class="field"><textarea name="purpose" id="purpose" rows="3" placeholder=" " data-req maxlength="300"></textarea><label for="purpose">Intended purpose &amp; nature of transaction *</label><div class="field-error"><span></span></div></div>
+          </div>
+        </section>
+
+        <!-- 5 EXPERIENCE -->
+        <section class="kyc-slide" data-step="5">
+          <header class="ks-head"><span class="ks-ico">🎯</span><div><h2>Trading experience</h2><p>Be honest — it helps us tailor your account.</p></div></header>
+          <div class="form-grid">
+            <div><span class="group-label">Do you have trading experience? *</span>
+              <div class="chip-group big stack" data-name="experience" data-opts="Yes, I have traded a real account|No" data-req></div><div class="field-error"><span>Select one</span></div></div>
+            <div class="kyc-note">💡 New to trading? No problem — you can practise on a free demo account and follow verified mentors.</div>
+          </div>
+        </section>
+
+        <!-- 6 CURRENCY -->
+        <section class="kyc-slide" data-step="6">
+          <header class="ks-head"><span class="ks-ico">💱</span><div><h2>Account currency</h2><p>Choose the base currency for your trading account.</p></div></header>
+          <div class="form-grid">
+            <div class="field"><select name="currency" id="currency" data-req data-opts="USD — US Dollar|EUR — Euro|GBP — British Pound|JPY — Japanese Yen|CHF — Swiss Franc|AUD — Australian Dollar|CAD — Canadian Dollar|NZD — New Zealand Dollar|SGD — Singapore Dollar|HKD — Hong Kong Dollar|ZAR — South African Rand|AED — UAE Dirham"><option value=""></option></select><label for="currency">Currency *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select a currency</span></div></div>
+            <div class="kyc-note">⚠ The base currency cannot be changed after your account is opened.</div>
+          </div>
+        </section>
+
+        <!-- 7 DECLARATION -->
+        <section class="kyc-slide" data-step="7">
+          <header class="ks-head"><span class="ks-ico">✍️</span><div><h2>Client declaration</h2><p>Review your details and confirm to finish.</p></div></header>
+          <div class="kyc-summary" id="kycSummary"></div>
+          <div class="form-grid">
+            <div>
+              <label class="check-row">
+                <span class="checkbox"><input type="checkbox" id="kycDecl"><svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5l3 3 6-6" stroke="#02110C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span>By pressing the 'SUBMIT' button below, I hereby confirm and acknowledge that the information provided above is true, and I further acknowledge that mentorsedgepro.com will use this information in the opening of my trading account.</span>
+              </label>
+              <div class="field-error" id="declError" style="margin-left:28px;"><span>You must confirm the declaration to submit</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Nav -->
+        <div class="kyc-nav">
+          <button type="button" class="btn-outline kyc-back" id="kycBack" disabled>← Back</button>
+          <button type="button" class="btn-solid btn-submit kyc-next magnetic" id="kycNext">
+            <span id="kycNextLabel">Continue →</span><div class="spinner"></div>
+          </button>
+        </div>
+      </form>
+
+      <p class="auth-foot-note">Frontend design demo — nothing is stored or transmitted. <a href="dashboard.html" class="link-muted" style="text-decoration:underline">Skip for now</a></p>
+
+      <!-- Success overlay -->
+      <div class="kyc-done" id="kycDone">
+        <svg class="kd-check" width="84" height="84" viewBox="0 0 84 84" fill="none"><circle cx="42" cy="42" r="38" stroke="#00E6A0" stroke-width="3"/><path d="M26 43l11 11 21-23" stroke="#00E6A0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2>Profile submitted</h2>
+        <p>Your account is being set up. Taking you to your dashboard…</p>
+        <div class="kd-bar"><i></i></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="auth.js"></script>
+<script src="kyc.js"></script>
+</body>
+</html>

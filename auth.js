@@ -196,7 +196,7 @@ if(loginForm){
 
     submitWithLoading(loginForm, ()=>{
       document.getElementById('loginSuccess').classList.add('show');
-      redirectToDashboard();
+      redirectTo('dashboard.html');
     });
   });
 }
@@ -225,15 +225,13 @@ if(registerForm){
 
     submitWithLoading(registerForm, ()=>{
       document.getElementById('registerSuccess').classList.add('show');
-      redirectToDashboard();
+      redirectTo('kyc.html');
     });
   });
 }
 
-function redirectToDashboard(delay = 1500){
-  setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, delay);
+function redirectTo(url, delay = 1500){
+  setTimeout(() => { window.location.href = url; }, delay);
 }
 
 function submitWithLoading(form, onDone){
