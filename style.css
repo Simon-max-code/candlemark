@@ -899,3 +899,25 @@ button,a{ -webkit-tap-highlight-color:transparent; }
 
   .faq-item.open .faq-a{ max-height:360px; }
 }
+
+  /* touch glow follows finger */
+  @media (hover:none){ .cursor-glow{ display:block; width:300px; height:300px; opacity:.9; } }
+
+  @media (max-width:900px){
+    .copy-card{ width:auto; animation:floatY 6s ease-in-out infinite; }
+    .copy-card-1{ margin-right:10%; }
+    .copy-card-2{ margin-left:10%; animation-duration:7s; animation-direction:reverse; }
+
+    .chart-road::after{
+      content:""; position:absolute; left:8px; top:0; width:2px;
+      height:calc(var(--p,0) * 100%); background:var(--bull);
+      box-shadow:0 0 10px rgba(0,230,160,.7); transition:height .15s linear;
+    }
+    .chart-step,.chart-step.step-left,.chart-step.step-right{ position:relative; }
+    .chart-step::before{
+      content:""; position:absolute; left:-27px; top:26px; width:12px; height:12px; border-radius:50%;
+      background:var(--bg-panel-2); border:2px solid var(--line-strong);
+      transition:all .4s var(--ease);
+    }
+    .chart-step.in-view::before{ background:var(--bull); border-color:var(--bull); box-shadow:0 0 12px rgba(0,230,160,.8); }
+  }

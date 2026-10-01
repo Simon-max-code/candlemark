@@ -118,6 +118,7 @@ countEls.forEach(el=> countObserver.observe(el));
     const total = rect.height + vh * 0.55;
     let progress = (vh * 0.82 - rect.top) / total;
     progress = Math.max(0, Math.min(1, progress));
+    wrap.style.setProperty('--p', progress.toFixed(3));
 
     pathFill.style.strokeDashoffset = String(len * (1 - progress));
 
