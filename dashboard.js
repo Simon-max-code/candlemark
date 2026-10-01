@@ -62,7 +62,8 @@ const topbarCrumb = document.getElementById('topbarCrumb');
 const titleMap = {
   overview:'Overview', copytrading:'Copytrading', markets:'Markets',
   wallet:'Wallet', transactions:'Transactions', settings:'Settings',
-  account:'Account Details', wallets:'Wallets', deposits:'Deposits'
+  account:'Account Details', wallets:'Wallets', deposits:'Deposits',
+  'mentors-pro':'Pro Mentors'
 };
 
 function activateTab(tab){
@@ -585,6 +586,78 @@ function showToast(title, sub){
 document.addEventListener('click', (e)=>{
   const trigger = e.target.closest('[data-toast]');
   if(trigger) showToast(trigger.dataset.toast, trigger.dataset.toastSub);
+});
+
+const PRO_MENTORS = [
+  { name:'Michael Sikand', handle:'michaelsikand', hue:160, gain:96, trades:6307, capital:1440000, risk:4, copiers:896, avgTime:'5 Days' },
+  { name:'Elena Vasquez', handle:'elenav_fx', hue:24, gain:78, trades:4210, capital:980000, risk:3, copiers:612, avgTime:'3 Days' },
+  { name:'Tunde Bakare', handle:'tundetrades', hue:280, gain:112, trades:8830, capital:2100000, risk:6, copiers:1340, avgTime:'1 Day' },
+  { name:'Priya Nair', handle:'priyanair', hue:200, gain:64, trades:3012, capital:540000, risk:2, copiers:401, avgTime:'7 Days' },
+  { name:'Carlos Mendez', handle:'carlosm_fx', hue:40, gain:88, trades:5521, capital:1120000, risk:5, copiers:770, avgTime:'4 Days' },
+  { name:'Sofia Lindgren', handle:'sofialindgren', hue:330, gain:71, trades:2894, capital:610000, risk:3, copiers:355, avgTime:'6 Days' },
+  { name:'David Chen', handle:'davidchen_trades', hue:120, gain:103, trades:7102, capital:1680000, risk:5, copiers:1050, avgTime:'2 Days' },
+  { name:'Amara Obi', handle:'amaraobi', hue:300, gain:59, trades:1980, capital:320000, risk:2, copiers:214, avgTime:'8 Days' },
+  { name:'Lukas Weber', handle:'lukasw', hue:210, gain:94, trades:6650, capital:1350000, risk:4, copiers:905, avgTime:'3 Days' },
+  { name:'Nadia Petrova', handle:'nadiap_fx', hue:260, gain:81, trades:4420, capital:890000, risk:4, copiers:560, avgTime:'5 Days' },
+  { name:'James O\'Connell', handle:'jamesoconnell', hue:50, gain:67, trades:2650, capital:470000, risk:2, copiers:298, avgTime:'6 Days' },
+  { name:'Yuki Tanaka', handle:'yukitanaka_fx', hue:190, gain:119, trades:9340, capital:2450000, risk:7, copiers:1510, avgTime:'1 Day' },
+  { name:'Grace Mwangi', handle:'gracemwangi', hue:140, gain:73, trades:3340, capital:650000, risk:3, copiers:420, avgTime:'5 Days' },
+];
+
+const proMentorGrid = document.getElementById('proMentorGrid');
+PRO_MENTORS.forEach((m, i)=>{
+  const el = document.createElement('div');
+  el.className = 'mentor-card tilt';
+  const color = '#00E6A0';
+  el.innerHTML = `
+    <div class="mc-head">
+      <div class="mc-avatar" style="background:conic-gradient(from 180deg, hsl(${m.hue} 70% 55%), hsl(${m.hue+60} 70% 50%), hsl(${m.hue} 70% 55%))"></div>
+      <div><strong>${m.name}</strong><small>@${m.handle}</small></div>
+    </div>
+    <div class="mc-spark">${miniSpark(i*17+5, color)}</div>
+    <div class="mc-row">
+      <div><strong style="color:var(--bull)">+${m.gain}%</strong><span>Gain</span></div>
+      <div><strong>${m.trades.toLocaleString()}</strong><span>Trades</span></div>
+      <div><strong>${m.copiers}</strong><span>Copiers</span></div>
+    </div>
+    <button class="mm-btn pm-open-btn" data-idx="${i}">Copy this trader</button>
+  `;
+  proMentorGrid.appendChild(el);
+});
+
+if(window.matchMedia('(hover: hover)').matches){
+  proMentorGrid.querySelectorAll('.tilt').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(700px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+  });
+}
+
+const pmBackdrop = document.getElementById('pmBackdrop');
+proMentorGrid.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.pm-open-btn');
+  if(!btn) return;
+  const m = PRO_MENTORS[btn.dataset.idx];
+  document.getElementById('pmAvatar').style.background = `conic-gradient(from 180deg, hsl(${m.hue} 70% 55%), hsl(${m.hue+60} 70% 50%), hsl(${m.hue} 70% 55%))`;
+  document.getElementById('pmName').textContent = m.name;
+  document.getElementById('pmHandle').textContent = '@' + m.handle;
+  document.getElementById('pmGain').textContent = `${m.gain}%`;
+  document.getElementById('pmTrades').textContent = m.trades.toLocaleString();
+  document.getElementById('pmCapital').textContent = '$' + m.capital.toLocaleString();
+  document.getElementById('pmRisk').textContent = m.risk;
+  document.getElementById('pmCopiers').textContent = m.copiers;
+  document.getElementById('pmAvgTime').textContent = m.avgTime;
+  pmBackdrop.classList.add('show');
+});
+document.getElementById('pmClose').addEventListener('click', ()=> pmBackdrop.classList.remove('show'));
+pmBackdrop.addEventListener('click', (e)=>{ if(e.target === pmBackdrop) pmBackdrop.classList.remove('show'); });
+document.getElementById('pmConfirm').addEventListener('click', ()=>{
+  pmBackdrop.classList.remove('show');
+  showToast('Now copying trader', '$10/mo subscription applied to your account.');
 });
 
 /* magnetic buttons (desktop only) */
