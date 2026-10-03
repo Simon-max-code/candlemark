@@ -134,7 +134,7 @@ function animateValue(el, target, opts={}){
   requestAnimationFrame(tick);
 }
 
-const TOTAL_BALANCE = 16698.60;
+const TOTAL_BALANCE = 0.00;
 animateValue(document.getElementById('totalBalance'), TOTAL_BALANCE);
 animateValue(document.getElementById('topbarBalanceVal'), 4218.60);
 animateValue(document.getElementById('statAvailable'), 4218.60, { decimals:0 });
