@@ -181,33 +181,74 @@ document.querySelectorAll('.field input').forEach(inp=>{
   inp.addEventListener('input', ()=> clearInvalid(inp.closest('.field')));
 });
 
+function openOtp(email, next){
+  const box = document.getElementById('otpBox'), code = document.getElementById('otpCode');
+  const err = document.getElementById('otpErr'), go = document.getElementById('otpGo');
+  document.getElementById('otpEmail').textContent = email;
+  code.value = ''; err.textContent = ''; box.classList.add('show'); code.focus();
+  go.onclick = async ()=>{
+    if(!/^\d{6}$/.test(code.value)){ err.textContent = 'Enter the 6-digit code'; return; }
+    go.disabled = true;
+    try{
+      const r = await api('/auth/verify-email', { method:'POST', auth:false, body:{ email, code:code.value } });
+      api.setToken(r.accessToken);
+      location.href = next;
+    }catch(e){
+      err.textContent = e.data?.error === 'INVALID_CODE' ? 'Invalid or expired code' : 'Something went wrong, try again';
+      go.disabled = false;
+    }
+  };
+  document.getElementById('otpResend').onclick = async ()=>{
+    await api('/auth/resend-otp', { method:'POST', auth:false, body:{ email } }).catch(()=>{});
+    err.textContent = 'If the email is valid, a new code was sent (60s cooldown).';
+  };
+}
+
 /* ---------- Login form ---------- */
 const loginForm = document.getElementById('loginForm');
+async function doLogin(email, password, totp){
+  const btn = loginForm.querySelector('.btn-submit');
+  const pwField = document.getElementById('loginPassword').closest('.field');
+  btn.classList.add('loading'); btn.disabled = true;
+  try{
+    const r = await api('/auth/login', { method:'POST', auth:false, body:{ email, password, ...(totp && { totp }) } });
+    api.setToken(r.accessToken);
+    document.getElementById('loginSuccess').classList.add('show');
+    redirectTo('dashboard.html', 500);
+  }catch(err){
+    const c = err.data?.error;
+    if(c === 'EMAIL_NOT_VERIFIED') openOtp(err.data.email, 'dashboard.html');
+    else if(c === 'TOTP_REQUIRED' || c === 'INVALID_TOTP'){
+      const t = prompt('Enter your 6-digit 2FA code');
+      if(t){ btn.classList.remove('loading'); btn.disabled = false; return doLogin(email, password, t.trim()); }
+    }
+    else if(c === 'ACCOUNT_SUSPENDED') setInvalid(pwField, 'Account restricted. Contact support.');
+    else if(c === 'INVALID_CREDENTIALS') setInvalid(pwField, 'Incorrect email or password');
+    else if(err.status === 429) setInvalid(pwField, 'Too many attempts, wait a minute');
+    else setInvalid(pwField, 'Server unreachable, try again');
+  }finally{
+    btn.classList.remove('loading'); btn.disabled = false;
+  }
+}
 if(loginForm){
   loginForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     let valid = true;
     const email = document.getElementById('loginEmail');
     const pw = document.getElementById('loginPassword');
-
     if(!email.value.includes('@')){ setInvalid(email.closest('.field'), 'Enter a valid email address'); valid = false; }
     if(pw.value.length < 6){ setInvalid(pw.closest('.field'), 'Password must be at least 6 characters'); valid = false; }
     if(!valid) return;
-
-    submitWithLoading(loginForm, ()=>{
-      document.getElementById('loginSuccess').classList.add('show');
-      redirectTo('dashboard.html');
-    });
+    doLogin(email.value.trim().toLowerCase(), pw.value);
   });
 }
 
 /* ---------- Register form ---------- */
 const registerForm = document.getElementById('registerForm');
 if(registerForm){
-  registerForm.addEventListener('submit', (e)=>{
+  registerForm.addEventListener('submit', async (e)=>{
     e.preventDefault();
     let valid = true;
-
     const name = document.getElementById('regName');
     const email = document.getElementById('regEmail');
     const pw = document.getElementById('regPassword');
@@ -218,29 +259,31 @@ if(registerForm){
     if(!email.value.includes('@')){ setInvalid(email.closest('.field'), 'Enter a valid email address'); valid = false; }
     if(pw.value.length < 8){ setInvalid(pw.closest('.field'), 'Use at least 8 characters'); valid = false; }
     if(confirm.value !== pw.value || confirm.value === ''){ setInvalid(confirm.closest('.field'), 'Passwords do not match'); valid = false; }
-    if(!terms.checked){ document.getElementById('termsError').style.display = 'block'; valid = false; }
-    else{ document.getElementById('termsError').style.display = 'none'; }
-
+    document.getElementById('termsError').style.display = terms.checked ? 'none' : 'block';
+    if(!terms.checked) valid = false;
     if(!valid) return;
 
-    submitWithLoading(registerForm, ()=>{
-      document.getElementById('registerSuccess').classList.add('show');
-      redirectTo('kyc.html');
-    });
+    const btn = registerForm.querySelector('.btn-submit');
+    btn.classList.add('loading'); btn.disabled = true;
+    const addr = email.value.trim().toLowerCase();
+    try{
+      await api('/auth/register', { method:'POST', auth:false, body:{
+        name: name.value.trim(), email: addr, password: pw.value,
+        country: document.getElementById('regCountry').value || undefined,
+      }});
+      openOtp(addr, 'kyc.html');
+    }catch(err){
+      const c = err.data?.error;
+      if(c === 'EMAIL_TAKEN') setInvalid(email.closest('.field'), 'Email already registered. Log in instead.');
+      else if(c === 'VALIDATION') setInvalid(pw.closest('.field'), 'Please check your details');
+      else if(err.status === 429) setInvalid(email.closest('.field'), 'Too many attempts, wait a minute');
+      else setInvalid(email.closest('.field'), 'Server unreachable, try again');
+    }finally{
+      btn.classList.remove('loading'); btn.disabled = false;
+    }
   });
 }
 
 function redirectTo(url, delay = 1500){
   setTimeout(() => { window.location.href = url; }, delay);
-}
-
-function submitWithLoading(form, onDone){
-  const btn = form.querySelector('.btn-submit');
-  btn.classList.add('loading');
-  btn.disabled = true;
-  setTimeout(()=>{
-    btn.classList.remove('loading');
-    btn.disabled = false;
-    onDone();
-  }, 1300);
 }

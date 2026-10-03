@@ -142,7 +142,20 @@
 
 </div>
 
+<div class="otp-backdrop" id="otpBox">
+  <div class="otp-card">
+    <h3>Verify your email</h3>
+    <p style="color:var(--text-secondary);font-size:.9rem">Enter the 6-digit code sent to <b id="otpEmail"></b></p>
+    <input id="otpCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000">
+    <p id="otpErr" style="color:var(--bear);font-size:12.5px;min-height:18px"></p>
+    <button type="button" class="btn-solid btn-submit" id="otpGo"><span>Verify</span></button>
+    <button type="button" class="link-muted" id="otpResend">Resend code</button>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="config.js"></script>
+<script src="api.js"></script>
 <script src="auth.js"></script>
 <script src="touch-fx.js"></script>
 <script>

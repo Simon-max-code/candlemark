@@ -321,3 +321,9 @@
 }
 .checkbox input{ inset:-10px; }
 .field-icon-btn{ padding:12px; right:6px; }
+
+.otp-backdrop{position:fixed;inset:0;z-index:500;background:rgba(6,8,11,.75);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+.otp-backdrop.show{display:flex}
+.otp-card{background:var(--bg-panel-2);border:1px solid var(--line-strong);border-radius:var(--radius-l);padding:32px;max-width:380px;width:100%;display:flex;flex-direction:column;gap:12px;text-align:center}
+.otp-card input{background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--text-primary);font:600 24px var(--font-mono);letter-spacing:.4em;text-align:center}
+.otp-card input:focus{outline:none;border-color:var(--bull)}
