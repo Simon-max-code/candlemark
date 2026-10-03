@@ -148,7 +148,158 @@
     api.setToken(null); location.href = 'login.html';
   });
 
-  await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx()]);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[c]));
+  const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+  const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
+  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Amount is below the minimum.', KYC_REQUIRED:'Identity verification must be approved first.',
+    SELF_COPY:"You can't copy yourself.", VALIDATION:'Please check the details.', NOT_FOUND:'Not found.' };
+  const $$id = (id) => document.getElementById(id);
+
+  // ---------- mentors / copytrading ----------
+  let mentors = [], picked = null;
+  const card = (m, i) => { const h = hue(m.handle), s = m.stats || {}; return `
+    <div class="mentor-card tilt">
+      <div class="mc-head"><div class="mc-avatar" style="background:${grad(h)}"></div>
+        <div><strong>${esc(m.name)}</strong><small>${esc(m.tag || '@' + m.handle)}</small></div></div>
+      <div class="mc-spark">${miniSpark(i * 13 + 2, '#00E6A0')}</div>
+      <div class="mc-row">
+        <div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
+        <div><strong>${s.trades != null ? Number(s.trades).toLocaleString() : '—'}</strong><span>Trades</span></div>
+        <div><strong>${m.copiers}</strong><span>Copiers</span></div></div>
+      <button class="mm-btn" data-copy-mentor="${m.id}">Copy this mentor</button>
+    </div>`; };
+
+  function openCopy(e) {
+    const b = e.target.closest('[data-copy-mentor]'); if (!b) return;
+    const m = picked = mentors.find(x => x.id === b.dataset.copyMentor), s = m.stats || {};
+    $$id('pmAvatar').style.background = grad(hue(m.handle));
+    $$id('pmName').textContent = m.name; $$id('pmHandle').textContent = '@' + m.handle;
+    $$id('pmGain').textContent = s.gain != null ? s.gain + '%' : '—';
+    $$id('pmTrades').textContent = s.trades != null ? Number(s.trades).toLocaleString() : '—';
+    $$id('pmCapital').textContent = s.capital != null ? '$' + Number(s.capital).toLocaleString() : '—';
+    $$id('pmRisk').textContent = m.risk; $$id('pmCopiers').textContent = m.copiers; $$id('pmAvgTime').textContent = s.avgTime || '—';
+    const fee = Number(m.fee) / 100;
+    document.querySelector('.pm-sub-note').textContent = `$${fee} subscription fee will be deducted from your trading account to follow this leader until the end of the month. Renews automatically on the 1st of next month.`;
+    $$id('pmConfirm').querySelector('span').textContent = `Confirm Copy — $${fee}/mo`;
+    pmBackdrop.classList.add('show');
+  }
+
+  async function loadMentors() {
+    mentors = (await api('/copy/mentors')).items;
+    const html = mentors.length ? mentors.map(card).join('') : '<p style="color:var(--text-tertiary)">No mentors available yet.</p>';
+    for (const id of ['mentorGrid', 'proMentorGrid']) {
+      const g = $$id(id), n = g.cloneNode(false); n.innerHTML = html; g.replaceWith(n); n.addEventListener('click', openCopy);
+    }
+  }
+
+  const pmc = $$id('pmConfirm');
+  pmc.insertAdjacentHTML('beforeend', '<div class="ot-field"><label>Allocation (USD, min $50)</label><div class="ot-input-row"><span>$</span><input type="number" id="pmAlloc" value="500" min="50"></div></div>');
+  const pmn = pmc.cloneNode(true); pmc.replaceWith(pmn);
+  pmn.addEventListener('click', async () => {
+    if (!picked) return;
+    pmn.disabled = true;
+    try {
+      await api(`/copy/mentors/${picked.id}/copy`, { method:'POST', body:{ allocation: String($$id('pmAlloc').value) } });
+      pmBackdrop.classList.remove('show');
+      showToast('Now copying ' + picked.name, 'Their new trades will be mirrored to your account.');
+      loadCopies(); loadBalance(); loadTx();
+    } catch (e) { showToast('Could not start copying', errMsg[e.data?.error] || 'Try again.'); }
+    pmn.disabled = false;
+  });
+
+  async function loadCopies() {
+    const { items } = await api('/copy');
+    $$id('activeCopies').innerHTML = items.length ? items.map(c => `
+      <div class="ac-row">
+        <div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
+        <div class="ac-info"><strong>${esc(c.name)}</strong><small>@${esc(c.handle)} · ${c.status.toLowerCase()}</small></div>
+        <div class="ac-alloc"><strong style="font-family:var(--font-mono)">$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>allocated</span></div>
+        <div class="ac-actions">
+          <button class="pill-toggle pause" data-act="${c.status === 'PAUSED' ? 'resume' : 'pause'}" data-id="${c.id}">${c.status === 'PAUSED' ? 'Resume' : 'Pause'}</button>
+          <button class="pill-toggle stop" data-act="stop" data-id="${c.id}">Stop</button>
+        </div></div>`).join('') : '<p style="color:var(--text-tertiary)">You are not copying anyone yet.</p>';
+    $$id('mentorStrip').innerHTML = items.map(c => `
+      <div class="mentor-mini"><div class="mm-head"><div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
+        <div><strong>${esc(c.name)}</strong><small>@${esc(c.handle)}</small></div></div>
+        <div class="mm-stats"><div><strong>$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>your allocation</span></div>
+        <div><strong>${c.status.toLowerCase()}</strong><span>status</span></div></div></div>`).join('');
+  }
+  $$id('activeCopies').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    try { await api(`/copy/${b.dataset.id}/${b.dataset.act}`, { method:'POST' }); showToast('Updated', `Copy ${b.dataset.act}d.`.replace('stopd', 'stopped')); }
+    catch { showToast('Could not update', 'Try again.'); }
+    loadCopies();
+  });
+
+  // ---------- deposits (crypto only) ----------
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="pm-modal-backdrop" id="mtBackdrop"><div class="pm-modal" style="text-align:center">
+      <button class="pm-close" id="mtClose">&times;</button>
+      <div style="font-size:34px;margin-bottom:10px">🛠️</div>
+      <h2 id="mtTitle" style="font-size:1.1rem;margin-bottom:18px;line-height:1.4"></h2>
+      <button class="btn-solid btn-sm" id="mtOk" style="width:100%;justify-content:center"><span>Use cryptocurrency</span></button>
+    </div></div>`);
+  const mt = $$id('mtBackdrop'), dg = $$id('depositMethodGrid');
+  const useCrypto = () => { mt.classList.remove('show'); dg.querySelector('[data-method="crypto"]').click(); };
+  $$id('mtClose').onclick = () => mt.classList.remove('show');
+  $$id('mtOk').onclick = useCrypto;
+  mt.addEventListener('click', (e) => { if (e.target === mt) mt.classList.remove('show'); });
+  dg.addEventListener('click', (e) => {
+    const b = e.target.closest('.method-card'); if (!b || b.dataset.method === 'crypto') return;
+    e.stopImmediatePropagation();
+    $$id('mtTitle').textContent = `${b.querySelector('strong').textContent} is currently under maintenance, use cryptocurrency method`;
+    mt.classList.add('show');
+  }, true);
+  dg.querySelector('[data-method="crypto"]').click();
+
+  async function loadDeposits() {
+    const m = await api('/wallet/deposit-methods').catch(() => ({}));
+    const c = m.crypto || {}, rows = document.querySelectorAll('[data-panel="crypto"] .crypto-row');
+    [c.btc, c.eth, c.usdtTrc20].forEach((v, i) => {
+      rows[i].querySelector('.mono').textContent = v || 'Address not available yet';
+      rows[i].querySelector('.copy-btn').dataset.copy = v || '';
+    });
+  }
+
+  const proofBtn = document.querySelector('#panel-deposits .btn-solid[data-toast]');
+  proofBtn.removeAttribute('data-toast');
+  proofBtn.addEventListener('click', async () => {
+    const amt = $$id('depositProofAmount').value, f = $$id('depositProofFile').files[0];
+    if (!(Number(amt) >= 100) || !f) return showToast('Missing details', 'Enter an amount of at least $100 and attach your proof.');
+    const fd = new FormData(); fd.append('amount', String(amt)); fd.append('method', 'crypto'); fd.append('file', f);
+    proofBtn.disabled = true;
+    try {
+      await api('/wallet/deposits', { method:'POST', headers:{ 'Idempotency-Key': key() }, form: fd });
+      showToast('Proof submitted', 'Your deposit is pending verification.');
+      $$id('depositProofAmount').value = ''; $$id('depositProofFile').value = '';
+    } catch (e) { showToast('Upload failed', e.data?.error === 'BAD_FILE_TYPE' ? 'Use a JPG, PNG or PDF.' : e.data?.error === 'FILE_TOO_LARGE' ? 'Max file size is 5MB.' : errMsg[e.data?.error] || 'Try again.'); }
+    proofBtn.disabled = false;
+  });
+
+  // ---------- withdrawals ----------
+  const wp = $$id('panel-wallets');
+  const wbtn = wp.querySelector('[data-toast="Withdrawal requested"]');
+  document.querySelectorAll('[data-toast="Withdrawal requested"]').forEach(b => b.removeAttribute('data-toast'));
+  document.querySelectorAll('[data-toast="Deposit initiated"]').forEach(b => { b.removeAttribute('data-toast'); b.addEventListener('click', () => activateTab('deposits')); });
+  wp.querySelector('select').closest('.settings-field').innerHTML = `
+    <label>Network</label>
+    <select id="wdNetwork" style="width:100%;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:9px;padding:12px 14px;color:var(--text-primary);font-size:13.5px;margin-bottom:12px">
+      <option value="BTC">Bitcoin (BTC)</option><option value="USDT_TRC20">USDT (TRC20)</option><option value="ETH_ERC20">Ethereum (ERC20)</option></select>
+    <label>Destination address</label><input type="text" id="wdDest" placeholder="Paste your wallet address">`;
+  wbtn.addEventListener('click', async () => {
+    const amt = $$id('wdAmount').value, dest = $$id('wdDest').value.trim();
+    if (!(Number(amt) >= 10) || !dest) return showToast('Missing details', 'Enter an amount (min $10) and your address.');
+    wbtn.disabled = true;
+    try {
+      await api('/wallet/withdrawals', { method:'POST', headers:{ 'Idempotency-Key': key() },
+        body:{ amount: String(amt), network: $$id('wdNetwork').value, destination: dest } });
+      showToast('Withdrawal requested', 'Pending review. Funds are held until approved.');
+      $$id('wdDest').value = ''; loadBalance(); loadTx();
+    } catch (e) { showToast('Withdrawal failed', errMsg[e.data?.error] || 'Try again.'); }
+    wbtn.disabled = false;
+  });
+
+  await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits()]);
   bindTrade(); connectWs();
   setInterval(() => { loadBalance(); loadPositions(); }, 15000);
 })();
