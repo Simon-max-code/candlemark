@@ -125,13 +125,23 @@ next.addEventListener('click', () => {
   $('#declError').classList.toggle('show', !decl.checked);
   if (!decl.checked) return;
   busy = true; next.classList.add('loading'); next.disabled = true;
-  setTimeout(() => {
+  const body = Object.fromEntries(new FormData($('#kycForm')));
+  delete body.undefined;
+  api('/kyc', { method:'PUT', body }).then(() => {
     $('#kpFill').style.width = '100%'; $('#kpPct').textContent = '100%';
     $$('#kpDots b').forEach(b => b.className = 'done');
     $$('#kycSteps li').forEach(li => li.className = 'done');
     $('#kycDone').classList.add('show');
     setTimeout(() => location.href = 'dashboard.html', 2600);
-  }, 1300);
+  }).catch((e) => {
+    busy = false; next.classList.remove('loading'); next.disabled = false;
+    const c = e.data?.error;
+    $('#declError span').textContent = c === 'KYC_LOCKED' ? 'Your profile is already submitted.'
+      : c === 'VALIDATION' ? 'Please check your details: ' + (e.data.issues?.[0]?.path || '')
+      : 'Could not submit, try again.';
+    $('#declError').classList.add('show');
+    if (c === 'KYC_LOCKED') setTimeout(() => location.href = 'dashboard.html', 1500);
+  });
 });
 back.addEventListener('click', () => { if (cur > 1){ cur--; render('back'); } });
 $('#kycForm').addEventListener('keydown', e => {      // Enter = Continue
