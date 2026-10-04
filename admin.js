@@ -146,5 +146,37 @@
   $('#tabs').innerHTML = Object.keys(TABS).map(t => `<button data-t="${t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('');
   $('#tabs').onclick = (e) => { const b = e.target.closest('[data-t]'); if (b) show(b.dataset.t); };
 
-  (async () => { try { const me = await api('/auth/me'); if (me.role !== 'ADMIN') { document.body.innerHTML = '<p style="padding:40px">Not authorised.</p>'; return; } $('#who').textContent = me.email; show('overview'); } catch {} })();
+  const loginBox = $('#login'), appBox = $('.ad');
+  const showLogin = (note) => { appBox.style.display = 'none'; loginBox.style.display = 'flex'; $('#lerr').textContent = note || ''; };
+  const enter = (me) => { loginBox.style.display = 'none'; appBox.style.display = ''; $('#who').textContent = me.email; show('overview'); };
+  const out = async () => { await api('/auth/logout', { method:'POST' }).catch(() => {}); api.setToken(null); };
+
+  $('#lo').onclick = async () => { await out(); showLogin(); };
+
+  $('#lf').onsubmit = async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button'); btn.disabled = true;
+    try {
+      const totp = $('#lt').value.trim();
+      const r = await api('/auth/login', { method:'POST', auth:false, body:{ email: $('#le').value.trim().toLowerCase(), password: $('#lp').value, ...(totp && { totp }) } });
+      api.setToken(r.accessToken);
+      if (r.user.role !== 'ADMIN') { await out(); return showLogin('This account is not an admin.'); }
+      $('#lp').value = ''; $('#lt').value = '';
+      enter(r.user);
+    } catch (err) {
+      const c = err.data?.error;
+      if (c === 'TOTP_REQUIRED' || c === 'INVALID_TOTP') { $('#lt').style.display = 'block'; $('#lt').focus(); $('#lerr').textContent = c === 'INVALID_TOTP' ? 'Wrong 2FA code.' : 'Enter your 2FA code.'; }
+      else if (c === 'ACCOUNT_SUSPENDED') $('#lerr').textContent = 'Account restricted.';
+      else if (c === 'EMAIL_NOT_VERIFIED') $('#lerr').textContent = 'Email not verified.';
+      else if (err.status === 429) $('#lerr').textContent = 'Too many attempts, wait a minute.';
+      else $('#lerr').textContent = c === 'INVALID_CREDENTIALS' ? 'Incorrect email or password.' : 'Server unreachable, try again.';
+    } finally { btn.disabled = false; }
+  };
+
+  (async () => {
+    try {
+      const me = await api('/auth/me');
+      if (me.role === 'ADMIN') enter(me); else { await out(); showLogin(); }
+    } catch { showLogin(); }
+  })();
 })();
