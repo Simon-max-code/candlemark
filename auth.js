@@ -287,3 +287,38 @@ if(registerForm){
 function redirectTo(url, delay = 1500){
   setTimeout(() => { window.location.href = url; }, delay);
 }
+
+/* ---------- Forgot password ---------- */
+(function forgot(){
+  const link = document.getElementById('forgotLink');
+  if(!link) return;
+  const box = document.getElementById('fpBox'), s1 = document.getElementById('fpStep1'), s2 = document.getElementById('fpStep2');
+  const err = document.getElementById('fpErr'), go = document.getElementById('fpGo'), label = go.querySelector('span');
+  let step = 1, email = '';
+  const reset = ()=>{ step = 1; s1.style.display = ''; s2.style.display = 'none'; label.textContent = 'Send code'; err.textContent = ''; err.style.color = 'var(--bear)'; };
+  link.addEventListener('click', (e)=>{ e.preventDefault(); reset(); document.getElementById('fpEmail').value = document.getElementById('loginEmail').value; box.classList.add('show'); });
+  document.getElementById('fpClose').onclick = ()=> box.classList.remove('show');
+  go.onclick = async ()=>{
+    err.style.color = 'var(--bear)'; err.textContent = ''; go.disabled = true;
+    try{
+      if(step === 1){
+        email = document.getElementById('fpEmail').value.trim().toLowerCase();
+        if(!email.includes('@')){ err.textContent = 'Enter a valid email'; return; }
+        await api('/auth/forgot-password', { method:'POST', auth:false, body:{ email } });
+        step = 2; s1.style.display = 'none'; s2.style.display = 'flex'; label.textContent = 'Reset password';
+        err.style.color = 'var(--text-secondary)'; err.textContent = 'If the account exists, a code was sent.';
+      } else {
+        const code = document.getElementById('fpCode').value, password = document.getElementById('fpPw').value;
+        if(!/^\d{6}$/.test(code)){ err.textContent = 'Enter the 6-digit code'; return; }
+        if(password.length < 8){ err.textContent = 'Password must be at least 8 characters'; return; }
+        await api('/auth/reset-password', { method:'POST', auth:false, body:{ email, code, password } });
+        box.classList.remove('show');
+        document.getElementById('loginPassword').value = '';
+        const ok = document.getElementById('loginSuccess');
+        ok.querySelector('span').textContent = 'Password updated. Log in with your new password.'; ok.classList.add('show');
+      }
+    }catch(e){
+      err.textContent = e.data?.error === 'INVALID_CODE' ? 'Invalid or expired code' : e.status === 429 ? 'Too many attempts, wait a minute' : 'Something went wrong, try again';
+    }finally{ go.disabled = false; }
+  };
+})();

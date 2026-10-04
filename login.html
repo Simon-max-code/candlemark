@@ -107,7 +107,7 @@
               <span class="checkbox"><input type="checkbox" id="loginRemember" checked><svg viewBox="0 0 11 11" fill="none"><path d="M1 5.5l3 3 6-6" stroke="#02110C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               <span>Remember me</span>
             </label>
-            <a href="#" class="link-muted">Forgot password?</a>
+            <a href="#" class="link-muted" id="forgotLink">Forgot password?</a>
           </div>
 
           <button type="submit" class="btn-solid btn-submit magnetic">
@@ -150,6 +150,23 @@
     <p id="otpErr" style="color:var(--bear);font-size:12.5px;min-height:18px"></p>
     <button type="button" class="btn-solid btn-submit" id="otpGo"><span>Verify</span></button>
     <button type="button" class="link-muted" id="otpResend">Resend code</button>
+  </div>
+</div>
+
+<div class="otp-backdrop" id="fpBox">
+  <div class="otp-card">
+    <h3>Reset password</h3>
+    <div id="fpStep1">
+      <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:12px">Enter your account email and we'll send a 6-digit code.</p>
+      <input id="fpEmail" type="email" placeholder="you@example.com" style="font:500 15px var(--font-body);letter-spacing:0;width:100%">
+    </div>
+    <div id="fpStep2" style="display:none;flex-direction:column;gap:12px">
+      <input id="fpCode" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code">
+      <input id="fpPw" type="password" placeholder="New password (8+ chars)" autocomplete="new-password" style="font:500 15px var(--font-body);letter-spacing:0">
+    </div>
+    <p id="fpErr" style="color:var(--bear);font-size:12.5px;min-height:18px"></p>
+    <button type="button" class="btn-solid btn-submit" id="fpGo"><span>Send code</span></button>
+    <button type="button" class="link-muted" id="fpClose">Cancel</button>
   </div>
 </div>
 
