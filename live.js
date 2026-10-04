@@ -306,7 +306,65 @@
     wbtn.disabled = false;
   });
 
-  await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits()]);
+  // ---------- wallet tab ----------
+  const wcards = document.querySelectorAll('#panel-wallet .wcard');
+  wcards[1].querySelector('.lbl').textContent = 'Pending deposits';
+  const wBody = document.querySelector('#panel-wallet .card:last-of-type tbody');
+  async function loadWallet() {
+    const [bal, pos, dep, wd] = await Promise.all([
+      api('/wallet/balance'), api('/trades?status=OPEN'), api('/wallet/deposits'), api('/wallet/withdrawals'),
+    ]);
+    const invested = pos.items.reduce((t, p) => t + Number(p.units) * Number(p.entry), 0);
+    const pending = dep.items.filter((d) => d.status === 'PENDING').reduce((t, d) => t + Number(d.amount), 0);
+    wcards[0].querySelector('.val').textContent = usd(bal.available);
+    wcards[1].querySelector('.val').textContent = usd(pending);
+    wcards[2].querySelector('.val').textContent = usd(Math.round(invested * 100));
+    const si = $$id('statInvested'); if (si) si.textContent = usd(Math.round(invested * 100));
+    const st = { APPROVED: ['completed', 'Completed'], PENDING: ['pending', 'Pending'], REJECTED: ['failed', 'Rejected'] };
+    const rows = [
+      ...dep.items.map((d) => ({ type: 'Deposit', method: d.method, amt: Number(d.amount), s: d.status, at: d.createdAt })),
+      ...wd.items.map((w) => ({ type: 'Withdrawal', method: w.network, amt: -Number(w.amount), s: w.status, at: w.createdAt })),
+    ].sort((a, b) => new Date(b.at) - new Date(a.at)).slice(0, 20);
+    wBody.innerHTML = rows.length ? rows.map((r) => `<tr><td>${r.type}</td><td>${esc(r.method)}</td>
+      <td class="pnl ${r.amt >= 0 ? 'up' : 'down'}">${r.amt >= 0 ? '+' : '-'}${usd(Math.abs(r.amt))}</td>
+      <td>${new Date(r.at).toLocaleDateString()}</td><td><span class="status-badge ${st[r.s][0]}">${st[r.s][1]}</span></td></tr>`).join('')
+      : '<tr><td colspan="5" style="color:var(--text-tertiary)">No wallet activity yet.</td></tr>';
+  }
+  document.querySelector('[data-tab="wallet"]').addEventListener('click', loadWallet);
+
+  // ---------- notifications ----------
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    #ntPanel{position:fixed;top:68px;right:16px;width:min(340px,92vw);max-height:70vh;overflow-y:auto;background:var(--bg-panel-2);border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.5);z-index:450;display:none}
+    #ntPanel.show{display:block}
+    #ntPanel h4{padding:14px 16px;border-bottom:1px solid var(--line);font-size:.95rem}
+    .nt-item{padding:12px 16px;border-bottom:1px solid var(--line);font-size:12.5px}
+    .nt-item.unread{background:rgba(0,230,160,.06)}
+    .nt-item strong{display:block;font-size:13px;margin-bottom:3px}
+    .nt-item p{color:var(--text-secondary);line-height:1.5}
+    .nt-item small{color:var(--text-tertiary);font-size:11px}
+    .nt-empty{padding:24px 16px;color:var(--text-tertiary);font-size:13px}
+  </style>`);
+  document.body.insertAdjacentHTML('beforeend', '<div id="ntPanel"><h4>Notifications</h4><div id="ntList"></div></div>');
+  const bell = document.querySelector('.icon-btn[aria-label="Notifications"]'), ping = bell.querySelector('.ping'), ntp = $$id('ntPanel');
+  async function loadNotifs() {
+    const { unread, items } = await api('/notifications?limit=20');
+    ping.style.display = unread > 0 ? '' : 'none';
+    $$id('ntList').innerHTML = items.length ? items.map((n) => `<div class="nt-item ${n.readAt ? '' : 'unread'}">
+      <strong>${esc(n.title)}</strong><p>${esc(n.body || '')}</p><small>${new Date(n.createdAt).toLocaleString()}</small></div>`).join('')
+      : '<div class="nt-empty">No notifications yet.</div>';
+    return unread;
+  }
+  bell.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    ntp.classList.toggle('show');
+    if (ntp.classList.contains('show')) {
+      const unread = await loadNotifs().catch(() => 0);
+      if (unread > 0) { await api('/notifications/read-all', { method: 'POST' }).catch(() => {}); ping.style.display = 'none'; }
+    }
+  });
+  document.addEventListener('click', (e) => { if (!ntp.contains(e.target)) ntp.classList.remove('show'); });
+
+  await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
   bindTrade(); connectWs();
-  setInterval(() => { loadBalance(); loadPositions(); }, 15000);
+  setInterval(() => { loadBalance(); loadPositions(); loadWallet(); loadNotifs(); }, 15000);
 })();
