@@ -166,6 +166,10 @@
         <div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
         <div><strong>${s.trades != null ? Number(s.trades).toLocaleString() : '—'}</strong><span>Trades</span></div>
         <div><strong>${m.copiers}</strong><span>Copiers</span></div></div>
+      <div class="mc-row" style="margin-top:-6px">
+        <div><strong>${s.winRate != null ? s.winRate + '%' : '—'}</strong><span>Win rate</span></div>
+        <div><strong>${s.capital != null ? '$' + Number(s.capital).toLocaleString() : '—'}</strong><span>Inv. capital</span></div>
+        <div><strong>${esc(s.avgTime || '—')}</strong><span>Avg. time</span></div></div>
       <button class="mm-btn" data-copy-mentor="${m.id}">Copy this mentor</button>
     </div>`; };
 
@@ -253,13 +257,16 @@
   dg.querySelector('[data-method="crypto"]').click();
 
   async function loadDeposits() {
-    const m = await api('/wallet/deposit-methods').catch(() => ({}));
-    const c = m.crypto || {}, rows = document.querySelectorAll('[data-panel="crypto"] .crypto-row');
-    [c.btc, c.eth, c.usdtTrc20].forEach((v, i) => {
-      rows[i].querySelector('.mono').textContent = v || 'Address not available yet';
-      rows[i].querySelector('.copy-btn').dataset.copy = v || '';
-    });
+    const rows = document.querySelectorAll('[data-panel="crypto"] .crypto-row');
+    try {
+      const c = (await api('/wallet/deposit-methods')).crypto || {};
+      [c.btc, c.eth, c.usdtTrc20].forEach((v, i) => {
+        rows[i].querySelector('.mono').textContent = v || 'Address not available yet';
+        rows[i].querySelector('.copy-btn').dataset.copy = v || '';
+      });
+    } catch { rows.forEach((r) => r.querySelector('.mono').textContent = 'Could not load address'); }
   }
+  document.querySelector('[data-tab="deposits"]').addEventListener('click', loadDeposits);
 
   const proofBtn = document.querySelector('#panel-deposits .btn-solid[data-toast]');
   proofBtn.removeAttribute('data-toast');

@@ -21,7 +21,7 @@
     let r = await raw(path, opts);
     if (r.status === 401 && opts.auth !== false) {
       try { await refresh(); r = await raw(path, opts); }
-      catch { setToken(null); location.href = 'login.html'; throw new Error('UNAUTHORIZED'); }
+      catch { setToken(null); if (!opts.noRedirect) location.href = 'login.html'; throw new Error('UNAUTHORIZED'); }
     }
     const data = await r.json().catch(() => ({}));
     if (!r.ok) throw Object.assign(new Error(data.error || data.message || 'ERROR'), { status: r.status, data });

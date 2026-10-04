@@ -175,7 +175,7 @@
 
   (async () => {
     try {
-      const me = await api('/auth/me');
+      const me = await api('/auth/me', { noRedirect: true });
       if (me.role === 'ADMIN') enter(me); else { await out(); showLogin(); }
     } catch { showLogin(); }
   })();
