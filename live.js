@@ -17,7 +17,7 @@
     const b = await api('/wallet/balance');
     const v = Number(b.available) / 100;
     window.__bal = v;
-    for (const id of ['totalBalance','topbarBalanceVal'])
+    for (const id of ['topbarBalanceVal'])
       { const el = document.getElementById(id); if (el) el.textContent = usd(b.available); }
     const sa = document.getElementById('statAvailable'); if (sa) sa.textContent = usd(b.available);
     document.querySelectorAll('#panel-wallet .wcard .val')[0].textContent = usd(b.available);
@@ -128,18 +128,26 @@
   }
 
   // transactions
-  async function loadTx(){
-    const { items } = await api('/wallet/ledger?limit=50');
-    const names = { DEMO_FUNDING:'Demo funding', DEPOSIT:'Deposit', WITHDRAWAL:'Withdrawal', TRADE_PNL:'Trade', COPY_FEE:'Copy fee', ADJUSTMENT:'Adjustment' };
-    document.getElementById('txBody').innerHTML = items.map(r => {
+  let txItems = [], txF = 'All';
+  const TXF = { Deposits: ['DEPOSIT', 'DEMO_FUNDING'], Withdrawals: ['WITHDRAWAL'], Trades: ['TRADE_PNL'], Copytrades: ['COPY_FEE'] };
+  const txNames = { DEMO_FUNDING:'Demo funding', DEPOSIT:'Deposit', WITHDRAWAL:'Withdrawal', TRADE_PNL:'Trade', COPY_FEE:'Copy fee', ADJUSTMENT:'Adjustment' };
+  function renderTx(){
+    const rows = txItems.filter(r => txF === 'All' || TXF[txF].includes(r.type));
+    document.getElementById('txBody').innerHTML = rows.length ? rows.map(r => {
       const up = BigInt(r.amount) >= 0n, abs = r.amount.replace('-','');
-      return `<tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${r.id.slice(-8).toUpperCase()}</td><td>${names[r.type]}</td>
-        <td style="color:var(--text-secondary)">${r.refType || ''}</td>
+      const detail = r.type === 'TRADE_PNL' ? (up ? 'Position closed' : 'Position opened') : (r.refType || '');
+      return `<tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${r.id.slice(-8).toUpperCase()}</td><td>${txNames[r.type]}</td>
+        <td style="color:var(--text-secondary)">${detail}</td>
         <td class="pnl ${up?'up':'down'}">${up?'+':'-'}${usd(abs)}</td>
         <td style="color:var(--text-tertiary)">${new Date(r.createdAt).toLocaleDateString()}</td>
         <td><span class="status-badge completed">Completed</span></td></tr>`;
-    }).join('');
+    }).join('') : '<tr><td colspan="6" style="color:var(--text-tertiary)">No transactions.</td></tr>';
   }
+  async function loadTx(){ txItems = (await api('/wallet/ledger?limit=100')).items; renderTx(); }
+  document.querySelectorAll('#panel-transactions .filter-chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('#panel-transactions .filter-chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active'); txF = c.textContent.trim(); renderTx();
+  }));
 
   // logout
   document.querySelector('a[href="login.html"]')?.addEventListener('click', async (e) => {
@@ -364,7 +372,45 @@
   });
   document.addEventListener('click', (e) => { if (!ntp.contains(e.target)) ntp.classList.remove('show'); });
 
+  // ---------- stat cards, hero total, allocation ----------
+  async function loadStats(){
+    const [bal, open, closed] = await Promise.all([api('/wallet/balance'), api('/trades?status=OPEN'), api('/trades?status=CLOSED')]);
+    const cash = Number(bal.available) / 100;
+    let invested = 0, unreal = 0; const by = { forex:0, stocks:0, crypto:0, other:0 };
+    open.items.forEach(p => {
+      const cost = Number(p.units) * Number(p.entry);
+      invested += cost; unreal += Number(p.pnl ?? 0) / 100;
+      by[['forex','stocks','crypto'].includes(p.asset) ? p.asset : 'other'] += cost;
+    });
+    const today = new Date().toDateString();
+    const realized = closed.items.filter(p => p.closedAt && new Date(p.closedAt).toDateString() === today)
+      .reduce((t, p) => t + Number(p.pnl ?? 0) / 100, 0);
+    const pnl = unreal + realized, equity = cash + invested + unreal;
+    const fmt = (n) => (n < 0 ? '-' : '+') + usd(Math.round(Math.abs(n) * 100));
+
+    $$id('totalBalance').textContent = usd(Math.round(equity * 100));
+    $$id('statInvested').textContent = usd(Math.round(invested * 100));
+    const sp = $$id('statPnl'); sp.textContent = fmt(pnl); sp.className = 'val pnl ' + (pnl >= 0 ? 'up' : 'down');
+    const pct = equity > 0 ? (pnl / equity) * 100 : 0;
+    const d = $$id('balanceDelta'); d.textContent = `${pct >= 0 ? '▲' : '▼'} ${Math.abs(pct).toFixed(2)}% today`; d.className = 'delta ' + (pct >= 0 ? 'up' : 'down');
+
+    const names = [['Forex', 'forex'], ['Stocks', 'stocks'], ['Crypto', 'crypto'], ['Other', 'other']];
+    const C = 2 * Math.PI * 40; let acc = 0;
+    document.querySelectorAll('.donut-seg').forEach((seg, i) => {
+      const frac = invested > 0 ? by[names[i][1]] / invested : 0, dash = frac * C;
+      seg.setAttribute('stroke-dasharray', `${dash} ${C - dash}`);
+      seg.setAttribute('transform', `rotate(${-90 + acc * 360} 50 50)`);
+      seg.style.strokeDashoffset = '0'; acc += frac;
+    });
+    document.querySelectorAll('.legend-row').forEach((r, i) => {
+      r.querySelector('.lname').textContent = names[i][0];
+      r.querySelector('.lval').textContent = (invested > 0 ? Math.round(by[names[i][1]] / invested * 100) : 0) + '%';
+    });
+    $$id('donutSvg').nextElementSibling.querySelector('strong').textContent = usd(Math.round(invested * 100));
+  }
+
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
+  setTimeout(loadStats, 1600); // after dashboard.js's count-up animations finish
   bindTrade(); connectWs();
-  setInterval(() => { loadBalance(); loadPositions(); loadWallet(); loadNotifs(); }, 15000);
+  setInterval(() => { loadBalance(); loadPositions(); loadWallet(); loadNotifs(); loadStats(); loadTx(); }, 15000);
 })();
