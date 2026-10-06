@@ -205,29 +205,26 @@ if(window.matchMedia('(hover: hover)').matches){
   });
 }
 
-/* ---------- Ticker tape generation ---------- */
-const tickerData = [
-  { s:'EUR/USD', p:'1.0842', d:'+0.18%', up:true },
-  { s:'GBP/USD', p:'1.2716', d:'-0.09%', up:false },
-  { s:'US500',   p:'5,614.2', d:'+0.42%', up:true },
-  { s:'XAU/USD', p:'2,384.6', d:'+0.71%', up:true },
-  { s:'BTC/USD', p:'67,214', d:'-1.24%', up:false },
-  { s:'ETH/USD', p:'3,481', d:'+2.03%', up:true },
-  { s:'US30',    p:'39,872', d:'+0.15%', up:true },
-  { s:'USD/JPY', p:'151.62', d:'-0.31%', up:false },
-  { s:'WTI OIL', p:'78.44', d:'+0.58%', up:true },
-  { s:'NAS100',  p:'19,208', d:'+0.66%', up:true },
-];
+/* ---------- Live ticker tape ---------- */
+const TICK = ['EUR/USD','GBP/USD','US500','XAU/USD','BTC/USD','ETH/USD','US30','USD/JPY','WTI','NAS100'];
 const tickerTrack = document.getElementById('tickerTrack');
-function buildTicker(){
-  const set = [...tickerData, ...tickerData];
-  tickerTrack.innerHTML = set.map(t=>`
-    <div class="ticker-item">
-      <strong>${t.s}</strong><span>${t.p}</span><span class="${t.up ? 'up':'down'}">${t.up?'▲':'▼'} ${t.d}</span>
-    </div>
-  `).join('');
+async function loadTicker(){
+  try{
+    const { items } = await (await fetch(API_BASE + '/markets')).json();
+    const by = Object.fromEntries(items.map(i=>[i.sym,i]));
+    const list = TICK.filter(s=>by[s]);
+    if(!tickerTrack.children.length){
+      const one = list.map(s=>`<div class="ticker-item"><strong>${s}</strong><span data-p="${s}"></span><span data-c="${s}"></span></div>`).join('');
+      tickerTrack.innerHTML = one + one;
+    }
+    list.forEach(s=>{
+      const i = by[s], up = i.chg >= 0;
+      tickerTrack.querySelectorAll(`[data-p="${s}"]`).forEach(e=> e.textContent = Number(i.price).toLocaleString(undefined,{maximumFractionDigits:4}));
+      tickerTrack.querySelectorAll(`[data-c="${s}"]`).forEach(e=>{ e.className = up ? 'up' : 'down'; e.textContent = `${up?'▲':'▼'} ${Math.abs(i.chg).toFixed(2)}%`; });
+    });
+  }catch{}
 }
-buildTicker();
+loadTicker(); setInterval(loadTicker, 5000);
 
 /* ============================================================
    THREE.JS — HERO CANDLESTICK SCENE
