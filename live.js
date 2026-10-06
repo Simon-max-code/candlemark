@@ -409,6 +409,86 @@
     $$id('donutSvg').nextElementSibling.querySelector('strong').textContent = usd(Math.round(invested * 100));
   }
 
+  // ---------- settings ----------
+  const sf2 = document.querySelectorAll('#panel-settings .settings-field input');
+  sf2[1].readOnly = true; sf2[1].style.opacity = '.6';
+  const saveBtn = document.querySelector('#panel-settings .settings-grid .card:first-child .btn-solid');
+  saveBtn.removeAttribute('data-toast');
+  saveBtn.addEventListener('click', async () => {
+    const name = sf2[0].value.trim();
+    if (name.length < 2) return showToast('Check your name', 'Enter at least 2 characters.');
+    saveBtn.disabled = true;
+    try {
+      const u = await api('/auth/me', { method:'PATCH', body:{ name, country: sf2[2].value.trim() || undefined } });
+      me.name = u.name; me.country = u.country;
+      const g2 = $('.dash-greeting h1'); if (g2) g2.textContent = `Good day, ${u.name.split(' ')[0]}.`;
+      const av2 = $('.avatar-btn'); if (av2) av2.textContent = u.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+      showToast('Profile updated', 'Your changes were saved.');
+    } catch { showToast('Could not save', 'Try again.'); }
+    saveBtn.disabled = false;
+  });
+
+  // change password card
+  document.querySelector('#panel-settings .settings-grid').insertAdjacentHTML('beforeend', `
+    <div class="card"><div class="card-head"><h3>Change password</h3></div>
+      <div class="settings-field"><label>Current password</label><input type="password" id="cpCur" autocomplete="current-password"></div>
+      <div class="settings-field"><label>New password (8+ characters)</label><input type="password" id="cpNew" autocomplete="new-password"></div>
+      <button class="btn-solid btn-sm" id="cpGo"><span>Update password</span></button></div>`);
+  $$id('cpGo').addEventListener('click', async () => {
+    const cur = $$id('cpCur').value, pw = $$id('cpNew').value;
+    if (!cur || pw.length < 8) return showToast('Check your details', 'New password must be at least 8 characters.');
+    $$id('cpGo').disabled = true;
+    try {
+      await api('/auth/change-password', { method:'POST', body:{ current: cur, password: pw } });
+      showToast('Password updated', 'Please log in again.');
+      api.setToken(null); setTimeout(() => location.href = 'login.html', 1200);
+    } catch (e) { showToast('Could not update', e.data?.error === 'INVALID_CREDENTIALS' ? 'Current password is wrong.' : 'Try again.'); }
+    $$id('cpGo').disabled = false;
+  });
+
+  // 2FA toggle
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="pm-modal-backdrop" id="tfBackdrop"><div class="pm-modal">
+      <button class="pm-close" id="tfClose">&times;</button>
+      <h2 id="tfTitle" style="font-size:1.2rem;margin-bottom:12px"></h2>
+      <div id="tfInfo" style="font-size:12.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:14px;word-break:break-all"></div>
+      <div class="settings-field"><label>6-digit code from your authenticator app</label><input id="tfCode" maxlength="6" inputmode="numeric" placeholder="000000"></div>
+      <p id="tfErr" style="color:var(--bear);font-size:12.5px;min-height:18px;margin-bottom:8px"></p>
+      <button class="btn-solid btn-sm" id="tfGo" style="width:100%;justify-content:center"><span>Confirm</span></button>
+    </div></div>`);
+  const tg = document.querySelector('#panel-settings .toggle-row input[type=checkbox]');
+  tg.checked = !!me.totpEnabled;
+  let tfMode = '';
+  const tfClose = () => { $$id('tfBackdrop').classList.remove('show'); tg.checked = !!me.totpEnabled; };
+  $$id('tfClose').onclick = tfClose;
+  $$id('tfBackdrop').addEventListener('click', (e) => { if (e.target.id === 'tfBackdrop') tfClose(); });
+  function openTf(mode, r) {
+    tfMode = mode; $$id('tfCode').value = ''; $$id('tfErr').textContent = '';
+    $$id('tfTitle').textContent = mode === 'enable' ? 'Enable two-factor authentication' : 'Disable two-factor authentication';
+    $$id('tfInfo').innerHTML = mode === 'enable'
+      ? `In Google Authenticator or Authy choose <b>Enter a setup key</b> (time-based) and type this key:<br><b style="font-family:var(--font-mono);color:var(--text-primary)">${esc(r.secret)}</b><br>Then enter the 6-digit code it shows.`
+      : 'Enter a current code from your authenticator app to turn 2FA off.';
+    $$id('tfBackdrop').classList.add('show');
+  }
+  tg.addEventListener('change', async () => {
+    if (tg.checked) {
+      try { openTf('enable', await api('/auth/2fa/setup', { method:'POST' })); }
+      catch { tg.checked = false; showToast('Could not start 2FA', 'Try again.'); }
+    } else openTf('disable');
+  });
+  $$id('tfGo').addEventListener('click', async () => {
+    const code = $$id('tfCode').value.trim();
+    if (!/^\d{6}$/.test(code)) { $$id('tfErr').textContent = 'Enter the 6-digit code'; return; }
+    $$id('tfGo').disabled = true;
+    try {
+      await api(`/auth/2fa/${tfMode}`, { method:'POST', body:{ code } });
+      me.totpEnabled = tfMode === 'enable';
+      $$id('tfBackdrop').classList.remove('show'); tg.checked = me.totpEnabled;
+      showToast(me.totpEnabled ? '2FA enabled' : '2FA disabled', me.totpEnabled ? 'You will be asked for a code at login.' : 'Login no longer asks for a code.');
+    } catch (e) { $$id('tfErr').textContent = e.data?.error === 'INVALID_TOTP' ? 'Wrong code, try again' : 'Something went wrong'; }
+    $$id('tfGo').disabled = false;
+  });
+
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
   setTimeout(loadStats, 1600); // after dashboard.js's count-up animations finish
   bindTrade(); connectWs();
