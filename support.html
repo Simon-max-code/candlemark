@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+<style>
+.sp{max-width:640px;margin:0 auto;padding:110px 22px 60px}
+.sp textarea{width:100%;min-height:140px;background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--text-primary);font:14.5px var(--font-body);resize:vertical}
+.sp textarea:focus{outline:none;border-color:var(--bull)}
+.sp .field input{padding:19px 16px 9px}
+</style>
+</head>
+<body>
+<header class="nav scrolled"><div class="nav-inner">
+  <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
+  <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
+</div></header>
+
+<main class="sp">
+  <span class="eyebrow">Support</span>
+  <h1 style="font-size:2rem;margin:6px 0 10px">How can we help?</h1>
+  <p style="color:var(--text-secondary);margin-bottom:26px">Check the <a href="index.html#faq" class="link-muted" style="color:var(--bull)">FAQ</a> first, or send us a message and we'll reply by email.</p>
+
+  <form id="spForm" novalidate>
+    <div class="form-grid">
+      <div class="form-row-2">
+        <div class="field"><input id="spName" placeholder=" " autocomplete="name" required><label for="spName">Your name</label></div>
+        <div class="field"><input id="spEmail" type="email" placeholder=" " autocomplete="email" required><label for="spEmail">Email</label></div>
+      </div>
+      <div class="field"><input id="spSubject" placeholder=" " maxlength="120" required><label for="spSubject">Subject</label></div>
+      <textarea id="spMsg" placeholder="Describe your issue (never include passwords or 2FA codes)" maxlength="2000" required></textarea>
+      <p id="spErr" role="alert" style="color:var(--bear);font-size:12.5px;min-height:18px"></p>
+      <button class="btn-solid btn-submit" id="spGo"><span>Send message</span><div class="spinner"></div></button>
+      <div class="form-success" id="spOk" role="status"><span>Message sent. We'll reply to your email.</span></div>
+    </div>
+  </form>
+</main>
+
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const spForm = $('spForm');
+spForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const body = { name: $('spName').value.trim(), email: $('spEmail').value.trim(), subject: $('spSubject').value.trim(), message: $('spMsg').value.trim() };
+  $('spErr').textContent = '';
+  $('spGo').disabled = true;
+  $('spGo').classList.add('loading');
+  try {
+    await api('/support', { method: 'POST', auth: false, body });
+    $('spOk').classList.add('show');
+    spForm.reset();
+  } catch (err) {
+    $('spErr').textContent = err.status === 429 ? 'Too many messages, try again in a few minutes.'
+      : err.data?.error === 'VALIDATION' ? 'Please fill every field (message needs 10+ characters).' : 'Could not send, try again.';
+  } finally {
+    $('spGo').disabled = false;
+    $('spGo').classList.remove('loading');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.lg{max-width:760px;margin:0 auto;padding:110px 22px 60px}
+.lg h2{margin:28px 0 8px;font-size:1.15rem}
+.lg p{color:var(--text-secondary);margin-bottom:10px}
+.lg .lg-notice{padding:14px 16px;border:1px solid var(--gold-dim);border-radius:8px;color:var(--text-primary);background:var(--bg-panel)}
+</style>
+</head>
+<body>
+<header class="nav scrolled"><div class="nav-inner"><a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a></div></header>
+<main class="lg" id="lg"></main>
+<script>
+const DOCS = {
+  terms: ['Terms & Conditions', [
+    ['1. Service and account', 'The site provides account registration and access to platform features. Registration and email verification do not, by themselves, establish that brokerage, investment, or trading services are available to you. Some dashboard balances, prices, mentor profiles, and performance figures may be simulated or illustrative.'],
+    ['2. Risk', 'Trading contracts for difference and other leveraged products involves substantial risk. Losses can occur rapidly and may exceed your expectations. Simulated results are not a reliable indicator of future performance. Do not trade money you cannot afford to lose.'],
+    ['3. Fees and charges', 'Review the applicable product and fee terms presented by the service provider before using a paid feature, depositing funds, or placing an order. No specific fee schedule or charging arrangement is established by this summary.'],
+    ['4. Provider and liability', 'The legal entity operating any account or financial service, its regulatory status, governing law, and the complete terms applicable to that service must be confirmed with the provider before you proceed. This page is a preliminary summary, not a complete customer agreement.']
+  ]],
+  privacy: ['Privacy Policy', [
+    ['Information you provide', 'Account information may include your name and email address. If identity verification is offered, information may also include identity, contact, and KYC details you submit. Technical and usage information may be generated when you use the site.'],
+    ['How information may be used', 'Information may be used to create and secure accounts, verify identity where required, operate site features, respond to support requests, and meet applicable legal obligations.'],
+    ['Your rights and further details', 'Your rights and the procedures for access, correction, or deletion depend on your location and the data controller. The operator, contact address, retention periods, legal bases, recipients, and any international transfers must be confirmed in a complete privacy notice before production use. Contact support through the Support page for questions.']
+  ]],
+  aml: ['Anti-Money Laundering Policy', [
+    ['Identity checks and monitoring', 'Where required for a service, identity and other due-diligence checks may be used to help prevent fraud, money laundering, and terrorist financing. Accounts and activity may be reviewed in line with the obligations applicable to the service provider.'],
+    ['Suspicious activity', 'Activity that raises a concern may be reviewed, delayed, or restricted, and information may be reported to relevant authorities where required by law. Specific controls, record-retention periods, and reporting obligations depend on the provider and applicable jurisdiction.']
+  ]]
+};
+const esc = (value) => value.replace(/[&<>]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[char]));
+const [title, sections] = DOCS[new URLSearchParams(location.search).get('p')] || DOCS.terms;
+document.title = title + ' — mentorsedgepro';
+document.getElementById('lg').innerHTML = `<h1>${esc(title)}</h1><p>Preliminary information. Last reviewed: October 7, 2026.</p><p class="lg-notice">These pages are not a complete legal agreement or jurisdiction-specific legal advice. Before offering financial services, the operator must publish complete terms and policies covering its legal identity, jurisdiction, fees, data handling, and applicable regulatory status.</p>` +
+  sections.map(([heading, text]) => `<h2>${esc(heading)}</h2><p>${esc(text)}</p>`).join('');
+</script>
+</body>
+</html>
