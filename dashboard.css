@@ -460,7 +460,7 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 .deposit-note{ font-size:11.5px; color:var(--gold); margin-top:12px; }
 .crypto-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-top:1px solid var(--line); }
 .crypto-row:first-of-type{ border-top:none; }
-.crypto-row .mono{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-tertiary); word-break:break-all; }
+.crypto-row .mono{ margin-left:8px; font-family:var(--font-mono); font-size:13px; font-weight:600; color:var(--text-secondary); word-break:break-all; }
 
 .status-badge{ font-family:var(--font-mono); font-size:10.5px; padding:4px 10px; border-radius:100px; font-weight:600; }
 .status-badge.completed{ color:var(--up); background:var(--bull-dim); }
