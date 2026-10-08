@@ -489,6 +489,16 @@
     $$id('tfGo').disabled = false;
   });
 
+  fetch(API_BASE + '/calendar').then((r) => { if (!r.ok) throw new Error('Calendar request failed'); return r.json(); }).then(({ items }) => {
+    document.getElementById('calBody').innerHTML = items.length ? items.map((e) => {
+      const d = new Date(e.date), imp = { High: 'high', Medium: 'med' }[e.impact] || 'low';
+      return `<tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${isNaN(d) ? '—' : d.toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })}</td><td><strong>${esc(e.ccy)}</strong></td><td>${esc(e.title)}</td>
+        <td><span class="status-badge impact-${imp}">${esc(e.impact)}</span></td><td style="font-family:var(--font-mono)">—</td>
+        <td style="font-family:var(--font-mono);color:var(--text-tertiary)">${esc(e.forecast) || '—'}</td><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${esc(e.previous) || '—'}</td></tr>`;
+    }).join('') : '<tr><td colspan="7" style="color:var(--text-tertiary)">No events.</td></tr>';
+  }).catch(() => {
+    document.getElementById('calBody').innerHTML = '<tr><td colspan="7" style="color:var(--text-tertiary)">Calendar unavailable right now.</td></tr>';
+  });
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
   setTimeout(loadStats, 1600); // after dashboard.js's count-up animations finish
   bindTrade(); connectWs();

@@ -745,22 +745,6 @@ document.getElementById('rtSentGrid') && [['Apple Inc',64,'#00E6A0'],['Meta Plat
       <div class="rt-sent-card"><strong>${name}</strong><div class="rt-conf-bar"><i style="width:${val}%;background:${color}"></i></div><span>${val}% bullish</span></div>`);
   });
 
-const CAL_EVENTS = [
-  ['08:30','USD','Retail Sales (YoY)','high','—','—','2.8%'],
-  ['09:00','EUR','ZEW Economic Sentiment','med','—','18.4','15.2'],
-  ['10:00','GBP','CPI (YoY)','high','—','2.6%','2.5%'],
-  ['12:30','USD','Initial Jobless Claims','med','—','221K','225K'],
-  ['14:00','USD','Fed Chair Speech','high','—','—','—'],
-  ['23:50','JPY','Trade Balance','low','—','¥180B','¥142B'],
-];
-document.getElementById('calBody') && CAL_EVENTS.forEach(([t,c,e,imp,a,f,p])=>{
-  document.getElementById('calBody').insertAdjacentHTML('beforeend', `
-    <tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${t}</td><td><strong>${c}</strong></td><td>${e}</td>
-    <td><span class="status-badge impact-${imp}">${imp}</span></td>
-    <td style="font-family:var(--font-mono)">${a}</td><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${f}</td>
-    <td style="font-family:var(--font-mono);color:var(--text-tertiary)">${p}</td></tr>`);
-});
-
 const NEWS = [
   ['Acuity','ING Economics: Softer-than-expected US inflation signals potential rate strategy shift','3h ago','Macro'],
   ['Reuters','Gold holds near record high as traders weigh Fed rate path','5h ago','Commodities'],

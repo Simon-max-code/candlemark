@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tools — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.tl{max-width:var(--container);margin:0 auto;padding:110px 24px 60px}
+.tl h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:6px 0 12px}
+.tl .lead{color:var(--text-secondary);max-width:660px;margin-bottom:28px}
+.tl h2{font-size:1.15rem;margin:26px 0 8px}.tl p{color:var(--text-secondary);margin-bottom:10px;max-width:720px}
+.tl a.tool-card{display:block}
+.tl-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.tl-tabs a{padding:8px 14px;border:1px solid var(--line);border-radius:100px;font-size:13px;font-weight:600;color:var(--text-secondary)}
+.tl-tabs a.on,.tl-tabs a:hover{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.tl-soon{display:inline-block;font:11px var(--font-mono);color:var(--gold);border:1px solid var(--gold-dim);border-radius:100px;padding:3px 10px;margin-bottom:14px}
+.tl-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:8px 20px;overflow-x:auto}
+.tl table{width:100%;border-collapse:collapse;min-width:620px}
+.tl th{text-align:left;font:500 10.5px var(--font-mono);text-transform:uppercase;color:var(--text-tertiary);padding:14px 8px 10px}
+.tl td{padding:12px 8px;border-top:1px solid var(--line);font-size:13.5px}
+.tl td.m{font-family:var(--font-mono);color:var(--text-secondary)}
+.imp{font:600 10.5px var(--font-mono);padding:3px 9px;border-radius:100px}
+.imp.High{color:var(--bear);background:var(--bear-dim)}.imp.Medium{color:var(--gold);background:var(--gold-dim)}.imp.Low,.imp.Holiday{color:var(--text-tertiary);background:rgba(255,255,255,.06)}
+.tl-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tl-bar button{padding:7px 14px;border:1px solid var(--line);border-radius:100px;font-size:12.5px;font-weight:600;color:var(--text-secondary)}
+.tl-bar button.on{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.tl-risk{font-size:.78rem;color:var(--text-tertiary);margin-top:28px;line-height:1.7}
+.tl-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="nav scrolled"><div class="nav-inner">
+  <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
+  <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
+</div></header>
+<main class="tl" id="tl"></main>
+
+<script src="config.js"></script>
+<script>
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const T = {
+  calendar: ['Economic Calendar', 'See which scheduled releases can move the markets this week.'],
+  signals: ['Signal Centre', 'Trading ideas, sourced and scored.'],
+  gym: ["Trader's Gym", 'Practise a strategy on historical data.'],
+  vps: ['VPS', 'Keep your trading software running around the clock.'],
+  education: ['Education & Demo', 'Learn the basics and practise risk-free.'],
+};
+const SOON = { signals: [
+  ['What it will be', 'A feed of trade ideas with entry, stop loss and take profit levels, each with a stated rationale.'],
+  ['Status', 'Not live. Signals need a vetted data source and a clear methodology, and we will not publish ideas we cannot stand behind.'],
+  ['Important', 'Signals are never a recommendation to trade. Any idea can lose money.']],
+gym: [
+  ['What it will be', 'Replay historical prices, place practice trades and review your results before using a demo or live account.'],
+  ['Status', 'Not live. It needs a licensed historical data set.'],
+  ['Meanwhile', 'Use your free demo account to practise with simulated funds.']],
+vps: [
+  ['What it is', 'A virtual private server is a remote computer that stays on 24/7, used to run automated strategies without depending on your own device.'],
+  ['Status', 'Not offered. Copytrading on this platform already runs on our servers, so you do not need a VPS to copy a mentor.']],
+};
+const RISK = '<p class="tl-risk"><strong>Risk warning:</strong> Trading leveraged products carries a high risk of loss. Information here is general, not investment advice, and accounts and prices may be simulated.</p>';
+const CTA = '<div class="tl-cta"><a href="register.html" class="btn-solid"><span>Open a free demo account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>';
+const root = document.getElementById('tl');
+const key = new URLSearchParams(location.search).get('p');
+const tabs = (k) => `<div class="tl-tabs">${Object.entries(T).map(([x, v]) => `<a href="tools.html?p=${x}" class="${x === k ? 'on' : ''}">${esc(v[0])}</a>`).join('')}</div>`;
+
+if (!T[key]) {
+  document.title = 'Tools — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>Tools for people who check their work</h1><p class="lead">What is live and what is still on the way is marked on each page.</p>
+    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${k === 'calendar' || k === 'education' ? 'var(--bull)' : 'var(--gold)'}">${k === 'calendar' || k === 'education' ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
+} else if (key === 'calendar') {
+  document.title = 'Economic Calendar — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.calendar[0]}</h1><p class="lead">${T.calendar[1]} Times are shown in your local time zone.</p>${tabs(key)}
+    <div class="tl-bar" id="bar"><button class="on" data-i="all">All</button><button data-i="High">High impact</button><button data-i="Medium">Medium</button></div>
+    <div class="tl-card" id="cal"><p style="padding:20px;color:var(--text-tertiary)">Loading…</p></div>${CTA}${RISK}`;
+  let rows = [], f = 'all';
+  const draw = () => {
+    const list = rows.filter((e) => f === 'all' || e.impact === f);
+    document.getElementById('cal').innerHTML = list.length ? `<table><thead><tr><th>Time</th><th>Ccy</th><th>Event</th><th>Impact</th><th>Forecast</th><th>Previous</th></tr></thead><tbody>${list.map((e) => {
+      const d = new Date(e.date), ok = !isNaN(d);
+      return `<tr><td class="m">${ok ? d.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' }) + '<br>' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}</td><td><strong>${esc(e.ccy)}</strong></td><td>${esc(e.title)}</td><td><span class="imp ${esc(e.impact)}">${esc(e.impact)}</span></td><td class="m">${esc(e.forecast) || '—'}</td><td class="m">${esc(e.previous) || '—'}</td></tr>`;
+    }).join('')}</tbody></table>` : '<p style="padding:20px;color:var(--text-tertiary)">No events to show right now.</p>';
+  };
+  document.getElementById('bar').onclick = (e) => { const b = e.target.closest('[data-i]'); if (!b) return; document.querySelectorAll('#bar button').forEach((x) => x.classList.toggle('on', x === b)); f = b.dataset.i; draw(); };
+  fetch(API_BASE + '/calendar').then((r) => { if (!r.ok) throw new Error('Calendar request failed'); return r.json(); }).then((d) => { rows = d.items; draw(); })
+    .catch(() => { document.getElementById('cal').innerHTML = '<p style="padding:20px;color:var(--text-tertiary)">Calendar unavailable right now.</p>'; });
+} else if (key === 'education') {
+  document.title = 'Education & Demo — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.education[0]}</h1><p class="lead">${T.education[1]}</p>${tabs(key)}
+    <h2>Start with a demo account</h2><p>Every new account comes with simulated funds, so you can place trades, follow a mentor and see how copying works without risking your own money.</p>
+    <h2>The basics</h2><p><strong>Buy or sell:</strong> buy if you think the price will rise, sell if you think it will fall.</p><p><strong>Stop loss:</strong> an exit that closes a trade at a loss level you choose, to cap what you can lose.</p><p><strong>Take profit:</strong> an exit that closes a trade once it reaches a profit level you choose.</p><p><strong>Copytrading:</strong> your account automatically mirrors the trades of a mentor you pick. You can pause or stop at any time.</p>
+    <h2>Before you copy anyone</h2><p>Check the mentor's risk rating, win rate and number of trades on the <a href="mentorboard.html" style="color:var(--bull)">Mentorboard</a>. A high past return can come with high risk, and past or simulated results do not predict future ones.</p>${CTA}${RISK}`;
+} else {
+  const [title, lead] = T[key];
+  document.title = title + ' — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p>${tabs(key)}<span class="tl-soon">${key === 'vps' ? 'Not offered' : 'Coming soon'}</span>
+    ${SOON[key].map(([h, t]) => `<h2>${esc(h)}</h2><p>${esc(t)}</p>`).join('')}${CTA}${RISK}`;
+}
+</script>
+</body>
+</html>
