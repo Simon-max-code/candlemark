@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mentorboard — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.mb{max-width:var(--container);margin:0 auto;padding:110px 24px 60px}
+.mb h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:6px 0 12px}
+.mb .lead{color:var(--text-secondary);max-width:640px;margin-bottom:26px}
+.mb-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.mb-bar button,.mb-bar select{padding:8px 16px;border:1px solid var(--line);border-radius:100px;font-size:13px;font-weight:600;color:var(--text-secondary);background:var(--bg-panel)}
+.mb-bar button.on{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.mb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mb-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:22px}
+.mb-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mb-av{width:44px;height:44px;border-radius:50%;flex-shrink:0}
+.mb-head small{color:var(--text-tertiary);font-size:12px}
+.mb-bio{color:var(--text-secondary);font-size:.88rem;margin-bottom:14px;min-height:2.6em}
+.mb-row{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12.5px;padding-top:12px;border-top:1px solid var(--line);margin-bottom:12px}
+.mb-row div{display:flex;flex-direction:column;gap:2px}.mb-row span{color:var(--text-tertiary);font:10.5px var(--font-body)}
+.mb-card .btn-outline{width:100%;justify-content:center;margin-top:6px}
+.mb-risk{font-size:.78rem;color:var(--text-tertiary);margin-top:28px;line-height:1.7}
+@media(max-width:1000px){.mb-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.mb-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav scrolled"><div class="nav-inner">
+  <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
+  <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
+</div></header>
+<main class="mb">
+  <span class="eyebrow">Mentorboard</span>
+  <h1>Browse our mentors</h1>
+  <p class="lead">Compare mentors by performance and risk. Statistics are supplied by the platform and may be simulated or illustrative on demo accounts.</p>
+  <div class="mb-bar" id="bar">
+    <button class="on" data-f="all">All</button><button data-f="low">Low risk</button><button data-f="mid">Medium risk</button><button data-f="high">High risk</button>
+    <select id="sort"><option value="gain">Sort: Gain</option><option value="copiers">Sort: Copiers</option><option value="risk">Sort: Lowest risk</option></select>
+  </div>
+  <div class="mb-grid" id="grid"><p style="color:var(--text-tertiary)">Loading mentors…</p></div>
+  <p class="mb-risk"><strong>Risk warning:</strong> Copying another trader does not guarantee profit and your capital is at risk. Past or simulated performance is not a reliable indicator of future results. This is not investment advice.</p>
+</main>
+<script src="config.js"></script>
+<script>
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
+let all = [], f = 'all', sort = 'gain';
+const g = (m, k) => m.stats?.[k] ?? -1;
+function draw() {
+  const list = all.filter((m) => f === 'all' || (f === 'low' ? m.risk <= 3 : f === 'mid' ? m.risk >= 4 && m.risk <= 6 : m.risk >= 7))
+    .sort((a, b) => sort === 'risk' ? a.risk - b.risk : sort === 'copiers' ? b.copiers - a.copiers : g(b, 'gain') - g(a, 'gain'));
+  document.getElementById('grid').innerHTML = list.length ? list.map((m) => { const s = m.stats || {}; return `
+    <div class="mb-card"><div class="mb-head"><div class="mb-av" style="background:${grad(hue(m.handle))}"></div>
+      <div><strong>${esc(m.name)}</strong><br><small>${esc(m.tag || '@' + m.handle)}</small></div></div>
+      <p class="mb-bio">${esc(m.bio || '')}</p>
+      <div class="mb-row"><div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
+        <div><strong>${s.winRate != null ? s.winRate + '%' : '—'}</strong><span>Win rate</span></div><div><strong>${m.risk}/10</strong><span>Risk</span></div></div>
+      <div class="mb-row"><div><strong>${s.trades != null ? Number(s.trades).toLocaleString() : '—'}</strong><span>Trades</span></div>
+        <div><strong>${m.copiers}</strong><span>Copiers</span></div><div><strong>$${Number(m.fee) / 100}/mo</strong><span>Fee</span></div></div>
+      <a href="register.html" class="btn-outline"><span>Copy this mentor</span></a></div>`; }).join('')
+    : '<p style="color:var(--text-tertiary)">No mentors match.</p>';
+}
+document.getElementById('bar').addEventListener('click', (e) => { const b = e.target.closest('[data-f]'); if (!b) return;
+  document.querySelectorAll('#bar button').forEach((x) => x.classList.toggle('on', x === b)); f = b.dataset.f; draw(); });
+document.getElementById('sort').onchange = (e) => { sort = e.target.value; draw(); };
+fetch(API_BASE + '/mentors').then((r) => r.json()).then((d) => { all = d.items; draw(); })
+  .catch(() => { document.getElementById('grid').innerHTML = '<p style="color:var(--text-tertiary)">Could not load mentors.</p>'; });
+</script>
+</body>
+</html>
