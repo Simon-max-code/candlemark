@@ -45,7 +45,7 @@ const M = {
   etf:{n:'ETFs & Futures',cls:'mc-etf',d:'Basket exposure and fixed-date contracts for structured strategies.',f:[['ETFs','One ticket, a basket of assets.'],['Futures','Fixed date, fixed price contracts.'],['Coming soon','Not yet available on the platform.']]},
 };
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const RISK = '<p class="mk-risk"><strong>Risk warning:</strong> Leveraged products carry a high risk of rapid losses. Prices shown may be delayed, simulated or illustrative and are not a record of executable quotes. This is not investment advice.</p>';
+const RISK = '<p class="mk-risk"><strong>Risk warning:</strong> Leveraged products carry a high risk of rapid losses. Prices shown may be delayed, incomplete, or unverified as executable quotes. This is not investment advice.</p>';
 const root = document.getElementById('mk');
 const key = new URLSearchParams(location.search).get('m');
 
@@ -61,7 +61,7 @@ if (!M[key]) {
     <div class="mk-tabs">${Object.entries(M).map(([k, x]) => `<a href="markets.html?m=${k}" class="${k === key ? 'on' : ''}">${esc(x.n)}</a>`).join('')}</div>
     <div class="mk-card" id="tbl"><p style="padding:20px;color:var(--text-tertiary)">${key === 'etf' ? 'ETFs and futures are not available yet.' : 'Loading prices…'}</p></div>
     <div class="mk-feats">${v.f.map(([h, t]) => `<div><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join('')}</div>
-    <div class="mk-cta"><a href="register.html" class="btn-solid"><span>Open a free demo account</span></a><a href="markets.html" class="btn-outline"><span>All markets</span></a></div>${RISK}`;
+    <div class="mk-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="markets.html" class="btn-outline"><span>All markets</span></a></div>${RISK}`;
   if (key !== 'etf') {
     const load = async () => {
       try {

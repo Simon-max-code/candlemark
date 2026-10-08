@@ -495,7 +495,7 @@ body::before{
    COPY TRADING FEATURE
 ============================================================ */
 .copy-feature{
-  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+  display:grid; grid-template-columns:1fr; gap:0; align-items:center;
 }
 .copy-visual{ position:relative; height:440px; }
 .copy-glow{

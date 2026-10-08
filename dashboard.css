@@ -730,3 +730,8 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
     margin:0; min-height:44px; font-size:13px; border-radius:10px;
   }
 }
+
+.sk{display:inline-block;min-width:80px;border-radius:6px;color:transparent!important;background:linear-gradient(90deg,var(--bg-panel-2),var(--bg-panel-3),var(--bg-panel-2));background-size:200% 100%;animation:skel 1.2s infinite}
+@keyframes skel{to{background-position:-200% 0}}
+.lazy:empty::after{content:"Loading…";color:var(--text-tertiary);font-size:13px}
+.balance-hero,.dual-grid{grid-template-columns:1fr}

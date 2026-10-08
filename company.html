@@ -23,15 +23,15 @@
 <script>
 const P = {
   about: ['About us', 'Company', [
-    ['What we do', 'MentorsedgePro provides a web interface for account registration, market information, mentor profiles, and copy-trading features. Some displayed data or features may be simulated or illustrative, and availability may depend on your account and location.'],
-    ['How mentors are presented', 'The site does not publish a detailed, independently verifiable mentor identity or track-record review process. Mentor profiles and performance figures may be simulated or illustrative; do not treat profile labels or displayed results as independently verified.'],
+    ['What we do', 'MentorsedgePro provides a web interface for account registration, market information, mentor profiles, and copy-trading features. Information may be delayed, incomplete, or unverified as live, and feature availability may depend on your account and location.'],
+    ['How mentors are presented', 'The site does not publish a detailed, independently verifiable mentor identity or track-record review process. Mentor profiles and performance figures are platform-supplied and should not be treated as independently verified.'],
     ['Our story', 'A verifiable company history or founding date is not published in the materials currently available on this site.'],
     ['Where we are', 'The site materials do not currently identify the operating legal entity, company registration number, or registered office. Review the legal terms and verify the operator before relying on the service.'],
   ]],
   security: ['Regulation & Security', 'Trust', [
-    ['Regulatory status', 'The site materials do not identify a regulator, licence number, or separate regulated broker, and do not establish that the platform is authorised to provide regulated financial services. Account registration or demo access is not evidence of authorisation. Verify the provider and its permissions with the relevant regulator before transferring funds or trading.'],
+    ['Regulatory status', 'The site materials do not identify a regulator, licence number, or separate regulated broker, and do not establish that the platform is authorised to provide regulated financial services. Account registration is not evidence of authorisation. Verify the provider and its permissions with the relevant regulator before transferring funds or trading.'],
     ['Account security', 'The sign-in flow uses an email address and password and may request a six-digit two-factor authentication code. The site materials do not describe password storage or session-security controls, or confirm that two-factor authentication is available to every user. Use a unique password, never share authentication codes, and contact Support if you suspect unauthorised access.'],
-    ['Your funds', 'The site does not provide verifiable details about who holds client funds or whether funds are segregated, insured, or covered by a compensation scheme. Displayed balances may be simulated or illustrative. Confirm the provider, custody arrangements, and applicable protections before sending money.'],
+    ['Your funds', 'The site does not provide verifiable details about who holds client funds or whether funds are segregated, insured, or covered by a compensation scheme. A displayed balance alone does not establish that funds are held or protected. Confirm the provider, custody arrangements, and applicable protections before sending money.'],
     ['Data protection', 'The Privacy Policy currently contains draft fields for the legal data controller, service providers, retention periods, and other practices. Those details should be verified with the operator before submitting identity or financial information.'],
     ['Reporting a problem', 'For support enquiries or to report suspicious activity, contact us through <a href="support.html" style="color:var(--bull)">Support</a>.'],
   ]],
@@ -42,8 +42,8 @@ document.title = title + ' — mentorsedgepro';
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 document.getElementById('co').innerHTML = `<span class="eyebrow">${eyebrow}</span><h1>${title}</h1>` +
   secs.map(([h, t]) => `<h2>${esc(h)}</h2><p>${t.includes('<a ') ? t : esc(t)}</p>`).join('') +
-  `<p class="note">Trading involves a high risk of loss. Accounts and figures on this platform may be simulated.</p>
-   <div class="co-cta"><a href="register.html" class="btn-solid"><span>Open a free account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>`;
+  `<p class="note">Trading involves a high risk of loss. Information on this site is not a substitute for provider documents or independent advice.</p>
+   <div class="co-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>`;
 </script>
 </body>
 </html>

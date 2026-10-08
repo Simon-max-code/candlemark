@@ -43,7 +43,7 @@
     <div class="acc-switch">
       <span class="dot"></span>
       <span>Account —</span>
-      <strong>Demo</strong>
+      <strong>Live</strong>
     </div>
 
     <nav class="dash-nav" aria-label="Dashboard">
@@ -55,7 +55,6 @@
       <a class="dash-nav-item" data-tab="copytrading">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 15V9m5 6V3m5 12v-5m5 5V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span class="label">Copytrading</span>
-        <span class="badge-count">3</span>
       </a>
       <a class="dash-nav-item" data-tab="mentors-pro">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l2 4 4.5.6-3.3 3.1.8 4.4L9 12l-4 2.1.8-4.4L2.5 6.6 7 6l2-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
@@ -138,13 +137,13 @@
         <span class="market-pill"><span class="dot"></span>Markets open</span>
         <div class="topbar-balance">
           <small>Available balance</small>
-          <strong id="topbarBalanceVal">$0.00</strong>
+          <strong id="topbarBalanceVal"><span class="sk">&nbsp;</span></strong>
         </div>
         <button class="icon-btn" aria-label="Notifications">
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2a4 4 0 0 0-4 4v2.5L3 11h11l-1.5-2.5V6a4 4 0 0 0-4-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 13.5a1.5 1.5 0 0 0 3 0" stroke="currentColor" stroke-width="1.4"/></svg>
           <span class="ping"></span>
         </button>
-        <button class="avatar-btn" aria-label="Account menu">AR</button>
+        <button class="avatar-btn" aria-label="Account menu"><span class="sk">&nbsp;</span></button>
       </div>
     </header>
 
@@ -155,7 +154,7 @@
       ================================================================= -->
       <section class="dash-panel active" id="panel-overview">
         <div class="dash-greeting">
-          <h1>Good afternoon, Adaeze.</h1>
+          <h1><span class="sk">&nbsp;</span></h1>
           <p id="clockLine">Loading local market time…</p>
         </div>
 
@@ -165,38 +164,18 @@
           <div class="balance-hero-left">
             <span class="balance-eyebrow">Total account balance</span>
             <div class="balance-num">
-              <span id="totalBalance">$0.00</span>
-              <span class="delta up" id="balanceDelta">▲ 2.6% today</span>
+              <span id="totalBalance"><span class="sk">&nbsp;</span></span>
+              <span class="delta up" id="balanceDelta"><span class="sk">&nbsp;</span></span>
             </div>
-            <p class="balance-sub">Demo balance across copytrading, live stocks and open positions.</p>
+            <p class="balance-sub">Your total account equity.</p>
             <div class="balance-actions">
-              <button class="btn-solid btn-sm magnetic" data-toast="Deposit initiated" data-toast-sub="This is a design demo — no funds were moved.">
+              <button class="btn-solid btn-sm magnetic" data-toast="Deposit initiated" data-toast-sub="Review the available deposit methods in your account.">
                 <span>Deposit</span>
               </button>
-              <button class="btn-outline btn-sm magnetic" data-tab-link="wallets" data-toast="Withdrawal requested" data-toast-sub="Demo withdrawals settle instantly in this preview.">
+              <button class="btn-outline btn-sm magnetic" data-tab-link="wallets" data-toast="Withdrawal requested" data-toast-sub="Processing depends on the provider and verification requirements.">
                 <span>Withdraw</span>
               </button>
             </div>
-          </div>
-          <div class="balance-hero-right">
-            <div class="spark-head">
-              <span>Equity — 30 days</span>
-              <div class="tf-tabs">
-                <button class="active">1M</button>
-                <button>3M</button>
-                <button>1Y</button>
-              </div>
-            </div>
-            <svg class="equity-svg" id="heroSpark" viewBox="0 0 320 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="equityGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#00E6A0" stop-opacity="0.35"/>
-                  <stop offset="100%" stop-color="#00E6A0" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path class="equity-area" id="heroSparkArea" d=""/>
-              <path class="equity-line" id="heroSparkLine" d=""/>
-            </svg>
           </div>
         </div>
 
@@ -207,56 +186,33 @@
               <p class="lbl">Available balance</p>
               <div class="stat-icon" style="background:var(--bull-dim);color:var(--bull)">$</div>
             </div>
-            <div class="val" id="statAvailable">$0</div>
+            <div class="val" id="statAvailable"><span class="sk">&nbsp;</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-card-head">
               <p class="lbl">Invested</p>
               <div class="stat-icon" style="background:rgba(110,168,255,.14);color:var(--blue)">◈</div>
             </div>
-            <div class="val" id="statInvested">$0</div>
+            <div class="val" id="statInvested"><span class="sk">&nbsp;</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-card-head">
               <p class="lbl">Today's P&amp;L</p>
               <div class="stat-icon" style="background:var(--bull-dim);color:var(--bull)">▲</div>
             </div>
-            <div class="val pnl up" id="statPnl">+$0</div>
+            <div class="val pnl up" id="statPnl"><span class="sk">&nbsp;</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-card-head">
               <p class="lbl">Open positions</p>
               <div class="stat-icon" style="background:var(--gold-dim);color:var(--gold)">◫</div>
             </div>
-            <div class="val">7 <small>across 2 mentors</small></div>
+            <div class="val"><span class="sk">&nbsp;</span></div>
           </div>
         </div>
 
         <!-- Chart + allocation -->
         <div class="dual-grid">
-          <div class="card">
-            <div class="card-head">
-              <h3>Portfolio performance</h3>
-              <div class="tf-tabs">
-                <button>1D</button>
-                <button>1W</button>
-                <button class="active">1M</button>
-                <button>3M</button>
-                <button>1Y</button>
-              </div>
-            </div>
-            <svg class="big-chart-svg" id="bigChart" viewBox="0 0 600 260" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="bigGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#00E6A0" stop-opacity="0.28"/>
-                  <stop offset="100%" stop-color="#00E6A0" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path id="bigChartArea" fill="url(#bigGrad)" opacity="0" d=""/>
-              <path id="bigChartLine" fill="none" stroke="#00E6A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(0,230,160,.5))" d=""/>
-            </svg>
-          </div>
-
           <div class="card">
             <div class="card-head"><h3>Allocation</h3></div>
             <div class="donut-wrap">
@@ -267,12 +223,12 @@
                 <circle class="donut-seg" cx="50" cy="50" r="40" fill="none" stroke="#6EA8FF" stroke-width="14" stroke-dasharray="251.2" stroke-dashoffset="251.2" transform="rotate(-90 50 50)" stroke-linecap="round"/>
                 <circle class="donut-seg" cx="50" cy="50" r="40" fill="none" stroke="#FF5C6C" stroke-width="14" stroke-dasharray="251.2" stroke-dashoffset="251.2" transform="rotate(-90 50 50)" stroke-linecap="round"/>
               </svg>
-              <div class="donut-center"><strong>$12,480</strong><span>Total deployed</span></div>
+              <div class="donut-center"><strong><span class="sk">&nbsp;</span></strong><span>Total deployed</span></div>
               <div class="legend">
-                <div class="legend-row"><span class="sw" style="background:#00E6A0"></span><span class="lname">Copytrading</span><span class="lval">46%</span></div>
-                <div class="legend-row"><span class="sw" style="background:#E8B961"></span><span class="lname">Stocks</span><span class="lval">27%</span></div>
-                <div class="legend-row"><span class="sw" style="background:#6EA8FF"></span><span class="lname">Forex</span><span class="lval">18%</span></div>
-                <div class="legend-row"><span class="sw" style="background:#FF5C6C"></span><span class="lname">Crypto</span><span class="lval">9%</span></div>
+                <div class="legend-row"><span class="sw" style="background:#00E6A0"></span><span class="lname">Copytrading</span><span class="lval">—</span></div>
+                <div class="legend-row"><span class="sw" style="background:#E8B961"></span><span class="lname">Stocks</span><span class="lval">—</span></div>
+                <div class="legend-row"><span class="sw" style="background:#6EA8FF"></span><span class="lname">Forex</span><span class="lval">—</span></div>
+                <div class="legend-row"><span class="sw" style="background:#FF5C6C"></span><span class="lname">Crypto</span><span class="lval">—</span></div>
               </div>
             </div>
           </div>
@@ -289,7 +245,7 @@
               <thead>
                 <tr><th>Instrument</th><th>Side</th><th>Entry</th><th>Current</th><th>P&amp;L</th><th>Trend</th><th></th></tr>
               </thead>
-              <tbody id="positionsBody"></tbody>
+              <tbody id="positionsBody"><tr><td colspan="7"><span class="sk" style="width:100%">&nbsp;</span></td></tr></tbody>
             </table>
           </div>
         </div>
@@ -299,7 +255,7 @@
           <h3>Mentors you follow</h3>
           <a href="#" class="link-muted" data-tab-link="copytrading">View Mentorboard →</a>
         </div>
-        <div class="mentor-strip" id="mentorStrip"></div>
+        <div class="mentor-strip lazy" id="mentorStrip"></div>
       </section>
 
       <!-- ================================================================
@@ -308,7 +264,7 @@
       <section class="dash-panel" id="panel-copytrading">
         <div class="dash-greeting">
           <h1>Copytrading</h1>
-          <p>Follow verified mentors and mirror their live positions automatically.</p>
+          <p>Review available mentor profiles and manage active copies from your account.</p>
         </div>
 
         <div class="filter-bar">
@@ -321,16 +277,16 @@
         </div>
 
         <div class="card-head" style="margin-bottom:14px;"><h3>Browse mentors</h3></div>
-        <div class="mentor-grid" id="mentorGrid"></div>
+        <div class="mentor-grid lazy" id="mentorGrid"></div>
 
         <div class="card-head" style="margin-bottom:14px;"><h3>Your active copies</h3></div>
-        <div class="active-copies" id="activeCopies"></div>
+        <div class="active-copies lazy" id="activeCopies"></div>
       </section>
 
       <section class="dash-panel" id="panel-mentors-pro">
         <div class="dash-greeting">
           <h1>Pro Mentors</h1>
-          <p>Browse verified top-performing traders and copy their open positions automatically.</p>
+          <p>Browse mentor profiles and review the information currently provided.</p>
         </div>
         <div class="filter-bar">
           <button class="filter-chip active">All</button>
@@ -339,7 +295,7 @@
           <button class="filter-chip">Indices</button>
           <button class="filter-chip">Low risk</button>
         </div>
-        <div class="mentor-grid" id="proMentorGrid"></div>
+        <div class="mentor-grid lazy" id="proMentorGrid"></div>
       </section>
 
       <!-- ================================================================
@@ -377,18 +333,12 @@
             <div class="ot-instrument">
               <div class="instr-icon blue" id="otIcon">EU</div>
               <div>
-                <strong id="otName">EUR/USD</strong>
-                <small id="otSub">Euro / US Dollar</small>
+                <strong id="otName"><span class="sk">&nbsp;</span></strong>
+                <small id="otSub"><span class="sk">&nbsp;</span></small>
               </div>
             </div>
-            <div class="ot-price" id="otPrice">1.0842</div>
-            <span class="delta up" id="otDelta">▲ 0.18% today</span>
-
-            <div class="ot-chart">
-              <svg viewBox="0 0 300 70" preserveAspectRatio="none">
-                <path id="otChartLine" fill="none" stroke="#00E6A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0,40 30,44 60,30 90,36 120,20 150,26 180,14 210,22 240,10 270,18 300,8"/>
-              </svg>
-            </div>
+            <div class="ot-price" id="otPrice"><span class="sk">&nbsp;</span></div>
+            <span class="delta up" id="otDelta"><span class="sk">&nbsp;</span></span>
 
             <div class="ot-seg">
               <button class="buy-active" id="otBuyToggle">Buy</button>
@@ -409,8 +359,7 @@
               </div>
             </div>
 
-            <div class="ot-summary"><span>Est. units</span><strong id="otUnits">92.23</strong></div>
-            <div class="ot-summary"><span>Spread</span><strong>0.8 pips</strong></div>
+            <div class="ot-summary"><span>Est. units</span><strong id="otUnits"><span class="sk">&nbsp;</span></strong></div>
 
             <button class="btn-solid btn-sm magnetic" style="width:100%; justify-content:center; margin-top:14px;" id="otSubmit">
               <span>Buy EUR/USD</span>
@@ -429,45 +378,9 @@
         </div>
 
         <div class="wallet-cards">
-          <div class="wcard"><p class="lbl">Available balance</p><div class="val">$4,218.60</div></div>
-          <div class="wcard"><p class="lbl">Bonus balance</p><div class="val" style="color:var(--gold)">$312.00</div></div>
-          <div class="wcard"><p class="lbl">Invested (locked)</p><div class="val" style="color:var(--blue)">$12,480.00</div></div>
-        </div>
-
-        <div class="card-head" style="margin-bottom:14px;"><h3>Deposit method</h3></div>
-        <div class="method-grid">
-          <button class="method-card selected" data-method>
-            <div class="method-icon">💳</div>
-            <strong>Card</strong>
-            <small>Instant · Visa &amp; Mastercard</small>
-          </button>
-          <button class="method-card" data-method>
-            <div class="method-icon">◈</div>
-            <strong>Crypto</strong>
-            <small>BTC, ETH, USDT</small>
-          </button>
-          <button class="method-card" data-method>
-            <div class="method-icon">🏦</div>
-            <strong>Bank transfer</strong>
-            <small>1–2 business days</small>
-          </button>
-        </div>
-
-        <div class="card" style="margin-bottom:24px;">
-          <div class="card-head"><h3>Deposit funds</h3></div>
-          <div class="ot-field">
-            <label>Amount</label>
-            <div class="ot-input-row"><span>$</span><input type="number" value="500" id="depositAmount"></div>
-            <div class="ot-quick">
-              <button data-amt="100">$100</button>
-              <button data-amt="500">$500</button>
-              <button data-amt="1000">$1k</button>
-              <button data-amt="5000">$5k</button>
-            </div>
-          </div>
-          <button class="btn-solid btn-sm magnetic" data-toast="Deposit initiated" data-toast-sub="This is a design demo — no funds were moved.">
-            <span>Continue to deposit</span>
-          </button>
+          <div class="wcard"><p class="lbl">Available balance</p><div class="val"><span class="sk">&nbsp;</span></div></div>
+          <div class="wcard"><p class="lbl">Bonus balance</p><div class="val" style="color:var(--gold)"><span class="sk">&nbsp;</span></div></div>
+          <div class="wcard"><p class="lbl">Invested (locked)</p><div class="val" style="color:var(--blue)"><span class="sk">&nbsp;</span></div></div>
         </div>
 
         <div class="card">
@@ -475,11 +388,7 @@
           <div class="table-wrap">
             <table class="dtable">
               <thead><tr><th>Type</th><th>Method</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td>Deposit</td><td>Card</td><td class="pnl up">+$1,000.00</td><td>Aug 15, 2026</td><td><span class="status-badge completed">Completed</span></td></tr>
-                <tr><td>Withdrawal</td><td>Crypto</td><td class="pnl down">-$320.00</td><td>Aug 12, 2026</td><td><span class="status-badge completed">Completed</span></td></tr>
-                <tr><td>Deposit</td><td>Bank transfer</td><td class="pnl up">+$2,500.00</td><td>Aug 6, 2026</td><td><span class="status-badge pending">Pending</span></td></tr>
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
@@ -506,7 +415,7 @@
           <div class="table-wrap">
             <table class="dtable" id="txTable">
               <thead><tr><th>Reference</th><th>Type</th><th>Detail</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
-              <tbody id="txBody"></tbody>
+              <tbody id="txBody"><tr><td colspan="7"><span class="sk" style="width:100%">&nbsp;</span></td></tr></tbody>
             </table>
           </div>
         </div>
@@ -524,8 +433,8 @@
         <div class="kyc-card">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3l10 4.5v7c0 7-4.5 11.2-10 12.5-5.5-1.3-10-5.5-10-12.5v-7L15 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
           <div>
-            <strong>Identity verification — In review</strong>
-            <p>Your documents were submitted Aug 14. Verification usually completes within 24 hours.</p>
+            <strong>Checking verification status…</strong>
+            <p></p>
           </div>
           <a href="kyc.html" class="btn-outline btn-sm">View status</a>
         </div>
@@ -533,9 +442,9 @@
         <div class="settings-grid">
           <div class="card">
             <div class="card-head"><h3>Profile</h3></div>
-            <div class="settings-field"><label>Full name</label><input type="text" value="Adaeze Reyes"></div>
-            <div class="settings-field"><label>Email address</label><input type="email" value="adaeze.reyes@example.com"></div>
-            <div class="settings-field"><label>Country</label><input type="text" value="Nigeria"></div>
+            <div class="settings-field"><label>Full name</label><input type="text" value=""></div>
+            <div class="settings-field"><label>Email address</label><input type="email" value=""></div>
+            <div class="settings-field"><label>Country</label><input type="text" value=""></div>
             <button class="btn-solid btn-sm magnetic" data-toast="Profile updated" data-toast-sub="Your changes were saved.">
               <span>Save changes</span>
             </button>
@@ -547,18 +456,6 @@
               <div><strong>Two-factor authentication</strong><p>Require a code at every login.</p></div>
               <label class="switch"><input type="checkbox" checked><span class="track"></span></label>
             </div>
-            <div class="toggle-row">
-              <div><strong>Trade confirmations</strong><p>Email me when a copied trade opens or closes.</p></div>
-              <label class="switch"><input type="checkbox" checked><span class="track"></span></label>
-            </div>
-            <div class="toggle-row">
-              <div><strong>Margin alerts</strong><p>Notify me when margin level drops below 50%.</p></div>
-              <label class="switch"><input type="checkbox" checked><span class="track"></span></label>
-            </div>
-            <div class="toggle-row">
-              <div><strong>Product news</strong><p>Occasional updates about new markets and tools.</p></div>
-              <label class="switch"><input type="checkbox"><span class="track"></span></label>
-            </div>
           </div>
         </div>
       </section>
@@ -567,11 +464,11 @@
       <section class="dash-panel" id="panel-account">
         <div class="dash-greeting"><h1>Account Details</h1><p>Your core account information.</p></div>
         <div class="card" style="max-width:560px">
-          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Full name</span><strong>Adaeze Reyes</strong></div>
-          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Email</span><strong>adaeze.reyes@example.com</strong></div>
-          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Account ID</span><strong style="font-family:var(--font-mono)">CM-208491</strong></div>
-          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Member since</span><strong>Jan 14, 2026</strong></div>
-          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">KYC status</span><span class="status-badge pending">In review</span></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Full name</span><strong></strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Email</span><strong></strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Account ID</span><strong style="font-family:var(--font-mono)"></strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">Member since</span><strong></strong></div>
+          <div class="toggle-row"><span style="color:var(--text-tertiary);font-size:13px">KYC status</span><span class="status-badge pending"></span></div>
         </div>
       </section>
 
@@ -580,41 +477,6 @@
         <div class="dash-greeting">
           <h1>Withdrawal Wallets &amp; Linked Accounts</h1>
           <p>Link an exchange account or configure direct crypto payout addresses.</p>
-        </div>
-
-        <div class="card-head" style="margin-bottom:14px;"><h3>Link an account</h3></div>
-        <div class="method-grid">
-          <button class="method-card" data-toast="Link Coinbase" data-toast-sub="Opens OAuth connection in the live build.">
-            <div class="method-icon">🔵</div><strong>Coinbase Account</strong><small>Mirror exchange via email</small>
-          </button>
-          <button class="method-card" data-toast="Link Trust Wallet" data-toast-sub="Opens wallet connect in the live build.">
-            <div class="method-icon">🛡️</div><strong>Trust Wallet</strong><small>Multi-chain &amp; TRC20</small>
-          </button>
-          <button class="method-card" data-toast="Link MetaMask" data-toast-sub="Opens Web3 connect in the live build.">
-            <div class="method-icon">🦊</div><strong>MetaMask</strong><small>Self-custody Web3</small>
-          </button>
-        </div>
-
-        <div class="card" style="margin-bottom:20px;">
-          <div class="card-head"><h3>Manual payout addresses</h3></div>
-          <div class="settings-field">
-            <label>USDT wallet (TRC20)</label>
-            <input type="text" placeholder="T...">
-            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ TRC20 network only — sending on another network may result in lost funds.</p>
-          </div>
-          <div class="settings-field">
-            <label>Bitcoin wallet</label>
-            <input type="text" placeholder="bc1...">
-            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ Bitcoin network only.</p>
-          </div>
-          <div class="settings-field">
-            <label>Ethereum wallet (ERC20)</label>
-            <input type="text" placeholder="0x...">
-            <p style="font-size:11.5px;color:var(--gold);margin-top:6px;">⚠ ERC20 network only.</p>
-          </div>
-          <button class="btn-solid btn-sm magnetic" data-toast="Wallet addresses saved" data-toast-sub="Demo only — nothing was transmitted.">
-            <span>Save wallet addresses</span>
-          </button>
         </div>
 
         <div class="card">
@@ -634,7 +496,7 @@
           <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:16px;line-height:1.6;">
             Network and transfer fees are deducted from the amount you receive — there's no separate fee payment required to release a withdrawal. Processed in FIFO order, typically within 24–48 hours. Minimum $10. KYC verification required.
           </p>
-          <button class="btn-solid btn-sm magnetic" data-toast="Withdrawal requested" data-toast-sub="Demo only — added to your queue, no funds moved.">
+          <button class="btn-solid btn-sm magnetic" data-toast="Withdrawal requested" data-toast-sub="Review the withdrawal details before submitting.">
             <span>Request Payout</span>
           </button>
         </div>
@@ -660,29 +522,11 @@
           </button>
         </div>
 
-        <div class="card deposit-details" data-panel="wire" style="margin-bottom:20px;">
-          <div class="card-head"><h3>Bank Wire Transfer Details</h3></div>
-          <div class="bank-field"><label>Account Holder / Beneficiary Name</label><div class="bank-val"><span>YOUR LEGAL BUSINESS NAME</span><button class="copy-btn" data-copy="YOUR LEGAL BUSINESS NAME">Copy</button></div></div>
-          <div class="bank-field"><label>Bank Name</label><div class="bank-val"><span>YOUR BANK NAME</span><button class="copy-btn" data-copy="YOUR BANK NAME">Copy</button></div></div>
-          <div class="bank-field"><label>Account Number</label><div class="bank-val"><span>XXXXXXXXXXXX</span><button class="copy-btn" data-copy="XXXXXXXXXXXX">Copy</button></div></div>
-          <div class="bank-field"><label>Routing Number (ABA)</label><div class="bank-val"><span>XXXXXXXXX</span><button class="copy-btn" data-copy="XXXXXXXXX">Copy</button></div></div>
-          <div class="bank-field"><label>Bank Address</label><div class="bank-val"><span>Your bank's registered address</span><button class="copy-btn" data-copy="">Copy</button></div></div>
-          <p class="deposit-note">📌 Include your Account ID in the wire memo for faster reconciliation.</p>
-        </div>
-
-        <div class="card deposit-details" data-panel="sepa" style="margin-bottom:20px; display:none;">
-          <div class="card-head"><h3>SEPA Bank Transfer Details</h3></div>
-          <div class="bank-field"><label>Bank Name</label><div class="bank-val"><span>YOUR EU BANK NAME</span><button class="copy-btn" data-copy="">Copy</button></div></div>
-          <div class="bank-field"><label>IBAN</label><div class="bank-val"><span>XXXXXXXXXXXXXXXXXX</span><button class="copy-btn" data-copy="">Copy</button></div></div>
-          <div class="bank-field"><label>BIC / SWIFT</label><div class="bank-val"><span>XXXXXXXX</span><button class="copy-btn" data-copy="">Copy</button></div></div>
-          <div class="bank-field"><label>Bank Address</label><div class="bank-val"><span>Bank's registered EU address</span><button class="copy-btn" data-copy="">Copy</button></div></div>
-        </div>
-
         <div class="card deposit-details" data-panel="crypto" style="margin-bottom:20px; display:none;">
           <div class="card-head"><h3>Cryptocurrency Wallets</h3></div>
-          <div class="crypto-row"><div><strong>Bitcoin (BTC)</strong><small class="mono">your-btc-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
-          <div class="crypto-row"><div><strong>Ethereum (ETH)</strong><small class="mono">your-eth-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
-          <div class="crypto-row"><div><strong>USDT (TRC20)</strong><small class="mono">your-usdt-trc20-address-here</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <div class="crypto-row"><div><strong>Bitcoin (BTC)</strong><small class="mono">Loading…</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <div class="crypto-row"><div><strong>Ethereum (ETH)</strong><small class="mono">Loading…</small></div><button class="copy-btn" data-copy="">Copy</button></div>
+          <div class="crypto-row"><div><strong>USDT (TRC20)</strong><small class="mono">Loading…</small></div><button class="copy-btn" data-copy="">Copy</button></div>
           <p class="deposit-note">⚠ Send only the matching asset on the matching network. Wrong-network transfers cannot be recovered.</p>
         </div>
 
@@ -691,50 +535,9 @@
           <p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:16px;">Send funds via your selected method, then upload your receipt or transaction screenshot. Minimum $100.</p>
           <div class="settings-field"><label>Amount deposited ($)</label><input type="number" id="depositProofAmount" min="100" placeholder="e.g. 500"></div>
           <div class="settings-field"><label>Proof (receipt or screenshot)</label><input type="file" id="depositProofFile" accept="image/*,.pdf"></div>
-          <button class="btn-solid btn-sm magnetic" data-toast="Proof submitted" data-toast-sub="Demo only — pending verification, no file uploaded.">
+          <button class="btn-solid btn-sm magnetic" data-toast="Proof submitted" data-toast-sub="Submit the receipt for verification.">
             <span>Submit proof of deposit</span>
           </button>
-        </div>
-      </section>
-
-      <section class="dash-panel" id="panel-research-terminal">
-        <div class="dash-greeting"><h1>Research Terminal</h1><p>Live sentiment, confidence scores and breaking news across your watchlist.</p></div>
-        <div class="filter-bar">
-          <button class="filter-chip active">Popular</button>
-          <button class="filter-chip">Market Alerts</button>
-          <button class="filter-chip">News</button>
-          <button class="filter-chip">Calendar</button>
-        </div>
-        <div class="rt-layout">
-          <div class="card">
-            <div class="card-head"><h3>Confidence</h3><span class="link-muted">All</span></div>
-            <div class="rt-conf-scale"><span>0%</span><span>100%</span></div>
-            <div class="rt-list" id="rtList"></div>
-          </div>
-          <div class="rt-side">
-            <div class="card">
-              <div class="card-head"><h3>Sentiment snapshot</h3></div>
-              <div class="rt-sent-grid" id="rtSentGrid"></div>
-            </div>
-            <div class="card">
-              <div class="card-head"><h3>News volume vs Fear Index</h3><span id="rtPair">EURUSD · 3h 52m</span></div>
-              <svg class="rt-fear-svg" viewBox="0 0 300 90" preserveAspectRatio="none">
-                <polyline points="0,60 30,55 60,62 90,40 120,48 150,30 180,38 210,20 240,28 270,15 300,22" fill="none" stroke="#6EA8FF" stroke-width="2"/>
-                <polyline points="0,70 30,68 60,72 90,65 120,68 150,58 180,60 210,50 240,52 270,44 300,46" fill="none" stroke="#FF5C6C" stroke-width="2"/>
-              </svg>
-            </div>
-            <div class="card">
-              <div class="card-head"><h3>Latest news</h3></div>
-              <p class="rt-news-item"><strong>Acuity:</strong> ING Economics — softer-than-expected US inflation signals potential rate strategy shift.</p>
-            </div>
-            <div class="card">
-              <div class="card-head"><h3>Next calendar item</h3></div>
-              <div class="rt-next-cal">
-                <strong>Retail Sales (YoY)</strong>
-                <div class="rt-next-cal-row"><span>Actual —</span><span>Forecast —</span><span>Previous 2.8%</span></div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -744,15 +547,10 @@
           <div class="table-wrap">
             <table class="dtable">
               <thead><tr><th>Time</th><th>Ccy</th><th>Event</th><th>Impact</th><th>Actual</th><th>Forecast</th><th>Previous</th></tr></thead>
-              <tbody id="calBody"></tbody>
+              <tbody id="calBody"><tr><td colspan="7"><span class="sk" style="width:100%">&nbsp;</span></td></tr></tbody>
             </table>
           </div>
         </div>
-      </section>
-
-      <section class="dash-panel" id="panel-market-news">
-        <div class="dash-greeting"><h1>Market News</h1><p>Headlines from across the markets you trade.</p></div>
-        <div class="news-grid" id="newsGrid"></div>
       </section>
 
       <div class="pm-modal-backdrop" id="pmBackdrop">

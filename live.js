@@ -41,6 +41,7 @@
   const rows = document.querySelectorAll('#panel-account .toggle-row strong, #panel-account .toggle-row span.status-badge');
   if (rows.length >= 5) {
     rows[0].textContent = me.name; rows[1].textContent = me.email; rows[2].textContent = me.id.slice(-8).toUpperCase();
+    rows[3].textContent = new Date(me.createdAt).toLocaleDateString();
     rows[4].textContent = me.kycStatus.replace('_',' ').toLowerCase();
   }
   const sf = document.querySelectorAll('#panel-settings .settings-field input');
@@ -81,6 +82,7 @@
     const { items } = await api('/markets');
     for (const k of Object.keys(MARKETS)) MARKETS[k] = [];
     items.forEach(i => { MARKETS[i.asset].push({ sym:i.sym, name:i.name, price:i.price, chg:i.chg }); live[i.sym] = i; });
+    window.__mkLoaded = true;
     renderMarkets(currentAsset);
   }
 
@@ -95,7 +97,7 @@
         loadPositions(); loadBalance();
       } catch (e) {
         const c = e.data?.error;
-        showToast('Order failed', c === 'INSUFFICIENT_FUNDS' ? 'Not enough balance.' : c === 'BELOW_MIN' ? 'Minimum trade is $10.' : 'Try again.');
+        showToast('Order failed', c === 'INSUFFICIENT_FUNDS' ? 'Not enough balance.' : c === 'BELOW_MIN' ? 'Minimum trade is $10.' : c === 'PRICE_UNAVAILABLE' ? 'Market price unavailable right now.' : 'Try again.');
       }
     };
     const clone = (el) => { const n = el.cloneNode(true); el.replaceWith(n); return n; };
@@ -129,8 +131,8 @@
 
   // transactions
   let txItems = [], txF = 'All';
-  const TXF = { Deposits: ['DEPOSIT', 'DEMO_FUNDING'], Withdrawals: ['WITHDRAWAL'], Trades: ['TRADE_PNL'], Copytrades: ['COPY_FEE'] };
-  const txNames = { DEMO_FUNDING:'Demo funding', DEPOSIT:'Deposit', WITHDRAWAL:'Withdrawal', TRADE_PNL:'Trade', COPY_FEE:'Copy fee', ADJUSTMENT:'Adjustment' };
+  const TXF = { Deposits: ['DEPOSIT'], Withdrawals: ['WITHDRAWAL'], Trades: ['TRADE_PNL'], Copytrades: ['COPY_FEE'] };
+  const txNames = { DEMO_FUNDING:'Funding', DEPOSIT:'Deposit', WITHDRAWAL:'Withdrawal', TRADE_PNL:'Trade', COPY_FEE:'Copy fee', ADJUSTMENT:'Adjustment' };
   function renderTx(){
     const rows = txItems.filter(r => txF === 'All' || TXF[txF].includes(r.type));
     document.getElementById('txBody').innerHTML = rows.length ? rows.map(r => {
@@ -159,7 +161,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[c]));
   const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
-  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Amount is below the minimum.', KYC_REQUIRED:'Identity verification must be approved first.',
+  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Amount is below the minimum.', PRICE_UNAVAILABLE:'Market price unavailable right now.', KYC_REQUIRED:'Identity verification must be approved first.',
     SELF_COPY:"You can't copy yourself.", VALIDATION:'Please check the details.', NOT_FOUND:'Not found.' };
   const $$id = (id) => document.getElementById(id);
 
@@ -230,11 +232,12 @@
           <button class="pill-toggle pause" data-act="${c.status === 'PAUSED' ? 'resume' : 'pause'}" data-id="${c.id}">${c.status === 'PAUSED' ? 'Resume' : 'Pause'}</button>
           <button class="pill-toggle stop" data-act="stop" data-id="${c.id}">Stop</button>
         </div></div>`).join('') : '<p style="color:var(--text-tertiary)">You are not copying anyone yet.</p>';
-    $$id('mentorStrip').innerHTML = items.map(c => `
+    $$id('mentorStrip').innerHTML = items.length ? items.map(c => `
       <div class="mentor-mini"><div class="mm-head"><div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
         <div><strong>${esc(c.name)}</strong><small>@${esc(c.handle)}</small></div></div>
         <div class="mm-stats"><div><strong>$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>your allocation</span></div>
-        <div><strong>${c.status.toLowerCase()}</strong><span>status</span></div></div></div>`).join('');
+        <div><strong>${c.status.toLowerCase()}</strong><span>status</span></div></div></div>`).join('')
+      : '<p style="color:var(--text-tertiary)">No active copies yet.</p>';
   }
   $$id('activeCopies').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-act]'); if (!b) return;
@@ -500,6 +503,7 @@
     document.getElementById('calBody').innerHTML = '<tr><td colspan="7" style="color:var(--text-tertiary)">Calendar unavailable right now.</td></tr>';
   });
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
+  document.querySelectorAll('.sk').forEach(e => e.classList.remove('sk'));
   setTimeout(loadStats, 1600); // after dashboard.js's count-up animations finish
   bindTrade(); connectWs();
   setInterval(() => { loadBalance(); loadPositions(); loadWallet(); loadNotifs(); loadStats(); loadTx(); }, 15000);

@@ -73,41 +73,6 @@
   animate();
 })();
 
-/* ---------- Rotating testimonials ---------- */
-(function testimonials(){
-  const quotes = document.querySelectorAll('.auth-quote');
-  const dots = document.querySelectorAll('.auth-quote-dots button');
-  if(!quotes.length) return;
-  let idx = 0;
-  let timer = null;
-
-  function show(i){
-    quotes.forEach(q => q.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    quotes[i].classList.add('active');
-    if(dots[i]) dots[i].classList.add('active');
-    idx = i;
-  }
-  function next(){ show((idx+1) % quotes.length); }
-
-  function restart(){
-    clearInterval(timer);
-    timer = setInterval(next, 5000);
-  }
-
-  dots.forEach((dot,i)=>{
-    dot.addEventListener('click', ()=>{ show(i); restart(); });
-  });
-
-  show(0);
-  restart();
-})();
-
-/* ---------- Segmented account-type control ---------- */
-document.querySelectorAll('.seg-control').forEach(seg=>{
-  // purely CSS-driven via :checked, nothing needed here except a11y label sync
-});
-
 /* ---------- Floating label fix for selects ---------- */
 document.querySelectorAll('.field select').forEach(sel=>{
   const sync = ()=>{
