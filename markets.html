@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Markets — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.mk{max-width:var(--container);margin:0 auto;padding:110px 24px 60px}
+.mk h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:6px 0 12px}
+.mk .lead{color:var(--text-secondary);max-width:640px;margin-bottom:32px}
+.mk a.market-card{display:block}
+.mk-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
+.mk-feats div{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:20px}
+.mk-feats h3{font-size:1rem;margin-bottom:6px}.mk-feats p{color:var(--text-secondary);font-size:.9rem}
+.mk-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.mk-tabs a{padding:8px 14px;border:1px solid var(--line);border-radius:100px;font-size:13px;font-weight:600;color:var(--text-secondary)}
+.mk-tabs a.on,.mk-tabs a:hover{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.mk-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:8px 20px;overflow-x:auto}
+.mk table{width:100%;border-collapse:collapse;min-width:420px}
+.mk th{text-align:left;font:500 10.5px var(--font-mono);text-transform:uppercase;color:var(--text-tertiary);padding:14px 8px 10px}
+.mk td{padding:14px 8px;border-top:1px solid var(--line);font-size:14px}
+.mk td.p{font-family:var(--font-mono)}.up{color:var(--bull)}.down{color:var(--bear)}
+.mk-risk{font-size:.78rem;color:var(--text-tertiary);margin-top:28px;line-height:1.7}
+.mk-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:700px){.mk-feats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav scrolled"><div class="nav-inner">
+  <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
+  <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
+</div></header>
+<main class="mk" id="mk"></main>
+
+<script src="config.js"></script>
+<script>
+const M = {
+  forex:{n:'Forex',cls:'mc-forex',d:'Trade major, minor and exotic currency pairs.',f:[['Major pairs','EUR/USD, GBP/USD, USD/JPY and more.'],['Around the clock','Currency markets run five days a week, almost 24 hours.'],['Copy mentors','Mirror verified mentors who specialise in FX.']]},
+  stocks:{n:'Stocks',cls:'mc-stocks',d:'Speculate on the price moves of well-known shares without owning them.',f:[['Popular names','Apple, Tesla, Nvidia, Microsoft, Amazon and more.'],['Price exposure','Trade price movement, not ownership.'],['Market hours','Prices move during exchange trading hours.']]},
+  crypto:{n:'Crypto',cls:'mc-crypto',d:'Bitcoin, Ethereum and other liquid digital assets.',f:[['Major coins','BTC, ETH, SOL, XRP.'],['24/7 prices','Crypto markets never close.'],['High volatility','Large swings in both directions.']]},
+  indices:{n:'Indices',cls:'mc-indices',d:'Trade the direction of whole markets through index baskets.',f:[['Global benchmarks','S&P 500, Nasdaq 100, Dow Jones, FTSE 100.'],['Broad exposure','One position tracks many companies.'],['Macro driven','Moved by economic data and central banks.']]},
+  commodities:{n:'Commodities',cls:'mc-commodities',d:'Gold, silver, oil and gas, the hard assets behind the economy.',f:[['Metals','Gold and silver.'],['Energy','Crude oil and natural gas.'],['Safe-haven demand','Gold often reacts to market stress.']]},
+  etf:{n:'ETFs & Futures',cls:'mc-etf',d:'Basket exposure and fixed-date contracts for structured strategies.',f:[['ETFs','One ticket, a basket of assets.'],['Futures','Fixed date, fixed price contracts.'],['Coming soon','Not yet available on the platform.']]},
+};
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RISK = '<p class="mk-risk"><strong>Risk warning:</strong> Leveraged products carry a high risk of rapid losses. Prices shown may be delayed, simulated or illustrative and are not a record of executable quotes. This is not investment advice.</p>';
+const root = document.getElementById('mk');
+const key = new URLSearchParams(location.search).get('m');
+
+if (!M[key]) {
+  document.title = 'Markets — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Markets</span><h1>One account. Every market.</h1>
+    <p class="lead">Pick an asset class to see its instruments and live prices.</p>
+    <div class="market-grid">${Object.entries(M).map(([k, v]) => `<a class="market-card" href="markets.html?m=${k}"><div class="mc-icon ${v.cls}"></div><h3>${esc(v.n)}</h3><p>${esc(v.d)}</p><span class="mc-tag">View market →</span></a>`).join('')}</div>${RISK}`;
+} else {
+  const v = M[key];
+  document.title = v.n + ' — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Markets</span><h1>${esc(v.n)}</h1><p class="lead">${esc(v.d)}</p>
+    <div class="mk-tabs">${Object.entries(M).map(([k, x]) => `<a href="markets.html?m=${k}" class="${k === key ? 'on' : ''}">${esc(x.n)}</a>`).join('')}</div>
+    <div class="mk-card" id="tbl"><p style="padding:20px;color:var(--text-tertiary)">${key === 'etf' ? 'ETFs and futures are not available yet.' : 'Loading prices…'}</p></div>
+    <div class="mk-feats">${v.f.map(([h, t]) => `<div><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join('')}</div>
+    <div class="mk-cta"><a href="register.html" class="btn-solid"><span>Open a free demo account</span></a><a href="markets.html" class="btn-outline"><span>All markets</span></a></div>${RISK}`;
+  if (key !== 'etf') {
+    const load = async () => {
+      try {
+        const { items } = await (await fetch(API_BASE + '/markets?asset=' + key)).json();
+        document.getElementById('tbl').innerHTML = `<table><thead><tr><th>Instrument</th><th>Price</th><th>Change</th></tr></thead><tbody>${items.map((i) => {
+          const up = i.chg >= 0;
+          return `<tr><td><strong>${esc(i.sym)}</strong><br><small style="color:var(--text-tertiary)">${esc(i.name)}</small></td><td class="p">${Number(i.price).toLocaleString(undefined, { maximumFractionDigits: 4 })}</td><td class="p ${up ? 'up' : 'down'}">${up ? '▲' : '▼'} ${Math.abs(i.chg).toFixed(2)}%</td></tr>`;
+        }).join('')}</tbody></table>`;
+      } catch { document.getElementById('tbl').innerHTML = '<p style="padding:20px;color:var(--text-tertiary)">Prices unavailable right now.</p>'; }
+    };
+    load(); setInterval(load, 5000);
+  }
+}
+</script>
+</body>
+</html>
