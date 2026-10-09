@@ -1,0 +1,1777 @@
+TradeWithMentors is a trading name of TWM Ltd
+.
+CLIENT AGREEMENT
+
+
+
+
+
+
+Version: December 2023
+RISK WARNING: Trading leveraged derivative products such as Foreign Exchange (Forex), Contracts for
+Difference (CFDs), or other financial derivative products carry a high level of risk to your capital. All
+these products, which are leveraged derivative products, may not be appropriate for all investors
+without an expert. The effect of leverage is that both gains and losses are magnified. The prices
+of leveraged derivative products may change to your disadvantage very quickly, you can lose more
+than your invested capital, and you may be required to make further payments. Before deciding to
+invest in any financial product, you should carefully consider your investment objectives, trading
+knowledge and experience, and affordability. You should only trade in Forex and CFDs if you have
+sufficient knowledge and experience of the risky nature of the products, the risks involved in trading
+such products, and if you are dealing with money that you can afford to lose. You should seek
+independent professional financial advice if you are in any doubt.
+TWM Ltd Client Agreement
+Page 2 of 36
+1. THIS AGREEMENT
+1.1. INTRODUCTION
+
+a) These Terms together with your completed and submitted Application Form
+comprise the Client Agreement between TWM Ltd. ("we", "us"
+or
+"TWM "),
+international business company regulated by U.S Securities And Exca
+hnange under
+registration number: 4342-345462.
+b) the Client is comprised of two or more legal persons, then a reference to a right or
+obligation of the Client under this Agreement or a transaction contemplated by this
+Agreement confers that right or imposes that obligation jointly and severally on
+those persons.
+c) This is a master agreement and sets out the terms and conditions upon which
+dealings between you and us relating to the provision of advice to the Client or the
+execution of Orders.
+d) This Agreement is in addition to other documents that may have been exchanged
+and/or executed between the parties. You should read this Agreement carefully and any
+other documents given to you that apply to you.
+Margin FX and Contracts- for-difference (CFDs) Transactions you enter into pursuant to the
+terms of this Agreement carry a high level of risk without an expert trader. You should ensure
+that you fully understand such risks before entering into this Agreement or any transaction
+with us.
+ By signing and submitting the Application Form by email or electronically via our website, or by
+taking any action consistent with your agreement to these terms and conditions, you confirm
+that you:
+a) have received, read and understood this Agreement, including our current Legal
+Documents on our website; and
+b) agree that we will provide our Products and Services to you on the terms and
+conditions of this Agreement.
+1.2. TRADE AT YOUR OWN RISK OR TRADE SAFE WITH AN EXPERT
+ TWM is under no obligation, Only your current Expert Trader can:
+a) to satisfy we as to the suitability of any Position for you;
+b) to monitor or advise you on the status of any of your Positions;
+c) prevent you from trading beyond your means or ability or to protect you; or
+d) to close any open Position.
+1.3. DEFINITIONS AND INTERPRETATION a) Whenever used in this Agreement, unless inconsistent with the subject matter or
+context, the following words shall have the following meanings:
+Accept or Acceptance means, except in the case of a Third-Party Online Platform, if the Client, or
+an Authorised User, indicate by either telephone, email, face-to-face, or through an Online
+Service that they accept the Trade Contract Terms provided by TWM.
+Ltd
+TWM Client Agreement
+Page 3 of 36
+Account Value means the currency value of the Client’s Account, which is calculated by
+TWM combining:
+a) the equivalent balance of your Account in the TWM client money trust account;
+b) the Realised/Unrealised Losses and Realised/Unrealised Gains.
+c) indicative costs to Close (fees, Overnight interest); and
+d) the values of Positions not yet booked
+Application Form means the form a client must complete and submit to apply to open an
+account with TWM .
+Authorized User means a person authorized by the Client to access TWM ’ s services and/or
+enter into Orders on the Client’s behalf.
+Base Currency means the first currency in a Currency Pair. The Base Currency is assigned a value
+of 1 when calculating exchange rates.
+Bought Swap Rate means the interest rate that applies to the Base Currency at the Close of
+Business on the relevant Trading Day.
+CFD means a Contract for Difference.
+Client, you or your means the Client named in this Agreement, together with its subsidiaries,
+affiliates, successors and/or assigns, as well as its officers, directors, employees and agents.
+Client Agreement means the completed Application Form and these Terms.
+Close of Business means 22:00 GMT.
+Closed Out means the termination of all or part of an Order.
+Close-Out Date means the date on which all or part of an Order is Closed-Out.
+Close-Out Value means the Order Value at the Close-Out Date.
+Corporate Action means payment of a dividend, scrip dividend or special dividend, a rights issue,
+open offer or free distribution of shares by way of a bonus, capitalization or any other offer or
+issue to the holders of the underlying asset, a takeover, reverse takeover, merger, demerger,
+listing, delisting or suspension from listing or any analogous event directly affecting holders of
+the underlying asset.
+Currency Pair means the Base Currency and the Term Currency for a Margin FX contract.
+Cut-Off Time means the time (AEST) for the destination country of the international payment
+by which cleared funds to need to be received by us for an international payment to be made
+on any Day. These times are set out on the Website.
+Day means a day on which commercial banks are open for business (including dealings in
+foreign exchange) in the place specified by TWM for that purpose.
+Daily Statement means an Account statement issued by TWM daily.
+Daily Statements include details of:
+a) your open Positions.
+TWM Ltd Client Agreement
+Page 4 of 36
+b) your new Positions.
+c) the opening cash balance on your Account, together with details of Account
+movements such as deposits, withdrawals or settlements.
+d) your closing Account balance for the day.
+e) profits or losses made on Open Positions (your open trade equity);
+f) the value of your Positions and movements on your Account in the currency in which
+your Account is denominated, indicating, where appropriate the consolidation rates
+used;
+g) other items affecting your Accounts, such as Rollover Benefits or Rollover Charges
+applied to your Account.
+h) profit or loss made on open Positions (your open trade equity);
+i) the liquidation value;
+j) your Total Margin Requirement; and
+k) your Margin excess or deficit.
+Default Event
+a) Each of the following constitutes a Default Event:
+i. (Any acts or omissions on the part of the Client;
+• Authorized User; or
+• the Client or Authorised User’s employee, agent or assignee (whether or not
+known to us, and whether or not acting in concert with other natural
+persons or algorithmic tools) which in TWM’ssole discretion,
+are deemed as being:
+• negligence;
+• mistake;
+• wilful misconduct, (including commission churning, sniping,
+causing or contributing to or benefiting from a Quoting
+Error, moving the price of an underlying asset, scalping,
+arbitraging off-market pricing);
+• the breach of any law; or
+• the breach of any provision of this Agreement.
+ii. the Client or their Guarantor becomes insolvent or bankrupt;
+iii. the Client is deceased or becomes of unsound mind;
+iv. the Client fails to provide any Margin or amounts due under this Agreement
+on time in respect of any Positions, or the Margin held by
+TWM in respect of any Positions falls below the Margin Requirement.
+v. the Client is in breach of any representation, warranty or undertaking made
+under this Agreement or any other material term of this Agreement and/or
+any information provided to TWM in connection
+this Agreement is or has become with untrue or misleading.
+Ltd
+TWM Client Agreement
+Page 5 of 36
+vi. any fee or charges or other payments due to TWM are
+not
+paid in
+accordance with this Agreement.
+vii. at any time or for a period the client is not contactable or does not respond
+to any notice of correspondence from TWM .
+viii. TWM reasonably considers it necessary for the
+protection
+of its rights
+under this Agreement;
+ix. TWM is requested by any regulatory body or authority;
+x. Your Account balance falls below the Minimum Margin Requirement;
+xi. any Dispute occurs, or litigation is commenced and, in view of the subject
+matter of or any issues in dispute in relation to that litigation,
+TWM reasonably decides that it cannot continue to
+deal
+with the Client
+while the litigation is pending;
+xii. the Client fails to provide, within 10 days of a written request, all information
+which TWM requested in connection with this Agreement;
+xiii. TWM has reason to believe the client is unable to
+manage
+the risk that
+arises from their Positions;
+xiv. the Client fails to comply with any limit or restriction imposed on them by
+TWM in connection to the Account (for example,
+a
+restriction on the kind,
+volume or value of Orders);
+xv. any change in law or interpretation which makes it unlawful for us to
+perform any provision of the Agreements; and
+xvi. If a chargeback occurs.
+b) in the case of a body corporate:
+i. the Client goes into liquidation, voluntarily or otherwise, or a liquidator,
+receiver, an administrator is appointed
+ii. a valid deed of guarantee and indemnity with respect to the obligations
+under this Agreement has not been provided to TWM .
+c) In the case of a trust, the Client ceases to be the trustee of the trust or the relevant
+trust is terminated.
+Deposit means the amount deposited by the Client withTWMasrequested
+by TWMin relation to all Financial Products, atthe time of booking and at any time prior to the
+Value Date which is a part- payment toward the agreed Order value and not client monies.
+Depositincludes amounts deposited by the Clientwith TWMas requested byTWMin respect of
+any anticipated or existingOpen Positionswhich the Client has orwill havewithTWM
+.
+Financial Product means a foreign exchange contract or a transaction in which a Client and
+TWM enterinto anOTC derivatives contract based on the value of
+an
+underlying asset or assets(
+including but not limited to a currency or currency pair, a commodity, a precious metal or an
+index).
+Force Majeure means events or causes including, but not limited to, the following: an act of
+God, peril of the sea, unavoidable accident of navigation, war (whether declared or not),
+sabotage, riot, insurrection, civil commotion, national emergency (whether in fact or law),
+martial law, fire, flood, cyclone, earthquake, landslide, explosion, power or water shortage,
+failure of a transmission or communication network, epidemic, quarantine, strike or other labor
+difficulty or expropriation, restriction, prohibition, law, regulation, decree or other legally
+Ltd
+TWM Client Agreement
+Page 6 of 36
+enforceable order of a government agency, breakage or accident, change of International,
+State or Commonwealth law or regulation or any damage of
+TWM ’ hardware or systems, unless occurring as a result of an act, omission, default or
+negligence ofthe Client orTWM.
+Free Balance means, at any time, the excess (if any) of the balance of the Client’s account at
+that time over the required Deposit.
+Futures CFD means a CFD where the value of the contract derives its value from an underlying
+asset or instrument whose price is quoted on a futures market.
+Fully Hedged Position means an Open Position that is equal and opposite of another Open
+Position.
+Guarantor means any person(s) identified as such in the Application Form.
+Hedged Position is as defined in clause 3.7.
+Instruction means any instruction or request given by the Client to
+TWM relating to the execution of a Financial Product as provided for under clause 8.2.
+Insolvency Event means any steps taken for:
+a) the winding-up, dissolution or administration of the Client;
+b) the Client to enter any arrangement, compromise or composition with or
+assignment for the benefit of its creditors or any class of them except for the
+purposes of a solvent reconstruction or amalgamation; or
+c) a receiver, receiver and manager, or other controllers, administrator or similar
+officer to be appointed with respect to, or takes control of, the Client or any of the
+Client’s assets and undertakings.
+Law means any local or foreign law, regulation or judgment, court order or sanctions regimes
+which TWM is subject to.
+Long Party means in respect of any Order the party identified in the Trade Confirmation Notice
+as having notionally bought the underlying asset or assets to the OTC derivative contract.
+Margin Call means an amount, in addition to the Deposit, as solely determined by
+TWM .
+Margin FX contract means a Margin Foreign Exchange contract.
+Mark to Market means the daily revaluation of an OTC derivatives contract entered between
+TWM and the Client to reflect its current market value rather than its original contract
+value. TWM shall have the right, at its sole discretion, to determine the Mark to Market
+value daily.
+Merger Event means in respect of any underlying asset:
+a) any reclassification or change of the underlying asset that results in a transfer of or
+an irrevocable commitment to transfer all outstanding securities of the same class
+as the underlying asset to another entity or person.
+b) consolidation, amalgamation, merger or binding share exchange of the issuer of the
+relevant underlying asset with or into another person (other than a consolidation,
+Ltd
+TWM Client Agreement
+Page 7 of 36
+amalgamation, merger or binding share exchange in which such issuer is the
+continuing person, and which does not result in a reclassification or change of all
+outstanding securities of the same class as the underlying asset); or
+c) takeover offer, tender offer, exchange offer, solicitation, proposal or other event by
+any entity or person to purchase or otherwise obtain 50% or more of the outstanding
+securities of the same class as the underlying asset that results in a transfer of or
+irrevocable commitment to transfer all such securities (other than such securities
+owned or controlled by such other entity or person).
+Notice means a notice required or permitted to be given under this Agreement or for the
+purposes of this Agreement.
+Off quotes means the error message in the MT4/MT5 platform, indicating that no price is
+currently available or the last prices are no longer considered valid market prices. This error
+typically occurs in two scenarios: when there is a disruption in connectivity with the trading
+platform, or when the best available price for asset falls outside the specified maximum
+deviation range. Off quotes are frequently encountered during volatile orlowliquidity periods.
+Online Services meansthe services which provide the ability for clientsto transact with
+TWM by way of an online trading platform including a Third-Party Online Platform
+.
+Open Position is where the Client has entered into a transaction or contract with
+TWM , and a further transaction is required in order to close the position.
+Order means a Financial Product entered between TWM and the Client
+under
+the applicable
+Trade Contract Terms.
+Order Value means for any Order, the Order price or rate multiplied by the Order quantity. OTC
+means Over the Counter.
+Partially Hedged Position means an Open Position that is opposite but not equal to another
+Open Position.
+Previous Order Value means, the amount calculated as follows:
+a) where the Order Value is being determined for the first time for an Order Contract,
+the Order Value at the commencement of the Order; or
+b) in all other cases, the Order Value at the most recent Valuation Time.
+Quoting Error means a liquidity provider error, a software error, a typographical error or
+obvious mistake in a quote or indication and includes quoting delays.
+Reciprocal Obligation means TWM ’ obligations to the Client in relation to
+an
+Order, a Margin Call
+or a Deposit.
+Reference Interest Rate meansthat interestrate provided by ourliquidity provider plus
+TWM ’ transaction fee of 3.5% per annum.
+Retail Client is a person or entity opting to receive the services provided by the Company.
+Security Details means the information required byTWMunder clause 3.6.
+Ltd
+TWM Client Agreement
+Page 8 of 36
+Sell Swap Rate means the interest rate that applies to the Term Currency at the Close of
+Business on the relevant Trading Day.
+Share CFD means a Financial Product where the underlying asset is a security listed on an
+exchange.
+Short Party means in respect of any Order the party identified in the Trade Confirmation Notice
+as having notionally sold the underlying asset or assets to the OTC derivative contract.
+Sophisticated Investor means a person other than a retail client.
+Spot CFD means a CFD where the value of the contract derives its value from an underlying
+asset or instrument whose price is quoted on a spot market.
+Suspicious Trading Activity means any belief or decision of
+TWM, reasonably formed or made and whether or not communicated to the Client, that the
+Client has, either acting alone or with other persons, used the Online Service in a way which
+affectsthe integrity or effective functioning oftheOnline Services or TWM’ for CFDs and Margin
+FX, or the market for the Underlying Asset to which the CFD or Margin FX contract relates
+whether or not such conduct is also illegal or also constitutes market abuse. Such conduct
+includes butis notlimited to:
+a) entering into Orders or combination of Orders such as holding long and short
+positions in the same or similar Underlying Assets at similar times, irrespective of
+how the Account(s) have been funded (for example, but not limited to, personal
+deposits); or
+b) entering into Orders or combinations of Orders in respect of Underlying Assets the
+Client has entered into a transaction in an underlying market for the Underlying
+Asset.
+c) entering into Orders or combination of Orders with intention of exploiting widerthan-usual spreads during abnormal period of thin liquidity by scalping with
+market/limit orders; or
+d) entering into Orders or combination of Orders with intention of exploiting the
+price gap with over-leveraged position prior to market closure or certain public
+announcements; or
+e) engaging in any trading activities with intention of abusing the Negative Balance
+Protection Facility; or
+f) engaging in any trading behaviors which are deemed exploitative, dishonest,
+abusive, or a good faith violation.
+Swap Charge or Swap Credit is as defined in clause 5.1 and 5.2.
+Swap- Free Account or Islamic Account means an account offered by
+TWM, at itssole discretion, which is designed specifically for, and available only to, Clients who
+cannotreceive or pay rolloverinterest on overnightOpen Positionsforreligiousreasons.
+Term Currency means the second currency in a Currency Pair.
+Terms mean these terms and conditions, together with all schedules, attachments or other
+documents attached.
+Ltd
+TWM Client Agreement
+Page 9 of 36
+Third- Party means any entity with whom TWMhas entered
+into an agreement or arrangement whereby TWMoffersthe Client accessto that entity’s online
+trading platform (“ Third- Party Online Platform”) for the purpose of the provision via the ThirdPartyOnline Platformof additionalservicesto the Client.
+Third-Party Online Platform means any online trading platform offered by a Third-Party.
+Trade Confirmation Notice means a document signed by the Client and
+TWM confirming the details of the Financial Product entered between the Client and
+TWM .
+Trade Contract Terms means the price, timing and other details (as contained in the
+Instructions) TWMprovides you, either verbally or via the Internet, atwhich the relevant Order
+can be purchased orsold.
+Trading Day means Monday to Saturday including public holidays for all assets except for
+Cryptocurrency CFDs. Trading Day for Cryptocurrency CFD means Monday to Sunday including
+public holidays.
+Value Date means either the Day selected by the Client and agreed by
+TWM for the settlement of an Order or if there is no such Day, the future value date after the
+execution of an Order by the Client and includes any agreed variation to the original date , being
+either an earlier or a later date.
+Valuation Time means the Close of Business on each Day, or any other time
+TWM decides in its absolute discretion.
+TWM , we, our or us means TWM Ltd., itssubsidiaries, holding companies,successors and/or
+assigns, as well as its officers, directors, employees and agents.
+Website means the TWM website.
+Wholesale Client is a client who is not retail or sophisticated.
+1.4. CLIENT REPRESENTATIONS AND WARRANTIES
+a) The Client warrants that:
+i. in the case of an individual or more than one individual, they are of full age
+and capacity.
+ii. in the case of a firm or corporation, it is duly constituted and incorporated
+and possesses the requisite power to enter into this Agreement and all
+contracts made or to be made.
+iii. in the case of a trustee of a trust, they are properly appointed as trustee,
+they will be liable both in their personal capacity and as trustee, the trust
+instrument is valid and complies with all applicable laws, and the trustee
+has a right of indemnity from the trust assets in respect of this Agreement;
+and
+iv. (iv) in any case, this Agreement and such contracts are and will constitute
+legally binding and enforceable obligations of the Client.
+b) The Client represents and warrants to TWM that:
+Ltd
+TWM Client Agreement
+Page 10 of 36
+i. the Client will place Orders wholly or predominantly for business and
+investment purposes and not for personal, domestic or household use or
+consumption.
+ii. execution and delivery by the Client of this Agreement, and performance
+of all the Client’s obligations contemplated under this Agreement does not
+violate any Law applicable to the Client.
+iii. all information provided by the Client to TWM is true, correct and
+complete, and the Client will notify TWM promptly of any changes to
+such information.
+iv. the Client shall make ongoing disclosure to TWMof any mattersthat may
+affect the operation of this Agreement or of the ability of the Client to
+pay Margin Calls or to remain solvent.
+v. The Client will not, either acting alone or with others, engage in conduct
+which results in Suspicious Trading Activity as defined in this Agreement.
+If TWMhas reasonable ground to suspect that the Client engages in
+Suspicious Trading Activity, TWM reserves the right to temporarily or
+permanently suspend the Client’s trading account, recover any losses
+incurred in connection with the Suspicious Trading from the Client and/or
+void the Client’s Orders and cancel any associated profits, with immediate
+effect.
+c) The Client acknowledges that:
+i. by applying to open an account, you acknowledge that you have read and
+understood this Agreement.
+ii. TWM will enter the transactions contemplated by this
+Agreement in reliance on the representations and warranties made by
+the Client.
+iii. TWM provides advisory and execution-only services, and the final
+investment decision is always the Client’s own.
+iv. if TWM provides advice to the Client, then that the advice is general
+only and does not consider the personal objectives, circumstances or
+needs of the Client; and
+v. if the Client is comprised of two or more legal persons,
+TWM ’ primary contact for the receipt of Notices is the first person
+named on the Application Form.
+d) The Client:
+i. confirms that they have regular access to the internet.
+ii. consents to TWM contacting the Client (in the circumstances described
+in this Agreement) by email on the address provided by the Client.
+iii. agrees to ensure that the Client's contact details are always up to date.
+iv. If this Agreement is provided to you in a language other than English, it is
+provided for information purpose only. The governing language of this
+Agreement is English. In the event of any inconsistency between the
+English language version of this Agreement and a foreign language version,
+the English version will prevail to the extent of any inconsistency.
+TWM Ltd Client Agreement
+Page 11 of 36
+2. THE ACCOUNT
+2.1.OPENING AN ACCOUNT
+a) You need to have an active Account prior to transacting with us. No Orders can be
+placed until an account has been opened and cleared funds received and credited
+into the Account. You can apply for more than one Account. References in this
+Agreement to your Account are taken to include reference additional accounts.
+b) To apply for an Account, you must complete an Application Form.TWM , at
+its sole discretion, may accept or decline your application. If
+TWM accepts your application, you will be notified via email.
+c) If TWM permits the Client to place an Order where no account
+has
+been opened, or
+clear funds received, this will not limit the Client’s liability to TWM under this
+Agreement.
+2.2. ACCOUNT INFORMATION
+
+a) You accept and warrant to us that any information provided to us at any time is true
+and correct and that you will immediately inform us of any change to that
+information.
+b) You are required to keep confidential all Security Details relating to the Account,
+including, but not limited to any username, account number, user ID and password.
+Once you have established this Security Details, TWM has
+no
+obligation to verify
+the authority of anyone using this information to operate your account. If you are
+aware or suspect that these items are no longer confidential, you should contact
+us immediately.
+2.3. AFFILIATES AND INTRODUCING BROKERS
+
+a) If you are referred to us by an Affiliate or Introducing Broker, you must not assume
+these parties have access to your Account, act on your behalf (send us instructions)
+or view your trading history unless they are an Authorized Person.
+2.4. AUTHORISED USERS AND AUTHORISATION LIMITS
+
+a) TWM may accept your authorization of another person (
+Authorized
+User) to give
+instructions and place Orders on the Client’s behalf. The Authorized Person can
+be an Affiliate, Introducing Broker or Trading Agent. The Client must notify
+TWM in a written Notice in the form of
+authorization
+under a power of attorney.
+b) Upon TWM receiving such Notice the change in
+Authorized
+User is effective
+immediately. However, the Notice shall not affect any Orders already executed
+.
+c) Any appointment of an Authorized User shall remain in full force and effect unless
+and until a notice of cancellation of appointment has been delivered to
+TWM .
+d) The Client may inform TWM of an authorization limit applicable
+to
+some or all
+Orders either in general or for particular Authorized Users. Any authorization
+Ltd
+TWM Client Agreement
+Page 12 of 36
+limit provided by the Client to TWM may be withdrawn by the Client
+at
+any time by
+giving Notice to TWM .
+e) All Instructions were given and Orders accepted by an Authorized User within their
+authorization limits will be deemed to be Instructions and Orders authorized by the
+Client and shall be binding upon the Client.
+f) Until the Client has provided a Notice toTWMto the contrary,TWMmay continue to
+assume that all existing Authorized Users have authority to execute legally binding
+Orders with TWM within
+their
+authorization limits.
+g) The Client hereby indemnifies and agrees to hold TWM
+harmless in respect of any loss incurred by an Authorized User entering
+Orders within their authorization limits.
+2.5. DEPOSITS
+a) TWM will provide you with access to online service where you can
+track
+the following
+information in your Account:
+i. the orders that you have entered with us.
+ii. the payments you have paid, or you are required to pay to us.
+iii. the payments TWM have paid, or
+TWM is
+required to pay to you.
+b) Paymentsto the Account may be made using any of the following payment methods:
+i. by online bank transfer.
+ii. by same day bank transfer; or
+iii. by international telegraphic transfer.
+c) TWM reserves the right to remove or restrict the payment methods
+that
+you use to
+deposit and withdraw money from your Account.
+d) The Client must have sufficient cleared funds deposited in an account before
+TWM creates any Order. TWM will indicate to
+the
+Client, where applicable, the sum
+required as the Deposit for each Order (where TWM
+applicable
+). may impose other
+fees and charges for using the services,
+e) by providing Notice to the Client. If the Client does not consent to the charges,
+the Client can terminate the Agreement immediately and the charges will not
+apply to the Order prior to the Notice being given by
+f) TWM TWM .is not responsible for any fees or charges imposed by
+ThirdParty banks or
+other counterparties, which are incurred by the Client in connection with the use
+of the services.
+g) All payments under this Agreement must be made in United States dollars or any
+other currency that TWM may agree
+h) toIf TWM . becomes aware or has reason to believe that the
+money
+you’ve deposited
+has come from someone other than you (i.e., from a funding method in someone
+else’s name), TWM reserves the right
+to
+decline your deposit, return the money to
+the source of origination, void any transactions and terminated this Agreement.
+i) If TWM is not satisfied that a payment method is in your name, TWM reserve
+the right to ask you for documents to prove this before TWM decide whether
+credit your Account. to
+TWM Ltd Client Agreement
+Page 13 of 36
+2.6. WITHDRAWALS
+
+a) If your Account shows Free Balance, you can ask TWM to pay some or part of
+that Free Balance to you.
+b) TWM may choose to withhold some or all any withdrawal that you request
+at its own discretion if:
+i. TWM requires you to maintain a certain amount of money in your
+Account to meet our margin obligations/requirements.
+ii. TWM is entitled to
+the Corporations Act; or amount withholdunder the
+iii. In line with section 2.6.
+c) TWM will inform you as soon as reasonably possible if TWM decides to withhold
+any part of your Free Balance.
+d) TWM hasthe right to refuse to act on Instructions to send fundsto a bank account
+or any other account if it has a reason to believe this destination account is held in
+a different name than the trading account name.
+e) TWM will use all reasonable endeavors to make payments to the Client in
+accordance with the timing specified in the Client’sInstructions. However, TWM
+shall not be liable under any circumstances for any direct, indirect or
+consequential loss (including any loss of profits) incurred as a result of a delay in
+funds reaching the Client’s nominated account.
+f) TWM will not be liable if a payee/beneficiary bank fails to process a payment
+correctly.
+g) TWM is only required to make an international payment to or at the direction
+of the Client on a particular Day if cleared funds have been received by TWM
+prior to the Cut-off Time for that Day. International payments relating to funds
+received by TWM after the Cut-off Time for a Day will be made on the next Day.
+The Client agrees all funds in and out of the Account are subject to TWM ’ deposits and
+withdrawals policy on our website.
+2.7. SEGREGATED CLIENT MONEY
+a) All money deposited by the Client with TWM , received by TWM or its
+agent on behalf of the Client, or that is, client profits on the Close Out of a Financial
+Product, shall be deposited into one or more accounts nominated by TWM and
+will be paid into a client segregated bank account when required by Law,
+which is typically when the Client pays money into the nominated account:
+i. without agreeing to the terms of a Financial Product by the next Day
+following actual receipt of the deposit; or
+ii. without TWM issuing the Financial Product immediately;
+or iii. Such segregation of the Client’s money does not fully protect the Client’
+s money from the risk of loss.
+Ltd
+TWM Client Agreement
+Page 14 of 36
+b) While the Client’s money is segregated from TWM ’ money, it may be
+co- mingled with the money of other Clients and utilized by TWM
+from time to time where TWM is allowed to do so pursuant to Law.
+c) TWM shall be entitled to retain any interest earned on such
+segregated money held or invested by TWM .
+d) TWM may use the funds in the client segregated account:
+i. in accordance with applicable Laws.
+ii. to manage TWM ’ dealings with its counterparties with respect to
+Wholesale Clients (other than Sophisticated Investors), including
+margining, guaranteeing, securing, transferring, adjusting or settling
+such dealings, but only at the time at which TWM
+has incurred such an obligation.
+e) If the Client is a Wholesale Client (other than a Sophisticated Investors) then the
+Client acknowledges that clause 6.4 constitutes the Client's written agreement to
+using funds in the client segregated account in the manner referred to in that clause.
+f) The Client acknowledges clause 4.6 is sufficient written authorization for
+TWM to withdraw without notice to, or further authorization from,
+the Client the amount of money deposited into the segregated account necessary to meet
+TWM ’ obligations incurred for this purpose. The Client has no interest in
+or
+claim over
+TWM ’ contracts (if any) with any other person or in
+the
+accounts into which
+lodges or pays the funds which were withdrawn from theTWMsegregated accounts.
+g) for the facilitation of transactions and settlements, and avails monies received
+for Deposits and settlements which are not client money to such providers for
+this purpose.
+h) When TWMacceptsmoney froma Clientin connectionwith an Order, a Margin
+Call or a Deposit, the Client immediately receives Reciprocal Obligationsfrom
+under the Trade Contract Terms. The payment is not “client TWMmoney”, but
+rather has purchased that Reciprocal Obligation from
+TWM .
+3. TRADING
+
+3.1. INSTRUCTIONS AND CREATION OF ORDERS
+
+a) Rate indications from TWM are available by telephone,
+email, face
+-to- face or
+through the Online Services. Such indications are not binding, and the rates will be
+as agreed when TWM exercises it right to create an
+b) The OrderClient . , or an Authorized User may issue trading instructions to
+TWM by using the TWM Trading Platform via a desktop
+computer
+or a mobile
+device.
+c)TWM, atits discretion,may accept orders orinstructionsfromthe Client through
+other means, such as by email or telephone.
+d) If the Client or an Authorized User executes an Order on the
+TWM Trading Platform, they are deemed to be making an offer to trade at the
+quoted price. A Trade Contract Terms and the quoted price offered by the Client
+or an Authorized
+Ltd
+TWM Client Agreement
+Page 15 of 36
+User will not be binding until the Order has been accepted and confirmed by
+TWM subject to its discretionary rights.
+e) If TWM exercises this right, then an Order is formed between the
+Client
+and TWM
+When an Order is created the parties shall become bound by the content. of the
+relevant Trade Contract Terms and this Agreement.
+f) TWMreservesthe rightto decline to enterinto anyOrder proposed by the Client or
+an Authorized User. TWM shall not be obliged to give
+a
+reason. However, TWM
+promptly notify the Client that TWM has not created anshall Order with the
+Client.
+g) When the Client, or an Authorized User, contact TWM by
+either
+telephone,
+email, face-to-face or through an Online Service and provides the appropriate
+Client reference number (and such other security checks as TWM may specify
+), TWM may, but is not
+obligated to, ask for the
+following information:
+i. the Client’s contact details;
+ii. your account number;
+iii. your further identification details;
+iv. the type of Order the Client wishes to enter into with reference to the
+asset or assets underlying the Order (e.g., exchange rate, currency pair,
+commodity, precious metal or index);
+v. whether you intend to be the Long Party or the Short Party for the Order;
+vi. the Order quantity;
+vii. the Order price or rate; and
+viii. any other information applicable to the Order as TWM
+may require from time to time. Collectively, though not exhaustively, this
+information or any portion constitutes an Instruction.
+h) An Order may be:
+i. A day Order meaning that the order will be cancelled at 22:00 GMT; or
+ii. A good ‘til cancelled Order, which means that the Order will remain
+capable of being accepted by TWM until the Client cancels the Order
+or TWM accepts it.
+i) Orders may be placed as:
+i. market Orders to buy or sell a Financial Product as soon as possible at the
+price obtainable in the market; or
+ii. limit and stop Orders to trade reaches a predefined level, as applicable to
+the various Financial Products offered (or a combination of these types of
+Orders).
+j) Limit Orders to buy and stop Orders to sell must be placed below the current market
+price, and limit Orders to sell and stop Orders to buy must be placed above the
+current market price. If the bid price for sell Orders or ask price for buy Orders is
+reached, the Order is filled as soon as possible at the price obtainable in the market.
+Limit and stop Orders are therefore not guaranteed executable at the specific level
+or amount.
+k) Where the Client is using a Third-Party Online Platform, and the Client selects a
+feature offered by the Third-Party that facilitates trades automatically, then
+acceptance of the Order occurs automatically for each Order placed by the Third-
+Ltd
+TWM Client Agreement
+Page 16 of 36
+Party, subject to the terms of the Third-Party’s agreement with the Client, and
+subject to TWM ’ discretionary right to create an Order.
+l) You acknowledge that TWM is not making any discretionary
+decisions
+to buy or sell
+Financial Products on the Client’s behalf, but rather, the Client is choosing to use
+trading strategies offered by a Third-Party via a Third-Party
+3.2. CANCELLATION OR ALTERATION OF AN ORDER
+
+a) If the Client decides that it wants to change any of the amounts or the dates under
+an Order, and the Client contacts TWMaccordingly, TWM may in its discretion
+provide the Client with Trade Contract Termsfor the alteration which are reasonable given the
+market conditions. The Client may either accept the new Trade Contract Terms and
+form a new Order or remain bound by the Trade Contract Terms of the original Order.
+b) If, after an Order has been placed, the Client informs TWM that
+they
+wish to cancel the
+Order, or this Agreement allows TWM to treat
+the
+Client as having terminated the
+Order or this Agreement, TWM
+may
+terminate at its complete discretion either the
+Order alone or the Order and this Agreement but may also at its discretion insist on
+the performance of the Order.
+c) If the Client cancels or fails to perform an Order, the Client is liable for any loss or
+damage suffered by TWM in closing out Orders which the
+Client
+has cancelled or
+failed to perform.
+d) The Client may forfeit part or all any Deposit in the event of cancellation. Where
+TWM has suffered loss, it reserves the right to set off against the
+Client
+’s Deposit or
+any other funds received from the Client, any charges, fees or losses sustained by
+TWM in closing out the Order.
+3.3. CURRENCY CONVERSIONS
+
+a) Money can be paid under the Agreements in these currencies, on the terms set out in
+this clause: Australian Dollars (AUD), United States Dollars (USD), British Pound
+Sterling (GBP), Euro (EUR), Canadian Dollars (CAD), Japanese Yen (JPY), New Zealand
+Dollars (NZD), Singapore Dollars (SGD) or Hong Kong Dollars (HKD).
+b) Realized profits and losses will be converted into the currency specified for the trade
+and will be converted into the Base Currency of the Account at the currentsport rate
+immediately on closing-Out a Position.
+c) If the Client makes a payment to TWMin a different currency than the Base
+Currency of the Account, the payment will be converted into the Base Currency of the
+Account at the spot rate given by TWM ’ financial.
+3.4. TRADING CONFIRMATIONS AND STATEMENTS
+
+a) Each time the Client places an Order with TWM , a
+confirmation of
+the executed
+trade will appear in the TWM Trading
+Platform.
+Ltd
+TWM Client Agreement
+Page 17 of 36
+b) The Client consents to receive Trade Confirmations by electronic means including,
+for example, through any Online Service.
+c) TWM will available Daily and Monthly Statements via TWM Trading Platform or
+online service.
+d) Following the end of day settlement time, provided the Client has transacted or has
+an open Position, TWM Trading Platform will produce a Daily Statement which will
+be emailed to the Client at their registered email address and then made available
+on the TWM Trading Platform.
+e) Following month-end, TWM will produce an electronic version of the Client’s
+trading statement which will be emailed to the Client and be available on the TWM
+Trading Platform. This will provide the same details as the daily statements but
+cover all account movements and transactions opened for the month.
+f) The Client is responsible for promptly checking all contents of Confirmations and the
+Daily and Monthly Statements. The client must immediately notify
+TWM if they become are that there is an error in the Confirmation or the
+Statements. TWM is entitled to assume that the Confirmations
+and Statements are correct unless the Client notifies TWM of
+any error within 48 hours following us giving the Confirmation or the
+Statements becoming available to the Client.
+3.5. TELEPHONE AND EMAIL TRANSACTIONS
+a) An Authorized User may request TWM to accept Instructions and enter Orders by
+telephone. TWM has sole discretion to accept Instructions and enter Orders by
+telephone.
+b) TWM may check the authority of the caller by requesting the caller give his or her
+name and confirming thatsuch name has been notified to TWMby the Client as an
+Authorized User. Upon such check confirming the identity of the caller, TWM
+may assume that the caller has the full authority as previously notified by the
+Client.
+c) The Client acknowledges and agrees and will ensure that each Authorized User
+acknowledges and agrees, that TWM may make a recording of each telephone
+Instruction and any other conversation (including Internet conversations e.g.,
+chats) received from a Client or an Authorized User or between a Client or an
+Authorized User and TWM . The recording remains the property of TWM .
+The telephone recording can be used by TWM to confirm the terms and
+conditions of any transaction where there is a dispute with a client as to the
+Trade Contract Terms of the transaction, and for training and monitoring
+d) purposes An Authorized User may request . TWM to accept Instructions and enter Orders by
+email. TWM may accept Instructions sent by email. The Client acknowledges and
+agrees that upon the acceptance by TWM of the Client’s Instructions, the
+Client shall be bound by those Instructions.
+3.6. ONLINE SERVICES
+a) If the Client or the Client’s Authorized User uses any of the Online Services, the Client
+or Authorized User will be able to:
+Ltd
+TWM Client Agreement
+Page 18 of 36
+i. place your Orders or issue Instructions to TWM
+ii. .
+enquire as to the availability or pricing or value of one or more Financial
+Products.
+iii. receive market data and other information in relation to one or more
+Financial Products.
+iv. monitor your obligations under this Agreement.
+v. receive Confirmations, Account balances or other information in
+connection with your Account or transactions booked with
+; or
+vi. use such other facilities as TWM may from time to time make
+available through the Online services.
+b) The Client must provide TWM on request with a list of
+Authorized
+User(s) and is
+responsible for informing TWM with any changes to
+that list.
+TWM
+c) An Online Service may be a proprietary service provided by
+or a service provided to you by a third party pursuant to an
+arrangementwith TWM (for example, by
+an
+Exchange or by a software provider).
+d) The Client isresponsible for complyingwith the operations aspects of Online Services
+provided by TWM or the provider of the Online Services.
+e) TWM may at any time without notice suspend, withdraw or
+deny
+access to the
+Online Services to a Client or one or more of the Client's Authorized Users for any
+reason including but not limited to security, quality of service, failure by the
+Client to pay any amount when due or breach by the Client of any provision of
+this Agreement.
+f) Clients can contactTWMinwriting to terminate their accessto an Online Services
+g) TWM can delay, decline or reverse any Order if TWM reasonably:
+i. suspects that the transaction might be unlawful or might be associated
+with financial crime.
+ii. suspects that the Client has engaged in Suspicious Trading Activity;
+iii. believes that by carrying out the transaction
+TWM might breach our compliance obligations;
+iv. believes or that the Client is in breach of this Agreement.
+Undersuch circumstances, TWMwill not be liable for delaying
+or
+refusing to carry
+out an Instruction.
+TW
+M
+TWM Ltd Client Agreement
+Page 19 of 36
+k) The Client must not:
+i. not permit, consent or allow any person (other than an Authorized User)
+to use the Security Details or to access or use the Online Service using that
+Security Details.
+ii. not provide, disclose or make available the Security Details to any person
+(other than an Authorized User);
+iii. misuse any of the Online Services by knowingly introducing viruses, trojans,
+worms, logic bombs or other material which is malicious or technologically
+harmful.
+iv. attempt to gain unauthorized access to any of the Online Services or any
+server, computer or database connected to any of the Online Services; and
+v. attack any of the Online Services via a denial-of-service attack or a
+distributed denial-of-service attack.
+l) The Client acknowledges and agrees that:
+i. Access to Online Services can only be granted using the Security Details.
+ii. The Client is responsible for the consequences of any unauthorized
+disclosure or use of the Security Details, and for any actions or omissions
+by an Authorized User.
+iii. TWM is entitled to rely on all Instructions given by,
+behalf of, or appear on theonClients’ behalf, using the Security Details; despite any
+other provision of these terms, TWM is not liable for any
+lcaused oss by it acting on Instructions or other communications using the
+Security Details.
+iv. There may be delays in the processing, execution, amendment or
+cancellation of an Order entered through the Online Service and:
+• an Order may be filled before instruction for its amendment or
+cancellation is processed.
+• the Client remains liable to settle the original Order until any
+relevant amendment or cancellation is affected; and
+• without limiting clause, 12 TWMwill not be liable for any loss
+incurred by the Client arising from any delay in the
+dissemination of market information or the processing of any
+Order or instruction to amend or cancel an Order.
+v. TWM is not responsible for the processing, execution or
+cancellation of any Orders submitted through the Online Services,
+regardless of who enters such Orders and regardless of whether there
+is an error in the Order entry or for any delays.
+vi. Any Online Service is provided on an "as is" basis and, except as required
+by law, TWM makes no representations or warranties express or implied
+with respect to the Online Services.
+vii. The speed of information provided through the Online Services is subject
+to a number of factors including, but not limited to, the speed of the user's
+internet connection, the user's settings, the number of concurrent users
+accessing the Online Services and the volume of information being
+received and sent by the Online Services.
+Ltd
+TWM Client Agreement
+Page 20 of 36
+viii. there are significant risks in trading through the Online Services because it
+is serviced by means of computer and telecommunications systems, even
+if generally accepted industry standards and practices are followed.
+ix. The Client will be liable for all Orders and/Instructions made when using
+any of the Online Services including instances of any misuse, fraud or
+abuse by the Client or the Client's Authorized Users or where the Client or
+the Client's Authorized Users have disclosed Security Details to a ThirdParty.
+x. TWM may change the minimum specification required to access the
+Online Services and may make operational changes to and alter the
+services currently available at any time. TWM will notify Clients of
+such changes by either placing a message on the client area, trading
+platform or by email.
+xi. the Client is responsible for ensuring they have in place alternative
+arrangements for the execution of Orders or other services available
+through the Online Services if the Online Services or any aspect of it ceases
+to be available or subject to failure (including, for example, arrangements
+for the use of telephone or e-mail);
+m) Clients are responsible for obtaining, maintaining and ensuring compatibility of their
+electronic software, devices and equipment. TWMwill not be responsible for any
+loss of or damage to a client’s data, software, computer, electronic devices,
+telecommunications or other equipment caused by use of any of the Online
+Services unless such loss or damage is directly and solely caused by our
+negligence or deliberate default.
+n) Clients are responsible for ensuring that their electronic devices and equipment are
+free from viruses and other malware and TWM will not be responsible for any
+losses incurred by failure to do this. TWM shall use reasonable endeavors to
+keep the Online Services free from viruses and corrupt files but cannot guarantee
+that the Online Services will be free from infection by viruses or anything else with
+contaminating or destructive properties. TWM is not able to guarantee that
+accessto any of the Online Services will be uninterrupted, continuous or error-free.
+o) By breaching this provision, a Client may also commit a criminal offence.
+TWM may report any such breach to the relevant law enforcement authorities
+and will co-operate with those authorities by disclosing a Client's identity to them.
+In the event of such a breach, the Client's right to use the Online Services will
+cease immediately and without Notice. TWM will not be liable for any loss or
+damage caused by a distributed denial-of- service attack, viruses or other
+technologically harmful material that may infect a Client's electronic devices and
+equipment.
+3.7. HEDGED POSITIONS
+a) TWM may allow you to execute Hedged Positions on some Financial Products
+from time to time. A Hedged Position is an Open Position that is opposite of
+another Open Position. In other words, it is the same Financial Product, but the
+opposite direction (i.e., you are the Long Party and the Short Party). A Hedged
+Position may be a Fully Hedged Position or a Partially Hedged Position.
+Ltd
+TWM Client Agreement
+Page 21 of 36
+b) TWM reserves the right to reduce the Deposit to zero for Fully Hedged Positions.
+We also reserve the right to reduce the Deposit for Partially Hedged Positions.
+If we choose to reduce the Deposit, we do not waive the right to require a deposit
+at any given time.
+c) You acknowledge and agree that if the Deposit for a Hedged Position has been
+reduced and you close anyone Open Position that forms part of the Hedged Position,
+it will immediately trigger the full Deposit for the Open Position. If you do not have
+sufficient Deposit such Open Position will be closed in accordance with clause 3.2 (c).
+d) TWM may close all or part of any Hedged Position at any time without notice at
+the Close-Out Value where we reasonably believe that the Hedged Position is being
+abused by a Client including where we reasonably believe that such Hedged
+Positions are not in the ordinary course of trading, or where it constitutes
+Suspicious Trading Activity.
+It is hereby agreed that the Company shall exercise its discretion in investigating clients’
+accounts. Based on the findings it may proceed with notifying client(s) that their account is
+under investigation whereas the Company reserves the right to proceed with immediate
+account termination, with or without prior notification to the client of the said breach of the
+Client Agreement. The Company is further entitled to reverse any profits accrued from
+suspicious trading and/or terminate the trading account and/or any account which can be
+found to be associated with such practices.
+3.8. DELAYS AND QUOTING ERRORS
+a) While TWM will make every reasonable effort to process the Client's Order
+promptly, in the absence of gross negligence or wilful misconduct, TWM cannot be
+held liable for delays, damages, failures, or errors in the completion of the Order,
+including instances of off quotes situations.
+b) In the event of a quoting or off quote error, TWM :
+i. is not liable and responsible for any damages, claims, losses, liabilities, or costs
+arising from the error;
+ii. reserves the right to restrict or suspend the trading activities of the involved
+Client until further notice; and
+iii. reserves the right to make the required adjustments to rectify the error.
+Any dispute arising from a quoting or off quote error will be resolved based on the fair market
+value, as determined by TWMacting reasonably, of the relevant currency at the time
+such quoting error occurred.
+c) If TWM is unable to perform its obligations under this Agreement or an Order
+because of factors beyond its control or because of a Force Majeure Event,
+TWM will notify the Client as soon as is reasonably practicable and will use
+reasonable endeavors to secure the return of any money paid by the Client in
+respect of which TWMhas been unable to discharge its obligations under this
+Agreement.
+d) TWM may give a Notice to the Client at any time if it forms the view that market
+conditions in the relevant financial market for the currency concerned are
+seriously disturbed. This includes circumstances where, in TWM ’ opinion, deposits
+in the currency concerned are not available in the ordinary course of business
+to TWM in the relevant financial market or because of national
+Ltd
+TWM Client Agreement
+Page 22 of 36
+or international financial, political or economic circumstances or exchange controls,
+it is impractical.
+e) When a Notice under clause 15 is given,TWM’s obligationswill be suspended
+while it and the Client negotiate alternative arrangements. If the parties reach an
+agreement before the Value Date, those alternative arrangements will apply. If
+they do not reach agreement within that period, each will be released from its
+obligations under the relevant transaction.
+3.9. TRADING HOURS
+a) Trading hoursfor Margin FX Contracts and CFDs vary and will depend on the relevant
+Underlying Instrument’s hours of operation. The trading hours are published on our
+website.
+b) We are under no obligation to quote prices or accept Orders on a public holiday in
+any jurisdiction which, in our reasonable opinion, affects the relevant value of the
+underlying asset or assetsto the OTC derivative contract TWM
+offers.
+We give notice
+of such public holidays and the underlying asset or assets affected on the Online
+Service.
+4. MARGIN
+4.1. INITIAL MARGIN
+a) Before placing a trade that creates an open Position the Client is required to pay into
+the Account the Initial Margin for that Position as calculated by TWM
+.
+4.2. MARGIN OBLIGATIONS
+a) The Client must pay to TWM such amounts of Margin as it
+may
+require under this
+Agreement.
+b) A Margin Deposit is credited by TWM at the time cleared funds
+have
+been received
+into the Client Account or such earlier time as allowed by TWM , so a Margin
+requirement for any anticipated or Open Positions by TWM is not satisfied
+unless ad until the Client’s payment is received in cleared funds into the Client Account.
+c) TWM will not be liable for any losses including losses arising from
+real
+or Open
+Positions if a Margin Deposit or payment is not received in cleared funds into the
+Client Account.
+d) The Client must maintain at least the amount of Margin required by
+TWM whether or not TWM gives any notice to the Client
+to
+make those
+payments of the Client has actual notice of the required amount. The required
+amount of Margin can change continuously, including over the weekend or other
+non-trading days
+e) It is the Client’s sole responsibility to always monitor through the
+TWM Trading Platform any notifications that TWM may, but is
+not
+obliged to,
+provide, the Margin deposited or any Minimum Margin
+Agreement having regard to such matters as: requirement under this
+i. your open Positions;
+ii. the volatility of any relevant Underlying Instrument;
+iii. the volatility of the Underlying Market and the generally.
+iv. any applicable Exchange Rate risk; and
+Ltd
+TWM Client Agreement
+Page 23 of 36
+v. the time it will take for you to remit sufficient cleared funds to
+.
+TWM
+f) The Client must ensure that for as long as they have an Open Position, their account
+is sufficiently funded to cover the required Margin. If not, the Client’s Open Position
+may be Closed Out by TWM without prior notice to the
+g) Client TWM.may, in its absolute discretion, provide the Client with further time to
+meet their Margin Requirements. Such permission will only be effective once
+confirmed in writing by TWM and only to the extent provided in the
+notice.
+h) If TWM asks the Client to transfer money to it to meet its Margin
+,
+requirement the client must take this action immediately. If they don’t, TWM will consider
+ita Default Event under these terms. TWM may also cancel any Orders or CloseOut one or more of the Client’s positions or part of their positions at its sole discretion
+without being liable to the Client, regardless of whether the Client transfers
+additional money to it.
+
+4.3. MARGIN CLOSE-OUT
+a) TWM Margin practice is an automated process where the TWM Electronic
+Trading Platform displays a visual warning on your Account online at different
+Margin levels. If the funds in your Account only cover 80 % of the margin
+requirements, a Margin Call alert will be triggered, and you will receive a visual
+warning automatically on the TWM Trading Platform. If the funds available
+in your account only covers 50% of the margin requirements for your open Margin
+FX or CFD positions, your worst-performing Margin FX or CFD positions (i.e., the
+CFD with the largest margin requirement) will be automatically closed out.
+
+4.4. CHANGING MARGIN PERCENTAGE
+a) TWM may vary the Margin Percentage in respect of any Position at any time by
+giving notice in accordance with clause 16.
+b) Any variation of the Margin Percentage and/or increase in Margin or Minimum
+Margin requirement will be due and payable immediately on
+TWM demand.
+4.5. MARK TO MARKET PAYMENTS
+a) TWM calculates the Order Value as at each Valuation Time.
+b) If at a Valuation Time:
+i. the Order Value is greater than the Previous Order Value:
+• the Short Party must pay the Long Party the excess of the Order
+Value over the Previous Order Value; or
+• the seller must pay the buyer the excess of the Order Value over
+the Previous Order Value; or
+ii. the Order Value is less than the Previous Order Value:
+• the Long Party must pay the Short Party the excess of the Previous
+Order Value over the Order Value; or
+• the buyer must pay the seller the excess of the Previous Order
+Value over the Order Value.
+c) If on the Close-Out Date:
+Ltd
+TWM Client Agreement
+Page 24 of 36
+i. the Close-Out Value is greater than the Previous Order Value the Long
+Party must pay the Short Party the excess of the Previous Order Value over
+the Close-Out Value; and
+ii. the Close-Out Value is less than the Previous Order Value the Short Party
+must pay the Long Party the excess of the Previous Order Value over the
+Close-Out Value.
+d) All Mark to Market Payments:
+i. TWM owes to the Client are credited to your account; and ii. you owe to
+us are debited from your account, on the Same Day as the
+relevant Valuation Time or Close-out Date.
+4.6. FORCED LIQUIDATION
+a) The Client is required to maintain a sufficient level of Margin.
+reserves its rights to close out all Open Positions:
+i. if at any time the Deposit held by TWM is
+no longer sufficient to cover the negativeapproaching mark to market or is value of any or
+all Open Positions that the Client has open with TWM; or
+ii. at
+any time, and
+fromtime to time, TWMdetermines
+the thatvalue of all of the Client’s Open Positions represents a substantial
+net unrealized loss to the Client such that, in TWM ’
+belief
+, the
+continued trading, or failure to Close Out, one or more of the Client’s Open
+Positions will or is likely to materially prejudice the Client’s
+b) TWM Account Value shall. have the right, at our sole discretion,
+to
+determine the
+Mark to Market value from time to time.
+c) In addition to other remedies available toTWM, ifthe Clientfailsto pay any amount
+when due under this Agreement, or if a Default Event occurs, TWM has the right
+toterminate (by either buying or selling) any or all of the Client’s Open Positions.
+5. CHARGES AND CREDITS TO THE ACCOUNT
+5.1. INTEREST CHARGES ON OPEN MARGIN FX POSITIONS
+a) Where an Order for a Margin FX contract is held overnight, the Order is subject to a
+Swap Charge or Swap Credit determined by TWM in accordance
+with
+this clause:
+i. if the Client is the Long Party and the Bought Swap Rate is higher than the
+Sell Swap Rate, TWM must pay you interest on
+the
+Open Position of
+any Orders at the rate that is the Bought Swap Rate minus the Sell Swap
+Rate;
+ii. if the Client is the Long Party and the Bought Swap Rate is less than the
+Sell Swap Rate, the Client must pay TWM interest on
+the
+Open Position of
+any Orders at the rate that is the Bought Swap Rate minus the Sell Swap
+Rate;
+iii. if the Client is the Short Party and the Sell Swap Rate is higher than the
+Bought Swap Rate, TWM must pay the Client interest
+on
+the Open
+Position of any Orders at the rate that isthe Bought Swap Rate minusthe
+Sell Swap Rate; and
+TW
+M
+Ltd
+TWM Client Agreement
+Page 25 of 36
+iv. if the Client is the Short Party and the Sell Swap Rate is lower than the
+Bought Swap Rate, the Client must pay TWM interest on the Open
+Position of any Orders at the rate that isthe Bought Swap Rate minusthe
+Sell Swap Rate.
+b) Where an Order for a Margin FX contract is held at the Close of Trade on a
+Wednesday, the Swap Charge or Swap Credit is adjusted to reflect interest rate
+changes in the Currency Pair until the following Monday.
+c) Where an Order for a Margin FX contract is held overnight, the Client agrees to pay
+TWM a transaction fee of up to 10% of the value of the Swap Charge or Swap
+Credit.
+d) Swap Charges or Swap Credits and TWM ’ transaction fee are calculated and
+applied to your account at the beginning of the next Trading Day
+e) No Swap Charge, Swap Credit or transaction fee is payable where an Order for a
+Margin FX contract is opened and closed on the same Trading Day.
+5.2. INTEREST CHARGES ON OPEN SPOT CFD POSITIONS
+a) Where an Order for a Spot CFD is held overnight, the Order is subject to a Swap
+Charge or Swap Credit determined by TWM multiplying the value of the contract
+at the end of the Trading Day by the Reference Interest Rate and adjusted for any
+dividend in relation to the underlying asset or instrument.
+b) TWM may, on its website, designate a spot CFD as a swap-free Spot CFD. Where an
+Order for a swap-free CFD contract is held overnight, the Order will not be
+subject to a Swap Charge or Swap Credit for the first seven days that the Order is
+held overnight provided that the Client does not engage in Suspicious Trading
+Activity with respect to the Order. If the Order remains open for more than seven
+days, the Order may be subject to a Swap Charge or Swap Credit determined by
+TWM in accordance with clause 5.2a) from day eight onwards. If TWM reasonably
+believes that a Client has engaged in Suspicious Trading Activity with respect to a
+swap-free Spot CFD, TWM reserves the right to apply Swap Charges or Swap
+Credits retrospectively from the opening of the Order and to take any other
+action that is permitted under this Agreement in relation to Suspicious
+Trading Activity.
+c) Where an Order for a Spot CFD (except for Cryptocurrency CFD) is held at the Close
+of Trade on a Friday, the Swap Charge or Swap Credit is adjusted to reflect the cost
+of holding the position until the following Monday.
+d) Swap Charges or Swap Credits in relation to Spot CFDs are calculated and applied to
+your account at the beginning of the next Trading Day.
+e) No Swap Charge or Swap Credit is payable where an Order for a Spot CFD is opened
+and closed on the same Trading Day.
+5.3. ROLLOVER CHARGES & CREDITS FOR OPEN FUTURES CFDPOSITIONS
+a) Where an Order for a Futures CFD is held overnight, the Order is not subject to a
+Swap Charge or Swap Credit.
+b) Where an Order for a Futures CFD is held at the Close of Trade on the Close-Out
+Date, the Order is automatically rolled over meaning that the contract is closed, and
+a new Order is created for the Futures CFD on the next Trading Day at the new
+contract price. TWM will not automatically roll over an Open Position for
+Ltd
+TWM Client Agreement
+Page 26 of 36
+a Futures CFD held at the Close of Trade on the Close- Out Date unless
+TWM has provided reasonable notice to the Client of the CloseOut
+Date and the
+position remains open after this date.
+c) Where an Order for a Futures CFD is held at the Close of Trade on the Close-Out
+Date, an adjustment will be applied to the Client’s account to reflect the difference
+between the old contract price and the new contract price for the Futures CFD less
+an administration fee of 2.5 basis points payable to TWM .
+d) Cash adjustments will be applied to the Client’s account on the first Trading Day of
+the new contract.
+5.4. COMMISSIONS FEES AND EXPENSES
+a) In addition to any other fees or charges set out in these Terms, the Client agrees to
+pay:
+i. an amount equal to any other fee charged or levied on
+TWM , or other expense incurred by TWM , arising
+from
+any action
+taken pursuant to this Agreement; and
+ii. all relevant taxes and expenses incurred by the Client in connection with
+this Agreement.
+b) The Client confirms and acknowledges thatTWMis,withoutlimiting its powers to
+recover amounts owing by the Client to TWM in
+any
+other way, permitted to
+deduct, without further reference to the Client, charges relating to any services
+provided by TWM
+including
+administration charges (including but not limited
+to fees associated with returned cheques, payment processing, debt collection
+and telephone transcript copies), charges relating to the use of the Online Services
+and any transaction fees charged to TWM by others with respect to the Client’s
+transactions including, but not limited to tracing fees.
+c) TWM may in its absolute discretion waive or reduce fees
+or
+transaction charges, for
+individual clients or for classes of clients, for any length of time, with or without
+conditions, without notice.
+d) The Client acknowledges that should they affect an Order with TWM
+,
+the Client
+must pay all transaction charges, fees, settlements, interest and any other
+amounts due under this Agreement on demand by TWM
+in
+cleared funds or
+otherwise as required in accordance with the terms of this
+e) The Client agrees that Agreement. TWMmay at any time share transaction fees
+and charges with any other persons without being required to disclose the
+sharing of such fees and charges to the Client unless such disclosure is required by
+Law.
+5.5. SWAP FREE OR ISLAMIC ACCOUNT
+a) Clients who hold a Swap Free Account will be charged an administrative fee instead
+of being credited or debited with a Swap Charge when holding a position overnight.
+TWM reserves the right to change the administration charges
+from
+time to time.
+Apart from this difference, Swap-Free Accounts have the same trading
+conditions and terms as TWM ’ regular Client accounts.
+b) If a Client holds an existing regular account and wishes to convert that account to a
+Swap Free Account, the client must make a request in writing to our support team.
+Ltd
+TWM Client Agreement
+Page 27 of 36
+The conversion from a regular account to a Swap Free Account can only take place
+if all positions on the regular accounts are closed and the account is reconciled.
+c) Swap Free Accounts are to be used in good faith and, the Client may not use the
+Swap-Free Account to make profits from swaps or, not paying swaps. The Client may
+not request the payment of any Swap Credit amounts that have been lost as a result
+of converting Client account(s) into one or more Swap- Free Accounts for the period
+during which the Client’s account(s) have been converted into one or more Swap
+Free Accounts.
+d) TWM reserves the right to revoke or cancel a Swap Free
+Account
+without having to
+provide any reason. If TWM detects that a
+Swap
+Free Account is being abused by
+taking advantage of not paying swaps, in the form of, but not limited to; fraud,
+manipulation, cash-back arbitrage, carry trades, or other forms of deceitful or
+fraudulent activity with the usage of a Swap Free Account, then TWM reserves
+right to take immediate action the
+;
+with immediate effect, revoking all live trading
+accounts that are under
+suspicion of exploitation.
+ii. correction and recovery of accrued swaps and related accrued interest
+expenses and/or costs pertaining to and all of the Client's Swap-Free
+Accounts for the period which the accounts were converted into SwapFree Accounts.
+iii. with immediate effect, termination of the Agreement; and/or
+iv. with immediate effect, nullifying all trades carried out on client's trading
+accounts and cancelling any profits earned or losses incurred on such
+client's trading accounts.
+6. GUARANTEE
+a) A Client’s obligations under the Agreement must be guaranteed:
+i. where the Client (including a trustee) is a company, by each director of the
+Company; and
+ii. in any other circumstance, where TWM
+determines, in
+its absolute
+discretion, that such guarantee is required.
+b) The Guarantor acknowledges thatTWMis acting in reliance on the Guarantor
+incurring obligations and giving rights under this guarantee and
+indemnity.
+c) The Guarantor unconditionally and irrevocably guarantees to
+TWM compliance with their obligations in connection
+the Agreement with, including each obligation to pay money.
+d) If the Client does not comply with those obligations on time and in accordance with
+the Agreement, then the Guarantor agrees to comply with those obligations ondemand from TWM . A demand may be made whether TWM has made demand
+on the Client.
+e) The Guarantor indemnifies TWM against any liability or loss
+arising
+from, and any
+costs it incurs, if:
+i. the Client does not, or is unable to, comply with an obligation the Client
+has (including an obligation to pay money) in connection with the
+Agreement; or
+ii. an obligation the Client would otherwise have under the Agreement
+(including an obligation to pay money) is found to be unenforceable; or
+Ltd
+TWM Client Agreement
+Page 28 of 36
+iii. an obligation the Guarantor would otherwise have under clause 6 is found
+to be unenforceable; or
+iv. a representation or warranty by the Client in the Agreement is found to
+have been incorrect or misleading when made or taken to be made.
+f) The Guarantor agrees to pay amounts due under clause 6 on demand from
+TWM .
+g) TWM needs not incur expense or make payment before
+enforcing
+this right of
+indemnity.
+h) The guarantee in clause 6 is a continuing obligation despite any intervening payment,
+settlement or other thing and extends to all of the Client’s obligations in connection
+with the Agreement. The Guarantor waives any right it has of first requiring
+TWM to commence proceedings or enforce any other rights
+against
+the Client or
+any other person before claiming from the Guarantor under this guarantee and
+indemnity.
+i) The Guarantor acknowledges that, before entering into this guarantee and
+indemnity, it:
+i. was given a copy of the Agreement (and all documents giving rise to your
+obligation in connection with the Agreement) and had full opportunity to
+consider their provisions; and
+ii. is responsible for making itself aware of the Client’s financial position and
+any other person who guarantees any of the Client’s obligations in
+connection with the Agreement.
+j) The Guarantor agrees to make payments under this guarantee and indemnity:
+i. in full without set-off or counterclaim, and without any withholding or
+deduction unless prohibited by law; and
+ii. in the currency in which the payment is due, and otherwise in United
+States dollars, in immediately available funds.
+k) If the Guarantor makes a payment that is subject to any withholding or deduction,
+the Guarantor agrees to pay TWMsuch additional amount to
+ensure
+that the
+amount received by TWM equals the full amount TWM would have received
+had no withholding or deduction been
+l) The rights are given to made. TWMunderthis guarantee and indemnity, and the
+Guarantor’s liabilities under it, are not affected by any act or omission of us or any
+other person. For example, those rights and liabilities are not affected by any act or
+omission:
+i. varying orreplacing the Agreement;releasing the Client or giving the Client
+a concession (such as more time to pay);
+ii. releasing any person who gives a guarantee or indemnity in connection
+with any of the Client’s obligations.
+iii. by which a person becomes a Guarantor after the date of this guarantee
+and indemnity.
+iv. by which the obligations of any person who guarantees any of the Client’s
+obligations (including obligations under this guarantee and indemnity)
+may become unenforceable.
+v. by which any person who wasintended to guarantee any of the obligations
+does not do so or does not do so effectively.
+Ltd
+TWM Client Agreement
+Page 29 of 36
+vi. by which a person who is co-surety or co-indemnifier is discharged under a
+Client Agreement or by operation of law.
+vii. a person dealing in any way with the Agreement or this guarantee and
+indemnity.
+viii. the death, mental or physical disability, or liquidation, administration or
+insolvency of any person including the Client or the Guarantor.
+ix. changes in the membership, name or business of any person.
+x. acquiescence or delay by TWM or any other person.
+m) If any obligation is required, or maybe required, to be complied with in connection
+with this guarantee and indemnity, the Guarantor may not, without our consent:
+i. reduce itsliability under this guarantee and indemnity by claiming that the
+Client or any other person has a right of set-off or counterclaim against
+TWM ; or
+ii. exercise any legal right to claim to be entitled to the benefit of another
+guarantee, indemnity, mortgage, charge or other encumbrance given in
+connection with the Agreement or any other amount payable under this
+guarantee and indemnity; or
+iii. claim an amount from the Client, or another guarantor (including a person
+who has signed the Application Form as a “Guarantor”) under a right of
+indemnity; or
+iv. claim an amount in your liquidation, administration or insolvency or of
+another guarantor of any of your obligations (including a person who has
+signed the Application Form as a “Guarantor”).
+7. CORPORATE ACTIONS
+a) If a Corporate Action occurs, TWM will reasonably
+determine
+what adjustment,
+if any, should be made to an Order to account for the dilutive or concentrative
+effect of any such event to preserve the economic equivalent of such Orders prior to
+the relevant event or to reflect the effect of such event on such Orders. Any such
+adjustments will be effective as of a date reasonably determined by us.
+b) TWM will not make dividend payments if:
+i. a Client is the Long Party for a Share CFD which goes ex-dividend,
+TWM will credit the Client’s account with a cash
+adjustment
+to reflect the
+impact of the dividend on the Orders. The amount of the adjustment will
+depend on the amount of the gross dividend on the relevant number of
+Share CFDs on the ex-dividend date.
+ii. a Client is the Short Party for a Share CFD which goes ex-dividend,
+TWM will debit the declared cash dividend from the Client
+’s
+account. The
+amount of the adjustment will depend on the amount equal to the gross
+dividend on the relevant number of Share
+CFDs on the-dividend date. TWM
+c) If an underlying asset to which an Open Position relatesissubject to a Merger Event,
+reserves the right to close any or
+all
+affected Open
+Positions at any time during the Merger Event. TWM
+will
+not close any Open Position
+that is subject to a Merger Event unless it has provided reasonable notice to the Client
+of a deadline for the Client to close their Open Position and the position remains
+open after this deadline.
+Ltd
+TWM Client Agreement
+Page 30 of 36
+d) TWM reserves the right to adjust the opening price of any Financial Product
+that is subject to a Merger Event to reflect any cash portion of the offeror to
+amend the size to reflect any corresponding adjustment to the underlying asset
+caused by the Merger Event and/or to close the affected Open Positions and reopen
+a new position reflecting the new underlying asset that has been created.
+e) clause 7(e) which would produce a commercially reasonable result,
+TWM may close your Open Position at the Close-Out Value on a
+date
+reasonably
+determined by us.
+f) Where the Client isthe Long Party for a Share CFD in relation to a US stock orsecurity,
+and the Share CFD goes ex-dividend, TWM is required by
+US
+tax legislation
+to withhold 30% of the cash adjustment to reflect the impact of the declared
+dividend. TWM will remit the amount withheld to
+its
+liquidity provider whowill
+account thewithheld amountsto the proper US authorities. Clients can view
+amounts withheld for US tax legislation purposes from their account.
+8. TRADING SUSPENSION AND DISRUPTION
+a) If, at any time:
+i. trading in any Underlying Asset on any exchange is suspended or halted;
+or
+ii. trading is suspended or halted on any exchange which restricts trading
+with any relevant index so that TWM is unable
+todetermine the price of the Underlying Asset, then TWM will take
+the price of the Underlying Asset as being the last traded price before the trading
+suspension or halt.
+b) If the suspension or halt continue for 5 Business Days, TWM at its discretion
+may Close-Out your part or all of your Positions. When this happens, TWM
+will decide the Close-Out date and the Close-Out value of your Contract in good
+faith (the Close-Out value will be the Underlying Asset price x the number of
+Contracts).
+c) TWM reserves the right at all times during any marketing limitations,
+suspension or disruption to adjust the price of any affected Underlying Asset.
+9. AMENDMENT, ASSIGNMENT AND TERMINATION
+9.1. AMENDMENT
+a) The terms of this Agreement and any transactions under it may be amended by
+TWM at any time. TWM will provide Notice to the Client of any such
+amendment. The Client agrees to be bound by the terms of such an
+amendment on the earlier of:
+i. ten (10) Days after TWM has issued a notification to the Client; or
+ii. on the date of the Client entering any Order after the amendment.
+b) Any other amendments must be agreed to in writing between
+TWM and the Client.
+Ltd
+TWM Client Agreement
+Page 31 of 36
+c) At no time shall either party enter commitments for or in the name of the other
+party or use their intellectual property for any purpose whatsoever. Except as
+specifically provided for in this Agreement, neither party will:
+i. use the other party’s name or intellectual property without the prior
+written approval of the other party; or
+ii. represent itself as being affiliated with, or authorized to act for, the other
+party.
+9.2. ASSIGNMENT
+a) Any rights or obligations that the Client may have pursuant to this Agreement shall
+not be assigned, transferred, sold, or otherwise conveyed, except with the prior
+written consent of TWM . TWM may,
+however,
+transfer any rights or obligations
+it may have pursuant to this Agreement to another party without the consent
+of the Client including, without limitation, in connection with a sale or transfer of all
+or part of TWM‘business
+to
+another person or entity.
+9.3. TERMINATION
+a) This Agreement may be terminated immediately by the Client or
+TWM by Notice to the other in writing. However, termination by either party
+shall not affect any Order or other transaction previously entered and shall not
+relieve either party of any outstanding obligations arising out of this Agreement, nor
+shall it relieve the Client of any obligations arising out of any Order entered into
+prior to such termination.
+b) If TWM is made aware of or has reason to believe any of the
+following:
+i. that the
+Client has provided false or misleading information
+ii. that the Client has participated or is participating or has assisted or is
+assisting in money laundering or terrorist financing;
+iii. that the Client is being officially investigated by law enforcement and/or
+regulatory agencies;
+iv. that abnormal trading conditions exist;
+v. that TWM is unable to make prices in the relevant
+Order due to the unavailability of relevant market information for reasons beyond
+vi. that the Client may be in possession of “inside information”;
+vii. a Default Event has occurred;
+viii. an Insolvency Event has occurred in respect of the Client, then
+TWM at its sole discretion, may terminate this Agreement
+byimmediately Notice to the Client, and TWM shall be relieved of
+obligations any set out in this Agreement or arising out of the transactions
+contemplated by this Agreement, including any obligations arising out of
+any Order already placed with TWM .
+c) Within two (2) days of termination of this Agreement, the Client will return or
+destroy all materials received from TWM as per TWM ’
+written instructions. Each party’ s duties of payment, delivery, and destruction of
+materials shallsurvive termination ofthis Agreement.
+TWM Ltd Client Agreement
+Page 32 of 36
+10. SET-OFF AGAINST MONIES OWED
+a) In addition to other rights available to TWM , the Client
+authorizes TWM to:
+i. appropriate, transfer, credit, apply or pay monies that may be received or
+held by TWM the Client’s behalf in payment of any
+amounts which may be outstanding by the Client to
+TWMor to an agent of TWM in a transaction effected on the
+ii. set Client -off against any amounts due to it by the Client, any amounts
+by TWM from or on behalf of the Client including but
+not limited to monies received as Deposits or Margin Calls.TWM
+may determine the application of any amounts which are to be
+set-off at its own discretion.
+b) Payments by the Client to TWM in accordance with this Agreement must be made
+without any set-off, counterclaim or condition and without any deduction or
+withholding for any tax or any other reason unless the deduction or withholding is
+required by applicable law.
+c) Should the Client be required to make any form of deduction in respect of tax from
+any payment to be made or if TWM is required to pay any tax in respect of any
+payment made in relation to this Agreement at the Client’s request the Client
+agrees to keep TWM indemnified against that tax and agrees to pay to TWM any
+additional amounts required to ensure TWMreceives the full net amount that is equal to
+the amountTWMwould have received had a deduction,withholding or
+payment
+of tax not been made.
+d) Deposits or Margin Calls deposited by the Client will not fall due for repayment
+until the Client’s obligations under this Agreement and under or
+in respect of any other account between TWM and the Client are satisfied in full. Until
+this time, Deposits or Margin Calls will not constitute a debt due from TWM to the
+Client nor will the Client have any right to receive payment of these funds
+
+If the
+Agreement is terminated, the Client and
+TWM
+e)
+agree that the claims against each other are finally discharged by means of close-out
+netting. TWM will determine the Close-Out Values for
+each
+affected Order in its sole
+discretion. The final amount to be paid by one of the parties will be the difference
+between the payment obligations of the parties.
+11. NEGATIVE BALANCE PROTECTION The trading systems of TWM are designed with safeguards to protect clientsfrom
+encountering negative balances when trading under normal market conditions.
+All clients are provided with margin monitoring functionality. This functionality monitors the
+level of collateral should it drop below 100% of the required margin. If it drops below 100%,
+the margin call mode will be triggered and maintained until the level of 50%. Should the margin
+level equal to, or drop below 50 %, TWM will initiate the closing
+of
+current open
+positions, starting from the most unprofitable considering trading hours of instruments
+traded by the client. Positions will be closed automatically at the current market price. The
+clients can set personal limits for risk management purposes. Should a client incur a negative
+balance due to a “market gap”, the client should inform the TWM support
+TWM will evaluate the inquiry and at its team.
+discretion,
+may credit the client's account with the
+Ltd
+TWM Client Agreement
+Page 33 of 36
+amount of the negative balance where the debit was during normal trading activity. This policy
+is available to Private Clients1 only.
+Clients are expected to always maintain the appropriate levels of margin in the trading account
+as the recommended method of risk management.
+NOTE: The provisions of this policy shall not apply to:
+a) Force Majeure Event understood as an act of God, war, terrorism, malicious damage,
+civil commotion, industrial acts, any exceptional market events, or acts and
+regulations of any governmental or supranational bodies or authorities which in the
+company’s opinion prevent an orderly market in relation to Client’s orders;
+b) in abnormal market conditions or exceptional market movements/volatility.
+where the company determines, in its sole and absolute discretion, that the negative
+balance is unrelated to the client’s trading activity (for example, where the debit
+relates to any fee or charges of the company);
+c) where the negative balance is connected to or a result of, either direct or indirect,
+breach of any provision by the client of the Client Agreement of the company or from
+the breach of the market rules, including but not limited to the laws of the client’s
+country of origin, client’s country of residence or any country.
+Negative balance accounts – TWMis entitled to combine the balances of any
+other accounts you hold with us, including any Joint Accounts to affect any set-off of amounts
+owing between you and TWM, pursuant to ourterms and conditions or otherwise, in each case
+in order to reduce or remove the relevant negative balance before effecting the negative
+balance protection provisionsset outin this clause.
+12. LIABILITY AND INDEMNITY
+a) The Client shall indemnify and hold TWM harmless from any and all
+liabilities, claims, costs, expenses and damages of any nature, including, but
+not limited to, reasonable legal fees and any fees and expenses incurred in
+connection with litigation, arising out of or relating to the Client’s
+negligence or willful misconduct, the violation of any Law by the Client, or the
+breach by the Client of any provision of this Agreement or if a Default Event
+b) occurs The Client also agrees to promptly pay . TWM for all damages, costs and expenses,
+including reasonable legal fees and expenses, incurred by TWM in the
+enforcement of any of the provisions of this Agreement.
+c) TWM is not responsible for any delays, charges or loss incurred due to errors in
+the payment or as a result of a delay in funds reaching the Client’s
+nominated account. The Client agrees to indemnify TWM and be liable for any
+losses or charges incurred by TWM arising from such error on the Client’s behalf.
+d) TWM will not be liable under any circumstances for any direct, indirect or
+consequential loss (including any loss of profits) incurred by the Client as a result of
+any acts or omissions by a Third-Party.
+e) Nothing in this Agreement is intended to limit or exclude any liability
+TWM may owe the Client under any statutory rights the Client may
+Ltd
+TWM Client Agreement
+Page 34 of 36
+i. crystalise, unwind, reverse, void, repair or close any Open Positions by
+closing any open Contracts; and/or
+ii. nominate the date on which the open Order is valued; and/or
+iii. nominate the methodology used to calculate the open Orders’ value;
+and/or
+iv. take any other action that TWM determines to
+be
+reasonably necessary
+to protect its legitimate interests.
+g) The Client's obligations under this clause 13 shall survive the termination of this
+Agreement.
+13. INFORMATION AND CONFIDENTIALITY
+a) The Client acknowledges and agrees that TWM is permitted to carryout an
+electronic database search and search credit reference agencies in order to verify
+the Client’s identity and credit standing. If such searches are carried out,
+TWM may keep records of the contents and results of such searches in
+accordance with all applicable Laws.
+b) TWMreservesthe rightto collectsuch information asis necessary from the Client
+to meet its obligations under the Money Laundering Prevention Act and the
+applicable Anti-Money Laundering and Counter-Terrorism Financing Laws.
+may pass on information collected from the Client and relating to transactions TWM as
+required by applicable Anti-Money Laundering and Counter- Terrorism
+Financing Regulations and is under no obligation to inform the Client it has done so.
+TWM may undertake all such AntiMoney
+Laundering and Counter-Terrorism
+Financing checksin relation to the Client ( including restricted lists, blocked persons
+and countries lists) as deemed necessary or appropriate by TWM .
+c) Personal information collected by TWM is treated as confidential
+and
+is protected
+by the Data Protection Law. TWM will only
+collect
+personal information which is
+necessary to perform the services contemplated by this Agreement.
+d) TWM will treat the Client's personal information in accordance
+with
+its privacy
+policy, which the Client may obtain on the Website.
+e) TWMwill use reasonable precautionstomaintain the confidentiality of information
+TWM receives from the Client and material and/
+or
+data the Client provides, creates,
+inputs or develops in connection with the Client’s use of the TWM
+Nonetheless, because such information, materialservices and/or data . may be provided
+through the internet, the Client hereby acknowledges and agrees that TWM
+cannot assure that such information, material and/or data will continue to be
+confidential.
+f) The Client accepts the risk of a Third-Party receiving confidential information
+concerning the Client and specifically releases and indemnifies
+TWM from any claim arising out of a Third-Party intercepting, accessing,
+monitoring or receiving any communication from a Client intended to be
+provided to TWM or from TWM intended to be
+provided to the Client.
+g) The Client acknowledges and agrees that
+TWM may disclose the Client’s name
+other personal and financial and information about the Client, and any relevant
+details of an Authorized User, to its employees, representatives , officers,
+Ltd
+TWM Client Agreement
+Page 35 of 36
+agents, introducing brokers and affiliates, as well as to a governmental entity or selfregulatory authority, an internet service provider or any other Third-Party agent or
+service provider for any purpose related to offering, providing, administering or
+maintaining theTWMservices, orto complywith applicable Laws.
+h) Due to the inherent risks in transferring currency between parties located in
+different countries, TWM takes measures to ensure that it is not
+participating or assisting in money laundering or terrorist financing. Law
+enforcement agencies and regulatory authorities may periodically inspect and
+require copies of Client information and business records held by TWM , to
+ensure compliance with all applicable anti-money laundering and counterterrorism financing laws.
+i) The Client should be fully aware that in appropriate cases all communications and
+information concerning the Client held by TWM , may be disclosed to and reviewed
+by law enforcement agencies and regulatory authorities. In addition , the Client
+agrees to comply with all applicable anti-money laundering and counterterrorism financing laws, including, but not limited to, the requirement to obtain
+satisfactory evidence of the identity of any principal whom the Client may
+represent in any transaction entered into with TWM .
+14. ELECTRONIC VERIFICATION TERMS AND CONDITIONS
+a) TWM is required by the anti-money laundering and counter- terrorism financing
+regulations to verify a Client’s identity before it can provide the Client with its
+services. Electronic verification allows TWMto verify a Client’s identity by using
+electronic tools and external data sources.
+b) In order to verify a Client’s identity electronically, TWM will request a Client’s
+details (such as your name, address, date of birth) and details of their
+identification documents.
+c) By agreeing to these terms and conditions a Client agrees that
+i. TWM may use and disclose personal information for the purposes
+of electronic verification as described above.
+ii. It is an offence under anti-money laundering and counter-terrorism
+financing laws for a Client to provide false and misleading information
+about their identity.
+15. DISPUTE RESOLUTION
+a) Please refer to for further information on how we handle complaints under the
+Agreements. You acknowledge that our internal and external dispute resolution
+procedures don’t prevent us from commencing proceedings in any other relevant
+jurisdiction for the enforcement of any complaint determination.
+16. NOTICES AND COMMUNICATIONS
+a) TWM may, to the extent of your authorization, send a communication under the
+Agreements to you or your Authorized Person.
+b) Unless the Agreements expressly say otherwise, all notices, certificates, consents,
+approvals, waivers and other communications in connection with the Agreements.
+i. must be sent by email or other means that we specify from time to time.
+ii. must be signed or issued by the sender (if an individual) or an Authorized
+Officer of the sender; and
+Ltd
+TWM Client Agreement
+Page 36 of 36
+iii. will be taken to be received upon sending, unless the sender receives an
+automated message informing them that the email has not been delivered.
+c) Communications take effect from the time they’re received unless a later time is
+specified in them.
+17. GOVERNING LAW
+This Agreement shall be governed by and construed in accordance with the International
+Business Companies Act, 1999 and the applicable Laws of Saint Lucia.
+18. SEVERANCE
+a) A provision of the Agreement that is void, illegal or unenforceable is ineffective only
+to the extent of the provision’s illegality or unenforceability, but the remaining
+provisions are not affected.
+b) Any present or future legislation which operates to vary the Client’s obligations in
+connection with this Agreement with the result that TWM’ rights, powers or
+remedies are adversely affected (including by way of delay or postponement) is
+excluded except to the extent that its exclusion is prohibited or rendered ineffective
+by law.
+19. FURTHER ACTS
+a) This Agreement may consist of several copies each signed by one or more parties to
+this Agreement. If so, the signed copies are treated as making up the one document.
+b) The Client agrees to do anything TWM reasonably requests (such as obtaining
+consents, signing and producing documents and arranging documents to be
+completed and signed):
+i. to bind the Client and any other person intended to be bound under this
+Agreement;
+ii. to show whether the Client is complying with this Agreement.

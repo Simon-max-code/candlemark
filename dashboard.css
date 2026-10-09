@@ -447,7 +447,8 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 }
 .method-card:hover{ border-color:var(--bull); background:rgba(0,230,160,.04); transform:translateY(-2px); }
 .method-card.selected{ border-color:var(--bull); background:rgba(0,230,160,.06); }
-.method-icon{ font-size:26px; margin-bottom:10px; }
+.method-icon{ display:flex; justify-content:center; color:var(--bull); margin-bottom:10px; }
+.method-icon svg{ width:28px; height:28px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
 .method-card strong{ display:block; font-size:13.5px; margin-bottom:4px; }
 .method-card small{ font-size:11px; color:var(--text-tertiary); }
 
@@ -457,7 +458,8 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 .bank-val{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:var(--font-mono); font-size:13.5px; }
 .copy-btn{ font-size:11px; font-weight:600; color:var(--bull); border:1px solid rgba(0,230,160,.35); padding:5px 10px; border-radius:7px; flex-shrink:0; transition:background .2s; }
 .copy-btn:hover{ background:var(--bull-dim); }
-.deposit-note{ font-size:11.5px; color:var(--gold); margin-top:12px; }
+.deposit-note{ display:flex; align-items:flex-start; gap:8px; font-size:11.5px; color:var(--gold); margin-top:12px; }
+.deposit-note svg{ width:16px; height:16px; flex:0 0 16px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .crypto-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-top:1px solid var(--line); }
 .crypto-row:first-of-type{ border-top:none; }
 .crypto-row .mono{ margin-left:8px; font-family:var(--font-mono); font-size:13px; font-weight:600; color:var(--text-secondary); word-break:break-all; }

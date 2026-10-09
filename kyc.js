@@ -62,7 +62,6 @@ function validateSlide(slide){
     else if (!el.value.trim()) msg = 'This field is required';
     else if (el.dataset.type === 'date') msg = validDate(el.value);
     else if (el.dataset.type === 'phone' && el.value.replace(/\D/g,'').length < 7) msg = 'Enter a valid phone number';
-    else if (el.id === 'purpose' && el.value.trim().length < 10) msg = 'Please describe in a few words';
     if (msg){ ok = false; setErr(el, msg); }
   });
   if (!ok) $('.invalid, .invalid-wrap', slide)?.scrollIntoView({ behavior:'smooth', block:'center' });

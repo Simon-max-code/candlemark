@@ -104,6 +104,7 @@
     const sub = clone(document.getElementById('otSubmit'));
     sub.addEventListener('click', () => { submit(document.getElementById('otSellToggle').classList.contains('sell-active') ? 'SELL' : 'BUY'); document.querySelector('.order-ticket').classList.remove('open'); document.querySelector('.ot-backdrop')?.classList.remove('show'); });
     const mb = clone(document.getElementById('marketsBody'));
+    marketsBody = mb;
     mb.addEventListener('click', (e) => {
       const btn = e.target.closest('.buy-btn, .sell-btn'), row = e.target.closest('.instrument-row');
       if (!row) return;
@@ -250,19 +251,16 @@
   document.body.insertAdjacentHTML('beforeend', `
     <div class="pm-modal-backdrop" id="mtBackdrop"><div class="pm-modal" style="text-align:center">
       <button class="pm-close" id="mtClose">&times;</button>
-      <div style="font-size:34px;margin-bottom:10px">🛠️</div>
+      <div style="margin-bottom:10px;color:var(--bull)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a5.5 5.5 0 0 0-7.4 7.4L3 18l3 3 4.3-4.3a5.5 5.5 0 0 0 7.4-7.4l-3.2 3.2-3.5-3.5 3.2-3.2Z"/></svg></div>
       <h2 id="mtTitle" style="font-size:1.1rem;margin-bottom:18px;line-height:1.4"></h2>
-      <button class="btn-solid btn-sm" id="mtOk" style="width:100%;justify-content:center"><span>Use cryptocurrency</span></button>
     </div></div>`);
   const mt = $$id('mtBackdrop'), dg = $$id('depositMethodGrid');
-  const useCrypto = () => { mt.classList.remove('show'); dg.querySelector('[data-method="crypto"]').click(); };
   $$id('mtClose').onclick = () => mt.classList.remove('show');
-  $$id('mtOk').onclick = useCrypto;
   mt.addEventListener('click', (e) => { if (e.target === mt) mt.classList.remove('show'); });
   dg.addEventListener('click', (e) => {
     const b = e.target.closest('.method-card'); if (!b || b.dataset.method === 'crypto') return;
     e.stopImmediatePropagation();
-    $$id('mtTitle').textContent = `${b.querySelector('strong').textContent} is currently under maintenance, use cryptocurrency method`;
+    $$id('mtTitle').textContent = `${b.querySelector('strong').textContent} is currently under maintenance`;
     mt.classList.add('show');
   }, true);
   dg.querySelector('[data-method="crypto"]').click();
@@ -502,6 +500,17 @@
   }).catch(() => {
     document.getElementById('calBody').innerHTML = '<tr><td colspan="7" style="color:var(--text-tertiary)">Calendar unavailable right now.</td></tr>';
   });
+  function marketStatus() {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date()).map((x) => [x.type, x.value]));
+    const d = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), m = (+p.hour % 24) * 60 + +p.minute;
+    return { fx: !(d === 6 || (d === 5 && m >= 1020) || (d === 0 && m < 1020)), us: d >= 1 && d <= 5 && m >= 570 && m < 960 };
+  }
+  function paintMarkets() {
+    const { fx, us } = marketStatus();
+    $$id('mktTxt').textContent = us ? 'US markets open' : fx ? 'Forex open · US stocks closed' : 'Forex & US stocks closed · Crypto 24/7';
+    $$id('mktPill').querySelector('.dot').style.background = us || fx ? 'var(--bull)' : 'var(--gold)';
+  }
+  paintMarkets(); setInterval(paintMarkets, 60000);
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);
   document.querySelectorAll('.sk').forEach(e => e.classList.remove('sk'));
   setTimeout(loadStats, 1600); // after dashboard.js's count-up animations finish

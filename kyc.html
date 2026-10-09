@@ -57,7 +57,7 @@
 
         <!-- 1 PERSONAL -->
         <section class="kyc-slide active" data-step="1">
-          <header class="ks-head"><span class="ks-ico">👤</span><div><h2>Personal information</h2><p>In order to start trading, you must first complete your profile.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.5-4.2 3.5-7 8-7s7.5 2.8 8 7"/></svg></span><div><h2>Personal information</h2><p>In order to start trading, you must first complete your profile.</p></div></header>
           <div class="form-grid">
             <div><span class="group-label">Title *</span>
               <div class="chip-group" data-name="title" data-opts="Mr|Mrs|Ms|Dr" data-req></div><div class="field-error"><span>Choose a title</span></div></div>
@@ -71,7 +71,7 @@
 
         <!-- 2 CONTACT -->
         <section class="kyc-slide" data-step="2">
-          <header class="ks-head"><span class="ks-ico">📍</span><div><h2>Contact information</h2><p>Where can we reach you? Use your current residential address.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><h2>Contact information</h2><p>Where can we reach you? Use your current residential address.</p></div></header>
           <div class="form-grid">
             <div class="form-row-2">
               <div class="field"><input type="text" name="houseNo" id="houseNo" placeholder=" " data-req><label for="houseNo">House No. *</label><div class="field-error"><span></span></div></div>
@@ -90,7 +90,7 @@
 
         <!-- 3 INVESTOR -->
         <section class="kyc-slide" data-step="3">
-          <header class="ks-head"><span class="ks-ico">💼</span><div><h2>Investor information</h2><p>Helps us understand your financial profile.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-13 5h18m-11-1v2h4v-2"/></svg></span><div><h2>Investor information</h2><p>Helps us understand your financial profile.</p></div></header>
           <div class="form-grid">
             <div><span class="group-label">Status of employment *</span>
               <div class="chip-group" data-name="employment" data-opts="Employed|Self Employed|Retired|Unemployed|Student|Others" data-req></div><div class="field-error"><span>Select one</span></div></div>
@@ -107,19 +107,19 @@
 
         <!-- 4 EXPECTATION -->
         <section class="kyc-slide" data-step="4">
-          <header class="ks-head"><span class="ks-ico">📊</span><div><h2>Trading expectation</h2><p>Tell us how you plan to use your account.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11m5 9V5m5 15v-7m5 7V8m-17 13h20"/></svg></span><div><h2>Trading expectation</h2><p>Tell us how you plan to use your account.</p></div></header>
           <div class="form-grid">
             <div><span class="group-label">Monthly exp. trade volume (lot) *</span>
               <div class="chip-group big" data-name="volume" data-opts="Below 50 Lots|Above 50 Lots" data-req></div><div class="field-error"><span>Select one</span></div></div>
             <div><span class="group-label">Monthly exp. trade frequency *</span>
               <div class="chip-group big" data-name="frequency" data-opts="Below 50 Transactions|Above 50 Transactions" data-req></div><div class="field-error"><span>Select one</span></div></div>
-            <div class="field"><textarea name="purpose" id="purpose" rows="3" placeholder=" " data-req maxlength="300"></textarea><label for="purpose">Intended purpose &amp; nature of transaction *</label><div class="field-error"><span></span></div></div>
+            <div class="field"><select name="purpose" id="purpose" data-req data-opts="Long-term investing|Short-term trading|Copy trading|Hedging|Income generation|Portfolio diversification|Other"><option value=""></option></select><label for="purpose">Intended purpose &amp; nature of transaction *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select one</span></div></div>
           </div>
         </section>
 
         <!-- 5 EXPERIENCE -->
         <section class="kyc-slide" data-step="5">
-          <header class="ks-head"><span class="ks-ico">🎯</span><div><h2>Trading experience</h2><p>Be honest — it helps us tailor your account.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="m13 11 7-7m-4 0h4v4"/></svg></span><div><h2>Trading experience</h2><p>Be honest — it helps us tailor your account.</p></div></header>
           <div class="form-grid">
             <div><span class="group-label">Do you have trading experience? *</span>
               <div class="chip-group big stack" data-name="experience" data-opts="Yes, I have traded a real account|No" data-req></div><div class="field-error"><span>Select one</span></div></div>
@@ -129,16 +129,16 @@
 
         <!-- 6 CURRENCY -->
         <section class="kyc-slide" data-step="6">
-          <header class="ks-head"><span class="ks-ico">💱</span><div><h2>Account currency</h2><p>Choose the base currency for your trading account.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15l-3-3m4 3-4 3M20 16H5l3 3m-4-3 4-3"/><path d="M9 12h6"/></svg></span><div><h2>Account currency</h2><p>Choose the base currency for your trading account.</p></div></header>
           <div class="form-grid">
             <div class="field"><select name="currency" id="currency" data-req data-opts="USD — US Dollar|EUR — Euro|GBP — British Pound|JPY — Japanese Yen|CHF — Swiss Franc|AUD — Australian Dollar|CAD — Canadian Dollar|NZD — New Zealand Dollar|SGD — Singapore Dollar|HKD — Hong Kong Dollar|ZAR — South African Rand|AED — UAE Dirham"><option value=""></option></select><label for="currency">Currency *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select a currency</span></div></div>
-            <div class="kyc-note">⚠ The base currency cannot be changed after your account is opened.</div>
+            <div class="kyc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg><span>The base currency cannot be changed after your account is opened.</span></div>
           </div>
         </section>
 
         <!-- 7 DECLARATION -->
         <section class="kyc-slide" data-step="7">
-          <header class="ks-head"><span class="ks-ico">✍️</span><div><h2>Client declaration</h2><p>Review your details and confirm to finish.</p></div></header>
+          <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 16-.8 4.8L8 20l11-11a2.8 2.8 0 0 0-4-4L4 16Z"/><path d="m13.5 6.5 4 4M3 22h18"/></svg></span><div><h2>Client declaration</h2><p>Review your details and confirm to finish.</p></div></header>
           <div class="kyc-summary" id="kycSummary"></div>
           <div class="form-grid">
             <div>

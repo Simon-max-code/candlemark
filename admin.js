@@ -3,6 +3,10 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   const usd = (c) => (Number(c) / 100).toLocaleString('en-US', { style:'currency', currency:'USD' });
   const view = $('#view');
+  new MutationObserver(() => view.querySelectorAll('table').forEach((t) => {
+    const h = [...t.querySelectorAll('th')].map((x) => x.textContent);
+    t.querySelectorAll('tbody tr').forEach((r) => [...r.children].forEach((c, i) => { if (h[i] && !c.dataset.label) c.dataset.label = h[i]; }));
+  })).observe(view, { childList: true, subtree: true });
   const msg = (t) => { const m = $('#msg'); m.textContent = t; m.style.display = 'block'; setTimeout(() => m.style.display = 'none', 4000); };
   const ERR = { STEP_UP_REQUIRED:'Wrong or missing 2FA code.', ADMIN_2FA_REQUIRED:'Enable 2FA in the Security tab first.', FORBIDDEN:'Not an admin.',
     NOT_PENDING:'Already reviewed.', HANDLE_TAKEN:'Handle taken.', MENTOR_EXISTS:'Already a mentor / handle used.', USER_NOT_FOUND:'No user with that email.',

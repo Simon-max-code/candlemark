@@ -84,7 +84,7 @@ const MARKETS = { forex:[], stocks:[], crypto:[], indices:[], commodities:[] };
 
 function miniSpark(){ return ''; }
 
-const marketsBody = document.getElementById('marketsBody');
+let marketsBody = document.getElementById('marketsBody');
 const assetTabs = document.getElementById('assetTabs');
 const otName = document.getElementById('otName');
 const otSub = document.getElementById('otSub');
