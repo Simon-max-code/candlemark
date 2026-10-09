@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Regulation & Licensing — mentorsedgepro</title>
+<meta name="description" content="Licences and regulatory registrations held by the entities behind mentorsedgepro, with links to each regulator's public register.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.rg-hero{position:relative;overflow:hidden;padding:150px 24px 90px;text-align:center}
+.rg-hero::before{content:"";position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(to right,rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 70% at 50% 30%,#000 25%,transparent 75%)}
+.rg-glow{position:absolute;left:50%;top:-120px;width:720px;height:720px;transform:translateX(-50%);z-index:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,230,160,.16),transparent 65%);animation:rgBreath 7s ease-in-out infinite}
+@keyframes rgBreath{50%{opacity:.55;transform:translateX(-50%) scale(1.08)}}
+.rg-hero-in{position:relative;z-index:1;max-width:780px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.rg-shield{width:84px;height:84px;margin-bottom:26px;color:var(--bull);filter:drop-shadow(0 0 18px rgba(0,230,160,.45))}
+.rg-shield path{stroke-dasharray:140;stroke-dashoffset:140;animation:rgDraw 1.6s var(--ease) .2s forwards}
+.rg-shield path.t{stroke-dasharray:40;stroke-dashoffset:40;animation-delay:1.2s;animation-duration:.8s}
+@keyframes rgDraw{to{stroke-dashoffset:0}}
+.rg-hero h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.1;letter-spacing:-.02em;margin:8px 0 18px}
+.rg-hero .lead{color:var(--text-secondary);max-width:620px;font-size:1.05rem;margin-bottom:30px}
+.rg-stats{display:flex;gap:0;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:var(--radius-m);backdrop-filter:blur(10px);overflow:hidden}
+.rg-stat{padding:18px 30px;display:flex;flex-direction:column;align-items:center;gap:4px;border-right:1px solid var(--line)}
+.rg-stat:last-child{border-right:0}
+.rg-stat b{font:600 1.6rem var(--font-mono)}.rg-stat span{font-size:12px;color:var(--text-tertiary)}
+
+.rg-wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+.rg-sec{padding:70px 0 10px}
+.rg-head{max-width:640px;margin-bottom:36px}
+.rg-head h2{font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.2;margin:4px 0 10px}
+.rg-head p{color:var(--text-secondary)}
+
+.rg-strip{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:50px}
+.rg-chip{display:flex;align-items:center;gap:10px;padding:11px 18px;background:var(--bg-panel);border:1px solid var(--line);border-radius:100px;
+  font:600 13px var(--font-display);letter-spacing:.06em;transition:border-color .25s,transform .25s var(--ease),background .25s}
+.rg-chip:hover{border-color:var(--bull);background:var(--bg-panel-2);transform:translateY(-3px)}
+.rg-chip i{font-style:normal;font-size:18px;line-height:1}
+
+.rg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.rg-card{position:relative;background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:26px;overflow:hidden;
+  transition:border-color .3s,transform .3s var(--ease),background .3s}
+.rg-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bull);box-shadow:0 0 14px rgba(0,230,160,.6);
+  transform:scaleY(0);transform-origin:top;transition:transform .6s var(--ease)}
+.rg-card.in-view::before{transform:scaleY(1)}
+.rg-card:hover{border-color:var(--line-strong);background:var(--bg-panel-2);transform:translateY(-4px)}
+.rg-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.rg-flag{width:42px;height:42px;border-radius:12px;background:var(--bg-panel-3);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.rg-top h3{font-size:1.05rem;line-height:1.3}
+.rg-badge{margin-left:auto;font:600 10px var(--font-mono);color:var(--bull);border:1px solid rgba(0,230,160,.35);border-radius:100px;padding:4px 10px;white-space:nowrap}
+.rg-card p{color:var(--text-secondary);font-size:.92rem;margin-bottom:16px}
+.rg-lic{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--bg-void);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
+.rg-lic small{display:block;font:500 10px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary)}
+.rg-lic code{font:600 14px var(--font-mono);word-break:break-all}
+.rg-copy{font-size:11px;font-weight:600;color:var(--bull);border:1px solid rgba(0,230,160,.35);padding:6px 11px;border-radius:7px;flex-shrink:0;transition:background .2s}
+.rg-copy:hover{background:var(--bull-dim)}
+.rg-verify{font-size:13px;font-weight:600;color:var(--bull);display:inline-flex;gap:6px;align-items:center}
+.rg-verify:hover{text-decoration:underline}
+
+.rg-empty{border:1px dashed var(--line-strong);border-radius:var(--radius-l);padding:44px 30px;text-align:center;background:var(--bg-panel)}
+.rg-empty h3{font-size:1.25rem;margin-bottom:10px}.rg-empty p{color:var(--text-secondary);max-width:560px;margin:0 auto 18px}
+.rg-sample-banner{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:300;background:var(--gold-dim);border:1px solid rgba(232,185,97,.5);
+  color:var(--gold);backdrop-filter:blur(10px);font:600 12px var(--font-mono);padding:10px 18px;border-radius:100px;text-align:center;max-width:92vw}
+.rg-sample-banner a{text-decoration:underline}
+
+.rg-steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.rg-steps::before{content:"";position:absolute;left:5%;right:5%;top:22px;height:2px;background:var(--line-strong)}
+.rg-steps::after{content:"";position:absolute;left:5%;top:22px;height:2px;width:calc(var(--p,0) * 90%);background:var(--bull);box-shadow:0 0 10px rgba(0,230,160,.7);transition:width 1.4s var(--ease)}
+.rg-step{position:relative;padding-top:58px}
+.rg-step .n{position:absolute;top:0;left:0;width:46px;height:46px;border-radius:50%;background:var(--bg-panel-2);border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;font:600 13px var(--font-mono);color:var(--bull);transition:all .5s var(--ease);z-index:1}
+.rg-step.in-view .n{background:var(--bull);color:#02110C;border-color:var(--bull);box-shadow:0 0 0 6px var(--bull-dim),0 0 18px rgba(0,230,160,.5)}
+.rg-step h3{font-size:1rem;margin-bottom:6px}.rg-step p{color:var(--text-secondary);font-size:.88rem}
+
+.rg-two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rg-panel{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:28px}
+.rg-panel h3{font-size:1.05rem;margin-bottom:14px}
+.rg-panel li{display:flex;gap:12px;color:var(--text-secondary);font-size:.92rem;padding:9px 0;border-top:1px solid var(--line)}
+.rg-panel li:first-of-type{border-top:0}
+.rg-panel li b{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.rg-yes b{background:var(--bull-dim);color:var(--bull)}.rg-no b{background:var(--bear-dim);color:var(--bear)}
+
+.rg-faq{max-width:780px}
+.rg-cta{margin:80px auto 70px;text-align:center;padding:70px 28px;border:1px solid var(--line);border-radius:var(--radius-l);background:var(--bg-panel);position:relative;overflow:hidden}
+.rg-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(0,230,160,.1),transparent 70%)}
+.rg-cta>*{position:relative}.rg-cta h2{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:12px}.rg-cta p{color:var(--text-secondary);margin-bottom:26px}
+.rg-foot{border-top:1px solid var(--line);padding:44px 24px 30px}
+.rg-foot p{max-width:var(--container);margin:0 auto 12px;font-size:.78rem;color:var(--text-tertiary);line-height:1.7}
+.rg-foot nav{max-width:var(--container);margin:0 auto 22px;display:flex;gap:22px;flex-wrap:wrap;font-size:.88rem;color:var(--text-secondary)}
+.rg-foot nav a:hover{color:var(--text-primary)}
+
+@media(max-width:900px){.rg-grid,.rg-two{grid-template-columns:1fr}.rg-steps{grid-template-columns:1fr 1fr;row-gap:30px}.rg-steps::before,.rg-steps::after{display:none}}
+@media(max-width:560px){.rg-hero{padding:120px 18px 70px}.rg-stat{padding:14px 16px}.rg-steps{grid-template-columns:1fr}.rg-badge{display:none}}
+</style>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<header class="nav scrolled"><div class="nav-inner">
+  <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
+  <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
+</div></header>
+
+<main>
+  <section class="rg-hero">
+    <div class="rg-glow" aria-hidden="true"></div>
+    <div class="rg-hero-in">
+      <svg class="rg-shield" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M32 5 54 14v16c0 14-9.5 24-22 29C19.500 54 10 44 10 30V14L32 5Z"/><path class="t" d="m22 32 7 7 13-14"/></svg>
+      <span class="eyebrow" data-reveal>Company · Regulation</span>
+      <h1 data-reveal>Regulation &amp; <span class="grad-text">licensing</span></h1>
+      <p class="lead" id="rgLead" data-reveal>Every licence listed here links to the regulator's own public register, so you can check it yourself before you deposit.</p>
+      <div class="rg-stats" data-reveal>
+        <div class="rg-stat"><b id="stLic" data-n="0">0</b><span>Licences published</span></div>
+        <div class="rg-stat"><b id="stReg" data-n="0">0</b><span>Regulators</span></div>
+        <div class="rg-stat"><b id="stCty" data-n="0">0</b><span>Jurisdictions</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rg-wrap">
+    <div class="rg-strip" id="rgStrip" data-reveal></div>
+
+    <section class="rg-sec" style="padding-top:0">
+      <div class="rg-head" data-reveal><span class="eyebrow">01 — Licences</span><h2>Entities and registrations</h2>
+        <p>Each entry shows the legal entity, the regulator, the licence number and a link to the official register.</p></div>
+      <div class="rg-grid" id="rgGrid"></div>
+    </section>
+
+    <section class="rg-sec">
+      <div class="rg-head" data-reveal><span class="eyebrow">02 — Verify</span><h2>Check any licence in four steps</h2>
+        <p>Do this for us, and for any broker you consider.</p></div>
+      <div class="rg-steps" id="rgSteps">
+        <div class="rg-step" data-reveal><div class="n">01</div><h3>Find the legal entity</h3><p>Use the full company name and registered address from the terms, not a brand name.</p></div>
+        <div class="rg-step" data-reveal><div class="n">02</div><h3>Open the regulator's register</h3><p>Go to the regulator's own website by typing it in, rather than following a link from an ad or message.</p></div>
+        <div class="rg-step" data-reveal><div class="n">03</div><h3>Match name and number</h3><p>The entity, licence number and permitted activities should match what you were told.</p></div>
+        <div class="rg-step" data-reveal><div class="n">04</div><h3>Check the permissions</h3><p>Confirm the licence covers the product you want, and that it's active, not suspended.</p></div>
+      </div>
+    </section>
+
+    <section class="rg-sec">
+      <div class="rg-head" data-reveal><span class="eyebrow">03 — Perspective</span><h2>What regulation does, and doesn't</h2></div>
+      <div class="rg-two">
+        <div class="rg-panel rg-yes" data-reveal><h3>It can mean</h3><ul>
+          <li><b>✓</b>The firm is supervised and must meet conduct and capital rules.</li>
+          <li><b>✓</b>You have a formal route to complain beyond the company.</li>
+          <li><b>✓</b>Records and client-money handling can be inspected.</li></ul></div>
+        <div class="rg-panel rg-no" data-reveal><h3>It does not mean</h3><ul>
+          <li><b>✕</b>Your trades will be profitable. Leveraged products can lose money quickly.</li>
+          <li><b>✕</b>Every product is covered. Permissions differ by licence and country.</li>
+          <li><b>✕</b>A mentor's results are verified or guaranteed.</li></ul></div>
+      </div>
+    </section>
+
+    <section class="rg-sec">
+      <div class="rg-head" data-reveal><span class="eyebrow">04 — FAQ</span><h2>Common questions</h2></div>
+      <div class="faq-list rg-faq" style="margin:0">
+        <div class="faq-item"><button class="faq-q"><span>Why does a licence need to be verifiable?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>A number only helps if you can confirm it on the regulator's own register. We link to the register for each entry so you never have to take our word for it.</p></div></div>
+        <div class="faq-item"><button class="faq-q"><span>Which entity will I contract with?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>The entity named in the Client Agreement you accept at sign-up. Read it before depositing and check it against this page.</p></div></div>
+        <div class="faq-item"><button class="faq-q"><span>Are all products available in every country?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>No. Availability depends on the licence of the entity serving your country and on local rules.</p></div></div>
+        <div class="faq-item"><button class="faq-q"><span>Who do I contact with a concern?</span><span class="faq-plus">+</span></button><div class="faq-a"><p>Start with <a href="support.html" style="color:var(--bull)">Support</a>. If it isn't resolved, the relevant regulator can advise on complaint routes.</p></div></div>
+      </div>
+    </section>
+
+    <section class="rg-cta" data-reveal>
+      <h2>Read the terms, then decide.</h2>
+      <p>Review the Client Agreement and the risks before opening an account.</p>
+      <a href="legal.html?p=terms" class="btn-outline btn-lg" style="margin-right:10px"><span>Read the terms</span></a>
+      <a href="register.html" class="btn-solid btn-lg"><span>Create an account</span></a>
+    </section>
+  </div>
+</main>
+
+<footer class="rg-foot">
+  <nav><a href="legal.html?p=terms">Terms &amp; conditions</a><a href="legal.html?p=privacy">Privacy policy</a><a href="legal.html?p=aml">AML policy</a><a href="company.html?p=security">Security</a><a href="support.html">Support</a></nav>
+  <p><strong>Risk warning:</strong> CFDs and other leveraged products are complex and carry a high risk of rapid losses. Copying another trader does not guarantee profit. This page is not investment advice.</p>
+  <p>© 2026 mentorsedgepro</p>
+</footer>
+
+<script>
+/* ===========================================================
+   LICENCE DATA — the single place to edit.
+   Add an entry ONLY for a licence you actually hold, and always
+   include the regulator's public-register URL. Entries without a
+   licence number or register URL are never shown.
+   {
+     entity:'Full Legal Name Ltd', regulator:'Full Regulator Name', short:'ABC',
+     country:'GB', licence:'123456', registerUrl:'https://…', scope:'Permitted activities'
+   }
+=========================================================== */
+const LICENCES = [];
+
+/* Layout preview only: open regulation.html?preview=1 */
+const SAMPLE = [
+  { entity:'Example Markets Ltd · Sample', regulator:'Example Financial Authority · Sample', short:'DEMO', country:'GB', licence:'DEMO-GB-0001', registerUrl:'', scope:'Illustrative permissions: foreign exchange and CFD services.' },
+  { entity:'Example Capital GmbH · Sample', regulator:'Example Supervisory Authority · Sample', short:'DEMO', country:'DE', licence:'DEMO-DE-0002', registerUrl:'', scope:'Illustrative permissions: investment services and portfolio tools.' },
+  { entity:'Example Global Pte. Ltd. · Sample', regulator:'Example Monetary Authority · Sample', short:'DEMO', country:'SG', licence:'DEMO-SG-0003', registerUrl:'', scope:'Illustrative permissions: dealing and client support services.' },
+  { entity:'Example Pacific Ltd · Sample', regulator:'Example Services Commission · Sample', short:'DEMO', country:'AU', licence:'DEMO-AU-0004', registerUrl:'', scope:'Illustrative permissions: financial product services.' },
+];
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const flag = (cc) => /^[A-Za-z]{2}$/.test(cc || '') ? String.fromCodePoint(...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0))) : '🏛';
+const preview = new URLSearchParams(location.search).get('preview') === '1';
+const valid = (l) => l.entity && l.regulator && l.licence && /^https?:\/\//.test(l.registerUrl || '') || (preview && l.entity);
+const list = (preview ? SAMPLE : LICENCES).filter(valid);
+
+/* strip + stats */
+document.getElementById('stLic').dataset.n = list.length;
+document.getElementById('stReg').dataset.n = new Set(list.map((l) => l.regulator)).size;
+document.getElementById('stCty').dataset.n = new Set(list.map((l) => l.country)).size;
+if (preview) {
+  document.getElementById('rgLead').textContent = 'Design preview only: sample entries show how verified licence information may appear when it is available.';
+  document.querySelectorAll('.rg-stat span').forEach((el, i) => { el.textContent = ['Sample entries', 'Sample authorities', 'Sample jurisdictions'][i]; });
+}
+document.getElementById('rgStrip').innerHTML = list.map((l) => `<span class="rg-chip"><i>${flag(l.country)}</i>${esc(l.short || l.regulator)}</span>`).join('');
+if (!list.length) document.getElementById('rgStrip').remove();
+
+/* cards or honest empty state */
+document.getElementById('rgGrid').innerHTML = list.length ? list.map((l) => `
+  <article class="rg-card" data-reveal>
+    <div class="rg-top"><div class="rg-flag">${flag(l.country)}</div><h3>${esc(l.entity)}</h3><span class="rg-badge">${preview ? 'SAMPLE' : 'VERIFIABLE'}</span></div>
+    <p>${preview
+      ? `Illustrative preview only — this sample entity, authority, registration number, and scope are fictional placeholders. ${esc(l.scope)}`
+      : `${esc(l.entity)} is authorised and regulated by the ${esc(l.regulator)}${l.short ? ` (“${esc(l.short)}”)` : ''}.${l.scope ? ' ' + esc(l.scope) : ''}`}</p>
+    <div class="rg-lic"><div><small>Licence / registration no.</small><code>${esc(l.licence)}</code></div><button class="rg-copy" data-copy="${esc(l.licence)}">Copy</button></div>
+    ${preview
+      ? '<span class="rg-verify">Register link shown when verified details are published</span>'
+      : `<a class="rg-verify" href="${esc(l.registerUrl)}" target="_blank" rel="noopener noreferrer">Verify on the regulator's register ↗</a>`}
+  </article>`).join('') : `
+  <div class="rg-empty" style="grid-column:1/-1" data-reveal>
+    <h3>No licences are published on this page yet</h3>
+    <p>We only list a licence when we can link to the regulator's own register. Until then, please don't treat this platform as regulated. Check the Client Agreement for the contracting entity.</p>
+    <a href="legal.html?p=terms" class="btn-outline"><span>Read the Client Agreement</span></a>
+  </div>`;
+
+if (preview) document.body.insertAdjacentHTML('beforeend', '<div class="rg-sample-banner">DESIGN PREVIEW — fictional placeholders only; no licences are represented as real. <a href="regulation.html">Exit preview</a></div>');
+
+/* reveal + counters + steps progress */
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in-view'); io.unobserve(e.target);
+  const idx = [...document.querySelectorAll('.rg-step')].indexOf(e.target);
+  if (idx > -1) document.getElementById('rgSteps').style.setProperty('--p', (idx + 1) / 4);
+}), { threshold: .2, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('[data-reveal],.rg-step').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+document.querySelectorAll('[data-n]').forEach((el) => {
+  const target = +el.dataset.n, t0 = performance.now();
+  const tick = (now) => { const p = Math.min((now - t0) / 1400, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+});
+
+/* copy, faq, glow, tilt */
+document.addEventListener('click', (e) => {
+  const c = e.target.closest('[data-copy]');
+  if (c) { navigator.clipboard?.writeText(c.dataset.copy); c.textContent = 'Copied'; setTimeout(() => c.textContent = 'Copy', 1400); }
+  const q = e.target.closest('.faq-q');
+  if (q) { const it = q.parentElement, was = it.classList.contains('open'); document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open')); if (!was) it.classList.add('open'); }
+});
+const glow = document.getElementById('cursorGlow');
+addEventListener('pointermove', (e) => glow.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`);
+if (matchMedia('(hover:hover)').matches) document.querySelectorAll('.rg-card').forEach((card) => {
+  card.addEventListener('mousemove', (e) => { const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = `perspective(800px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg) translateY(-4px)`; });
+  card.addEventListener('mouseleave', () => card.style.transform = '');
+});
+</script>
+</body>
+</html>
