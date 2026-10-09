@@ -921,3 +921,8 @@ button,a{ -webkit-tap-highlight-color:transparent; }
     }
     .chart-step.in-view::before{ background:var(--bull); border-color:var(--bull); box-shadow:0 0 12px rgba(0,230,160,.8); }
   }
+/* ---------- Market closed state ---------- */
+.mk-closed{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(255,255,255,.06);vertical-align:middle}
+tr.closed .p,tr.instrument-row.closed td:nth-child(2),tr.instrument-row.closed td:nth-child(3){opacity:.6}
+tr.instrument-row.closed .buy-btn,tr.instrument-row.closed .sell-btn,.buy-btn:disabled,.sell-btn:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(.6);pointer-events:none}
+.ticker-item.closed{opacity:.55}

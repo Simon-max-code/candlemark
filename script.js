@@ -219,6 +219,7 @@ async function loadTicker(){
     }
     list.forEach(s=>{
       const i = by[s], up = i.chg >= 0;
+      tickerTrack.querySelectorAll(`[data-p="${s}"]`).forEach(e=> e.closest('.ticker-item').classList.toggle('closed', !!i.closed));
       tickerTrack.querySelectorAll(`[data-p="${s}"]`).forEach(e=> e.textContent = Number(i.price).toLocaleString(undefined,{maximumFractionDigits:4}));
       tickerTrack.querySelectorAll(`[data-c="${s}"]`).forEach(e=>{ e.className = up ? 'up' : 'down'; e.textContent = `${up?'▲':'▼'} ${Math.abs(i.chg).toFixed(2)}%`; });
     });

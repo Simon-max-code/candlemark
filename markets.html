@@ -68,7 +68,7 @@ if (!M[key]) {
         const { items } = await (await fetch(API_BASE + '/markets?asset=' + key)).json();
         document.getElementById('tbl').innerHTML = `<table><thead><tr><th>Instrument</th><th>Price</th><th>Change</th></tr></thead><tbody>${items.map((i) => {
           const up = i.chg >= 0;
-          return `<tr><td><strong>${esc(i.sym)}</strong><br><small style="color:var(--text-tertiary)">${esc(i.name)}</small></td><td class="p">${Number(i.price).toLocaleString(undefined, { maximumFractionDigits: 4 })}</td><td class="p ${up ? 'up' : 'down'}">${up ? '▲' : '▼'} ${Math.abs(i.chg).toFixed(2)}%</td></tr>`;
+          return `<tr class="${i.closed ? 'closed' : ''}"><td><strong>${esc(i.sym)}</strong><br><small style="color:var(--text-tertiary)">${esc(i.name)}${i.closed ? ' <span class="mk-closed">Market closed</span>' : ''}</small></td><td class="p">${Number(i.price).toLocaleString(undefined, { maximumFractionDigits: 4 })}</td><td class="p ${up ? 'up' : 'down'}">${up ? '▲' : '▼'} ${Math.abs(i.chg).toFixed(2)}%</td></tr>`;
         }).join('')}</tbody></table>`;
       } catch { document.getElementById('tbl').innerHTML = '<p style="padding:20px;color:var(--text-tertiary)">Prices unavailable right now.</p>'; }
     };

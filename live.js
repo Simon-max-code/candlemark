@@ -81,7 +81,7 @@
   async function loadMarkets(){
     const { items } = await api('/markets');
     for (const k of Object.keys(MARKETS)) MARKETS[k] = [];
-    items.forEach(i => { MARKETS[i.asset].push({ sym:i.sym, name:i.name, price:i.price, chg:i.chg }); live[i.sym] = i; });
+    items.forEach(i => { MARKETS[i.asset].push({ sym:i.sym, name:i.name, price:i.price, chg:i.chg, closed:!!i.closed }); live[i.sym] = i; });
     window.__mkLoaded = true;
     renderMarkets(currentAsset);
   }
@@ -97,7 +97,7 @@
         loadPositions(); loadBalance();
       } catch (e) {
         const c = e.data?.error;
-        showToast('Order failed', c === 'INSUFFICIENT_FUNDS' ? 'Not enough balance.' : c === 'BELOW_MIN' ? 'Minimum trade is $10.' : c === 'PRICE_UNAVAILABLE' ? 'Market price unavailable right now.' : 'Try again.');
+        showToast('Order failed', c === 'INSUFFICIENT_FUNDS' ? 'Not enough balance.' : c === 'BELOW_MIN' ? 'Minimum trade is $10.' : c === 'PRICE_UNAVAILABLE' ? 'This market is closed right now.' : 'Try again.');
       }
     };
     const clone = (el) => { const n = el.cloneNode(true); el.replaceWith(n); return n; };
@@ -106,7 +106,7 @@
     const mb = clone(document.getElementById('marketsBody'));
     marketsBody = mb;
     mb.addEventListener('click', (e) => {
-      const btn = e.target.closest('.buy-btn, .sell-btn'), row = e.target.closest('.instrument-row');
+      const btn = e.target.closest('.buy-btn:not(:disabled), .sell-btn:not(:disabled)'), row = e.target.closest('.instrument-row');
       if (!row) return;
       const inst = MARKETS[currentAsset].find(m => m.sym === row.dataset.sym);
       selectInstrument(inst, currentAsset);
@@ -121,7 +121,7 @@
     ws.onmessage = (m) => {
       const { t, p } = JSON.parse(m.data);
       if (t !== 'tick' && t !== 'snapshot') return;
-      Object.values(MARKETS).flat().forEach(i => { if (p[i.sym]) i.price = Number(p[i.sym]); });
+      Object.values(MARKETS).flat().forEach(i => { if (p[i.sym]) { i.price = Number(p[i.sym]); i.closed = false; } });
       document.querySelectorAll('#marketsBody tr').forEach((tr, idx) => {
         const i = MARKETS[currentAsset][idx]; if (i) tr.children[1].textContent = i.price.toLocaleString(undefined, { maximumFractionDigits:4 });
       });

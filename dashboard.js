@@ -111,12 +111,12 @@ function renderMarkets(asset){
     const up = inst.chg >= 0;
     const color = up ? '#00E6A0' : '#FF5C6C';
     const tr = document.createElement('tr');
-    tr.className = `instrument-row ${up ? 'up' : 'down'}`;
+    tr.className = `instrument-row ${up ? 'up' : 'down'}${inst.closed ? ' closed' : ''}`;
     tr.dataset.sym = inst.sym;
-    tr.innerHTML = `<td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--bull-dim)':'var(--bear-dim)'};color:${color}">${inst.sym.slice(0,2)}</div><div><strong>${inst.sym}</strong><small>${inst.name}</small></div></td>
+    tr.innerHTML = `<td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--bull-dim)':'var(--bear-dim)'};color:${color}">${inst.sym.slice(0,2)}</div><div><strong>${inst.sym}</strong><small>${inst.name}${inst.closed ? ' <span class="mk-closed">Market closed</span>' : ''}</small></div></td>
       <td style="font-family:var(--font-mono)">${inst.price.toLocaleString(undefined,{maximumFractionDigits:4})}</td>
       <td class="pnl ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(inst.chg).toFixed(2)}%</td><td>${miniSpark()}</td>
-      <td><button class="buy-btn" data-sym="${inst.sym}" data-side="buy">Buy</button> <button class="sell-btn" data-sym="${inst.sym}" data-side="sell">Sell</button></td>`;
+      <td><button class="buy-btn" data-sym="${inst.sym}" data-side="buy"${inst.closed ? ' disabled' : ''}>Buy</button> <button class="sell-btn" data-sym="${inst.sym}" data-side="sell"${inst.closed ? ' disabled' : ''}>Sell</button></td>`;
     marketsBody.appendChild(tr);
   });
   selectInstrument(MARKETS[asset][0]);
@@ -135,6 +135,8 @@ function selectInstrument(inst){
   otIcon.textContent = inst.sym.slice(0,2);
   otIcon.style.background = up ? 'var(--bull)' : 'var(--bear)';
   updateUnits();
+  const sb = document.getElementById('otSubmit');
+  if(sb){ sb.disabled = !!inst.closed; if(inst.closed) sb.querySelector('span').textContent = 'Market closed'; }
 }
 
 function updateUnits(){
