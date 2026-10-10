@@ -150,7 +150,7 @@
   $('#tabs').innerHTML = Object.keys(TABS).map(t => `<button data-t="${t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('');
   $('#tabs').onclick = (e) => { const b = e.target.closest('[data-t]'); if (b) show(b.dataset.t); };
 
-  const loginBox = $('#login'), appBox = $('.ad');
+  const loginBox = $('#login'), appBox = $('.adm');
   const showLogin = (note) => { appBox.style.display = 'none'; loginBox.style.display = 'flex'; $('#lerr').textContent = note || ''; };
   const enter = (me) => { loginBox.style.display = 'none'; appBox.style.display = ''; $('#who').textContent = me.email; show('overview'); };
   const out = async () => { await api('/auth/logout', { method:'POST' }).catch(() => {}); api.setToken(null); };
