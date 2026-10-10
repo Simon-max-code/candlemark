@@ -151,7 +151,7 @@
   $('#tabs').onclick = (e) => { const b = e.target.closest('[data-t]'); if (b) show(b.dataset.t); };
 
   const loginBox = $('#login'), appBox = $('.adm');
-  const showLogin = (note) => { appBox.style.display = 'none'; loginBox.style.display = 'flex'; $('#lerr').textContent = note || ''; };
+  const showLogin = (note) => { appBox.style.display = 'none'; loginBox.style.display = 'flex'; $('#rf').style.display = 'none'; $('#lf').style.display = ''; $('#lerr').textContent = note || ''; };
   const enter = (me) => { loginBox.style.display = 'none'; appBox.style.display = ''; $('#who').textContent = me.email; show('overview'); };
   const out = async () => { await api('/auth/logout', { method:'POST' }).catch(() => {}); api.setToken(null); };
 
@@ -188,8 +188,8 @@
       $('#rp').textContent = ['', 'Enter your admin email and password. We will email you a code.', 'Enter the 6-digit code we emailed you.', 'Scan the QR code (or type the key) in Google Authenticator / Authy, then enter the code it shows.'][n];
       $('#rgo span').textContent = ['', 'Send code', 'Reset 2FA', 'Enable 2FA'][n]; err('');
     };
-    const open = () => { $('#re').value = $('#le').value; $('#rpw').value = $('#lp').value; loginBox.style.display = 'none'; rf.style.display = ''; $('#rc').value = ''; $('#rn').value = ''; set(1); };
-    const close = () => { rf.style.display = 'none'; loginBox.style.display = 'flex'; $('#rpw').value = ''; };
+    const open = () => { $('#re').value = $('#le').value; $('#rpw').value = $('#lp').value; $('#lf').style.display = 'none'; rf.style.display = ''; $('#rc').value = ''; $('#rn').value = ''; set(1); };
+    const close = () => { rf.style.display = 'none'; $('#lf').style.display = ''; $('#rpw').value = ''; };
     $('#r2fa').onclick = open; $('#rback').onclick = close;
     rf.onsubmit = async (e) => {
       e.preventDefault(); const btn = $('#rgo'); btn.disabled = true; err('');
