@@ -155,7 +155,7 @@
   const enter = (me) => { loginBox.style.display = 'none'; appBox.style.display = ''; $('#who').textContent = me.email; show('overview'); };
   const out = async () => { await api('/auth/logout', { method:'POST' }).catch(() => {}); api.setToken(null); };
 
-  $('#lo').onclick = async () => { await out(); showLogin(); };
+  const lo = $('#lo'); if (lo) lo.onclick = async () => { await out(); showLogin(); };
 
   $('#lf').onsubmit = async (e) => {
     e.preventDefault();
