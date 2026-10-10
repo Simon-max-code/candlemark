@@ -97,8 +97,8 @@
     mentors: async () => {
       const { items } = await A('/mentors');
       view.innerHTML = `<form class="card" id="mf"><h3 id="mt">Create mentor</h3><div class="g">
-        <div id="memw"><label>User email (create only)</label><input name="email" type="email"></div>
-        <div><label>Handle (a-z 0-9 _)</label><input name="handle" required></div><div><label>Display name</label><input name="displayName"></div><div><label>Tag</label><input name="tag"></div>
+        <div id="memw"><label>Mentor email (account is created if it doesn’t exist)</label><input name="email" type="email"></div>
+        <div><label>Handle (a-z 0-9 _)</label><input name="handle" required></div><div><label>Display name</label><input name="displayName" required></div><div><label>Tag</label><input name="tag"></div>
         <div><label>Risk (1-10)</label><input name="riskScore" type="number" min="1" max="10"></div><div><label>Monthly fee (USD)</label><input name="fee" placeholder="10"></div>
         <div><label>Gain %</label><input name="gain" type="number"></div><div><label>Win rate %</label><input name="winRate" type="number"></div><div><label>Trades</label><input name="trades" type="number"></div>
         <div><label>Capital $</label><input name="capital" type="number"></div><div><label>Copiers shown</label><input name="copiers" type="number"></div><div><label>Avg trade time</label><input name="avgTime"></div>
@@ -106,9 +106,9 @@
         <label>Bio</label><textarea name="bio" rows="2"></textarea><input type="hidden" name="id"><button class="b" style="margin-top:12px">Save</button> <button type="button" class="b" id="mreset">New</button></form>` +
         table(['Mentor', 'Handle', 'Risk', 'Fee', 'Verified', 'Copiers', ''], items.map((m, i) => `<tr><td>${esc(m.displayName)}<br><small>${esc(m.email)}</small></td><td>@${esc(m.handle)}</td><td>${m.risk}</td><td>${usd(m.fee)}</td><td>${m.verified}</td><td>${m.activeCopiers}</td><td><button class="b" data-e="${i}">Edit</button></td></tr>`));
       const f = $('#mf');
-      $('#mreset').onclick = () => { f.reset(); f.elements.namedItem('id').value = ''; $('#mt').textContent = 'Create mentor'; $('#memw').style.display = ''; };
+      $('#mreset').onclick = () => { f.reset(); f.elements.namedItem('id').value = ''; f.elements.namedItem('displayName').required = true; $('#mt').textContent = 'Create mentor'; $('#memw').style.display = ''; };
       view.onclick = (e) => { const b = e.target.closest('[data-e]'); if (!b) return; const m = items[b.dataset.e], s = m.stats || {};
-        f.reset(); f.elements.namedItem('id').value = m.id; $('#mt').textContent = 'Edit @' + m.handle; $('#memw').style.display = 'none';
+        f.reset(); f.elements.namedItem('id').value = m.id; f.elements.namedItem('displayName').required = false; $('#mt').textContent = 'Edit @' + m.handle; $('#memw').style.display = 'none';
         Object.entries({ handle:m.handle, displayName:m.displayName, tag:m.tag, riskScore:m.risk, fee:(Number(m.fee) / 100).toFixed(2), verified:String(m.verified), bio:m.bio, ...s }).forEach(([k, v]) => { const field = f.elements.namedItem(k); if (field) field.value = v ?? ''; });
         scrollTo({ top:0, behavior:'smooth' }); };
       f.onsubmit = (e) => { e.preventDefault(); run(async () => {

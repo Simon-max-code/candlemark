@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Mentor portal — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body::before{display:none}
+.mt{max-width:1400px;margin:0 auto;padding:16px}
+.card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:16px;margin-bottom:14px}
+.mt-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.mt-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.mt-stats .card{margin:0}.mt-stats small{color:var(--text-tertiary);font-size:11.5px}.mt-stats b{display:block;font:600 1.25rem var(--font-mono);margin-top:4px}
+.mt-main{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start}
+.mt-sym{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+#px{font:600 1.4rem var(--font-mono)}
+#tv{height:480px;border-radius:10px;overflow:hidden}
+.mt input,.mt select{background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--text-primary);font-size:14px;width:100%}
+.mt label{display:block;font-size:11.5px;color:var(--text-tertiary);margin:10px 0 4px}
+.mt-sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 4px}
+.mt-sg button{padding:12px;border-radius:9px;font-weight:700;border:1px solid var(--line-strong);color:var(--text-secondary)}
+#sBuy.on{background:var(--bull);color:#02110C;border-color:var(--bull)}#sSell.on{background:var(--bear);color:#fff;border-color:var(--bear)}
+#go{width:100%;margin-top:14px;padding:14px;border-radius:10px;font-weight:700;background:var(--bull);color:#02110C}#go.sell{background:var(--bear);color:#fff}#go:disabled{opacity:.5}
+.mt-tbl{overflow-x:auto}.mt table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.mt th{text-align:left;color:var(--text-tertiary);font:500 10.5px var(--font-mono);text-transform:uppercase;padding:0 8px 10px}
+.mt td{padding:10px 8px;border-top:1px solid var(--line)}.up{color:var(--bull)}.down{color:var(--bear)}
+.mt .cl{padding:6px 12px;border:1px solid var(--line-strong);border-radius:7px;font-size:12px;font-weight:600}.mt .cl:hover{border-color:var(--bear);color:var(--bear)}
+.hint{font-size:11.5px;color:var(--text-tertiary);line-height:1.5;margin-top:10px}
+#msg{position:fixed;bottom:20px;right:20px;left:20px;max-width:340px;margin-left:auto;background:var(--bg-panel-3);border:1px solid var(--line-strong);padding:12px 16px;border-radius:10px;display:none;z-index:9;font-size:13px}
+@media(max-width:900px){.mt-main{grid-template-columns:1fr}#tv{height:360px}.mt{padding:10px}.mt input,.mt select{font-size:16px;min-height:44px}.mt-sg button,#go{min-height:48px}}
+</style>
+</head>
+<body>
+<div id="login" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px">
+  <form id="lf" class="card" style="width:100%;max-width:360px;padding:28px">
+    <h2 style="margin-bottom:6px">Mentor login</h2>
+    <p style="color:var(--text-tertiary);font-size:12.5px">Mentor accounts are created by an admin. <a href="login.html#forgot" class="link-muted" style="color:var(--bull)">Set or reset password</a></p>
+    <div class="mt"><input id="le" type="email" placeholder="Email" autocomplete="username" required style="margin-top:12px">
+    <input id="lp" type="password" placeholder="Password" autocomplete="current-password" required style="margin-top:8px">
+    <input id="lt" placeholder="2FA code" maxlength="6" inputmode="numeric" style="display:none;margin-top:8px"></div>
+    <p id="lerr" style="color:var(--bear);font-size:12.5px;min-height:18px;margin:8px 0"></p>
+    <button class="btn-solid" style="width:100%;justify-content:center"><span>Log in</span></button>
+  </form>
+</div>
+
+<div class="mt" id="app" style="display:none">
+  <div class="mt-top"><h2>Mentor portal <span id="who" style="font-size:.8rem;color:var(--text-tertiary)"></span></h2><button class="link-muted" id="lo">Log out</button></div>
+  <div class="mt-stats" id="stats"></div>
+  <div class="mt-main">
+    <div class="card">
+      <div class="mt-sym"><select id="sym" style="max-width:220px"></select><span id="px">—</span><span id="chg"></span></div>
+      <div id="tv"></div>
+      <p class="hint">Chart by TradingView. Trades fill at this platform's live price, which can differ slightly from the chart.</p>
+    </div>
+    <aside class="card">
+      <h3 style="margin-bottom:6px">Place a trade</h3>
+      <div class="mt-sg"><button id="sBuy" class="on">Buy</button><button id="sSell">Sell</button></div>
+      <label>Amount (USD)</label><input id="amt" type="number" min="10" value="100">
+      <label>Stop loss (<span class="un">pips</span> from entry)</label><input id="sl" type="number" min="0" step="any" placeholder="optional">
+      <label>Take profit (<span class="un">pips</span> from entry)</label><input id="tp" type="number" min="0" step="any" placeholder="optional">
+      <button id="go">Buy</button>
+      <p class="hint">Your copiers mirror this trade in proportion to their allocation, and each one is emailed the time, levels and result.</p>
+    </aside>
+  </div>
+  <div class="card"><h3 style="margin-bottom:10px">Open positions</h3><div class="mt-tbl"><table><thead><tr><th>Instrument</th><th>Side</th><th>Entry</th><th>Current</th><th>SL</th><th>TP</th><th>P&amp;L</th><th></th></tr></thead><tbody id="pos"></tbody></table></div></div>
+</div>
+<div id="msg"></div>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script src="mentor.js"></script>
+</body>
+</html>

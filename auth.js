@@ -179,7 +179,7 @@ async function doLogin(email, password, totp){
     const r = await api('/auth/login', { method:'POST', auth:false, body:{ email, password, ...(totp && { totp }) } });
     api.setToken(r.accessToken);
     document.getElementById('loginSuccess').classList.add('show');
-    redirectTo('dashboard.html', 500);
+    redirectTo(r.user.role === 'MENTOR' ? 'mentor.html' : 'dashboard.html', 500);
   }catch(err){
     const c = err.data?.error;
     if(c === 'EMAIL_NOT_VERIFIED') openOtp(err.data.email, 'dashboard.html');
@@ -262,6 +262,7 @@ function redirectTo(url, delay = 1500){
   let step = 1, email = '';
   const reset = ()=>{ step = 1; s1.style.display = ''; s2.style.display = 'none'; label.textContent = 'Send code'; err.textContent = ''; err.style.color = 'var(--bear)'; };
   link.addEventListener('click', (e)=>{ e.preventDefault(); reset(); document.getElementById('fpEmail').value = document.getElementById('loginEmail').value; box.classList.add('show'); });
+  if(location.hash === '#forgot') link.click();
   document.getElementById('fpClose').onclick = ()=> box.classList.remove('show');
   go.onclick = async ()=>{
     err.style.color = 'var(--bear)'; err.textContent = ''; go.disabled = true;
