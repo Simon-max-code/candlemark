@@ -60,6 +60,20 @@ body::before{display:none}
     <input id="lt" placeholder="2FA code" maxlength="6" inputmode="numeric" style="display:none;width:100%;margin-top:8px;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:11px;color:var(--text-primary)">
     <p id="lerr" style="color:var(--bear);font-size:12.5px;min-height:18px;margin:8px 0"></p>
     <button class="btn-solid btn-submit" style="width:100%;justify-content:center"><span>Log in</span></button>
+    <div style="display:flex;justify-content:flex-end;margin-top:14px"><button type="button" id="r2fa" class="link-muted" style="font-size:12px;background:none;border:0;cursor:pointer;text-decoration:underline">Reset 2FA</button></div>
+  </form>
+  <form id="rf" class="card" style="display:none;width:100%;max-width:360px;background:var(--bg-panel);border:1px solid var(--line);border-radius:16px;padding:28px">
+    <h2 id="rt" style="margin-bottom:6px">Reset 2FA</h2>
+    <p id="rp" style="color:var(--text-tertiary);font-size:12.5px;margin-bottom:12px"></p>
+    <div id="rs1"><input id="re" type="email" placeholder="Admin email" autocomplete="username" style="width:100%;margin-top:8px;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:11px;color:var(--text-primary)">
+      <input id="rpw" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;margin-top:8px;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:11px;color:var(--text-primary)"></div>
+    <div id="rs2" style="display:none"><input id="rc" placeholder="6-digit email code" maxlength="6" inputmode="numeric" autocomplete="one-time-code" style="width:100%;margin-top:8px;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:11px;color:var(--text-primary)"></div>
+    <div id="rs3" style="display:none"><div id="rqr" style="background:#fff;padding:10px;border-radius:10px;width:max-content;margin:8px auto"></div>
+      <pre id="rsec" style="word-break:break-all"></pre>
+      <input id="rn" placeholder="6-digit code from your app" maxlength="6" inputmode="numeric" style="width:100%;margin-top:8px;background:var(--bg-panel-2);border:1px solid var(--line);border-radius:8px;padding:11px;color:var(--text-primary)"></div>
+    <p id="rerr" style="color:var(--bear);font-size:12.5px;min-height:18px;margin:8px 0"></p>
+    <button id="rgo" class="btn-solid btn-submit" style="width:100%;justify-content:center"><span>Send code</span></button>
+    <div style="display:flex;justify-content:flex-end;margin-top:14px"><button type="button" id="rback" class="link-muted" style="font-size:12px;background:none;border:0;cursor:pointer;text-decoration:underline">Back to login</button></div>
   </form>
 </div>
 <div class="adm" style="display:none">
@@ -71,6 +85,7 @@ body::before{display:none}
   <div id="view"></div>
 </div>
 <div id="msg"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="config.js"></script>
 <script src="api.js"></script>
 <script src="admin.js"></script>

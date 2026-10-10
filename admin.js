@@ -177,6 +177,42 @@
     } finally { btn.disabled = false; }
   };
 
+  // ---- Reset 2FA (password + emailed code -> wipe -> set up a new authenticator) ----
+  (() => {
+    const rf = $('#rf'), err = (t) => { $('#rerr').textContent = t || ''; };
+    let step = 1, me = null;
+    const RERR = { INVALID_CREDENTIALS:'Incorrect email or password.', INVALID_CODE:'Wrong or expired code.', FORBIDDEN:'This account is not an admin.', ACCOUNT_SUSPENDED:'Account restricted.', INVALID_TOTP:'Wrong code, check your app and try again.' };
+    const set = (n) => {
+      step = n;
+      ['rs1','rs2','rs3'].forEach((id, i) => { $('#' + id).style.display = i + 1 === n ? '' : 'none'; });
+      $('#rp').textContent = ['', 'Enter your admin email and password. We will email you a code.', 'Enter the 6-digit code we emailed you.', 'Scan the QR code (or type the key) in Google Authenticator / Authy, then enter the code it shows.'][n];
+      $('#rgo span').textContent = ['', 'Send code', 'Reset 2FA', 'Enable 2FA'][n]; err('');
+    };
+    const open = () => { $('#re').value = $('#le').value; $('#rpw').value = $('#lp').value; loginBox.style.display = 'none'; rf.style.display = ''; $('#rc').value = ''; $('#rn').value = ''; set(1); };
+    const close = () => { rf.style.display = 'none'; loginBox.style.display = 'flex'; $('#rpw').value = ''; };
+    $('#r2fa').onclick = open; $('#rback').onclick = close;
+    rf.onsubmit = async (e) => {
+      e.preventDefault(); const btn = $('#rgo'); btn.disabled = true; err('');
+      const creds = { email: $('#re').value.trim().toLowerCase(), password: $('#rpw').value };
+      try {
+        if (step === 1) { await api('/auth/2fa/reset-request', { method:'POST', auth:false, body:creds }); set(2); $('#rc').focus(); }
+        else if (step === 2) {
+          const r = await api('/auth/2fa/reset', { method:'POST', auth:false, body:{ ...creds, code: $('#rc').value.trim() } });
+          api.setToken(r.accessToken); me = r.user;
+          const s = await api('/auth/2fa/setup', { method:'POST' });
+          $('#rsec').textContent = 'Key: ' + s.secret; $('#rqr').innerHTML = '';
+          try { new QRCode($('#rqr'), { text: s.otpauth, width: 160, height: 160 }); } catch { $('#rqr').textContent = s.otpauth; }
+          set(3); $('#rn').focus();
+        } else {
+          await api('/auth/2fa/enable', { method:'POST', body:{ code: $('#rn').value.trim() } });
+          me.totpEnabled = true; $('#rpw').value = ''; rf.style.display = 'none'; enter(me); msg('2FA reset and re-enabled');
+        }
+      } catch (x) {
+        err(x.status === 429 ? 'Too many attempts, wait a minute.' : RERR[x.data?.error] || 'Something went wrong, try again.');
+      } finally { btn.disabled = false; }
+    };
+  })();
+
   (async () => {
     try {
       const me = await api('/auth/me', { noRedirect: true });
