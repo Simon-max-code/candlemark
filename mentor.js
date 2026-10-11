@@ -84,7 +84,14 @@
   const showLogin = (n) => { app.style.display = 'none'; loginBox.style.display = 'flex'; $('#lerr').textContent = n || ''; };
   let started = false;
   async function enter() {
-    try { await api('/mentor/overview', { noRedirect: true }); } catch { await out(); return showLogin('This account is not a mentor account.'); }
+    try { await api('/mentor/overview', { noRedirect: true }); }
+    catch (e) {
+      if (e.status === 403) { // keep the session (don't log an admin out); just explain
+        const me = await api('/auth/me', { noRedirect: true }).catch(() => null);
+        return showLogin(`${me ? 'You are signed in as ' + me.email + ', which has' : 'This account has'} no active, verified mentor profile. Log in with the mentor's own account (use a private window to stay signed in as admin).`);
+      }
+      await out(); return showLogin('Could not load the mentor portal, please log in again.');
+    }
     loginBox.style.display = 'none'; app.style.display = '';
     if (started) return; started = true;
     await loadMarkets(true); await refresh(); connectWs();
