@@ -143,6 +143,7 @@
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2a4 4 0 0 0-4 4v2.5L3 11h11l-1.5-2.5V6a4 4 0 0 0-4-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 13.5a1.5 1.5 0 0 0 3 0" stroke="currentColor" stroke-width="1.4"/></svg>
           <span class="ping"></span>
         </button>
+        <div class="tier-badge" id="tierBadge"><b>Tier 0</b><span class="tb-track"><i></i></span><small></small></div>
         <button class="avatar-btn" aria-label="Account menu"><span class="sk">&nbsp;</span></button>
       </div>
     </header>
@@ -506,7 +507,7 @@
       <section class="dash-panel" id="panel-deposits">
         <div class="dash-greeting">
           <h1>Deposit Funds</h1>
-          <p>Select your preferred payment method, send the funds, then upload proof of deposit. Minimum $100. Funds are credited after verification.</p>
+          <p>Select your preferred payment method, send the funds, then upload proof of deposit. Minimum $1,000. Funds are credited after verification.</p>
         </div>
 
         <div class="card-head" style="margin-bottom:14px;"><h3>Choose deposit method</h3></div>
@@ -532,8 +533,8 @@
 
         <div class="card">
           <div class="card-head"><h3>Upload proof of deposit</h3></div>
-          <p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:16px;">Send funds via your selected method, then upload your receipt or transaction screenshot. Minimum $100.</p>
-          <div class="settings-field"><label>Amount deposited ($)</label><input type="number" id="depositProofAmount" min="100" placeholder="e.g. 500"></div>
+          <p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:16px;">Send funds via your selected method, then upload your receipt or transaction screenshot. Minimum $1,000.</p>
+          <div class="settings-field"><label>Amount deposited ($)</label><input type="number" id="depositProofAmount" min="1000" placeholder="e.g. 500"></div>
           <div class="settings-field"><label>Proof (receipt or screenshot)</label><input type="file" id="depositProofFile" accept="image/*,.pdf"></div>
           <button class="btn-solid btn-sm magnetic" data-toast="Proof submitted" data-toast-sub="Submit the receipt for verification.">
             <span>Submit proof of deposit</span>

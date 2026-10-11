@@ -54,7 +54,7 @@ function draw() {
     .sort((a, b) => sort === 'risk' ? a.risk - b.risk : sort === 'copiers' ? b.copiers - a.copiers : g(b, 'gain') - g(a, 'gain'));
   document.getElementById('grid').innerHTML = list.length ? list.map((m) => { const s = m.stats || {}; return `
     <div class="mb-card"><div class="mb-head"><div class="mb-av" style="background:${grad(hue(m.handle))}"></div>
-      <div><strong>${esc(m.name)}</strong><br><small>${esc(m.tag || '@' + m.handle)}</small></div></div>
+      <div><strong>${esc(m.name)}</strong><br><small>${esc(m.tag || '@' + m.handle)} · Tier ${s.tier ?? 1}</small></div></div>
       <p class="mb-bio">${esc(m.bio || '')}</p>
       <div class="mb-row"><div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
         <div><strong>${s.winRate != null ? s.winRate + '%' : '—'}</strong><span>Win rate</span></div><div><strong>${m.risk}/10</strong><span>Risk</span></div></div>

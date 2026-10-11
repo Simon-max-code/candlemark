@@ -101,7 +101,7 @@
         <div><label>Handle (a-z 0-9 _)</label><input name="handle" required></div><div><label>Display name</label><input name="displayName" required></div><div><label>Tag</label><input name="tag"></div>
         <div><label>Risk (1-10)</label><input name="riskScore" type="number" min="1" max="10"></div><div><label>Monthly fee (USD)</label><input name="fee" placeholder="10"></div>
         <div><label>Gain %</label><input name="gain" type="number"></div><div><label>Win rate %</label><input name="winRate" type="number"></div><div><label>Trades</label><input name="trades" type="number"></div>
-        <div><label>Capital $</label><input name="capital" type="number"></div><div><label>Copiers shown</label><input name="copiers" type="number"></div><div><label>Avg trade time</label><input name="avgTime"></div>
+        <div><label>Capital $</label><input name="capital" type="number"></div><div><label>Copiers shown</label><input name="copiers" type="number"></div><div><label>Tier (1-4)</label><input name="tier" type="number" min="1" max="4"></div><div><label>Avg trade time</label><input name="avgTime"></div>
         <div><label>Verified (visible to users)</label><select name="verified"><option value="true">Yes</option><option value="false">No</option></select></div></div>
         <label>Bio</label><textarea name="bio" rows="2"></textarea><input type="hidden" name="id"><button class="b" style="margin-top:12px">Save</button> <button type="button" class="b" id="mreset">New</button></form>` +
         table(['Mentor', 'Handle', 'Risk', 'Fee', 'Verified', 'Copiers', ''], items.map((m, i) => `<tr><td>${esc(m.displayName)}<br><small>${esc(m.email)}</small></td><td>@${esc(m.handle)}</td><td>${m.risk}</td><td>${usd(m.fee)}</td><td>${m.verified}</td><td>${m.activeCopiers}</td><td><button class="b" data-e="${i}">Edit</button></td></tr>`));
@@ -116,7 +116,7 @@
         for (const k of ['handle', 'displayName', 'tag', 'bio', 'fee']) if (d[k]) body[k] = d[k];
         if (d.riskScore) body.riskScore = +d.riskScore;
         body.verified = d.verified === 'true';
-        const st = {}; for (const k of ['gain', 'winRate', 'trades', 'capital', 'copiers']) if (d[k] !== '') st[k] = +d[k];
+        const st = {}; for (const k of ['gain', 'winRate', 'trades', 'capital', 'copiers', 'tier']) if (d[k] !== '') st[k] = +d[k];
         if (d.avgTime) st.avgTime = d.avgTime;
         if (Object.keys(st).length) body.stats = st;
         if (id) await A('/mentors/' + id, { method:'PATCH', body });

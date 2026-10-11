@@ -11,6 +11,11 @@
   const first = me.name.split(' ')[0];
   const g = $('.dash-greeting h1'); if (g) g.textContent = `Good day, ${first}.`;
   const av = $('.avatar-btn'); if (av) av.textContent = me.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  const tb = $('#tierBadge'), T = me.tier, k = (c) => '$' + (Number(c) / 100).toLocaleString();
+  tb.querySelector('b').textContent = 'Tier ' + T.tier;
+  tb.querySelector('i').style.width = T.progress + '%';
+  tb.querySelector('small').textContent = !T.next ? 'Max' : T.tier ? `${T.progress}% → T${T.next.tier}` : 'Verify KYC';
+  tb.title = `Deposited ${k(T.deposited)} · withdraw limit ${T.wdPct}%/30d` + (T.tier && T.next ? ` · next tier at ${k(T.next.min)}` : '');
 
   // balance
   async function loadBalance(){
@@ -96,8 +101,8 @@
         showToast(`${side === 'BUY' ? 'Buy' : 'Sell'} order placed`, `${selectedInstrument.sym} · $${amt}`);
         loadPositions(); loadBalance();
       } catch (e) {
-        const c = e.data?.error;
-        showToast('Order failed', c === 'INSUFFICIENT_FUNDS' ? 'Not enough balance.' : c === 'BELOW_MIN' ? 'Minimum trade is $10.' : c === 'PRICE_UNAVAILABLE' ? 'This market is closed right now.' : 'Try again.');
+        const c = e.data?.error === 'Bad Request' ? e.data.message : e.data?.error;
+        showToast('Order failed', errMsg[c] || 'Try again.');
       }
     };
     const clone = (el) => { const n = el.cloneNode(true); el.replaceWith(n); return n; };
@@ -162,7 +167,8 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[c]));
   const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
-  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Amount is below the minimum.', PRICE_UNAVAILABLE:'Market price unavailable right now.', KYC_REQUIRED:'Identity verification must be approved first.',
+  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Minimum trade is $10.', PRICE_UNAVAILABLE:'This market is closed right now.', KYC_REQUIRED:'Identity verification must be approved first.',
+    TIER_LIMIT:'Above your tier withdrawal limit.', TOO_MANY_POSITIONS:'Your tier allows 1 open trade. Close it or upgrade.',
     SELF_COPY:"You can't copy yourself.", VALIDATION:'Please check the details.', NOT_FOUND:'Not found.' };
   const $$id = (id) => document.getElementById(id);
 
@@ -171,7 +177,7 @@
   const card = (m, i) => { const h = hue(m.handle), s = m.stats || {}; return `
     <div class="mentor-card tilt">
       <div class="mc-head"><div class="mc-avatar" style="background:${grad(h)}"></div>
-        <div><strong>${esc(m.name)}</strong><small>${esc(m.tag || '@' + m.handle)}</small></div></div>
+        <div><strong>${esc(m.name)}</strong><small>${esc(m.tag || '@' + m.handle)} · Tier ${s.tier ?? 1}</small></div></div>
       <div class="mc-spark">${miniSpark(i * 13 + 2, '#00E6A0')}</div>
       <div class="mc-row">
         <div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
@@ -281,7 +287,7 @@
   proofBtn.removeAttribute('data-toast');
   proofBtn.addEventListener('click', async () => {
     const amt = $$id('depositProofAmount').value, f = $$id('depositProofFile').files[0];
-    if (!(Number(amt) >= 100) || !f) return showToast('Missing details', 'Enter an amount of at least $100 and attach your proof.');
+    if (!(Number(amt) >= 1000) || !f) return showToast('Missing details', 'Enter an amount of at least $1,000 and attach your proof.');
     const fd = new FormData(); fd.append('amount', String(amt)); fd.append('method', 'crypto'); fd.append('file', f);
     proofBtn.disabled = true;
     try {

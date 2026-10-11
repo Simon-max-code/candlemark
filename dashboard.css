@@ -737,3 +737,9 @@ table.dtable{ width:100%; border-collapse:collapse; min-width:640px; }
 @keyframes skel{to{background-position:-200% 0}}
 .lazy:empty::after{content:"Loading…";color:var(--text-tertiary);font-size:13px}
 .balance-hero,.dual-grid{grid-template-columns:1fr}
+.tier-badge{display:flex;align-items:center;gap:8px;border:1px solid var(--line-strong);border-radius:100px;padding:5px 12px;font:600 11.5px var(--font-mono);background:var(--bg-panel)}
+.tier-badge b{color:var(--gold)}
+.tb-track{width:54px;height:4px;border-radius:4px;background:var(--bg-panel-3);overflow:hidden}
+.tb-track i{display:block;height:100%;width:0;background:var(--bull);transition:width .8s var(--ease)}
+.tier-badge small{color:var(--text-tertiary);font-weight:400}
+@media(max-width:560px){.tier-badge small,.tb-track{display:none}}
