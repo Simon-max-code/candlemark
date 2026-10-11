@@ -19,7 +19,7 @@
 
   // balance
   async function loadBalance(){
-    const b = await api('/wallet/balance');
+    const b = await api('/wallet/balance?acct=trading');
     const v = Number(b.available) / 100;
     window.__bal = v;
     for (const id of ['topbarBalanceVal'])
@@ -287,7 +287,7 @@
   proofBtn.removeAttribute('data-toast');
   proofBtn.addEventListener('click', async () => {
     const amt = $$id('depositProofAmount').value, f = $$id('depositProofFile').files[0];
-    if (!(Number(amt) >= 1000) || !f) return showToast('Missing details', 'Enter an amount of at least $1,000 and attach your proof.');
+    if (!(Number(amt) > 0) || !f) return showToast('Missing details', 'Enter an amount and attach your proof.');
     const fd = new FormData(); fd.append('amount', String(amt)); fd.append('method', 'crypto'); fd.append('file', f);
     proofBtn.disabled = true;
     try {
@@ -381,7 +381,7 @@
 
   // ---------- stat cards, hero total, allocation ----------
   async function loadStats(){
-    const [bal, open, closed] = await Promise.all([api('/wallet/balance'), api('/trades?status=OPEN'), api('/trades?status=CLOSED')]);
+    const [bal, open, closed] = await Promise.all([api('/wallet/balance?acct=trading'), api('/trades?status=OPEN'), api('/trades?status=CLOSED')]);
     const cash = Number(bal.available) / 100;
     let invested = 0, unreal = 0; const by = { forex:0, stocks:0, crypto:0, other:0 };
     open.items.forEach(p => {
@@ -452,6 +452,19 @@
     } catch (e) { showToast('Could not update', e.data?.error === 'INVALID_CREDENTIALS' ? 'Current password is wrong.' : 'Try again.'); }
     $$id('cpGo').disabled = false;
   });
+  if (T.tier >= 5) api('/mentor-apply').then(({ status }) => {
+    document.querySelector('#panel-settings .settings-grid').insertAdjacentHTML('beforeend', `<div class="card"><div class="card-head"><h3>Become a mentor</h3></div>${status !== 'NONE'
+      ? `<p style="color:var(--text-secondary);font-size:13px">Application ${status.toLowerCase()}.</p>`
+      : `<div class="settings-field"><label>Handle (a-z, 0-9, _)</label><input id="maH"></div>
+         <div class="settings-field"><label>Short bio (20+ characters)</label><input id="maB"></div>
+         <button class="btn-solid btn-sm" id="maGo"><span>Apply</span></button>`}</div>`);
+    document.getElementById('maGo')?.addEventListener('click', async () => {
+      try {
+        await api('/mentor-apply', { method:'POST', body:{ handle: document.getElementById('maH').value.trim().toLowerCase(), bio: document.getElementById('maB').value.trim() } });
+        showToast('Application sent', 'An admin will review it.'); document.getElementById('maGo').disabled = true;
+      } catch (e) { showToast('Could not apply', e.data?.error === 'TIER_REQUIRED' ? 'Tier 5 required.' : 'Handle taken or details invalid.'); }
+    });
+  }).catch(() => showToast('Could not load mentor application', 'Try again.'));
 
   // 2FA toggle
   document.body.insertAdjacentHTML('beforeend', `
