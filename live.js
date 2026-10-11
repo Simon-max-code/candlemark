@@ -16,6 +16,8 @@
   tb.querySelector('i').style.width = T.progress + '%';
   tb.querySelector('small').textContent = !T.next ? 'Max' : T.tier ? `${T.progress}% → T${T.next.tier}` : 'Verify KYC';
   tb.title = `Deposited ${k(T.deposited)} · withdraw limit ${T.wdPct}%/30d` + (T.tier && T.next ? ` · next tier at ${k(T.next.min)}` : '');
+  if (me.role === 'MENTOR') document.querySelector('.dash-sidebar-foot').insertAdjacentHTML('afterbegin',
+    `<a class="dash-nav-item" href="mentor.html"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l2 4 4.5.6-3.3 3.1.8 4.4L9 12l-4 2.1.8-4.4L2.5 6.6 7 6l2-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="label">Mentor portal</span></a>`);
 
   // balance
   async function loadBalance(){

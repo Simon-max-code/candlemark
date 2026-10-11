@@ -179,7 +179,7 @@ async function doLogin(email, password, totp){
     const r = await api('/auth/login', { method:'POST', auth:false, body:{ email, password, ...(totp && { totp }) } });
     api.setToken(r.accessToken);
     document.getElementById('loginSuccess').classList.add('show');
-    redirectTo(r.user.role === 'MENTOR' ? 'mentor.html' : 'dashboard.html', 500);
+    redirectTo('dashboard.html', 500);
   }catch(err){
     const c = err.data?.error;
     if(c === 'EMAIL_NOT_VERIFIED') openOtp(err.data.email, 'dashboard.html');
