@@ -109,11 +109,11 @@ function renderMarkets(asset){
   otSubmit.disabled = false;
   MARKETS[asset].forEach((inst)=>{
     const up = inst.chg >= 0;
-    const color = up ? '#00E6A0' : '#FF5C6C';
+    const color = up ? '#0A8A5F' : '#D92D43';
     const tr = document.createElement('tr');
     tr.className = `instrument-row ${up ? 'up' : 'down'}${inst.closed ? ' closed' : ''}`;
     tr.dataset.sym = inst.sym;
-    tr.innerHTML = `<td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--bull-dim)':'var(--bear-dim)'};color:${color}">${inst.sym.slice(0,2)}</div><div><strong>${inst.sym}</strong><small>${inst.name}${inst.closed ? ' <span class="mk-closed">Market closed</span>' : ''}</small></div></td>
+    tr.innerHTML = `<td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--up-dim)':'var(--down-dim)'};color:${color}">${inst.sym.slice(0,2)}</div><div><strong>${inst.sym}</strong><small>${inst.name}${inst.closed ? ' <span class="mk-closed">Market closed</span>' : ''}</small></div></td>
       <td style="font-family:var(--font-mono)">${inst.price.toLocaleString(undefined,{maximumFractionDigits:4})}</td>
       <td class="pnl ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(inst.chg).toFixed(2)}%</td><td>${miniSpark()}</td>
       <td><button class="buy-btn" data-sym="${inst.sym}" data-side="buy"${inst.closed ? ' disabled' : ''}>Buy</button> <button class="sell-btn" data-sym="${inst.sym}" data-side="sell"${inst.closed ? ' disabled' : ''}>Sell</button></td>`;
@@ -133,7 +133,7 @@ function selectInstrument(inst){
   otDelta.textContent = `${up?'▲':'▼'} ${Math.abs(inst.chg).toFixed(2)}% today`;
   otDelta.className = `delta ${up?'up':'down'}`;
   otIcon.textContent = inst.sym.slice(0,2);
-  otIcon.style.background = up ? 'var(--bull)' : 'var(--bear)';
+  otIcon.style.background = up ? 'var(--up)' : 'var(--down)';
   updateUnits();
   const sb = document.getElementById('otSubmit');
   if(sb){ sb.disabled = !!inst.closed; if(inst.closed) sb.querySelector('span').textContent = 'Market closed'; }
@@ -245,8 +245,8 @@ if(window.matchMedia('(hover: hover)').matches){
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
 
-  scene.add(new THREE.AmbientLight(0x445566, 1.2));
-  const key = new THREE.PointLight(0x00E6A0, 1.6, 30);
+  scene.add(new THREE.AmbientLight(0xFFFFFF, 1.2));
+  const key = new THREE.PointLight(0x4F9BFF, 1.6, 30);
   key.position.set(-5,3,6); scene.add(key);
 
   const pCount = 70;
@@ -258,7 +258,7 @@ if(window.matchMedia('(hover: hover)').matches){
     pos[i*3+2] = (Math.random()-0.5) * 10 - 2;
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  const mat = new THREE.PointsMaterial({ color:0x2C3444, size:0.07, transparent:true, opacity:0.6 });
+  const mat = new THREE.PointsMaterial({ color:0x4F9BFF, size:0.08, transparent:true, opacity:0.5 });
   const points = new THREE.Points(geo, mat);
   scene.add(points);
 

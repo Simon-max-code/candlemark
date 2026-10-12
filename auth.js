@@ -10,7 +10,7 @@
   let W = wrap.clientWidth, H = wrap.clientHeight;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0A0D12, 0.05);
+  scene.fog = new THREE.FogExp2(0xDCEBFF, 0.022);
   const camera = new THREE.PerspectiveCamera(50, W/H, 0.1, 100);
   camera.position.set(0, 2, 16);
 
@@ -18,10 +18,10 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
 
-  scene.add(new THREE.AmbientLight(0x445566, 1.2));
-  const key = new THREE.PointLight(0x00E6A0, 2, 40);
+  scene.add(new THREE.AmbientLight(0xCFE1FF, 0.6));
+  const key = new THREE.PointLight(0xFFFFFF, 1.4, 40);
   key.position.set(-6, 6, 8); scene.add(key);
-  const rim = new THREE.PointLight(0xE8B961, 1.1, 40);
+  const rim = new THREE.PointLight(0x7DB4FF, 0.8, 40);
   rim.position.set(8, -2, 4); scene.add(rim);
 
   // Sparse candlestick silhouette drifting in background
@@ -32,9 +32,9 @@
     const seed = i*2.7;
     const bull = Math.sin(seed) > -0.15;
     const h = 1 + Math.abs(Math.sin(seed*1.7)) * 3.4;
-    const color = bull ? 0x00E6A0 : 0xFF5C6C;
+    const color = bull ? 0x2A74E8 : 0x8FBDF5;
     const geo = new THREE.BoxGeometry(0.5, h, 0.5);
-    const mat = new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:0.3, transparent:true, opacity:0.55 });
+    const mat = new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:0.05, transparent:true, opacity:0.75 });
     const mesh = new THREE.Mesh(geo, mat);
     mesh.position.set((i - COUNT/2) * 1.1, h/2 - 3, -4 - (i%3)*1.5);
     group.add(mesh);
@@ -50,7 +50,7 @@
     pos[i*3+2] = (Math.random()-0.5) * 20 - 4;
   }
   geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  const pMat = new THREE.PointsMaterial({ color:0x2C3444, size:0.08, transparent:true, opacity:0.7 });
+  const pMat = new THREE.PointsMaterial({ color:0x4F9BFF, size:0.1, transparent:true, opacity:0.55 });
   const points = new THREE.Points(geo, pMat);
   scene.add(points);
 
@@ -104,7 +104,7 @@ const pwInput = document.getElementById('regPassword');
 if(pwInput){
   const bars = document.querySelectorAll('.pw-strength i');
   const label = document.querySelector('.pw-strength-label');
-  const colors = ['#FF5C6C','#FF5C6C','#E8B961','#00E6A0','#00E6A0'];
+  const colors = ['#D92D43','#D92D43','#E0A030','#0A8A5F','#0A8A5F'];
   const labels = ['Very weak','Weak','Fair','Strong','Very strong'];
 
   pwInput.addEventListener('input', ()=>{

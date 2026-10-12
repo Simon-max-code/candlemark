@@ -16,7 +16,7 @@
   function chart() {
     if (!window.TradingView || !cur) return;
     $('#tv').innerHTML = '';
-    new TradingView.widget({ container_id:'tv', autosize:true, symbol: TV[cur] || cur, interval:'15', timezone:'Etc/UTC', theme:'dark', style:'1', locale:'en', enable_publishing:false, allow_symbol_change:false, hide_top_toolbar:false });
+    new TradingView.widget({ container_id:'tv', autosize:true, symbol: TV[cur] || cur, interval:'15', timezone:'Etc/UTC', theme:'light', style:'1', locale:'en', enable_publishing:false, allow_symbol_change:false, hide_top_toolbar:false });
   }
   function paintPrice() {
     const m = M[cur]; if (!m) return;

@@ -59,9 +59,9 @@
     const { items } = await api('/trades?status=OPEN');
     const body = document.getElementById('positionsBody');
     body.innerHTML = items.length ? items.map(p => {
-      const up = (p.pnlPct ?? 0) >= 0, color = up ? '#00E6A0' : '#FF5C6C';
+      const up = (p.pnlPct ?? 0) >= 0, color = up ? '#0A8A5F' : '#D92D43';
       return `<tr data-id="${p.id}">
-        <td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--bull-dim)':'var(--bear-dim)'};color:${color}">${p.sym.slice(0,2)}</div>
+        <td class="cell-instrument"><div class="instr-icon" style="background:${up?'var(--up-dim)':'var(--down-dim)'};color:${color}">${p.sym.slice(0,2)}</div>
           <div><strong>${p.sym}</strong><small>${p.asset}${p.copied ? ' · copied' : ''}</small></div></td>
         <td><span class="tag-dir ${p.dir}">${p.dir}</span></td>
         <td style="font-family:var(--font-mono)">${Number(p.entry)}</td>
@@ -180,7 +180,7 @@
     <div class="mentor-card tilt">
       <div class="mc-head"><div class="mc-avatar" style="background:${grad(h)}"></div>
         <div><strong>${esc(m.name)}</strong><small>${esc(m.tag || '@' + m.handle)} · Tier ${s.tier ?? 1}</small></div></div>
-      <div class="mc-spark">${miniSpark(i * 13 + 2, '#00E6A0')}</div>
+      <div class="mc-spark">${miniSpark(i * 13 + 2, '#2272E6')}</div>
       <div class="mc-row">
         <div><strong style="color:var(--bull)">${s.gain != null ? '+' + s.gain + '%' : '—'}</strong><span>Gain</span></div>
         <div><strong>${s.trades != null ? Number(s.trades).toLocaleString() : '—'}</strong><span>Trades</span></div>
@@ -259,7 +259,7 @@
   document.body.insertAdjacentHTML('beforeend', `
     <div class="pm-modal-backdrop" id="mtBackdrop"><div class="pm-modal" style="text-align:center">
       <button class="pm-close" id="mtClose">&times;</button>
-      <div style="margin-bottom:10px;color:var(--bull)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a5.5 5.5 0 0 0-7.4 7.4L3 18l3 3 4.3-4.3a5.5 5.5 0 0 0 7.4-7.4l-3.2 3.2-3.5-3.5 3.2-3.2Z"/></svg></div>
+      <div style="margin-bottom:10px;color:var(--brand)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a5.5 5.5 0 0 0-7.4 7.4L3 18l3 3 4.3-4.3a5.5 5.5 0 0 0 7.4-7.4l-3.2 3.2-3.5-3.5 3.2-3.2Z"/></svg></div>
       <h2 id="mtTitle" style="font-size:1.1rem;margin-bottom:18px;line-height:1.4"></h2>
     </div></div>`);
   const mt = $$id('mtBackdrop'), dg = $$id('depositMethodGrid');
@@ -351,11 +351,11 @@
 
   // ---------- notifications ----------
   document.head.insertAdjacentHTML('beforeend', `<style>
-    #ntPanel{position:fixed;top:68px;right:16px;width:min(340px,92vw);max-height:70vh;overflow-y:auto;background:var(--bg-panel-2);border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.5);z-index:450;display:none}
+    #ntPanel{position:fixed;top:68px;right:16px;width:min(340px,92vw);max-height:70vh;overflow-y:auto;background:var(--bg-panel-2);border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 24px 60px rgba(24,64,140,0.14);z-index:450;display:none}
     #ntPanel.show{display:block}
     #ntPanel h4{padding:14px 16px;border-bottom:1px solid var(--line);font-size:.95rem}
     .nt-item{padding:12px 16px;border-bottom:1px solid var(--line);font-size:12.5px}
-    .nt-item.unread{background:rgba(0,230,160,.06)}
+    .nt-item.unread{background:rgba(34,114,230,.06)}
     .nt-item strong{display:block;font-size:13px;margin-bottom:3px}
     .nt-item p{color:var(--text-secondary);line-height:1.5}
     .nt-item small{color:var(--text-tertiary);font-size:11px}
@@ -529,7 +529,7 @@
   function paintMarkets() {
     const { fx, us } = marketStatus();
     $$id('mktTxt').textContent = us ? 'US markets open' : fx ? 'Forex open · US stocks closed' : 'Forex & US stocks closed · Crypto 24/7';
-    $$id('mktPill').querySelector('.dot').style.background = us || fx ? 'var(--bull)' : 'var(--gold)';
+    $$id('mktPill').querySelector('.dot').style.background = us || fx ? 'var(--up)' : 'var(--gold)';
   }
   paintMarkets(); setInterval(paintMarkets, 60000);
   await Promise.all([loadBalance(), loadPositions(), loadMarkets(), loadTx(), loadMentors(), loadCopies(), loadDeposits(), loadWallet(), loadNotifs()]);

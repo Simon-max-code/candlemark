@@ -240,7 +240,7 @@ loadTicker(); setInterval(loadTicker, 5000);
   const isSmall = window.innerWidth < 640;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0A0D12, 0.028);
+  scene.fog = new THREE.FogExp2(0xEEF5FF, 0.022);
 
   const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 200);
   camera.position.set(0, 7, 22);
@@ -253,11 +253,11 @@ loadTicker(); setInterval(loadTicker, 5000);
   renderer.setSize(W, H);
 
   // Lighting
-  scene.add(new THREE.AmbientLight(0x445566, 1.1));
-  const key = new THREE.PointLight(0x00E6A0, 2.2, 60);
+  scene.add(new THREE.AmbientLight(0xCFE1FF, 0.55));
+  const key = new THREE.PointLight(0xFFFFFF, 1.5, 60);
   key.position.set(-8, 12, 10);
   scene.add(key);
-  const rim = new THREE.PointLight(0xE8B961, 1.4, 60);
+  const rim = new THREE.PointLight(0x7DB4FF, 0.9, 60);
   rim.position.set(10, 6, -6);
   scene.add(rim);
 
@@ -278,11 +278,11 @@ loadTicker(); setInterval(loadTicker, 5000);
     const bull = seededRandom(i*3.1) > 0.42;
     const bodyH = 1.2 + seededRandom(i*7.7) * 4.2;
     const wickH = bodyH + 0.8 + seededRandom(i*5.3) * 2.4;
-    const color = bull ? 0x00E6A0 : 0xFF5C6C;
+    const color = bull ? 0x2A74E8 : 0x8FBDF5;
 
     const bodyGeo = new THREE.BoxGeometry(0.62, bodyH, 0.62);
     const bodyMat = new THREE.MeshStandardMaterial({
-      color, emissive:color, emissiveIntensity:0.35, roughness:0.35, metalness:0.15
+      color, emissive:color, emissiveIntensity:0.05, roughness:0.55, metalness:0.05
     });
     const body = new THREE.Mesh(bodyGeo, bodyMat);
     body.position.set((i - COUNT/2) * SPACING, bodyH/2, 0);
@@ -290,14 +290,14 @@ loadTicker(); setInterval(loadTicker, 5000);
     bars.push(body);
 
     const wickGeo = new THREE.CylinderGeometry(0.045, 0.045, wickH, 6);
-    const wickMat = new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:0.2, transparent:true, opacity:0.6 });
+    const wickMat = new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:0.05, transparent:true, opacity:0.6 });
     const wick = new THREE.Mesh(wickGeo, wickMat);
     wick.position.set((i - COUNT/2) * SPACING, wickH/2, 0);
     group.add(wick);
   }
 
   // Base grid plane (subtle)
-  const gridHelper = new THREE.GridHelper(60, 30, 0x1D2330, 0x141822);
+  const gridHelper = new THREE.GridHelper(60, 30, 0xA9C8F2, 0xD3E3F8);
   gridHelper.position.y = 0;
   scene.add(gridHelper);
 
@@ -311,7 +311,7 @@ loadTicker(); setInterval(loadTicker, 5000);
     positions[i*3+2] = (Math.random()-0.5) * 40 - 5;
   }
   particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const particlesMat = new THREE.PointsMaterial({ color:0x2C3444, size:0.09, transparent:true, opacity:0.7 });
+  const particlesMat = new THREE.PointsMaterial({ color:0x4F9BFF, size:0.11, transparent:true, opacity:0.55 });
   const particles = new THREE.Points(particlesGeo, particlesMat);
   scene.add(particles);
 
@@ -377,14 +377,14 @@ loadTicker(); setInterval(loadTicker, 5000);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
 
-  scene.add(new THREE.AmbientLight(0x445566, 1.2));
-  const p1 = new THREE.PointLight(0x00E6A0, 2, 40);
+  scene.add(new THREE.AmbientLight(0xFFFFFF, 1.2));
+  const p1 = new THREE.PointLight(0x4F9BFF, 2, 40);
   p1.position.set(-6,4,6); scene.add(p1);
-  const p2 = new THREE.PointLight(0xE8B961, 1.4, 40);
+  const p2 = new THREE.PointLight(0xFFFFFF, 1.2, 40);
   p2.position.set(6,-2,4); scene.add(p2);
 
   const geo = new THREE.IcosahedronGeometry(3.4, 1);
-  const mat = new THREE.MeshStandardMaterial({ color:0x12161D, emissive:0x00E6A0, emissiveIntensity:0.12, wireframe:true, transparent:true, opacity:0.5 });
+  const mat = new THREE.MeshStandardMaterial({ color:0x2272E6, emissive:0x2272E6, emissiveIntensity:0.1, wireframe:true, transparent:true, opacity:0.3 });
   const mesh = new THREE.Mesh(geo, mat);
   scene.add(mesh);
 

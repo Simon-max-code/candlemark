@@ -14,7 +14,7 @@
 .tl a.tool-card{display:block}
 .tl-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
 .tl-tabs a{padding:8px 14px;border:1px solid var(--line);border-radius:100px;font-size:13px;font-weight:600;color:var(--text-secondary)}
-.tl-tabs a.on,.tl-tabs a:hover{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.tl-tabs a.on,.tl-tabs a:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
 .tl-soon{display:inline-block;font:11px var(--font-mono);color:var(--gold);border:1px solid var(--gold-dim);border-radius:100px;padding:3px 10px;margin-bottom:14px}
 .tl-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:8px 20px;overflow-x:auto}
 .tl table{width:100%;border-collapse:collapse;min-width:620px}
@@ -22,10 +22,10 @@
 .tl td{padding:12px 8px;border-top:1px solid var(--line);font-size:13.5px}
 .tl td.m{font-family:var(--font-mono);color:var(--text-secondary)}
 .imp{font:600 10.5px var(--font-mono);padding:3px 9px;border-radius:100px}
-.imp.High{color:var(--bear);background:var(--bear-dim)}.imp.Medium{color:var(--gold);background:var(--gold-dim)}.imp.Low,.imp.Holiday{color:var(--text-tertiary);background:rgba(255,255,255,.06)}
+.imp.High{color:var(--bear);background:var(--bear-dim)}.imp.Medium{color:var(--gold);background:var(--gold-dim)}.imp.Low,.imp.Holiday{color:var(--text-tertiary);background:rgba(34,114,230,0.085)}
 .tl-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .tl-bar button{padding:7px 14px;border:1px solid var(--line);border-radius:100px;font-size:12.5px;font-weight:600;color:var(--text-secondary)}
-.tl-bar button.on{background:var(--bull);color:#02110C;border-color:var(--bull)}
+.tl-bar button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
 .tl-risk{font-size:.78rem;color:var(--text-tertiary);margin-top:28px;line-height:1.7}
 .tl-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
 </style>
@@ -68,7 +68,7 @@ const tabs = (k) => `<div class="tl-tabs">${Object.entries(T).map(([x, v]) => `<
 if (!T[key]) {
   document.title = 'Tools — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>Tools for people who check their work</h1><p class="lead">What is live and what is still on the way is marked on each page.</p>
-    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${k === 'calendar' || k === 'education' ? 'var(--bull)' : 'var(--gold)'}">${k === 'calendar' || k === 'education' ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
+    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${k === 'calendar' || k === 'education' ? 'var(--brand)' : 'var(--gold)'}">${k === 'calendar' || k === 'education' ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
 } else if (key === 'calendar') {
   document.title = 'Economic Calendar — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.calendar[0]}</h1><p class="lead">${T.calendar[1]} Times are shown in your local time zone.</p>${tabs(key)}
@@ -90,7 +90,7 @@ if (!T[key]) {
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.education[0]}</h1><p class="lead">${T.education[1]}</p>${tabs(key)}
     <h2>Account features</h2><p>Available features may vary by account and location. Review the applicable provider terms and confirm whether activity is live before making a trading decision.</p>
     <h2>The basics</h2><p><strong>Buy or sell:</strong> buy if you think the price will rise, sell if you think it will fall.</p><p><strong>Stop loss:</strong> an exit that closes a trade at a loss level you choose, to cap what you can lose.</p><p><strong>Take profit:</strong> an exit that closes a trade once it reaches a profit level you choose.</p><p><strong>Copytrading:</strong> your account automatically mirrors the trades of a mentor you pick. You can pause or stop at any time.</p>
-    <h2>Before you copy anyone</h2><p>Check the mentor's risk rating, win rate and number of trades on the <a href="mentorboard.html" style="color:var(--bull)">Mentorboard</a>. A high past return can come with high risk, and past results do not predict future ones.</p>${CTA}${RISK}`;
+    <h2>Before you copy anyone</h2><p>Check the mentor's risk rating, win rate and number of trades on the <a href="mentorboard.html" style="color:var(--brand)">Mentorboard</a>. A high past return can come with high risk, and past results do not predict future ones.</p>${CTA}${RISK}`;
 } else {
   const [title, lead] = T[key];
   document.title = title + ' — mentorsedgepro';
