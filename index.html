@@ -156,37 +156,40 @@
     <p>Browse the instruments and asset classes currently listed on the platform.</p>
   </div>
 
-  <div class="market-grid">
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-forex" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=forex">Forex</a></h3>
-      <p>Major, minor and exotic currency pairs.</p>
-    </article>
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-stocks" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=stocks">Stocks</a></h3>
-      <p>View price information for listed shares.</p>
-    </article>
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-crypto" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=crypto">Crypto</a></h3>
-      <p>Bitcoin, Ethereum and other digital assets.</p>
-    </article>
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-indices" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=indices">Indices</a></h3>
-      <p>Trade the direction of entire economies through global index baskets.</p>
-    </article>
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-commodities" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=commodities">Commodities</a></h3>
-      <p>Gold, silver, oil and other commodity markets.</p>
-    </article>
-    <article class="market-card tilt" data-tilt>
-      <div class="mc-icon mc-etf" aria-hidden="true"></div>
-      <h3><a href="markets.html?m=etf">ETFs &amp; Futures</a></h3>
-      <p>Basket exposure and fixed-date contracts for structured strategies.</p>
-    </article>
+  <div class="mk-wrap">
+    <div class="market-grid">
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-forex" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=forex">Forex</a></h3>
+        <p>Major, minor and exotic currency pairs.</p>
+      </article>
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-stocks" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=stocks">Stocks</a></h3>
+        <p>View price information for listed shares.</p>
+      </article>
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-crypto" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=crypto">Crypto</a></h3>
+        <p>Bitcoin, Ethereum and other digital assets.</p>
+      </article>
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-indices" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=indices">Indices</a></h3>
+        <p>Trade the direction of entire economies through global index baskets.</p>
+      </article>
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-commodities" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=commodities">Commodities</a></h3>
+        <p>Gold, silver, oil and other commodity markets.</p>
+      </article>
+      <article class="market-card tilt" data-tilt>
+        <div class="mc-icon mc-etf" aria-hidden="true"></div>
+        <h3><a href="markets.html?m=etf">ETFs &amp; Futures</a></h3>
+        <p>Basket exposure and fixed-date contracts for structured strategies.</p>
+      </article>
+    </div>
+    <div class="fx-stage"><canvas id="mkCanvas"></canvas></div>
   </div>
 </section>
 
@@ -223,6 +226,7 @@
 
     <a href="mentorboard.html" class="btn-solid magnetic"><span>Browse the Mentorboard</span></a>
   </div>
+  <div class="fx-stage"><canvas id="copyCanvas"></canvas></div>
 </section>
 
 <!-- ============ HOW IT WORKS — ZIGZAG CHART ============ -->
@@ -302,7 +306,44 @@
   </div>
 </section>
 
-<!-- ============ LEVERAGE / SAFETY ============ -->
+<!-- 07 PRICE SURFACE -->
+<section class="fx-full">
+  <canvas id="terrCanvas"></canvas>
+  <div class="fx-in center-txt">
+    <span class="eyebrow">07 — Volatility</span>
+    <h2>Markets move. <span class="grad-text-2">Size your risk.</span></h2>
+    <p>Illustrative visual only, not live data. Leveraged products can lose value quickly. Move your cursor to disturb the surface.</p>
+  </div>
+</section>
+
+<!-- 08 TIERS -->
+<section class="section">
+  <div class="section-head"><span class="eyebrow">08 — Tiers</span><h2>Limits grow with verified deposits.</h2>
+    <p>Hover a tower or tap a tier. Tiers need approved KYC and are based on approved deposits.</p></div>
+  <div class="fx-split">
+    <div class="fx-stage"><canvas id="tierCanvas"></canvas></div>
+    <div>
+      <div id="tierBtns" class="tier-btns"><button>T1</button><button>T2</button><button>T3</button><button>T4</button><button>T5</button></div>
+      <div id="tierInfo" class="glass"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 LEDGER -->
+<section class="section">
+  <div class="section-head"><span class="eyebrow">09 — Ledger</span><h2>Every balance is derived from a ledger.</h2>
+    <p>Balances are the sum of append-only entries, not editable numbers. Each money operation is recorded with a unique key.</p></div>
+  <div class="fx-split rev">
+    <div class="fx-stage"><canvas id="ledgerCanvas"></canvas></div>
+    <ul class="glass fx-list">
+      <li><b>01</b> Deposit proof submitted, reviewed by an admin</li>
+      <li><b>02</b> Approved amount posted as a ledger entry</li>
+      <li><b>03</b> Trades and fees post as further entries</li>
+      <li><b>04</b> Withdrawals are held at request; rejected ones are refunded</li>
+    </ul>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="section faq" id="faq">
   <div class="section-head center">
@@ -396,6 +437,7 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="fx3d.js"></script>
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script src="touch-fx.js"></script>
