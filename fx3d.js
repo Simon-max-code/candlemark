@@ -45,7 +45,7 @@ async function pull() {
     if ($('rsM')) $('rsM').textContent = String(mt?.items?.length ?? '—');
     if ($('rsC')) $('rsC').textContent = String((mt?.items ?? []).reduce((a, x) => a + (+x.copiers || 0), 0).toLocaleString());
     if ($('rsI')) $('rsI').textContent = open + ' / ' + live.items.length;
-    if ($('volRead')) $('volRead').textContent = `Live average move today: ${live.vol.toFixed(2)}% across ${live.items.length} instruments. Move your cursor to disturb the surface.`;
+    if ($('volRead')) $('volRead').textContent = `Live average move today: ${live.vol.toFixed(2)}% across ${live.items.length} instruments.`;
   } catch (err) {}
 }
 pull(); setInterval(pull, 5000);
