@@ -439,11 +439,6 @@ p{ margin:0; }
 .logo-row span{ transition:color .25s; cursor:default; }
 .logo-row span:hover{ color:var(--text-primary); }
 
-.copytrader-video-section{
-  max-width:var(--container);
-  margin:0 auto;
-  padding:0 32px 64px;
-}
 .copytrader-video-frame{
   position:relative;
   width:100%;
@@ -460,14 +455,20 @@ p{ margin:0; }
   height:100%;
   object-fit:cover;
 }
+.copy-feature-video{
+  min-height:420px;
+  height:100%;
+  border-radius:var(--radius-l);
+  background:var(--bg-panel-2);
+}
 
 @media (max-width:480px){
   .logo-strip{ padding:40px 20px; }
   .logo-row{ gap:22px 30px; font-size:13px; }
 }
 @media (max-width:600px){
-  .copytrader-video-section{ padding:0 18px 44px; }
   .copytrader-video-frame{ border-radius:var(--radius-m); }
+  .copy-feature-video{ min-height:280px; }
 }
 
 /* ============================================================
