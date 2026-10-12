@@ -29,6 +29,26 @@ function stage(id, z = 14, fov = 45) {
 }
 const mat = (c, o = .35) => new THREE.MeshBasicMaterial({ color: c, wireframe: true, transparent: true, opacity: o });
 const dot = (r, c) => new THREE.Mesh(new THREE.SphereGeometry(r, 12, 12), new THREE.MeshBasicMaterial({ color: c }));
+const live = { items: [], vol: 0 };
+const $ = id => document.getElementById(id);
+
+async function pull() {
+  if (typeof API_BASE === 'undefined') return;
+  try {
+    const [m, mt] = await Promise.all([
+      fetch(API_BASE + '/markets').then(r => r.json()),
+      fetch(API_BASE + '/mentors').then(r => r.json())
+    ]);
+    live.items = Array.isArray(m?.items) ? m.items : [];
+    live.vol = live.items.length ? live.items.reduce((a, i) => a + Math.abs(i.chg || 0), 0) / live.items.length : 0;
+    const open = live.items.filter(i => !i.closed).length;
+    if ($('rsM')) $('rsM').textContent = String(mt?.items?.length ?? '—');
+    if ($('rsC')) $('rsC').textContent = String((mt?.items ?? []).reduce((a, x) => a + (+x.copiers || 0), 0).toLocaleString());
+    if ($('rsI')) $('rsI').textContent = open + ' / ' + live.items.length;
+    if ($('volRead')) $('volRead').textContent = `Live average move today: ${live.vol.toFixed(2)}% across ${live.items.length} instruments. Move your cursor to disturb the surface.`;
+  } catch (err) {}
+}
+pull(); setInterval(pull, 5000);
 
 /* 1 — MARKETS GLOBE */
 (() => {
@@ -90,60 +110,92 @@ const dot = (r, c) => new THREE.Mesh(new THREE.SphereGeometry(r, 12, 12), new TH
     const mx = mouse.x * 30, mz = mouse.y * 18;
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i), z = pos.getZ(i), d = Math.hypot(x - mx, z - mz);
-      pos.setY(i, Math.sin(x * .4 + t) * .8 + Math.cos(z * .5 + t * .8) * .7 + Math.sin((x + z) * .2 + t * .5) * 1.1 + Math.exp(-d * .15) * Math.sin(d - t * 3) * .9);
+      const A = .6 + Math.min(live.vol, 3) * .5;
+      pos.setY(i, A * (Math.sin(x * .4 + t) * .8 + Math.cos(z * .5 + t * .8) * .7 + Math.sin((x + z) * .2 + t * .5) * 1.1 + Math.exp(-d * .15) * Math.sin(d - t * 3) * .9));
     }
     pos.needsUpdate = true; g.cam.position.x = mouse.x * 3; g.cam.lookAt(0, 0, 0);
   });
 })();
 
-/* 4 — TIER TOWERS */
+/* 5 — TOOLS */
 (() => {
-  const g = stage('tierCanvas', 11, 40); if (!g) return;
-  g.cam.position.set(0, 4, 11); g.cam.lookAt(0, 2, 0);
-  const T = [[1, '$0 + approved KYC', 10, 1], [2, '$10,000', 20, 1], [3, '$25,000', 30, 50], [4, '$35,000', 50, 50], [5, '$50,000', 70, 50]];
-  const grp = new THREE.Group(); g.s.add(grp);
-  const floor = new THREE.GridHelper(14, 14, 0xA9C8F2, 0xD3E3F8); grp.add(floor);
-  const bars = T.map((_, i) => {
-    const h = 1.2 + i * 1.1, m = new THREE.Mesh(new THREE.BoxGeometry(1.3, 1, 1.3), new THREE.MeshStandardMaterial({ color: L, roughness: .5 }));
-    m.position.x = (i - 2) * 2.1; m.userData = { h, i }; m.scale.y = .001; grp.add(m); return m;
+  const g = stage('toolCanvas', 11); if (!g) return;
+  const G = [new THREE.TorusKnotGeometry(.8, .25, 80, 12), new THREE.OctahedronGeometry(1.1), new THREE.CylinderGeometry(1, 1, .4, 32)];
+  const S = G.map((geo, i) => {
+    const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: [B, L, D][i], roughness: .35, metalness: .2 }));
+    const w = new THREE.Mesh(geo, mat(B, .35)); w.scale.setScalar(1.15); m.add(w);
+    m.position.x = (i - 1) * 3.2; g.s.add(m); return m;
   });
-  let act = 0; const info = document.getElementById('tierInfo'), btns = [...document.querySelectorAll('#tierBtns button')];
-  const set = i => {
-    act = i; const [n, dep, wd, mo] = T[i];
-    info.innerHTML = `<b>Tier ${n}</b><span>Approved deposits: ${dep}</span><span>Withdraw up to ${wd}% of balance / 30 days</span><span>Max open trades: ${mo}</span>`;
-    btns.forEach((b, k) => b.classList.toggle('on', k === i));
+  let act = -1;
+  document.querySelectorAll('.tl-stack .tool-card').forEach((c, i) => { c.onmouseenter = () => act = i; c.onmouseleave = () => act = -1; });
+  g.fns.push(t => S.forEach((m, i) => {
+    m.rotation.y = t * .5 + i; m.rotation.x = t * .15 * (i + 1) + mouse.y;
+    m.position.y = Math.sin(t + i * 2) * .4;
+    const s = act === i ? 1.35 : 1; m.scale.x += (s - m.scale.x) * .08; m.scale.y = m.scale.z = m.scale.x;
+  }));
+})();
+
+/* 8 — LIVE HEATMAP */
+(() => {
+  const g = stage('heatCanvas', 16, 42); if (!g) return;
+  g.cam.position.set(0, 9, 14); g.cam.lookAt(0, 0, 0);
+  const grp = new THREE.Group(); g.s.add(grp);
+  grp.add(new THREE.GridHelper(16, 16, 0xA9C8F2, 0xD3E3F8));
+  let bars = [];
+  const build = () => {
+    bars.forEach(b => grp.remove(b));
+    bars = live.items.map((it, i) => {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ roughness: .5 }));
+      m.position.set((i % 6 - 2.5) * 2.2, 0, (Math.floor(i / 6) - 1.5) * 2.2); m.scale.set(1.5, .01, 1.5); grp.add(m); return m;
+    });
   };
-  btns.forEach((b, i) => b.onclick = () => set(i)); set(0);
-  const ray = new THREE.Raycaster(), v = new THREE.Vector2();
+  const info = $('heatInfo'), ray = new THREE.Raycaster(), v = new THREE.Vector2();
   g.c.addEventListener('pointermove', e => {
     const r = g.c.getBoundingClientRect(); v.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-    ray.setFromCamera(v, g.cam); const h = ray.intersectObjects(bars)[0]; if (h) set(h.object.userData.i);
+    ray.setFromCamera(v, g.cam); const h = ray.intersectObjects(bars)[0];
+    if (h) { const it = live.items[bars.indexOf(h.object)]; info.textContent = `${it.sym}  ${Number(it.price).toLocaleString(undefined, { maximumFractionDigits: 4 })}  ${it.chg >= 0 ? '▲' : '▼'} ${Math.abs(it.chg).toFixed(2)}%${it.closed ? ' · closed' : ''}`; }
   });
   g.fns.push(t => {
-    grp.rotation.y = Math.sin(t * .3) * .25 + mouse.x * .6;
+    if (bars.length !== live.items.length) build();
     bars.forEach((b, i) => {
-      const k = b.userData, on = i === act;
-      b.scale.y += (k.h * (on ? 1.08 : 1) - b.scale.y) * .06; b.position.y = b.scale.y / 2;
-      b.material.color.setHex(on ? B : i < act ? 0x5B9BF0 : L);
+      const it = live.items[i], h = .4 + Math.min(Math.abs(it.chg), 5) * .7;
+      b.material.color.setHex(it.chg >= 0 ? B : 0xD92D43);
+      b.scale.y += (h - b.scale.y) * .06; b.position.y = b.scale.y / 2;
     });
+    grp.rotation.y = Math.sin(t * .2) * .2 + mouse.x * .6;
   });
 })();
 
-/* 5 — LEDGER FLOW */
+/* 9 — RISK LAB */
 (() => {
-  const g = stage('ledgerCanvas', 13); if (!g) return;
-  const P = [...Array(120)].map((_, i) => { const a = i / 120 * Math.PI * 2; return new THREE.Vector3(Math.sin(a) + 2 * Math.sin(2 * a), Math.cos(a) - 2 * Math.cos(2 * a), -Math.sin(3 * a)).multiplyScalar(1.5); });
-  const C = new THREE.CatmullRomCurve3(P, true), grp = new THREE.Group(); g.s.add(grp);
-  const tg = new THREE.TubeGeometry(C, 200, .14, 8, true);
-  grp.add(new THREE.Mesh(tg, new THREE.MeshStandardMaterial({ color: 0xBFDBFF, transparent: true, opacity: .8, roughness: .4 })), new THREE.Mesh(tg, mat(B, .25)));
-  const n = SM ? 90 : 170, arr = new Float32Array(n * 3);
-  const pts = new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(arr, 3)), new THREE.PointsMaterial({ color: D, size: .14 }));
-  grp.add(pts);
-  [0, .25, .5, .75].forEach(u => { const s = dot(.38, B); s.position.copy(C.getPoint(u)); grp.add(s); });
-  g.fns.push(t => {
-    for (let i = 0; i < n; i++) { const p = C.getPoint((i / n + t * .05) % 1); arr.set([p.x, p.y, p.z], i * 3); }
-    pts.geometry.attributes.position.needsUpdate = true;
-    grp.rotation.y = t * .15 + mouse.x; grp.rotation.x = mouse.y * .6;
+  const g = stage('riskCanvas', 14); if (!g) return;
+  const N = 90, W = 10, U = .4, grp = new THREE.Group(); g.s.add(grp);
+  const arr = new Float32Array(N * 3), geo = new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(arr, 3));
+  grp.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color: D })));
+  const mk = c => { const m = new THREE.Mesh(new THREE.PlaneGeometry(W, 1), new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: .2, side: 2 })); grp.add(m); return m; };
+  const tpP = mk(B), slP = mk(0xD92D43), mid = new THREE.Mesh(new THREE.BoxGeometry(W, .03, .03), new THREE.MeshBasicMaterial({ color: D })); grp.add(mid);
+  const mark = dot(.18, B); grp.add(mark);
+  const sl = $('slR'), tp = $('tpR'), out = $('riskInfo');
+  const lv = () => ({ s: +sl.value * U, t: +tp.value * U });
+  const lab = (extra = '') => { $('slV').textContent = sl.value; $('tpV').textContent = tp.value;
+    out.innerHTML = `<span>Reward : risk <b>${(tp.value / sl.value).toFixed(2)} : 1</b></span><span>${extra}</span>`; };
+  let path = [], k = 0, wait = 0;
+  const gen = () => { let y = 0; path = [0]; for (let i = 1; i < N; i++) { y += (Math.random() - .5) * .55; path.push(y); } k = 0; wait = 0; mark.material.color.setHex(B); lab('Simulated path, for education'); };
+  const place = () => { const { s, t } = lv(); tpP.scale.y = t; tpP.position.y = t / 2; slP.scale.y = s; slP.position.y = -s / 2; };
+  sl.oninput = tp.oninput = () => { place(); lab('Simulated path, for education'); };
+  place(); gen();
+  g.fns.push(() => {
+    const { s, t } = lv();
+    if (wait) { if (--wait === 0) gen(); return; }
+    k = Math.min(k + .6, N - 1); const n = Math.floor(k);
+    for (let i = 0; i <= n; i++) arr.set([-W / 2 + W * i / (N - 1), path[i], 0], i * 3);
+    geo.setDrawRange(0, n + 1); geo.attributes.position.needsUpdate = true;
+    mark.position.set(-W / 2 + W * n / (N - 1), path[n], 0);
+    const y = path[n];
+    if (y >= t) { mark.material.color.setHex(B); lab('Take profit hit'); wait = 120; }
+    else if (y <= -s) { mark.material.color.setHex(0xD92D43); lab('Stop loss hit'); wait = 120; }
+    else if (n === N - 1) { lab('Neither level hit'); wait = 120; }
+    grp.rotation.y = mouse.x * .5;
   });
 })();
 })();

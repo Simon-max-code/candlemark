@@ -704,6 +704,14 @@ p{ margin:0; }
 @media (max-width:900px){ .tool-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:560px){ .tool-grid{ grid-template-columns:1fr; } }
 
+.tl-stack{grid-template-columns:1fr!important;gap:14px}
+.heat-info{position:absolute;left:16px;bottom:16px;padding:10px 16px;font:600 13px var(--font-mono);z-index:2;color:var(--text-primary)}
+.risk-ctl{display:flex;flex-direction:column;gap:10px}
+.risk-ctl label{font-size:.9rem;color:var(--text-secondary);display:flex;justify-content:space-between}
+.risk-ctl input[type=range]{width:100%;accent-color:var(--brand)}
+#riskInfo{display:flex;flex-direction:column;gap:6px;color:var(--text-secondary);font-size:.92rem;margin-top:6px}
+#riskInfo b{font-family:var(--font-mono);color:var(--brand)}
+
 /* ============================================================
    SAFETY / LEVERAGE
 ============================================================ */

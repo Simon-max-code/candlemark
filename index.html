@@ -273,9 +273,14 @@
 <!-- ============ RESULTS / STATS ============ -->
 <section class="section results" id="results">
   <div class="section-head">
-    <span class="eyebrow">04 — Performance information</span>
-    <h2>Review results with care.</h2>
-    <p>No independently verified platform-wide performance or execution metrics are published here.</p>
+    <span class="eyebrow">04 — Platform stats</span>
+    <h2>Live from the platform.</h2>
+    <p>Counts refresh every few seconds. Mentor figures are supplied by mentors/platform, not independently verified.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-card"><span class="result-num" id="rsM">—</span><p>Mentors listed</p></div>
+    <div class="result-card"><span class="result-num" id="rsC">—</span><p>Copiers (as listed)</p></div>
+    <div class="result-card"><span class="result-num" id="rsI">—</span><p>Instruments with live prices</p></div>
   </div>
 </section>
 
@@ -284,25 +289,27 @@
   <div class="section-head">
     <span class="eyebrow">05 — Tools</span>
     <h2>Built for people who <span class="grad-text-2">check their work.</span></h2>
-    <p>Explore the calendar and see which other tools are currently available.</p>
+    <p>Hover a tool to bring it forward.</p>
   </div>
-
-  <div class="tool-grid">
-    <article class="tool-card tilt" data-tilt>
-      <div class="tool-icon" style="--c:#2272E6">◧</div>
-      <h3><a href="tools.html?p=gym">Trader's Gym</a></h3>
-      <p>Historical strategy replay is not currently available.</p>
-    </article>
-    <article class="tool-card tilt" data-tilt>
-      <div class="tool-icon" style="--c:#0EA5E9">◨</div>
-      <h3><a href="tools.html?p=signals">Signal Centre</a></h3>
-      <p>Trading ideas are not currently available.</p>
-    </article>
-    <article class="tool-card tilt" data-tilt>
-      <div class="tool-icon" style="--c:#5B8DEF">◪</div>
-      <h3><a href="tools.html?p=calendar">Economic Calendar</a></h3>
-      <p>Scheduled event information depends on feed availability.</p>
-    </article>
+  <div class="fx-split rev">
+    <div class="fx-stage"><canvas id="toolCanvas"></canvas></div>
+    <div class="tool-grid tl-stack">
+      <article class="tool-card tilt" data-tilt>
+        <div class="tool-icon" style="--c:#2272E6">◧</div>
+        <h3><a href="tools.html?p=gym">Trader's Gym</a></h3>
+        <p>Historical strategy replay is not currently available.</p>
+      </article>
+      <article class="tool-card tilt" data-tilt>
+        <div class="tool-icon" style="--c:#0EA5E9">◨</div>
+        <h3><a href="tools.html?p=signals">Signal Centre</a></h3>
+        <p>Trading ideas are not currently available.</p>
+      </article>
+      <article class="tool-card tilt" data-tilt>
+        <div class="tool-icon" style="--c:#5B8DEF">◪</div>
+        <h3><a href="tools.html?p=calendar">Economic Calendar</a></h3>
+        <p>Scheduled event information depends on feed availability.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -312,35 +319,28 @@
   <div class="fx-in center-txt">
     <span class="eyebrow">07 — Volatility</span>
     <h2>Markets move. <span class="grad-text-2">Size your risk.</span></h2>
-    <p>Illustrative visual only, not live data. Leveraged products can lose value quickly. Move your cursor to disturb the surface.</p>
+    <p id="volRead">Reading live markets…</p>
   </div>
 </section>
 
-<!-- 08 TIERS -->
+<!-- 08 HEATMAP -->
 <section class="section">
-  <div class="section-head"><span class="eyebrow">08 — Tiers</span><h2>Limits grow with verified deposits.</h2>
-    <p>Hover a tower or tap a tier. Tiers need approved KYC and are based on approved deposits.</p></div>
+  <div class="section-head"><span class="eyebrow">08 — Live heatmap</span><h2>Every market, one landscape.</h2>
+    <p>Tower height is today's move. Blue is up, red is down. Hover a tower.</p></div>
+  <div class="fx-stage"><canvas id="heatCanvas"></canvas><div id="heatInfo" class="glass heat-info">Hover a tower</div></div>
+</section>
+
+<!-- 09 RISK LAB -->
+<section class="section">
+  <div class="section-head"><span class="eyebrow">09 — Risk lab</span><h2>Place your stop loss and take profit.</h2>
+    <p>Drag the sliders and watch a simulated price path hit one level or the other.</p></div>
   <div class="fx-split">
-    <div class="fx-stage"><canvas id="tierCanvas"></canvas></div>
-    <div>
-      <div id="tierBtns" class="tier-btns"><button>T1</button><button>T2</button><button>T3</button><button>T4</button><button>T5</button></div>
-      <div id="tierInfo" class="glass"></div>
+    <div class="fx-stage"><canvas id="riskCanvas"></canvas></div>
+    <div class="glass risk-ctl">
+      <label>Stop loss distance <b id="slV">3</b></label><input type="range" id="slR" min="1" max="10" value="3">
+      <label>Take profit distance <b id="tpV">6</b></label><input type="range" id="tpR" min="1" max="10" value="6">
+      <div id="riskInfo"></div>
     </div>
-  </div>
-</section>
-
-<!-- 09 LEDGER -->
-<section class="section">
-  <div class="section-head"><span class="eyebrow">09 — Ledger</span><h2>Every balance is derived from a ledger.</h2>
-    <p>Balances are the sum of append-only entries, not editable numbers. Each money operation is recorded with a unique key.</p></div>
-  <div class="fx-split rev">
-    <div class="fx-stage"><canvas id="ledgerCanvas"></canvas></div>
-    <ul class="glass fx-list">
-      <li><b>01</b> Deposit proof submitted, reviewed by an admin</li>
-      <li><b>02</b> Approved amount posted as a ledger entry</li>
-      <li><b>03</b> Trades and fees post as further entries</li>
-      <li><b>04</b> Withdrawals are held at request; rejected ones are refunded</li>
-    </ul>
   </div>
 </section>
 
@@ -436,9 +436,9 @@
   </div>
 </footer>
 
+<script src="config.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="fx3d.js"></script>
-<script src="config.js"></script>
 <script src="script.js"></script>
 <script src="touch-fx.js"></script>
 </body>
