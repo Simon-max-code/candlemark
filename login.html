@@ -21,7 +21,9 @@
 
   <!-- ============ LEFT VISUAL PANEL ============ -->
   <aside class="auth-visual">
-    <canvas id="authCanvas" class="auth-visual-canvas"></canvas>
+    <video class="auth-visual-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="assests/play_720pp.mp4" type="video/mp4">
+    </video>
     <div class="auth-visual-grid" aria-hidden="true"></div>
 
     <div class="auth-visual-content">
@@ -129,7 +131,6 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="config.js"></script>
 <script src="api.js"></script>
 <script src="auth.js"></script>
