@@ -51,7 +51,10 @@
 
     kyc: async () => {
       const { items } = await A('/kyc?status=PENDING');
-      view.innerHTML = table(['User', 'Submitted', 'Details', ''], items.map(k => `<tr><td>${esc(k.email)}<br><small>${esc(k.name)}</small></td><td>${new Date(k.submittedAt).toLocaleString()}</td>
+      view.innerHTML = table(['User', 'Photo', 'ID (front)', 'Submitted', 'Details', ''], items.map(k => `<tr><td>${esc(k.email)}<br><small>${esc(k.name)}</small></td>
+        <td>${k.avatar ? `<a target="_blank" rel="noopener" href="${esc(k.avatar)}"><img src="${esc(k.avatar)}" style="width:56px;height:56px;border-radius:50%;object-fit:cover"></a>` : '—'}</td>
+        <td>${k.idUrl ? `<a target="_blank" rel="noopener" href="${esc(k.idUrl)}"><img src="${esc(k.idUrl)}" style="max-width:160px;border-radius:8px"></a>` : '—'}</td>
+        <td>${new Date(k.submittedAt).toLocaleString()}</td>
         <td><details><summary>View</summary><pre>${esc(JSON.stringify(k.data, null, 2))}</pre></details></td>
         <td><button class="b" data-d="APPROVED" data-id="${k.userId}">Approve</button><button class="b r" data-d="REJECTED" data-id="${k.userId}">Reject</button></td></tr>`));
       view.onclick = (e) => run(async () => {
@@ -103,7 +106,7 @@
         <div><label>Gain %</label><input name="gain" type="number"></div><div><label>Win rate %</label><input name="winRate" type="number"></div><div><label>Trades</label><input name="trades" type="number"></div>
         <div><label>Capital $</label><input name="capital" type="number"></div><div><label>Copiers shown</label><input name="copiers" type="number"></div><div><label>Tier (1-5)</label><input name="tier" type="number" min="1" max="5"></div><div><label>Avg trade time</label><input name="avgTime"></div>
         <div><label>Verified (visible to users)</label><select name="verified"><option value="true">Yes</option><option value="false">No</option></select></div></div>
-        <label>Bio</label><textarea name="bio" rows="2"></textarea><input type="hidden" name="id"><button class="b" style="margin-top:12px">Save</button> <button type="button" class="b" id="mreset">New</button></form>` +
+        <label>Bio</label><textarea name="bio" rows="2"></textarea><label>Profile photo</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"><input type="hidden" name="id"><button class="b" style="margin-top:12px">Save</button> <button type="button" class="b" id="mreset">New</button></form>` +
         table(['Mentor', 'Handle', 'Risk', 'Fee', 'Verified', 'Copiers', ''], items.map((m, i) => `<tr><td>${esc(m.displayName)}<br><small>${esc(m.email)}</small></td><td>@${esc(m.handle)}</td><td>${m.risk}</td><td>${usd(m.fee)}</td><td>${m.verified}</td><td>${m.activeCopiers}</td><td><button class="b" data-e="${i}">Edit</button></td></tr>`));
       const f = $('#mf');
       $('#mreset').onclick = () => { f.reset(); f.elements.namedItem('id').value = ''; f.elements.namedItem('displayName').required = true; $('#mt').textContent = 'Create mentor'; $('#memw').style.display = ''; };
@@ -119,8 +122,11 @@
         const st = {}; for (const k of ['gain', 'winRate', 'trades', 'capital', 'copiers', 'tier']) if (d[k] !== '') st[k] = +d[k];
         if (d.avgTime) st.avgTime = d.avgTime;
         if (Object.keys(st).length) body.stats = st;
+        let mid = id;
         if (id) await A('/mentors/' + id, { method:'PATCH', body });
-        else { body.email = d.email; await A('/mentors', { method:'POST', body }); }
+        else { body.email = d.email; mid = (await A('/mentors', { method:'POST', body })).id; }
+        const file = f.elements.namedItem('photo').files[0];
+        if (file) { const fd = new FormData(); fd.append('file', file); await A(`/mentors/${mid}/photo`, { method:'POST', form: fd }); }
         msg('Saved'); TABS.mentors();
       }); };
     },

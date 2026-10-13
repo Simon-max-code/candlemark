@@ -1,17 +1,33 @@
 (async () => {
   const $ = (s) => document.querySelector(s);
-  const usd = (c) => (Number(c) / 100).toLocaleString('en-US', { style:'currency', currency:'USD' });
+  const usd = (c) => { const f = window.__fx || { currency:'USD', rate:1 }; return (Number(c) / 100 * f.rate).toLocaleString('en-US', { style:'currency', currency:f.currency }); };
+  const fx = () => window.__fx || { currency:'USD', rate:1 };
+  const toUsd = (v) => Number(v) / fx().rate;
+  const fromUsd = (u) => Number(u) * fx().rate;
+  const toUsdStr = (v) => toUsd(v).toFixed(2);
+  const money = (u) => usd(Math.round(u * 100));
   const key = () => api.key();
 
   // guard: no session -> login
   let me;
   try { me = await api('/auth/me'); } catch { return; }
+  window.__fx = me.fx;
 
   // greeting + avatar
   const first = me.name.split(' ')[0];
   const g = $('.dash-greeting h1'); if (g) g.textContent = `Good day, ${first}.`;
   const av = $('.avatar-btn'); if (av) av.textContent = me.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-  const tb = $('#tierBadge'), T = me.tier, k = (c) => '$' + (Number(c) / 100).toLocaleString();
+  const tb = $('#tierBadge'), T = me.tier, k = (c) => usd(c);
+  const cur = fx().currency, sym = new Intl.NumberFormat('en-US', { style:'currency', currency:cur }).formatToParts(0).find(p => p.type === 'currency').value;
+  const nf = new Intl.NumberFormat('en-US', { style:'currency', currency:cur, maximumFractionDigits:0, notation:'compact' });
+  document.querySelectorAll('.ot-quick button').forEach(b => { const v = Math.round(fromUsd(b.dataset.amt)); b.dataset.amt = v; b.textContent = nf.format(v); });
+  const setAmt = (id, def) => { const el = document.getElementById(id); el.value = Math.ceil(fromUsd(def)); el.min = Math.ceil(fromUsd(10)); el.previousElementSibling.textContent = sym; };
+  setAmt('otAmount', 100); setAmt('wdAmount', 100);
+  document.querySelector('#panel-markets .order-ticket .ot-field label').textContent = `Amount to invest (${cur})`;
+  document.querySelector('#panel-wallets .ot-field label').textContent = `Amount (${cur})`;
+  document.querySelector('#panel-deposits .settings-field label').textContent = `Amount deposited (${cur})`;
+  document.getElementById('depositProofAmount').placeholder = 'e.g. ' + Math.round(fromUsd(500));
+  const mw = document.getElementById('minWd'); if (mw) mw.textContent = usd(1000);
   tb.querySelector('b').textContent = 'Tier ' + T.tier;
   tb.querySelector('i').style.width = T.progress + '%';
   tb.querySelector('small').textContent = !T.next ? 'Max' : T.tier ? `${T.progress}% → T${T.next.tier}` : 'Verify KYC';
@@ -99,8 +115,8 @@
       const amt = otAmount.value;
       try {
         await api('/trades', { method:'POST', headers:{ 'Idempotency-Key': key() },
-          body:{ symbol: selectedInstrument.sym, side, amount: String(amt) } });
-        showToast(`${side === 'BUY' ? 'Buy' : 'Sell'} order placed`, `${selectedInstrument.sym} · $${amt}`);
+          body:{ symbol: selectedInstrument.sym, side, amount: toUsdStr(amt) } });
+        showToast(`${side === 'BUY' ? 'Buy' : 'Sell'} order placed`, `${selectedInstrument.sym} · ${money(toUsd(amt))}`);
         loadPositions(); loadBalance();
       } catch (e) {
         const c = e.data?.error === 'Bad Request' ? e.data.message : e.data?.error;
@@ -169,7 +185,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[c]));
   const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
-  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Minimum trade is $10.', PRICE_UNAVAILABLE:'This market is closed right now.', KYC_REQUIRED:'Identity verification must be approved first.',
+  const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', get BELOW_MIN(){ return 'Minimum trade is ' + usd(1000) + '.'; }, PRICE_UNAVAILABLE:'This market is closed right now.', KYC_REQUIRED:'Identity verification must be approved first.',
     TIER_LIMIT:'Above your tier withdrawal limit.', TOO_MANY_POSITIONS:'Your tier allows 1 open trade. Close it or upgrade.',
     SELF_COPY:"You can't copy yourself.", VALIDATION:'Please check the details.', NOT_FOUND:'Not found.' };
   const $$id = (id) => document.getElementById(id);
@@ -178,7 +194,7 @@
   let mentors = [], picked = null;
   const card = (m, i) => { const h = hue(m.handle), s = m.stats || {}; return `
     <div class="mentor-card tilt">
-      <div class="mc-head"><div class="mc-avatar" style="background:${grad(h)}"></div>
+      <div class="mc-head"><div class="mc-avatar" style="background:${m.avatar ? `url(${esc(m.avatar)}) center/cover` : grad(h)}"></div>
         <div><strong>${esc(m.name)}</strong><small>${esc(m.tag || '@' + m.handle)} · Tier ${s.tier ?? 1}</small></div></div>
       <div class="mc-spark">${miniSpark(i * 13 + 2, '#2272E6')}</div>
       <div class="mc-row">
@@ -187,7 +203,7 @@
         <div><strong>${m.copiers}</strong><span>Copiers</span></div></div>
       <div class="mc-row" style="margin-top:-6px">
         <div><strong>${s.winRate != null ? s.winRate + '%' : '—'}</strong><span>Win rate</span></div>
-        <div><strong>${s.capital != null ? '$' + Number(s.capital).toLocaleString() : '—'}</strong><span>Inv. capital</span></div>
+        <div><strong>${s.capital != null ? money(s.capital) : '—'}</strong><span>Inv. capital</span></div>
         <div><strong>${esc(s.avgTime || '—')}</strong><span>Avg. time</span></div></div>
       <button class="mm-btn" data-copy-mentor="${m.id}">Copy this mentor</button>
     </div>`; };
@@ -199,11 +215,10 @@
     $$id('pmName').textContent = m.name; $$id('pmHandle').textContent = '@' + m.handle;
     $$id('pmGain').textContent = s.gain != null ? s.gain + '%' : '—';
     $$id('pmTrades').textContent = s.trades != null ? Number(s.trades).toLocaleString() : '—';
-    $$id('pmCapital').textContent = s.capital != null ? '$' + Number(s.capital).toLocaleString() : '—';
+    $$id('pmCapital').textContent = s.capital != null ? money(s.capital) : '—';
     $$id('pmRisk').textContent = m.risk; $$id('pmCopiers').textContent = m.copiers; $$id('pmAvgTime').textContent = s.avgTime || '—';
-    const fee = Number(m.fee) / 100;
-    document.querySelector('.pm-sub-note').textContent = `$${fee} subscription fee will be deducted from your trading account to follow this leader until the end of the month. Renews automatically on the 1st of next month.`;
-    $$id('pmConfirm').querySelector('span').textContent = `Confirm Copy — $${fee}/mo`;
+    document.querySelector('.pm-sub-note').textContent = `${usd(m.fee)} subscription fee will be deducted from your trading account to follow this leader until the end of the month. Renews automatically on the 1st of next month.`;
+    $$id('pmConfirm').querySelector('span').textContent = `Confirm Copy — ${usd(m.fee)}/mo`;
     pmBackdrop.classList.add('show');
   }
 
@@ -216,13 +231,13 @@
   }
 
   const pmc = $$id('pmConfirm');
-  pmc.insertAdjacentHTML('beforeend', '<div class="ot-field"><label>Allocation (USD, min $50)</label><div class="ot-input-row"><span>$</span><input type="number" id="pmAlloc" value="500" min="50"></div></div>');
+  pmc.insertAdjacentHTML('beforeend', `<div class="ot-field"><label>Allocation (${cur}, min ${usd(5000)})</label><div class="ot-input-row"><span>${sym}</span><input type="number" id="pmAlloc" value="${Math.ceil(fromUsd(500))}" min="${Math.ceil(fromUsd(50))}"></div></div>`);
   const pmn = pmc.cloneNode(true); pmc.replaceWith(pmn);
   pmn.addEventListener('click', async () => {
     if (!picked) return;
     pmn.disabled = true;
     try {
-      await api(`/copy/mentors/${picked.id}/copy`, { method:'POST', body:{ allocation: String($$id('pmAlloc').value) } });
+      await api(`/copy/mentors/${picked.id}/copy`, { method:'POST', body:{ allocation: toUsdStr($$id('pmAlloc').value) } });
       pmBackdrop.classList.remove('show');
       showToast('Now copying ' + picked.name, 'Their new trades will be mirrored to your account.');
       loadCopies(); loadBalance(); loadTx();
@@ -236,7 +251,7 @@
       <div class="ac-row">
         <div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
         <div class="ac-info"><strong>${esc(c.name)}</strong><small>@${esc(c.handle)} · ${c.status.toLowerCase()}</small></div>
-        <div class="ac-alloc"><strong style="font-family:var(--font-mono)">$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>allocated</span></div>
+        <div class="ac-alloc"><strong style="font-family:var(--font-mono)">${usd(c.allocation)}</strong><span>allocated</span></div>
         <div class="ac-actions">
           <button class="pill-toggle pause" data-act="${c.status === 'PAUSED' ? 'resume' : 'pause'}" data-id="${c.id}">${c.status === 'PAUSED' ? 'Resume' : 'Pause'}</button>
           <button class="pill-toggle stop" data-act="stop" data-id="${c.id}">Stop</button>
@@ -244,7 +259,7 @@
     $$id('mentorStrip').innerHTML = items.length ? items.map(c => `
       <div class="mentor-mini"><div class="mm-head"><div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
         <div><strong>${esc(c.name)}</strong><small>@${esc(c.handle)}</small></div></div>
-        <div class="mm-stats"><div><strong>$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>your allocation</span></div>
+        <div class="mm-stats"><div><strong>${usd(c.allocation)}</strong><span>your allocation</span></div>
         <div><strong>${c.status.toLowerCase()}</strong><span>status</span></div></div></div>`).join('')
       : '<p style="color:var(--text-tertiary)">No active copies yet.</p>';
   }
@@ -290,7 +305,7 @@
   proofBtn.addEventListener('click', async () => {
     const amt = $$id('depositProofAmount').value, f = $$id('depositProofFile').files[0];
     if (!(Number(amt) > 0) || !f) return showToast('Missing details', 'Enter an amount and attach your proof.');
-    const fd = new FormData(); fd.append('amount', String(amt)); fd.append('method', 'crypto'); fd.append('file', f);
+    const fd = new FormData(); fd.append('amount', toUsdStr(amt)); fd.append('method', 'crypto'); fd.append('file', f);
     proofBtn.disabled = true;
     try {
       await api('/wallet/deposits', { method:'POST', headers:{ 'Idempotency-Key': key() }, form: fd });
@@ -312,11 +327,11 @@
     <label>Destination address</label><input type="text" id="wdDest" placeholder="Paste your wallet address">`;
   wbtn.addEventListener('click', async () => {
     const amt = $$id('wdAmount').value, dest = $$id('wdDest').value.trim();
-    if (!(Number(amt) >= 10) || !dest) return showToast('Missing details', 'Enter an amount (min $10) and your address.');
+    if (!(toUsd(amt) >= 10) || !dest) return showToast('Missing details', `Enter an amount (min ${usd(1000)}) and your address.`);
     wbtn.disabled = true;
     try {
       await api('/wallet/withdrawals', { method:'POST', headers:{ 'Idempotency-Key': key() },
-        body:{ amount: String(amt), network: $$id('wdNetwork').value, destination: dest } });
+        body:{ amount: toUsdStr(amt), network: $$id('wdNetwork').value, destination: dest } });
       showToast('Withdrawal requested', 'Pending review. Funds are held until approved.');
       $$id('wdDest').value = ''; loadBalance(); loadTx();
     } catch (e) { showToast('Withdrawal failed', errMsg[e.data?.error] || 'Try again.'); }
@@ -431,10 +446,22 @@
       const u = await api('/auth/me', { method:'PATCH', body:{ name, country: sf2[2].value.trim() || undefined } });
       me.name = u.name; me.country = u.country;
       const g2 = $('.dash-greeting h1'); if (g2) g2.textContent = `Good day, ${u.name.split(' ')[0]}.`;
-      const av2 = $('.avatar-btn'); if (av2) av2.textContent = u.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+      const av2 = $('.avatar-btn'); if (av2 && !me.avatarUrl) av2.textContent = u.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
       showToast('Profile updated', 'Your changes were saved.');
     } catch { showToast('Could not save', 'Try again.'); }
     saveBtn.disabled = false;
+  });
+
+  const pc = document.querySelector('#panel-settings .settings-grid .card:first-child');
+  pc.querySelector('.card-head').insertAdjacentHTML('afterend', `<div class="settings-field"><label>Profile photo</label><div id="apv" style="width:72px;height:72px;border-radius:50%;background:var(--brand-50) center/cover;margin-bottom:8px"></div><input type="file" id="apf" accept="image/jpeg,image/png,image/webp"></div>`);
+  const paintAv = (u) => { if (!u) return; $$id('apv').style.backgroundImage = `url(${u})`; const a = $('.avatar-btn'); a.textContent = ''; a.style.background = `url(${u}) center/cover`; };
+  paintAv(me.avatarUrl);
+  $$id('apf').addEventListener('change', async (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    if (f.size > 5 * 1024 * 1024) return showToast('Too large', 'Max 5MB.');
+    const fd = new FormData(); fd.append('file', f);
+    try { const r = await api('/profile/photo', { method: 'POST', form: fd }); me.avatarUrl = r.avatarUrl; paintAv(r.avatarUrl); showToast('Photo updated', ''); }
+    catch (er) { showToast('Upload failed', er.data?.error === 'BAD_FILE_TYPE' ? 'Use JPG, PNG or WebP.' : 'Try again.'); }
   });
 
   // change password card

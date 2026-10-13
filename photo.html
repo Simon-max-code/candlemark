@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Profile photo — mentorsedgepro</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="auth.css">
+<style>.ph{width:140px;height:140px;border-radius:50%;background:var(--brand-50) center/cover;border:2px dashed var(--brand-200);margin:0 auto 18px}</style></head>
+<body><div class="auth-shell" style="grid-template-columns:1fr"><section class="auth-form-panel"><div class="auth-card" style="text-align:center">
+<span class="auth-eyebrow">Last step</span><h2>Add a profile photo</h2>
+<p style="color:var(--text-secondary);margin:8px 0 20px">JPG, PNG or WebP, max 5 MB.</p>
+<div class="ph" id="ph"></div>
+<input type="file" id="f" accept="image/jpeg,image/png,image/webp">
+<p id="err" style="color:var(--bear);font-size:12.5px;min-height:18px;margin:8px 0"></p>
+<button class="btn-solid btn-submit" id="go"><span>Save &amp; continue</span><div class="spinner"></div></button>
+<a href="dashboard.html" class="link-muted" style="display:block;margin-top:14px">Skip for now</a>
+</div></section></div>
+<script src="config.js"></script><script src="api.js"></script><script src="i18n.js"></script>
+<script>
+const $ = (i) => document.getElementById(i);
+$('f').onchange = (e) => { const f = e.target.files[0]; if (f) $('ph').style.backgroundImage = `url(${URL.createObjectURL(f)})`; };
+$('go').onclick = async () => {
+  const f = $('f').files[0]; $('err').textContent = '';
+  if (!f) return $('err').textContent = 'Choose a photo or skip.';
+  if (f.size > 5 * 1024 * 1024) return $('err').textContent = 'Max 5 MB.';
+  const fd = new FormData(); fd.append('file', f);
+  $('go').disabled = true; $('go').classList.add('loading');
+  try { await api('/profile/photo', { method: 'POST', form: fd }); location.href = 'dashboard.html'; }
+  catch (e) { $('err').textContent = e.data?.error === 'BAD_FILE_TYPE' ? 'Use JPG, PNG or WebP.' : 'Upload failed, try again.'; $('go').disabled = false; $('go').classList.remove('loading'); }
+};
+</script></body></html>

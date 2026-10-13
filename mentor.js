@@ -1,13 +1,15 @@
 (() => {
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
-  const usd = (c) => (Number(c) / 100).toLocaleString('en-US', { style:'currency', currency:'USD' });
+  const fx = () => window.__fx || { currency:'USD', rate:1 };
+  const usd = (c) => (Number(c) / 100 * fx().rate).toLocaleString('en-US', { style:'currency', currency:fx().currency });
+  const toUsdStr = (v) => (Number(v) / fx().rate).toFixed(2);
   const TV = { 'EUR/USD':'FX:EURUSD','GBP/USD':'FX:GBPUSD','USD/JPY':'FX:USDJPY','AUD/USD':'FX:AUDUSD','USD/CAD':'FX:USDCAD',
     AAPL:'NASDAQ:AAPL',TSLA:'NASDAQ:TSLA',NVDA:'NASDAQ:NVDA',MSFT:'NASDAQ:MSFT',AMZN:'NASDAQ:AMZN',
     'BTC/USD':'BINANCE:BTCUSDT','ETH/USD':'BINANCE:ETHUSDT','SOL/USD':'BINANCE:SOLUSDT','XRP/USD':'BINANCE:XRPUSDT',
     US500:'OANDA:SPX500USD',NAS100:'OANDA:NAS100USD',US30:'OANDA:US30USD',UK100:'OANDA:UK100GBP',
     'XAU/USD':'OANDA:XAUUSD','XAG/USD':'OANDA:XAGUSD',WTI:'TVC:USOIL',NATGAS:'CAPITALCOM:NATURALGAS' };
-  const ERR = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Minimum trade is $10.', PRICE_UNAVAILABLE:'No live price right now (market closed?).',
+  const ERR = { INSUFFICIENT_FUNDS:'Not enough balance.', get BELOW_MIN(){ return 'Minimum trade is ' + usd(1000) + '.'; }, PRICE_UNAVAILABLE:'No live price right now (market closed?).',
     BAD_STOP_LOSS:'Stop loss is on the wrong side of the price.', BAD_TAKE_PROFIT:'Take profit is on the wrong side of the price.', TOO_MANY_POSITIONS:'Too many open positions.', VALIDATION:'Check the amount and levels.' };
   const code = (e) => (e.data?.message in ERR ? e.data.message : e.data?.error);
   const msg = (t) => { const m = $('#msg'); m.textContent = t; m.style.display = 'block'; setTimeout(() => m.style.display = 'none', 4000); };
@@ -67,7 +69,7 @@
   $('#go').onclick = async () => {
     const m = M[cur]; if (!m) return msg(ERR.PRICE_UNAVAILABLE);
     const amt = $('#amt').value, sl = +$('#sl').value, tp = +$('#tp').value, dir = side === 'BUY' ? 1 : -1;
-    const body = { symbol: cur, side, amount: String(amt) };
+    const body = { symbol: cur, side, amount: toUsdStr(amt) };
     if (sl > 0) body.stopLoss = (m.price - dir * sl * m.pip).toFixed(m.dp);
     if (tp > 0) body.takeProfit = (m.price + dir * tp * m.pip).toFixed(m.dp);
     if ((body.stopLoss && +body.stopLoss <= 0) || (body.takeProfit && +body.takeProfit <= 0)) return msg('Level would be below zero.');
@@ -93,6 +95,13 @@
       await out(); return showLogin('Could not load the mentor portal, please log in again.');
     }
     loginBox.style.display = 'none'; app.style.display = '';
+    const me = await api('/auth/me');
+    window.__fx = me.fx;
+    const currency = fx().currency;
+    const amount = $('#amt');
+    amount.value = Math.ceil(100 * fx().rate);
+    amount.min = Math.ceil(10 * fx().rate);
+    amount.previousElementSibling.textContent = `Amount (${currency})`;
     if (started) return; started = true;
     await loadMarkets(true); await refresh(); connectWs();
     setInterval(() => { refresh(); loadMarkets(false).catch(() => {}); }, 10000);

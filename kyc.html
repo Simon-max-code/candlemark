@@ -66,6 +66,7 @@
               <div class="field"><input type="text" name="lastName" id="lastName" placeholder=" " data-req autocomplete="family-name"><label for="lastName">Surname / Last name *</label><div class="field-error"><span></span></div></div>
             </div>
             <div class="field"><input type="text" name="dob" id="dob" placeholder=" " data-req data-type="date" inputmode="numeric" maxlength="10" autocomplete="bday"><label for="dob">Date of birth (dd/mm/yyyy) *</label><div class="field-error"><span></span></div></div>
+            <div class="field"><span class="group-label">ID document, front only (JPG, PNG or WebP, max 5 MB) *</span><input type="file" name="idFront" id="idFront" accept="image/jpeg,image/png,image/webp" data-req><div class="field-error"><span>Upload the front of your ID</span></div></div>
           </div>
         </section>
 
@@ -131,7 +132,7 @@
         <section class="kyc-slide" data-step="6">
           <header class="ks-head"><span class="ks-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15l-3-3m4 3-4 3M20 16H5l3 3m-4-3 4-3"/><path d="M9 12h6"/></svg></span><div><h2>Account currency</h2><p>Choose the base currency for your trading account.</p></div></header>
           <div class="form-grid">
-            <div class="field"><select name="currency" id="currency" data-req data-opts="USD — US Dollar|EUR — Euro|GBP — British Pound|JPY — Japanese Yen|CHF — Swiss Franc|AUD — Australian Dollar|CAD — Canadian Dollar|NZD — New Zealand Dollar|SGD — Singapore Dollar|HKD — Hong Kong Dollar|ZAR — South African Rand|AED — UAE Dirham"><option value=""></option></select><label for="currency">Currency *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select a currency</span></div></div>
+            <div class="field"><select name="currency" id="currency" data-req data-opts="USD — US Dollar|EUR — Euro|GBP — British Pound|JPY — Japanese Yen|CHF — Swiss Franc|AUD — Australian Dollar|CAD — Canadian Dollar|NZD — New Zealand Dollar|SGD — Singapore Dollar|HKD — Hong Kong Dollar|ZAR — South African Rand|AED — UAE Dirham|NGN — Nigerian Naira"><option value=""></option></select><label for="currency">Currency *</label><svg class="select-chevron" width="12" height="7" viewBox="0 0 12 7"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><div class="field-error"><span>Select a currency</span></div></div>
             <div class="kyc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg><span>The base currency cannot be changed after your account is opened.</span></div>
           </div>
         </section>
@@ -179,5 +180,6 @@
 <script src="auth.js"></script>
 <script src="kyc.js"></script>
 <script src="touch-fx.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>
