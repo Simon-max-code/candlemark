@@ -1,7 +1,7 @@
 /* ============================================================
   MENTORSEDGEPRO — KYC WIZARD
 ============================================================ */
-const STEPS = ['Personal information','Contact information','Investor information','Trading expectation','Trading experience','Currency','Client declaration'];
+const STEPS = ['Personal information','Contact information','Investor information','Trading expectation','Trading experience','Client declaration'];
 const TOTAL = STEPS.length;
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
@@ -109,7 +109,6 @@ function buildSummary(){
     ['Employment', g('employment')],
     ['Annual amount', g('annual')],
     ['Experience', g('experience')],
-    ['Currency', g('currency')],
   ];
   $('#kycSummary').innerHTML = rows.map(([k,v]) => `<div><small>${k}</small><strong>${v}</strong></div>`).join('');
 }

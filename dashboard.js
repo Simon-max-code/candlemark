@@ -141,7 +141,7 @@ function selectInstrument(inst){
 
 function updateUnits(){
   if(!selectedInstrument) return;
-  const amt = (parseFloat(otAmount.value) || 0) / (window.__fx?.rate || 1);
+  const amt = parseFloat(otAmount.value) || 0;
   otUnits.textContent = (amt / selectedInstrument.price).toLocaleString(undefined,{maximumFractionDigits:4});
   otSubmit.querySelector('span').textContent = `${otSide === 'buy' ? 'Buy' : 'Sell'} ${selectedInstrument.sym}`;
 }
