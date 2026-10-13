@@ -42,6 +42,15 @@
     kycBox.querySelector('p').textContent = map[1];
     const a = kycBox.querySelector('a'); a.textContent = map[2];
     a.href = st === 'NOT_STARTED' ? 'kyc.html' : '#';
+    if (st === 'REJECTED') a.href = 'support.html';
+    else if (st !== 'NOT_STARTED') a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const k = await api('/kyc').catch(() => null);
+      if (!k) return showToast('Could not load', 'Try again.');
+      const d = k.data || {}, row = (l, v) => `<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:8px 0;border-top:1px solid var(--line)"><span style="color:var(--text-tertiary)">${l}</span><strong>${esc(v || '—')}</strong></div>`;
+      $$id('mtTitle').innerHTML = 'Identity verification' + `<div style="text-align:left;margin-top:14px">${row('Status', k.status.replace('_', ' '))}${row('Name', [d.title, d.firstName, d.lastName].filter(Boolean).join(' '))}${row('Date of birth', d.dob)}${row('City', d.city)}${row('Phone', d.phone)}${row('Currency', d.currency)}</div>`;
+      $$id('mtBackdrop').classList.add('show');
+    });
   }
 
   // account details

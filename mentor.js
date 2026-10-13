@@ -14,6 +14,7 @@
   const code = (e) => (e.data?.message in ERR ? e.data.message : e.data?.error);
   const msg = (t) => { const m = $('#msg'); m.textContent = t; m.style.display = 'block'; setTimeout(() => m.style.display = 'none', 4000); };
   let M = {}, cur = '', side = 'BUY';
+  let prev = null;
 
   function chart() {
     if (!window.TradingView || !cur) return;
@@ -45,14 +46,46 @@
   }
   async function loadOverview() {
     const o = await api('/mentor/overview');
+    window.__h = o.handle;
     $('#who').textContent = `· ${o.name} (@${o.handle})`;
     const pnl = Number(o.pnl);
     $('#stats').innerHTML = [['Balance', usd(o.balance)], ['Active copiers', o.copiers], ['Allocated by copiers', usd(o.allocated)], ['Closed trades', o.trades],
       ['Win rate', o.winRate == null ? '—' : o.winRate + '%'], ['Realised P&L', `<span class="${pnl >= 0 ? 'up' : 'down'}">${usd(o.pnl)}</span>`]]
       .map(([k, v]) => `<div class="card"><small>${k}</small><b>${v}</b></div>`).join('');
   }
+  async function snap(ids) {
+    const { items } = await api('/trades?status=CLOSED');
+    const closed = ids.map((id) => items.find((p) => p.id === id)).filter(Boolean);
+    if (!closed.length) return;
+    const total = closed.reduce((sum, p) => sum + Number(p.pnl || 0), 0);
+    const card = $('#snapCard');
+    card.innerHTML = `<div class="snap-h"><strong>MENTORSEDGEPRO</strong><span class="snap-badge">TRADE CLOSED</span></div>
+      <div class="snap-pl"><b>${total >= 0 ? '+' : ''}${usd(total)}</b><span>Realised result · ${closed.length} ${closed.length === 1 ? 'trade' : 'trades'}</span></div>
+      ${closed.map((p) => `<div class="snap-g">
+        <div><small>Market</small><strong>${esc(p.sym)}</strong></div>
+        <div><small>Direction</small><strong>${esc(p.side)}</strong></div>
+        <div><small>Entry</small><strong>${esc(p.entry)}</strong></div>
+        <div><small>Exit</small><strong>${esc(p.closePrice ?? p.exitPrice ?? p.cur ?? '—')}</strong></div>
+        <div><small>Stop loss</small><strong>${esc(p.stopLoss ?? '—')}</strong></div>
+        <div><small>Take profit</small><strong>${esc(p.takeProfit ?? '—')}</strong></div>
+        <div><small>Result</small><strong>${usd(p.pnl || 0)}</strong></div>
+        <div><small>Mentor</small><strong>${esc(window.__h || 'Mentor')}</strong></div>
+      </div>`).join('')}
+      <div class="snap-f"><span>Closed ${new Date().toLocaleString()}</span><span>Trading involves risk.</span></div>`;
+    $('#snapBg').classList.add('show');
+    const canvas = await html2canvas(card, { backgroundColor:null, scale:2, useCORS:true });
+    $('#snapDownload').onclick = () => {
+      const a = document.createElement('a');
+      a.download = 'mentorsedgepro-trade-snapshot.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    };
+  }
   async function loadPositions() {
     const { items } = await api('/trades?status=OPEN');
+    const ids = new Set(items.map(p => p.id));
+    if (prev) { const gone = [...prev].filter(i => !ids.has(i)); if (gone.length) snap(gone).catch(() => {}); }
+    prev = ids;
     $('#pos').innerHTML = items.length ? items.map((p) => { const up = Number(p.pnl) >= 0; return `<tr>
       <td><strong>${esc(p.sym)}</strong></td><td class="${p.dir === 'long' ? 'up' : 'down'}">${esc(p.side)}</td><td>${Number(p.entry)}</td><td>${Number(p.cur)}</td>
       <td>${p.stopLoss ? Number(p.stopLoss) : '—'}</td><td>${p.takeProfit ? Number(p.takeProfit) : '—'}</td>
@@ -107,6 +140,8 @@
     setInterval(() => { refresh(); loadMarkets(false).catch(() => {}); }, 10000);
   }
   $('#lo').onclick = async () => { await out(); location.reload(); };
+  $('#snapDismiss').onclick = () => $('#snapBg').classList.remove('show');
+  $('#snapBg').addEventListener('click', (e) => { if (e.target === $('#snapBg')) $('#snapBg').classList.remove('show'); });
   $('#lf').onsubmit = async (e) => {
     e.preventDefault(); const btn = e.target.querySelector('button'); btn.disabled = true;
     try {

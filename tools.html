@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Tools — mentorsedgepro</title>
+<script src="theme.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -44,21 +45,10 @@ const T = {
   calendar: ['Economic Calendar', 'See which scheduled releases can move the markets this week.'],
   signals: ['Signal Centre', 'Trading ideas, sourced and scored.'],
   gym: ["Trader's Gym", 'Practise a strategy on historical data.'],
-  vps: ['VPS', 'Keep your trading software running around the clock.'],
   education: ['Education', 'Learn the basics and review trading risks.'],
 };
-const SOON = { signals: [
-  ['What it will be', 'A feed of trade ideas with entry, stop loss and take profit levels, each with a stated rationale.'],
-  ['Status', 'Not live. Signals need a vetted data source and a clear methodology, and we will not publish ideas we cannot stand behind.'],
-  ['Important', 'Signals are never a recommendation to trade. Any idea can lose money.']],
-gym: [
-  ['What it will be', 'Replay historical prices, place practice trades and review your results before trading with an account.'],
-  ['Status', 'Not live. It needs a licensed historical data set.'],
-  ['Meanwhile', 'Use only features enabled for your account, and confirm whether activity is live before trading.']],
-vps: [
-  ['What it is', 'A virtual private server is a remote computer that stays on 24/7, used to run automated strategies without depending on your own device.'],
-  ['Status', 'Not offered. Copytrading on this platform already runs on our servers, so you do not need a VPS to copy a mentor.']],
-};
+const LIVE = ['calendar','education','gym','signals'];
+const SOON = {};
 const RISK = '<p class="tl-risk"><strong>Risk warning:</strong> Trading leveraged products carries a high risk of loss. Information here is general, not investment advice. Prices and account information may be delayed, incomplete, or unverified as live.</p>';
 const CTA = '<div class="tl-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>';
 const root = document.getElementById('tl');
@@ -68,7 +58,7 @@ const tabs = (k) => `<div class="tl-tabs">${Object.entries(T).map(([x, v]) => `<
 if (!T[key]) {
   document.title = 'Tools — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>Tools for people who check their work</h1><p class="lead">What is live and what is still on the way is marked on each page.</p>
-    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${k === 'calendar' || k === 'education' ? 'var(--brand)' : 'var(--gold)'}">${k === 'calendar' || k === 'education' ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
+    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${LIVE.includes(k) ? 'var(--brand)' : 'var(--gold)'}">${LIVE.includes(k) ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
 } else if (key === 'calendar') {
   document.title = 'Economic Calendar — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.calendar[0]}</h1><p class="lead">${T.calendar[1]} Times are shown in your local time zone.</p>${tabs(key)}
@@ -91,6 +81,45 @@ if (!T[key]) {
     <h2>Account features</h2><p>Available features may vary by account and location. Review the applicable provider terms and confirm whether activity is live before making a trading decision.</p>
     <h2>The basics</h2><p><strong>Buy or sell:</strong> buy if you think the price will rise, sell if you think it will fall.</p><p><strong>Stop loss:</strong> an exit that closes a trade at a loss level you choose, to cap what you can lose.</p><p><strong>Take profit:</strong> an exit that closes a trade once it reaches a profit level you choose.</p><p><strong>Copytrading:</strong> your account automatically mirrors the trades of a mentor you pick. You can pause or stop at any time.</p>
     <h2>Before you copy anyone</h2><p>Check the mentor's risk rating, win rate and number of trades on the <a href="mentorboard.html" style="color:var(--brand)">Mentorboard</a>. A high past return can come with high risk, and past results do not predict future ones.</p>${CTA}${RISK}`;
+} else if (key === 'gym') {
+  document.title = "Trader's Gym — mentorsedgepro";
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.gym[0]}</h1><p class="lead">${T.gym[1]} Practice trades are simulated and never touch your balance.</p>${tabs(key)}
+    <div class="tl-bar"><select id="gSym"></select><button id="gNew">New session</button><button id="gPlay">▶ Play</button><button id="gNext">Next candle</button><button id="gBuy">Buy</button><button id="gSell">Sell</button><button id="gClose">Close trade</button></div>
+    <div class="tl-card" style="padding:12px"><canvas id="gCv" style="width:100%;height:340px;display:block"></canvas></div>
+    <p id="gInfo" class="lead" style="margin-top:12px"></p>${CTA}${RISK}`;
+  const g = (id) => document.getElementById(id), cv = g('gCv'), x = cv.getContext('2d');
+  g('gSym').innerHTML = ['EUR/USD','GBP/USD','USD/JPY','AAPL','TSLA','BTC/USD','ETH/USD','US500','XAU/USD'].map((s) => `<option>${s}</option>`).join('');
+  let C = [], i = 0, pos = null, real = 0, tm = null;
+  const stop = () => { clearInterval(tm); tm = null; g('gPlay').textContent = '▶ Play'; };
+  const paint = () => {
+    const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1;
+    cv.width = r.width * d; cv.height = r.height * d; x.setTransform(d, 0, 0, d, 0, 0);
+    const v = C.slice(Math.max(0, i - 79), i + 1); if (!v.length) return;
+    const hi = Math.max(...v.map((c) => c.h)), lo = Math.min(...v.map((c) => c.l)), H = r.height, w = r.width / 80, y = (p) => H - 8 - (p - lo) / (hi - lo || 1) * (H - 16);
+    v.forEach((c, k) => { x.strokeStyle = x.fillStyle = c.c >= c.o ? '#0A8A5F' : '#D92D43'; const cx = k * w + w / 2; x.beginPath(); x.moveTo(cx, y(c.h)); x.lineTo(cx, y(c.l)); x.stroke(); x.fillRect(cx - w * .35, Math.min(y(c.o), y(c.c)), w * .7, Math.max(1, Math.abs(y(c.o) - y(c.c)))); });
+    const px = C[i].c, u = pos ? pos.s * (px - pos.e) / pos.e * 100 : 0;
+    if (pos) { x.setLineDash([5, 4]); x.strokeStyle = '#2272E6'; x.beginPath(); x.moveTo(0, y(pos.e)); x.lineTo(r.width, y(pos.e)); x.stroke(); x.setLineDash([]); }
+    g('gInfo').textContent = `${new Date(C[i].t * 1000).toLocaleString()} · Price ${px.toFixed(4)} · ${pos ? (pos.s > 0 ? 'Long' : 'Short') + ' @ ' + pos.e.toFixed(4) + ' (' + u.toFixed(2) + '%)' : 'No open trade'} · Realised ${real.toFixed(2)}%`;
+  };
+  const next = () => { if (i < C.length - 1) { i++; paint(); } else stop(); };
+  const load = async () => {
+    stop(); g('gInfo').textContent = 'Loading…';
+    const r = await fetch(`${API_BASE}/gym/candles?sym=${encodeURIComponent(g('gSym').value)}&interval=15m&range=1mo`).then((q) => q.json()).catch(() => null);
+    if (!r?.items?.length) { g('gInfo').textContent = 'No data for this market right now.'; return; }
+    C = r.items; i = Math.min(C.length - 1, 80 + Math.floor(Math.random() * Math.max(1, C.length - 200))); pos = null; real = 0; paint();
+  };
+  const open = (s) => { if (C.length && !pos) { pos = { e: C[i].c, s }; paint(); } };
+  g('gNew').onclick = load; g('gSym').onchange = load; g('gNext').onclick = next;
+  g('gPlay').onclick = () => { if (tm) return stop(); g('gPlay').textContent = '❚❚ Pause'; tm = setInterval(next, 600); };
+  g('gBuy').onclick = () => open(1); g('gSell').onclick = () => open(-1);
+  g('gClose').onclick = () => { if (pos) { real += pos.s * (C[i].c - pos.e) / pos.e * 100; pos = null; paint(); } };
+  load();
+} else if (key === 'signals') {
+  document.title = 'Signal Centre — mentorsedgepro';
+  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.signals[0]}</h1><p class="lead">Trade ideas published by our team. They are not personal advice and any idea can lose money.</p>${tabs(key)}<div class="tl-card" id="sg"><p style="padding:20px;color:var(--text-tertiary)">Loading…</p></div>${CTA}${RISK}`;
+  fetch(API_BASE + '/signals').then((r) => r.json()).then(({ items }) => {
+    document.getElementById('sg').innerHTML = items.length ? `<table><thead><tr><th>Date</th><th>Market</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Status</th><th>Rationale</th></tr></thead><tbody>${items.map((s) => `<tr><td class="m">${new Date(s.createdAt).toLocaleDateString()}</td><td><strong>${esc(s.symbol)}</strong></td><td>${esc(s.side)}</td><td class="m">${Number(s.entry)}</td><td class="m">${Number(s.stopLoss)}</td><td class="m">${Number(s.takeProfit)}</td><td><span class="imp ${s.status === 'HIT_TP' ? 'Low' : s.status === 'HIT_SL' ? 'High' : 'Medium'}">${esc(s.status.replace('_', ' '))}</span></td><td>${esc(s.rationale)}<br><small style="color:var(--text-tertiary)">${esc(s.source)}</small></td></tr>`).join('')}</tbody></table>` : '<p style="padding:20px;color:var(--text-tertiary)">No signals published yet.</p>';
+  }).catch(() => { document.getElementById('sg').innerHTML = '<p style="padding:20px;color:var(--text-tertiary)">Signals unavailable right now.</p>'; });
 } else {
   const [title, lead] = T[key];
   document.title = title + ' — mentorsedgepro';

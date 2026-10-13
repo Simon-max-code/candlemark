@@ -86,6 +86,20 @@
       });
     },
 
+    signals: async () => {
+      const { items } = await api('/signals');
+      view.innerHTML = `<form class="card"><h3>Post signal</h3><div class="g">
+        <div><label>Symbol (e.g. EUR/USD)</label><input name="symbol" required></div>
+        <div><label>Side</label><select name="side"><option>BUY</option><option>SELL</option></select></div>
+        <div><label>Entry</label><input name="entry" required></div><div><label>Stop loss</label><input name="stopLoss" required></div>
+        <div><label>Take profit</label><input name="takeProfit" required></div><div><label>Source / method</label><input name="source" required></div></div>
+        <label>Rationale</label><textarea name="rationale" rows="2" required></textarea><button class="b" style="margin-top:12px">Publish</button></form>` +
+        table(['Market', 'Side', 'Entry', 'SL', 'TP', 'Status', ''], items.map(x => `<tr><td>${esc(x.symbol)}</td><td>${x.side}</td><td>${esc(x.entry)}</td><td>${esc(x.stopLoss)}</td><td>${esc(x.takeProfit)}</td><td>${x.status}</td>
+          <td>${x.status === 'OPEN' ? ['HIT_TP', 'HIT_SL', 'CLOSED'].map(k => `<button class="b" data-s="${k}" data-id="${x.id}">${k}</button>`).join('') : ''}</td></tr>`));
+      view.onsubmit = (e) => { e.preventDefault(); run(async () => { await A('/signals', { method:'POST', body:Object.fromEntries(new FormData(e.target)) }); msg('Published'); TABS.signals(); }); };
+      view.onclick = (e) => run(async () => { const b = e.target.closest('[data-s]'); if (!b) return; await A(`/signals/${b.dataset.id}/close`, { method:'POST', body:{ status:b.dataset.s } }); TABS.signals(); });
+    },
+
     addresses: async () => {
       const { items } = await A('/deposit-addresses');
       const cur = Object.fromEntries(items.map(i => [i.method, i.details]));
