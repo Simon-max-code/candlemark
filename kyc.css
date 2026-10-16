@@ -3,6 +3,8 @@
 ============================================================ */
 .kyc-card{ max-width:580px; position:relative; }
 .auth-form-panel{ overflow-y:auto; }
+.kyc-page #authCanvas{ position:absolute; inset:0; z-index:0; }
+.kyc-page .auth-logo{ margin-bottom:0; }
 
 /* ---------- Left stepper ---------- */
 .kyc-lead{ color:var(--text-secondary); font-size:.95rem; margin-bottom:26px; }
