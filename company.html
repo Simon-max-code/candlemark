@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Company — mentorsedgepro</title>
+<title>About MentorsEdgePro</title>
 <script src="theme.js"></script>
+<meta name="description" content="Learn about the platform, how mentors are presented and how we operate.">
+<link rel="canonical" href="https://mentorsedgepro.co/company?p=about">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#2272E6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MentorsEdgePro">
+<meta property="og:title" content="About MentorsEdgePro">
+<meta property="og:description" content="Learn about the platform, how mentors are presented and how we operate.">
+<meta property="og:url" content="https://mentorsedgepro.co/company?p=about">
+<meta property="og:image" content="https://mentorsedgepro.co/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -30,7 +43,7 @@ const P = {
     ['Where we are', 'The site materials do not currently identify the operating legal entity, company registration number, or registered office. Review the legal terms and verify the operator before relying on the service.'],
   ]],
   security: ['Regulation & Security', 'Trust', [
-    ['Regulatory status', 'The site materials do not identify a regulator, licence number, or separate regulated broker, and do not establish that the platform is authorised to provide regulated financial services. Account registration is not evidence of authorisation. Verify the provider and its permissions with the relevant regulator before transferring funds or trading.'],
+    ['Regulatory status', 'The Regulation & Licensing page lists the Financial Conduct Authority (FCA), the Cyprus Securities and Exchange Commission (CySEC), and the Australian Securities & Investments Commission (ASIC), with associated registration references. These listings are not independent verification and do not by themselves establish that the platform is authorised to provide regulated financial services. Account registration is not evidence of authorisation. Verify the provider and its permissions directly with the relevant regulator before transferring funds or trading.'],
     ['Account security', 'The sign-in flow uses an email address and password and may request a six-digit two-factor authentication code. The site materials do not describe password storage or session-security controls, or confirm that two-factor authentication is available to every user. Use a unique password, never share authentication codes, and contact Support if you suspect unauthorised access.'],
     ['Your funds', 'The site does not provide verifiable details about who holds client funds or whether funds are segregated, insured, or covered by a compensation scheme. A displayed balance alone does not establish that funds are held or protected. Confirm the provider, custody arrangements, and applicable protections before sending money.'],
     ['Data protection', 'The Privacy Policy identifies mentorsedgepro Ltd. as the operator and describes the personal information it collects, how it may be used and shared, international transfers, cookies, security, and your rights. Contact details for privacy requests are not provided in the policy text.'],
@@ -39,7 +52,7 @@ const P = {
 };
 const key = new URLSearchParams(location.search).get('p');
 const [title, eyebrow, secs] = P[key] || P.about;
-document.title = title + ' — mentorsedgepro';
+document.title = key === 'security' ? 'Regulation & Security: MentorsEdgePro' : 'About MentorsEdgePro';
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 document.getElementById('co').innerHTML = `<span class="eyebrow">${eyebrow}</span><h1>${title}</h1>` +
   secs.map(([h, t]) => `<h2>${esc(h)}</h2><p>${t.includes('<a ') ? t : esc(t)}</p>`).join('') +

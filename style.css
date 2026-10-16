@@ -1053,3 +1053,7 @@ tr.instrument-row.closed .buy-btn,tr.instrument-row.closed .sell-btn,.buy-btn:di
 [data-theme="dark"] .auth-visual::after{background:linear-gradient(180deg,rgba(10,13,18,.2),rgba(10,13,18,.75) 75%,var(--bg-void))}
 [data-theme="dark"] .kyc-done{background:rgba(10,13,18,.96)}
 [data-theme="dark"] .lang-sel{background:var(--bg-panel);color:var(--text-primary)}
+
+/* section slide-up on scroll */
+.sec-reveal{opacity:0;transform:translate3d(0,48px,0);transition:opacity .8s var(--ease),transform .8s var(--ease);will-change:opacity,transform}
+.sec-reveal.in-view{opacity:1;transform:none;will-change:auto}

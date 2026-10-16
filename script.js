@@ -358,6 +358,18 @@ loadTicker(); setInterval(loadTicker, 5000);
   animate();
 })();
 
+/* ---------- Section slide-up on scroll ---------- */
+(function sectionReveal(){
+  const els = document.querySelectorAll('main > section:not(.hero), .ticker-tape, .footer');
+  if(!('IntersectionObserver' in window)){ return; }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { threshold:0, rootMargin:'0px 0px -12% 0px' });
+  els.forEach(el=>{ el.classList.add('sec-reveal'); io.observe(el); });
+})();
+
 /* ============================================================
    THREE.JS — FINAL CTA AMBIENT SCENE (lightweight)
 ============================================================ */
