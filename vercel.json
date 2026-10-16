@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "mentorsedgepro-one.vercel.app" }],
+      "destination": "https://mentorsedgepro.co/$1",
+      "permanent": true
+    }
+  ]
+}
